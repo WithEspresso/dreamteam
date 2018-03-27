@@ -1,0 +1,22 @@
+{% extends 'payrollapp/base.html' %}
+{% load staticfiles %}
+
+<div style="padding:50px;">
+
+    {% block title %}
+    <h1> Welcome to the payroll app</h1>
+    {% endblock %}
+
+    {% block content %}
+    <h1>Login for employees</h1>
+    <a href = "login_manager"> Log in as an employee </a>
+    <h1>Login for managers</h1>
+    <a href=  "login_employee"> Log in as a manager </a>
+    {% endblock %}
+
+</div>
+
+{% block footer %}
+{% endblock %}
+
+</html>

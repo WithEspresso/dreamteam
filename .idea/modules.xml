@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../csc648-team05/.idea/csc648-team05.iml" filepath="$PROJECT_DIR$/../csc648-team05/.idea/csc648-team05.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/dreamteam.iml" filepath="$PROJECT_DIR$/.idea/dreamteam.iml" />
+    </modules>
+  </component>
+</project>

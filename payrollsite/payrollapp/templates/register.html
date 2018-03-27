@@ -1,0 +1,23 @@
+{% extends 'payrollapp/base.html' %}
+{% block title %}
+<h2> Register for an account here!</h2>\
+{% endblock %}
+
+{% block content %}
+<div style="padding:50px;">
+    {% if error_message %}
+        <h2> {{error_message}} </h2>
+    {% endif %}
+    <form class="form-horizonal" role="form" action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% include 'payrollapp/form_template.html' %}
+        <div class="form-group">
+            <br>
+            <button type="submit"> Register now! </button>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
