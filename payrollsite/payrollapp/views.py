@@ -79,4 +79,4 @@ def show_dashboard(request):
 def time_list(request):
     all_posts = TimeRecord.objects.all()
     context = {'all_times': all_posts}
-    return render(request, 'payrollApp/post_list.html', context)
+    return render(request, 'payrollApp/time_records_list.html', context)
