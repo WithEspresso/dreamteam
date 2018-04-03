@@ -1,13 +1,51 @@
-{% extends 'payrollapp/base.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link type="text/css" rel="stylesheet" href="css/style.css">
+<title>Payroll System | by Dreamteam</title>
+<link rel="icon" href="images/favicon.png">
+</head>
+<body>
 
-{% block title %}
-<h2> Welcome, {{ request.user.username }} </h2>
-{% endblock %}
+  <header class="site-header">
+      <a href="#" class="logo"><img src="images/logo.png" alt="" style="width:250px; padding:5px;"></a>
 
-{% block content %}
-show times later on.
-{% endblock %}
+    <div class="subheader">
+      <button type="button" style="width: 120px; border-radius:4px; font-size: 16px; margin-right:30px;">Employee</button>
+      <h2 style="color:white; display: inline-block; margin-right:50px;">Username</h2>
+      <img src="images/avatar.png" width="50px" style="display: inline-block; position:absolute; bottom:15px; right:10px;">
+    </div>
+  </header>
 
-{% block footer %}
-<a href={% url 'logout_user' %}> Log out. </a> <br> <br>
-{% endblock %}
+  <div class="sidenav">
+    <a href="#">Dashboard</a>
+    <a href="#">Reports</a>
+    <a href="#">Paycheck</a>
+    <a href="#">Timesheets</a>
+    <a href="#">Announcements</a>
+  </div>
+
+  <div class="main-body">
+    <h2>Welcome Username!</h2>
+
+    <div class="split left">
+      <div class="mini-header-dashboard">
+        <h3 style="color:white; padding: 15px; margin:0">Paycheck</h3>
+      </div>
+
+      <p>Some text.</p>
+    </div>
+
+    <div class="split right">
+        <div class="mini-header-dashboard">
+          <h3 style="color:white; padding: 15px; margin:0">Announcements</h3>
+        </div>
+        <p>Some text here too.</p>
+
+    </div>
+
+  </div>
+
+</body>
+</html>
