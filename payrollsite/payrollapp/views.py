@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.shortcuts import redirect
 from django.contrib.auth import authenticate, login, logout
 
-from .models import TimeRecord
 from .forms import LoginForm
 from .forms import UserForm
 
