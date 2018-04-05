@@ -1097,12 +1097,12 @@ textarea {
   line-height: inherit;
 }
 a {
-  color: #337ab7;
+  color: #afdced;
   text-decoration: none;
 }
 a:hover,
 a:focus {
-  color: #23527c;
+  color: #d4d9dd;
   text-decoration: underline;
 }
 a:focus {
@@ -3988,7 +3988,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav > li > a:hover,
 .nav > li > a:focus {
   text-decoration: none;
-  background-color: #eee;
+  background-color: #444c54;
+  /*can be this one!!! I also like: #515d68*/
 }
 .nav > li.disabled > a {
   color: #777;
@@ -4003,7 +4004,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav .open > a,
 .nav .open > a:hover,
 .nav .open > a:focus {
-  background-color: #eee;
+  background-color: #444c54;
   border-color: #337ab7;
 }
 .nav .nav-divider {
@@ -4493,8 +4494,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
 }
 .navbar-default {
-  background-color: #f8f8f8;
-  border-color: #e7e7e7;
+  background-color: #343a40;
+  border-color: #545e68;
 }
 .navbar-default .navbar-brand {
   color: #777;
