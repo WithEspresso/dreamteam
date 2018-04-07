@@ -1,40 +1,202 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en">
 
-<link type="text/css" rel="stylesheet" href="css/style.css">
-<title>Payroll System | by Dreamteam</title>
-<link rel="icon" href="images/favicon.png">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Payroll System | by Dreamteam</title>
+    <link rel="icon" href="images/favicon.png">
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="css/metisMenu.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="css/style.css" rel="stylesheet">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
 
 </head>
+
 <body>
 
-  <div style="text-align:center; margin-top:40px;">
-    <img src="images/logo3.png" alt="" height="70px">
-  </div>
+    <div id="wrapper">
 
-  <div class="background-image">
-    <img src="images/wallpaper.jpg" alt="" width="100%" height="100%">
-  </div>
-  <form action="/action_page.php">
-    <div class="container-login">
-      <label for="uname"><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" name="uname" required>
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="#" class="logo"><img src="images/logo3.png" alt="" style="width:235px; padding:5px;"></a>
+            </div>
+            <!-- /.navbar-header -->
 
-      <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="psw" required>
+            <ul class="nav navbar-top-links navbar-right">
+              <!-- /.dropdown -->
+              <li class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                      <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                  </a>
+                  <ul class="dropdown-menu dropdown-user">
+                      <li><a href="#" data-toggle="modal" data-target="#myModalUserInfo"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                      </li>
+                      <li><a href="#" data-toggle="modal" data-target="#myModalSettings"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                      </li>
+                      <li class="divider"></li>
+                      <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                      </li>
+                  </ul>
+                  <!-- /.dropdown-user -->
+              </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
 
-      <label for="email"><b>Email</b></label>
-      <input type="text" placeholder="Enter Email" name="email" required>
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
 
-      <input type="radio" name="usertype" value="employee" checked style="margin:5px;"> Employee<br>
-      <input type="radio" name="usertype" value="manager" style="margin:5px;"> Manager<br>
-      <input type="radio" name="usertype" value="human-resources" style="margin:5px;"> Human Resources<br><br>
+                        <li>
+                            <a href="dashboard-hr.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-tasks fa-fw"></i> Paycheck</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-table fa-fw"></i> Timesheets</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-files-o fa-fw"></i> Announcements</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Reports</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-money fa-fw"></i> Expenses</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-edit fa-fw"></i> Paid Time Off</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-wrench fa-fw"></i> Approvals<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="#">Timesheet approvals</a>
+                                </li>
+                                <li>
+                                    <a href="#">Expenses approvals</a>
+                                </li>
+                                <li>
+                                    <a href="#">PTO approvals</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-user fa-fw"></i> Manage Accounts<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="signup.html">Create an account</a>
+                                </li>
+                                <li>
+                                    <a href="#">Manage accounts</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
 
-      <button type="button"><a href="signup.html" style="color:white; text-decoration:none">Submit</a></button>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+
+                <form action="" id="form-create-account">
+                  <div class="container-login">
+                    <div class="container-inside-form">
+                      <label for="uname"><b>Username</b></label>
+                      <input type="text" placeholder="Enter Username" name="uname" required>
+                    </div>
+                    <div class="container-inside-form">
+                      <label for="psw"><b>Password</b></label>
+                      <input type="password" placeholder="Enter Password" name="psw" required>
+                    </div>
+                    <div class="container-inside-form">
+                      <label for="name"><b>First Name</b></label>
+                      <input type="text" placeholder="Enter First Name" name="name" required>
+                    </div>
+                    <div class="container-inside-form">
+                      <label for="lastname"><b>Last Name</b></label>
+                      <input type="text" placeholder="Enter Last Name" name="lastname" required>
+                    </div>
+                    <div class="container-inside-form">
+                      <label for="email"><b>Email</b></label>
+                      <input type="text" placeholder="Enter Email" name="email" required>
+                    </div>
+                    <div class="container-inside-form">
+                      <label for="address"><b>Address</b></label>
+                      <input type="text" placeholder="Enter Address" name="address" required>
+                    </div>
+                    <div class="container-inside-form">
+                      <label for="ssn"><b>SSN</b></label>
+                      <input type="text" placeholder="Enter SSN" name="ssn" required>
+                    </div>
+                    <div class="container-inside-form">
+                      <label for="manager"><b>Manager ID</b></label>
+                      <input type="text" placeholder="Enter Manager ID" name="manager" required>
+                    </div>
+
+                    <input type="radio" name="usertype" value="employee" checked style="margin:5px; margin-top:20px;"> Employee<br>
+                    <input type="radio" name="usertype" value="manager" style="margin:5px;"> Manager<br>
+                    <input type="radio" name="usertype" value="human-resources" style="margin:5px;"> Human Resources<br><br>
+
+                    <button type="button"><a href="signup.html" style="color:white; text-decoration:none">Create an account</a></button>
+                  </div>
+                </form>
+
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /#page-wrapper -->
+
     </div>
-  </form>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="scripts/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="scripts/bootstrap.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="scripts/metisMenu.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="scripts/sb-admin-2.js"></script>
 
 </body>
+
 </html>

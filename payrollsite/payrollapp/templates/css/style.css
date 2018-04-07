@@ -9,7 +9,8 @@ form {
   padding-bottom: 5px;
   width: 300px;
   margin-top: 10px;
-  margin-left: 35%;
+  margin: 0 auto;
+
 }
 
 .background-image{
@@ -19,6 +20,7 @@ form {
   z-index:-1;
   top:0;
   left:0;
+  height:100%;
 }
 
 input[type=text], input[type=password] {
@@ -135,7 +137,49 @@ header{
   height: 50px;
 }
 
-@media screen and (max-width: 450px) {
+#form-create-account{
+  width:80%;
+  margin-top: 50px;
+}
+
+.container-inside-form{
+  margin:0 2%;
+  padding:0;
+  width:45%;
+  display: inline-block;
+}
+
+@media screen and (max-width: 500px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
+
+  form {
+    width:60%;
+  }
+
+  .container-inside-form{
+    margin:0 2%;
+    padding:0;
+    width:95%;
+    display: inline-block;
+  }
+
+  #form-create-account{
+    margin-top: 50px;
+    width:90%;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .container-inside-form{
+    margin:0 2%;
+    padding:0;
+    width:95%;
+    display: inline-block;
+  }
+
+  #form-create-account{
+    margin-top: 50px;
+    width:90%;
+  }
 }
