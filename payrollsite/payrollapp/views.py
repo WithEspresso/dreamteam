@@ -16,6 +16,10 @@ def index(request):
     return render(request, 'index.html', context={})
 
 
+def forgotpassword(request):
+    return render(request, 'forgotpassword.html', context={})
+
+
 # Logs in a user if a post request is given or redirects the user
 # to the login page.
 # @param:   An http request
@@ -31,13 +35,13 @@ def login_user(request):
                 login(request, user)
                 return redirect(show_dashboard)
             else:
-                return render(request, 'login_employee.html', {'error_message': 'You have been banned.'})
+                return render(request, 'login.html', {'error_message': 'You have been banned.'})
         else:
-            return render(request, 'login_employee.html', {'error_message': 'Invalid login'})
+            return render(request, 'login.html', {'error_message': 'Invalid login'})
     context = {
          "form": form,
     }
-    return render(request, 'login_employee.html', context)
+    return render(request, 'login.html', context)
 
 
 # Logs a user out.
@@ -80,3 +84,39 @@ def time_list(request):
     all_posts = TimeRecord.objects.all()
     context = {'all_times': all_posts}
     return render(request, 'payrollApp/time_records_list.html', context)
+
+
+def expenses(request):
+    return render(request, 'expenses.html', context={})
+
+
+def paycheck(request):
+    return render(request, 'paycheck.html', context={})
+
+
+def signup(request):
+    return render(request, 'signup.html', context={})
+
+
+def dashboardemployee(request):
+    return render(request, 'dashboard-employee.html', context={})
+
+
+def dashboardmanager(request):
+    return render(request, 'dashboard-manager.html', context={})
+
+
+def dashboardhr(request):
+    return render(request, 'dashboard-hr.html', context={})
+
+
+def pto(request):
+    return render(request, 'pto.html', context={})
+
+
+def reports(request):
+    return render(request, 'reports.html', context={})
+
+
+def timesheets(request):
+    return render(request, 'timesheets.html', context={})

@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,21 +9,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Payroll System | by Dreamteam</title>
-    <link rel="icon" href="images/favicon.png">
+
+    <link rel="icon" href="{% static 'images/favicon.png' %}">
 
     <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href= "{% static 'css/bootstrap.css' %}" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
-    <link href="css/metisMenu.css" rel="stylesheet">
+    <link href="{% static 'css/metisMenu.css' %}" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="css/sb-admin-2.css" rel="stylesheet">
+    <link href="{% static 'css/sb-admin-2.css' %}" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/font-awesome.css' %}" rel="stylesheet" type="text/css">
 
-    <link href="css/morris.css" rel="stylesheet">
+    <link href="{% static 'css/morris.css' %}" rel="stylesheet">
+
+        {% block stylesblock %}
+        {% endblock %}
+        
 </head>
 
 <body>
@@ -37,7 +44,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="#" class="logo"><img src="images/logo3.png" alt="" style="width:235px; padding:5px;"></a>
+                <a href="#" class="logo"><img src="{% static 'images/logo3.png' %}" alt="" style="width:235px; padding:5px;"></a>
             </div>
             <!-- /.navbar-header -->
 
@@ -54,7 +61,7 @@
                         <li><a href="#" data-toggle="modal" data-target="#myModalSettings"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="{% url 'login' %}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -68,22 +75,19 @@
                     <ul class="nav" id="side-menu">
 
                         <li>
-                            <a href="dashboard-employee.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="{% url 'index' %}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-tasks fa-fw"></i> Paycheck</a>
+                            <a href="{% url 'paycheck' %}"><i class="fa fa-tasks fa-fw"></i> Paycheck</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-table fa-fw"></i> Timesheets</a>
+                            <a href="{% url 'timesheets' %}"><i class="fa fa-table fa-fw"></i> Timesheets</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-files-o fa-fw"></i> Announcements</a>
+                            <a href="{% url 'expenses' %}"><i class="fa fa-money fa-fw"></i> Expenses</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-money fa-fw"></i> Expenses</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-edit fa-fw"></i> Paid Time Off</a>
+                            <a href="{% url 'pto' %}"><i class="fa fa-edit fa-fw"></i> Paid Time Off</a>
                         </li>
 
                     </ul>
@@ -104,15 +108,15 @@
               </div>
               <div class="modal-body">
                 <h4>Name </h4>
-                <p>{{%Full name%}}</p>
+                <p>Full name</p>
                 <h4>User ID </h4>
-                <p>{{%UserID%}}</p>
+                <p>UserID</p>
                 <h4>Email </h4>
-                <p>{{%Email%}}</p>
+                <p>Email</p>
                 <h4>Address </h4>
-                <p>{{%Adress%}}</p>
+                <p>Adress</p>
                 <h4>SSN </h4>
-                <p>{{%SSN%}}</p>
+                <p>SSN</p>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -158,20 +162,19 @@
 
     </div>
     <!-- /#wrapper -->
-
+    {% block scriptsblock %}
+    {% endblock %}
     <!-- jQuery -->
-    <script src="scripts/jquery.js"></script>
+    <script src="{% static 'scripts/jquery.js' %}"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="scripts/bootstrap.js"></script>
+    <script src="{% static 'scripts/bootstrap.js' %}"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
-    <script src="scripts/metisMenu.js"></script>
+    <script src="{% static 'scripts/metisMenu.js' %}"></script>
 
     <!-- Custom Theme JavaScript -->
-    <script src="scripts/sb-admin-2.js"></script>
-
-
+    <script src="{% static 'scripts/sb-admin-2.js' %}"></script>
 
 </body>
 
