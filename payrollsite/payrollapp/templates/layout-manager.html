@@ -178,8 +178,7 @@
 
     </div>
     <!-- /#wrapper -->
-    {% block scriptsblock %}
-    {% endblock %}
+
     <!-- jQuery -->
     <script src="{% static 'scripts/jquery.js' %}"></script>
 
@@ -192,6 +191,8 @@
     <!-- Custom Theme JavaScript -->
     <script src="{% static 'scripts/sb-admin-2.js' %}"></script>
 
+    {% block scriptsblock %}
+    {% endblock %}
 
 
 </body>
