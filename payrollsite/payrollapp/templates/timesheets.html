@@ -27,9 +27,9 @@
                       </tr>
                       <tr>
                         <th>Date</th>
-                        <th>In</th>
-                        <th>Out</th>
-                        <th>Deductions</th>
+                        <th>Hours</th>
+                        <!-- <th>Out</th> -->
+                        <!-- <th>Deductions</th> -->
                         <!-- <th>Vacation</th> -->
                         <!-- <th>Personal</th> -->
                         <!-- <th>Unpaid</th> -->
@@ -42,14 +42,19 @@
                           <input class="form-control" type="date" v-model="day.date" />
                         </td>
                         <td>
-                          <input class="form-control" type="time" v-model="day.in" />
+                          <input class="form-control" type="number" min="0" max="8" step="1" v-model="day.hours" />
                         </td>
                         <td>
-                          <input class="form-control" type="time" v-model="day.out" />
+                           { dailyTotal(day) }
                         </td>
+                        <!--
+                        <td>
+                          <input class="form-control" type="time" v-model="day.out" />
+                        </td> -->
+                        <!--
                         <td class="deductions">
                           <input class="form-control" type="number" min="0" max="8" step=".5" v-model="day.deductions" />
-                        </td>
+                        </td> -->
                         <!-- <td class="vacations">
                           <input class="form-control" type="number" min="0" max="8" step=".5" v-model="day.vacation" />
                         </td> -->
@@ -59,23 +64,20 @@
                         <!-- <td class="unpaid">
                           <input class="form-control" type="number" min="0" max="8" step=".5" v-model="day.unpaid" />
                         </td> -->
-                        <td>
-                           { dailyTotal(day) }
-                        </td>
+
                       </tr>
                       <tr>
-                        <td></td>
-                        <td></td>
                         <td>
-                          <h4>Total</h4></td>
-                        <td>
-                          <h4>{ calcWeekDeductions(week) }</h4></td>
-                        <td>
-                          <!-- <h4>{ calcWeekVacation(week) }</h4></td> -->
-                        <td>
-                          <!-- <h4>{ calcWeekPersonal(week) }</h4></td> -->
-                        <td>
-                          <!-- <h4>{ calcWeekUnpaid(week) }</h4></td> -->
+                          <h4>Total</h4>
+                        </td>
+                      <!--  <td>
+                          <h4>{ calcWeekDeductions(week) }</h4></td> -->
+                      <!--  <td>
+                           <h4>{ calcWeekVacation(week) }</h4></td> -->
+                      <!--   <td>
+                          <h4>{ calcWeekPersonal(week) }</h4></td> -->
+                      <!--  <td>
+                           <h4>{ calcWeekUnpaid(week) }</h4></td> -->
                         <td>
                           <h4>{ calcWeekHours(week) }</h4>
                         </td>
