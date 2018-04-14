@@ -7,6 +7,11 @@ class Manager(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
+class HumanResources(models.Model):
+    human_resources_id = models.AutoField(primary_key=True)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+
+
 class Employee(models.Model):
     employee_id = models.AutoField(primary_key=True)
     manager_id = models.ForeignKey(Manager, on_delete=models.CASCADE)
@@ -15,7 +20,7 @@ class Employee(models.Model):
 
 class UserMetaData(models.Model):
     user_meta_data_id = models.AutoField(primary_key=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     address = models.CharField(max_length=255)
     social_security_number = models.IntegerField()
     user_status = models.CharField(max_length=25)
