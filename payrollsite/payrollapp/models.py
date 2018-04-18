@@ -62,7 +62,7 @@ class Expenses(models.Model):
     title = models.CharField(max_length=64)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     amount = models.DecimalField(decimal_places=2, max_digits=16)
-    file = models.FileField(upload_to=expense_directory_path, null=True)
+    file = models.ImageField(upload_to=expense_directory_path, null=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICE)
 
 

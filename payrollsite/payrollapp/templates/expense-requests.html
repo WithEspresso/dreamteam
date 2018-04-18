@@ -13,17 +13,6 @@
             <!-- /.col-lg-12 -->
         </div>
 
-        <!-- Displays errors when invalid input is provided to the form. -->
-        {% if form.errors %}
-        {% for field in form %}
-        {% for error in field.errors %}
-        <div class="alert alert-danger">
-            <strong>{{ error|escape }}</strong>
-        </div>
-        {% endfor %}
-        {% endfor %}
-        {% endif %}
-
         <!-- Displays all pto requests for the logged in user. -->
         {% if expense_requests %}
         <table style-="width:100%">
@@ -52,17 +41,18 @@
                         <h4 class="modal-title">Create a new expense reimbursement</h4>
                     </div>
                     <div class="modal-body">
-                        <form method="post">
+                        <form action="" method="post" enctype="multipart/form-data">
                             {% csrf_token %}
-                            {% for field in form %}
-                            <h4> {{ field.label_tag }} </h4>
-                            {{ field }}
-                            {% endfor %}
+                            <h4> {{ form.title.label_tag }} </h4>
+                            {{ form.title }}
+                            <h4> {{ form.amount.label_tag }} </h4>
+                            {{ form.amount }}
+                            <h4> {{form.file.label_tag}} </h4>
+                            {{ form.file }}
                             <br><br>
                             <button type="submit" class="btn btn-primary" onclick="" style="margin-left:28%">Submit
                             </button>
                         </form>
-                        <br><br>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
