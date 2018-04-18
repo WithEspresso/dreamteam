@@ -120,3 +120,6 @@ def reports(request):
 
 def timesheets(request):
     return render(request, 'timesheets.html', context={})
+
+def manageaccounts(request):
+    return render(request, 'manageaccounts.html', context={})
