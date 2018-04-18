@@ -90,21 +90,21 @@
                       <li>
                           <a href="{% url 'reports' %}"><i class="fa fa-bar-chart-o fa-fw"></i> Reports</a>
                       </li>
-                        <li>
-                            <a href="#"><i class="fa fa-wrench fa-fw"></i> Approvals<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="#">Timesheet approvals</a>
-                                </li>
-                                <li>
-                                    <a href="#">Expenses approvals</a>
-                                </li>
-                                <li>
-                                    <a href="#">PTO approvals</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
+                      <li>
+                          <a href="#"><i class="fa fa-wrench fa-fw"></i> Approvals<span class="fa arrow"></span></a>
+                          <ul class="nav nav-second-level">
+                              <li>
+                                  <a href="{% url 'approvalstimesheets' %}">Timesheet approvals</a>
+                              </li>
+                              <li>
+                                  <a href="{% url 'approvalsexpenses' %}">Expenses approvals</a>
+                              </li>
+                              <li>
+                                  <a href="{% url 'approvalspto' %}">PTO approvals</a>
+                              </li>
+                          </ul>
+                          <!-- /.nav-second-level -->
+                      </li>
 
                     </ul>
                 </div>
