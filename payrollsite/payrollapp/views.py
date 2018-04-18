@@ -8,6 +8,7 @@ from django.http import HttpResponseRedirect
 from .forms import LoginForm
 from .forms import UserForm
 from .forms import PaidTimeOffForm
+from .forms import ExpenseRequestForm
 
 # TODO: only import models we are utilizing, let me be lazy right now please.
 from .models import *
@@ -47,7 +48,7 @@ def logout_user(request):
     :return The index page.
     """
     logout(request)
-    return redirect(index)
+    return redirect(login)
 
 
 def reset_password(request):
@@ -58,7 +59,7 @@ def reset_password(request):
     :return The password reset page.
     """
     logout(request)
-    return redirect(index)
+    return redirect(login)
 
 
 def register(request):
@@ -112,8 +113,7 @@ def show_dashboard(request):
 def paid_time_off(request):
     """
     Loads a list of paid time off requests for the user.
-    # TODO: HTTP GET, retrieve User paid time off requests as context.
-    # TODO: HTTP POST, update table with PTO request for current user.
+    Provides a form for the user to add additional PTO.
     :param   request as an http request
     :return: A rendered html page for the index with a list of current pending and process PTO requests.
     """
@@ -151,7 +151,7 @@ def approve_paid_time_off(request):
     return render(request)
 
 
-def display_expense_reimbursement(request):
+def expense_reimbursement(request):
     """
     Loads a list of expense reimbursement requests for the user.
     # TODO: HTTP GET, retrieve User paid time off requests as context.
@@ -159,7 +159,27 @@ def display_expense_reimbursement(request):
     :param   request as an http request
     :return: A rendered html page for the index with a list of current pending and expense reimbursement requests.
     """
-    return render(request)
+    form = ExpenseRequestForm(request.POST or None)
+    # Retrieving existing pto requests from the database
+    # Saving the form data and saving to the database.
+    if request.user.is_authenticated:
+        this_username = request.user
+        user = User.objects.get(username=this_username)
+        expense_requests = ExpenseRequest.objects.filter(user_id__username=this_username)
+        if form.is_valid():
+            expense_request = form.save(commit=False)
+            expense_request.user_id = user
+            expense_request.status = 'Pending'
+            expense_request.save()
+            # Redirect is done instead of rendering because refreshing will cause form resubmission.
+            return HttpResponseRedirect('expenses/')
+    else:
+        return render(request, 'login.html')
+    context = {
+        "form": form,
+        "expense_requests": expense_requests,
+    }
+    return render(request, 'expenses.html', context)
 
 
 def approve_expense_reimbursement(request):

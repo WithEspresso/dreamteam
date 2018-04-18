@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django import forms
-from .models import PaidTimeOffRequests
+from .models import PaidTimeOffRequests, Expenses
+from .validators import validate_image_file
 
 
 class LoginForm(forms.ModelForm):
@@ -31,3 +32,15 @@ class PaidTimeOffForm(forms.ModelForm):
     class Meta:
         model = PaidTimeOffRequests
         fields = ['date', 'hours']
+
+
+class ExpenseRequestForm(forms.ModelForm):
+    file = forms.FileField(label="Select an image to upload.",
+                           help_text="Maximum file size is 2 megabytes",
+                           validators=[validate_image_file])
+
+    # User is automatically retrieved from the request.user method in the view.
+    # Status is only visible to the manager
+    class Meta:
+        model = Expenses
+        fields = ['title', 'amount', 'file']

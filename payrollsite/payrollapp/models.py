@@ -2,6 +2,12 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
+STATUS_CHOICE = (
+    ('Pending', 'Pending'),
+    ('Approved', 'Approved'),
+    ('Denied', 'Denied'))
+
+
 class Manager(models.Model):
     manager_id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -53,9 +59,11 @@ def expense_directory_path(instance, filename):
 
 class Expenses(models.Model):
     expense_id = models.AutoField(primary_key=True)
+    title = models.CharField(max_length=64)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     amount = models.DecimalField(decimal_places=2, max_digits=16)
     file = models.FileField(upload_to=expense_directory_path, null=True)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICE)
 
 
 class ExpenseRequest(models.Model):
@@ -69,16 +77,9 @@ class PaidTimeOff(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
-STATUS_CHOICE = (
-    ('Pending', 'Pending'),
-    ('Approved', 'Approved'),
-    ('Denied', 'Denied'))
-
-
 class PaidTimeOffRequests(models.Model):
     paid_time_off_request_id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    status = models.CharField(max_length=10, choices=STATUS_CHOICE)
     date = models.DateField()
     hours = models.IntegerField()
 
