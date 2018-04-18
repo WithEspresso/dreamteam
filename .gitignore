@@ -1,1 +1,2 @@
-payrollsite/payrollapp/__pycache__/*
+/payrollsite/payrollapp/__pycache__/*
+/payrollsite/payrollapp/migrations/__pycache__/*
