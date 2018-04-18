@@ -168,7 +168,16 @@ def timesheets(request):
 
 def manageaccount(request):
     return render(request, 'manageaccount.html', context={})
-  
+
+def approvalspto(request):
+ return render(request, 'approvalspto.html', context={})
+
+def approvalstimesheets(request):
+ return render(request, 'approvalstimesheets.html', context={})
+
+def approvalsexpenses(request):
+ return render(request, 'approvalsexpenses.html', context={})
+
 # def display_paid_time_off(request):
 #     """
 #     Loads a list of paid time off requests for the user.
@@ -285,4 +294,3 @@ def manageaccount(request):
 #     :return: A rendered html page with wage information
 #     """
 #     return render(request)
-

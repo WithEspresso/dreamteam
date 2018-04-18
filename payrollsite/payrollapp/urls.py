@@ -24,5 +24,8 @@ urlpatterns = [
     url(r'^reports/$', views.reports, name='reports'),
     url(r'^timesheets/$', views.timesheets, name='timesheets'),
     url(r'^manageaccount/$', views.manageaccount, name='manageaccount'),
+    url(r'^approvalspto/$', views.approvalspto, name='approvalspto'),
+    url(r'^approvalsexpenses/$', views.approvalsexpenses, name='approvalsexpenses'),
+    url(r'^approvalstimesheets/$', views.approvalstimesheets, name='approvalstimesheets'),
 
 ]
