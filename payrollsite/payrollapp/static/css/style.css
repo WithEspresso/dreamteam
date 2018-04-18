@@ -1,0 +1,188 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin:0;
+}
+form {
+  border: 3px solid #f1f1f1;
+  background-color: white;
+  padding: 20px 40px;
+  padding-bottom: 5px;
+  width: 300px;
+  margin-top: 10px;
+  margin: 0 auto;
+
+}
+
+.background-image{
+  margin:0;
+  padding:0;
+  position: fixed;
+  z-index:-1;
+  top:0;
+  left:0;
+  height:100%;
+}
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    font-size: 14px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #51ade2;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    font-size: 14px;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+.container-login {
+    padding: 16px;
+}
+
+header{
+  position:fixed;
+  z-index:10;
+  width: 100%;
+  background-color: #1e2535;
+  left: 0;
+  top: 0;
+  height: 75px;
+}
+
+.subheader{
+  display: inline-block;
+  width:70%;
+  margin:0;
+  padding:0;
+  float:right;
+  margin-right:20px;
+  text-align: right;
+}
+
+.sidenav {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 70px;
+    left: 0;
+    background-color: #192030;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.sidenav a {
+    padding: 6px 6px 6px 32px;
+    text-decoration: none;
+    font-size: 16px;
+    color: #cecece;
+    display: block;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.main-body {
+    margin-top: 100px; /* A bit more than the height of the header */
+    margin-left: 220px; /* A bit more than the width of the sidenav */
+}
+
+.split {
+    height: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 150px;
+    margin-left: 220px;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.left {
+    margin-left: 0;
+    padding:0;
+    width: 50%;
+    margin-right: 10px;
+    background-color: white;
+    border: 2px solid #cecece;
+}
+
+.right {
+    right: 10px;
+    width: 30%;
+    padding:0;
+    margin-left: 10px;
+    background-color: white;
+    border: 2px solid #cecece;
+
+}
+
+.mini-header-dashboard{
+  background-color: #51ade2;
+  margin:0;
+  padding:0;
+  height: 50px;
+}
+
+#form-create-account{
+  width:80%;
+  margin-top: 50px;
+  margin-bottom: 50px;
+
+}
+
+.container-inside-form{
+  margin:0 2%;
+  padding:0;
+  width:45%;
+  display: inline-block;
+}
+
+@media screen and (max-width: 500px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+
+  form {
+    width:60%;
+  }
+
+  .container-inside-form{
+    margin:0 2%;
+    padding:0;
+    width:95%;
+    display: inline-block;
+  }
+
+  #form-create-account{
+    margin-top: 50px;
+    width:90%;
+  }
+
+}
+
+@media screen and (max-width: 720px) {
+  .container-inside-form{
+    margin:0 2%;
+    padding:0;
+    width:95%;
+    display: inline-block;
+  }
+
+  #form-create-account{
+    margin-top: 50px;
+    width:90%;
+  }
+}

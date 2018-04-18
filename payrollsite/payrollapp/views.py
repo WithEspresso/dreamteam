@@ -17,6 +17,16 @@ def index(request):
     return render(request, 'index.html', context={})
 
 
+
+def forgotpassword(request):
+    return render(request, 'forgotpassword.html', context={})
+
+
+# Logs in a user if a post request is given or redirects the user
+# to the login page.
+# @param:   An http request
+# @return:  The profile page for the user if the login is successful
+
 def login_user(request):
     """
     Logs in a user if a post request is given or redirects the user
@@ -33,13 +43,13 @@ def login_user(request):
                 login(request, user)
                 return redirect(show_dashboard)
             else:
-                return render(request, 'login_employee.html', {'error_message': 'You have been banned.'})
+                return render(request, 'login.html', {'error_message': 'You have been banned.'})
         else:
-            return render(request, 'login_employee.html', {'error_message': 'Invalid login'})
+            return render(request, 'login.html', {'error_message': 'Invalid login'})
     context = {
          "form": form,
     }
-    return render(request, 'login_employee.html', context)
+    return render(request, 'login.html', context)
 
 
 def logout_user(request):
@@ -111,119 +121,168 @@ def show_dashboard(request):
     return render(request, 'dashboard.html')
 
 
-def display_paid_time_off(request):
-    """
-    Loads a list of paid time off requests for the user.
-    # TODO: HTTP GET, retrieve User paid time off requests as context.
-    # TODO: HTTP POST, update table with PTO request for current user.
-    :param   request as an http request
-    :return: A rendered html page for the index with a list of current pending and process PTO requests.
-    """
-    return render(request)
+
+# Loads a list of clock in and clock out times for that user.
+# @param:   An http request
+# @return:  A rendered html page for the index with a list of all previous clock in/out times.
+def time_list(request):
+    all_posts = TimeRecord.objects.all()
+    context = {'all_times': all_posts}
+    return render(request, 'payrollApp/time_records_list.html', context)
 
 
-def approve_paid_time_off(request):
-    """
-    Loads a list of pending paid time off requests.
-    TODO: Add decorator so this is a manager only view.
-    TODO: HTTP GET, retrieve pending pto request. Implement manager only access to this view. Redirect if failed.
-    TODO: HTTP POST, update status of PTO requests.
-    :param   request as an http request
-    :return: A rendered html page for the index with a list of current pending and process PTO requests.
-    """
-    return render(request)
+def expenses(request):
+    return render(request, 'expenses.html', context={})
 
 
-def display_expense_reimbursement(request):
-    """
-    Loads a list of expense reimbursement requests for the user.
-    # TODO: HTTP GET, retrieve User paid time off requests as context.
-    # TODO: HTTP POST, update table with expense reimbursement request for current user.
-    :param   request as an http request
-    :return: A rendered html page for the index with a list of current pending and expense reimbursement requests.
-    """
-    return render(request)
+def paycheck(request):
+    return render(request, 'paycheck.html', context={})
 
 
-def approve_expense_reimbursement(request):
-    """
-    Loads a list of pending expense reimbursement requests.
-    TODO: Add decorator so this is a manager only view.
-    TODO: HTTP GET, retrieve pending pto request. Implement manager only access to this view. Redirect if failed.
-    TODO: HTTP POST, update status of PTO requests.
-    :param   request as an http request
-    :return: A rendered html page for the index with a list of current pending and process PTO requests.
-    """
-    return render(request)
+def signup(request):
+    return render(request, 'signup.html', context={})
 
 
-def display_time_sheet(request):
-    """
-    Displays a form so the user can input their time sheet information
-    TODO: HTTP NONE, display time sheet form.
-    TODO: HTTP POST, validate time and add to the database.
-    :param   request as an http request
-    :return: A rendered html page for inputting time sheet requests
-    """
-    return render(request)
+def dashboardemployee(request):
+    return render(request, 'dashboard-employee.html', context={})
 
 
-def approve_time_sheet(request):
-    """
-    Loads a list of pending time sheets from employees, managers, and HR
-    TODO: Add decorator so this is a manager only view.
-    TODO: HTTP NONE, display time sheet form.
-    TODO: HTTP GET, retrieve pending pto request. Implement manager only access to this view. Redirect if failed.
-    TODO: HTTP POST, update status of PTO requests.
-    :param   request as an http request
-    :return: A rendered html page for the index with a list of current pending and process PTO requests.
-    """
-    return render(request)
+def dashboardmanager(request):
+    return render(request, 'dashboard-manager.html', context={})
 
 
-def generate_reports(request):
-    """
-    Displays reports about the manager's employees.
-    TODO: Add decorator so this is a manager only view.
-    TODO: HTTP NONE, display time sheet form.
-    TODO: HTTP GET, display reports about a given user by filtering results.
-    :param   request as an http request
-    :return: A rendered html page with the employee reports.
-    """
-    return render(request)
+def dashboardhr(request):
+    return render(request, 'dashboard-hr.html', context={})
 
 
-def view_personal_information(request):
-    """
-    Displays personal information to the user.
-    TODO: HTTP NONE, display personal information.
-    :param   request as an http request
-    :return: A rendered html page with user information.
-    """
-    return render(request)
+def pto(request):
+    return render(request, 'pto.html', context={})
 
 
-def update_personal_information(request):
-    """
-    Allows HR to search for user information and edit it.
-    TODO: Add a decorator so that it is an HR only view
-    TODO: HTTP NONE, display personal information.
-    TODO: HTTP GET, display personal information of the given user_id.
-    TODO: HTTP POST, update personal information
-    :param   request as an http request
-    :return: A rendered html page with user information.
-    """
-    return render(request)
+def reports(request):
+    return render(request, 'reports.html', context={})
 
 
-def manage_wages(request):
-    """
-    Allows HR to manage wages of a given employee
-    TODO: Add a decorator so that it is an HR only view
-    TODO: HTTP NONE, displays form to search for an employee
-    TODO: HTTP GET, display wage information of the given user_id.
-    TODO: HTTP POST, update wage information
-    :param   request as an http request
-    :return: A rendered html page with wage information
-    """
-    return render(request)
+def timesheets(request):
+    return render(request, 'timesheets.html', context={})
+
+def manageaccount(request):
+    return render(request, 'manageaccount.html', context={})
+  
+# def display_paid_time_off(request):
+#     """
+#     Loads a list of paid time off requests for the user.
+#     # TODO: HTTP GET, retrieve User paid time off requests as context.
+#     # TODO: HTTP POST, update table with PTO request for current user.
+#     :param   request as an http request
+#     :return: A rendered html page for the index with a list of current pending and process PTO requests.
+#     """
+#     return render(request)
+
+
+# def approve_paid_time_off(request):
+#     """
+#     Loads a list of pending paid time off requests.
+#     TODO: Add decorator so this is a manager only view.
+#     TODO: HTTP GET, retrieve pending pto request. Implement manager only access to this view. Redirect if failed.
+#     TODO: HTTP POST, update status of PTO requests.
+#     :param   request as an http request
+#     :return: A rendered html page for the index with a list of current pending and process PTO requests.
+#     """
+#     return render(request)
+
+
+# def display_expense_reimbursement(request):
+#     """
+#     Loads a list of expense reimbursement requests for the user.
+#     # TODO: HTTP GET, retrieve User paid time off requests as context.
+#     # TODO: HTTP POST, update table with expense reimbursement request for current user.
+#     :param   request as an http request
+#     :return: A rendered html page for the index with a list of current pending and expense reimbursement requests.
+#     """
+#     return render(request)
+
+
+# def approve_expense_reimbursement(request):
+#     """
+#     Loads a list of pending expense reimbursement requests.
+#     TODO: Add decorator so this is a manager only view.
+#     TODO: HTTP GET, retrieve pending pto request. Implement manager only access to this view. Redirect if failed.
+#     TODO: HTTP POST, update status of PTO requests.
+#     :param   request as an http request
+#     :return: A rendered html page for the index with a list of current pending and process PTO requests.
+#     """
+#     return render(request)
+
+
+# def display_time_sheet(request):
+#     """
+#     Displays a form so the user can input their time sheet information
+#     TODO: HTTP NONE, display time sheet form.
+#     TODO: HTTP POST, validate time and add to the database.
+#     :param   request as an http request
+#     :return: A rendered html page for inputting time sheet requests
+#     """
+#     return render(request)
+
+
+# def approve_time_sheet(request):
+#     """
+#     Loads a list of pending time sheets from employees, managers, and HR
+#     TODO: Add decorator so this is a manager only view.
+#     TODO: HTTP NONE, display time sheet form.
+#     TODO: HTTP GET, retrieve pending pto request. Implement manager only access to this view. Redirect if failed.
+#     TODO: HTTP POST, update status of PTO requests.
+#     :param   request as an http request
+#     :return: A rendered html page for the index with a list of current pending and process PTO requests.
+#     """
+#     return render(request)
+
+
+# def generate_reports(request):
+#     """
+#     Displays reports about the manager's employees.
+#     TODO: Add decorator so this is a manager only view.
+#     TODO: HTTP NONE, display time sheet form.
+#     TODO: HTTP GET, display reports about a given user by filtering results.
+#     :param   request as an http request
+#     :return: A rendered html page with the employee reports.
+#     """
+#     return render(request)
+
+
+# def view_personal_information(request):
+#     """
+#     Displays personal information to the user.
+#     TODO: HTTP NONE, display personal information.
+#     :param   request as an http request
+#     :return: A rendered html page with user information.
+#     """
+#     return render(request)
+
+
+# def update_personal_information(request):
+#     """
+#     Allows HR to search for user information and edit it.
+#     TODO: Add a decorator so that it is an HR only view
+#     TODO: HTTP NONE, display personal information.
+#     TODO: HTTP GET, display personal information of the given user_id.
+#     TODO: HTTP POST, update personal information
+#     :param   request as an http request
+#     :return: A rendered html page with user information.
+#     """
+#     return render(request)
+
+
+# def manage_wages(request):
+#     """
+#     Allows HR to manage wages of a given employee
+#     TODO: Add a decorator so that it is an HR only view
+#     TODO: HTTP NONE, displays form to search for an employee
+#     TODO: HTTP GET, display wage information of the given user_id.
+#     TODO: HTTP POST, update wage information
+#     :param   request as an http request
+#     :return: A rendered html page with wage information
+#     """
+#     return render(request)
+
