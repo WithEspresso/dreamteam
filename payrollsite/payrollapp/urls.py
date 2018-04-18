@@ -23,6 +23,6 @@ urlpatterns = [
     url(r'^pto/$', views.pto, name='pto'),
     url(r'^reports/$', views.reports, name='reports'),
     url(r'^timesheets/$', views.timesheets, name='timesheets'),
-    url(r'^manageaccounts/$', views.manageaccounts, name='manageaccounts'),
+    url(r'^manageaccount/$', views.manageaccount, name='manageaccount'),
 
 ]
