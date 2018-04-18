@@ -1,20 +1,18 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
+from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 
 from .forms import LoginForm
 from .forms import UserForm
+from .forms import PaidTimeOffForm
+
+# TODO: only import models we are utilizing, let me be lazy right now please.
+from .models import *
 
 # Note, possibly convert these views from function based views to class based views in the future.
-
-
-def index(request):
-    """
-    Loads the index page.
-    :param request:
-    :return: A rendered html page for the index.
-    """
-    return render(request, 'index.html', context={})
 
 
 def login_user(request):
@@ -31,15 +29,15 @@ def login_user(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return redirect(show_dashboard)
+                return render(request, 'dashboard-employee.html')
             else:
-                return render(request, 'login_employee.html', {'error_message': 'You have been banned.'})
+                return render(request, 'login.html', {'error_message': 'You have been banned.'})
         else:
-            return render(request, 'login_employee.html', {'error_message': 'Invalid login'})
+            return render(request, 'login.html', {'error_message': 'Invalid login'})
     context = {
          "form": form,
     }
-    return render(request, 'login_employee.html', context)
+    return render(request, 'login.html', context)
 
 
 def logout_user(request):
@@ -111,7 +109,7 @@ def show_dashboard(request):
     return render(request, 'dashboard.html')
 
 
-def display_paid_time_off(request):
+def paid_time_off(request):
     """
     Loads a list of paid time off requests for the user.
     # TODO: HTTP GET, retrieve User paid time off requests as context.
@@ -119,7 +117,26 @@ def display_paid_time_off(request):
     :param   request as an http request
     :return: A rendered html page for the index with a list of current pending and process PTO requests.
     """
-    return render(request)
+    form = PaidTimeOffForm(request.POST or None)
+    # Retrieving existing pto requests from the database
+    # Saving the form data and saving to the database.
+    if request.user.is_authenticated:
+        this_username = request.user
+        user = User.objects.get(username=this_username)
+        pto_requests = PaidTimeOffRequests.objects.filter(user_id__username=this_username)
+        if form.is_valid():
+            pto_request = form.save(commit=False)
+            pto_request.user_id = user
+            pto_request.status = 'Pending'
+            pto_request.save()
+            return HttpResponseRedirect('pto/')
+    else:
+        return render(request, 'login.html')
+    context = {
+        "form": form,
+        "pto_requests": pto_requests
+    }
+    return render(request, 'pto.html', context)
 
 
 def approve_paid_time_off(request):

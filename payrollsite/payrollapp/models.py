@@ -69,12 +69,21 @@ class PaidTimeOff(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
+STATUS_CHOICE = (
+    ('Pending', 'Pending'),
+    ('Approved', 'Approved'),
+    ('Denied', 'Denied'))
+
+
 class PaidTimeOffRequests(models.Model):
     paid_time_off_request_id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    status = models.CharField(max_length=20)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICE)
     date = models.DateField()
     hours = models.IntegerField()
+
+    def __str__(self):
+        return str(self.user_id) + "'s pto request for " + str(self.date)
 
 
 class Approvals(models.Model):
