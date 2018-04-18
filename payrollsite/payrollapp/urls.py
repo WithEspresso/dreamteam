@@ -14,7 +14,7 @@ urlpatterns = [
     url(r'^dashboard/$', views.show_dashboard, name='dashboard'),
 
 
-    url(r'expenses/$', views.expenses, name='expenses'),
+    url(r'^expenses/$', views.expenses, name='expenses'),
     url(r'^paycheck/$', views.paycheck, name='paycheck'),
     url(r'^signup/$', views.signup, name='signup'),
     url(r'^dashboardemployee/$', views.dashboardemployee, name='dashboardemployee'),
