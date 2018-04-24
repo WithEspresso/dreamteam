@@ -121,20 +121,24 @@ def paid_time_off(request):
         this_username = request.user
         user = User.objects.get(username=this_username)
         pto_requests = PaidTimeOffRequests.objects.filter(user_id__username=this_username)
-        # Saving the form data and saving to the database.
-        if form.is_valid():
+        context = {
+            "form": form,
+            "pto_requests": pto_requests
+        }
+        print(str(request.POST["date"]))
+        print(str(request.POST["hours"]))
+        # Saving the form data and saving to the database if the user is sending a POST request.
+        if request.method == "POST" and form.is_valid():
             pto_request = form.save(commit=False)
             pto_request.user_id = user
-            pto_request.status = 'Pending'
+            pto_request.date = request.POST["date"]
+            pto_request.hours = request.POST["hours"]
+            pto_request.status = request.POST["status"]
             pto_request.save()
             return HttpResponseRedirect('pto/')
+        return render(request, 'pto.html', context)
     else:
         return render(request, 'login.html')
-    context = {
-        "form": form,
-        "pto_requests": pto_requests
-    }
-    return render(request, 'pto.html', context)
 
 
 def approve_paid_time_off(request):
@@ -170,6 +174,7 @@ def expense_reimbursement(request):
             # Redirect is done instead of rendering because refreshing will cause form resubmission.
             return HttpResponseRedirect('expense-requests/')
     else:
+        # User is not logged in. Show them the way.
         return redirect('index')
     context = {
         "form": form,

@@ -31,7 +31,7 @@ class PaidTimeOffForm(forms.ModelForm):
     # Status is only visible to the manager
     class Meta:
         model = PaidTimeOffRequests
-        fields = ['date', 'hours']
+        fields = ['date', 'hours', 'status']
 
 
 MONTH_CHOICES = (
