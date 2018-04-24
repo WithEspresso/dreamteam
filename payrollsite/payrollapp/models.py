@@ -32,6 +32,14 @@ class UserMetaData(models.Model):
     user_status = models.CharField(max_length=25)
 
 
+class HumanResourcesData(models.Model):
+    human_resources_data_id = models.AutoField(primary_key=True)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    is_activated = models.BooleanField(default=True)
+    is_human_resources = models.BooleanField(default=False)
+    is_manager = models.BooleanField(default=False)
+
+
 class TimeSheet(models.Model):
     time_sheet_id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)

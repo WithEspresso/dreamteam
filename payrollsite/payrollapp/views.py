@@ -28,7 +28,7 @@ def login_user(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return render(request, 'dashboard-employee.html')
+                return redirect('dashboard')
             else:
                 return render(request, 'login.html', {'error_message': 'You have been banned.'})
         else:
@@ -96,7 +96,7 @@ def view_paycheck_information(request):
     :param   request as an http request
     :return: A rendered html page for the index with detailed paycheck information.
     """
-    return render(request)
+    return render(request, 'paycheck.html')
 
 
 def show_dashboard(request):
@@ -105,7 +105,7 @@ def show_dashboard(request):
     :param   request as an http request
     :return: A rendered html page for the index with a list of current pending and process PTO requests.
     """
-    return render(request, 'dashboard.html')
+    return render(request, 'dashboard-employee.html')
 
 
 def paid_time_off(request):
@@ -170,7 +170,7 @@ def expense_reimbursement(request):
             # Redirect is done instead of rendering because refreshing will cause form resubmission.
             return HttpResponseRedirect('expense-requests/')
     else:
-        return render(request, 'login.html')
+        return redirect('index')
     context = {
         "form": form,
         "expense_requests": expense_requests,
@@ -198,7 +198,7 @@ def display_time_sheet(request):
     :param   request as an http request
     :return: A rendered html page for inputting time sheet requests
     """
-    return render(request)
+    return render(request, 'timesheets.html')
 
 
 def approve_time_sheet(request):

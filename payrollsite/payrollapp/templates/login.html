@@ -2,41 +2,38 @@
 
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}">
-<title>Payroll System | by Dreamteam</title>
-<link rel="icon" href="{% static 'images/favicon.png' %}">
+    <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Payroll System | by Dreamteam</title>
+    <link rel="icon" href="{% static 'images/favicon.png' %}">
 
 </head>
 <body>
 
-  <div style="text-align:center; margin-top:70px;">
+<div style="text-align:center; margin-top:70px;">
     <img src="{% static 'images/logo3.png' %}" alt="" height="70px">
-  </div>
-
-  <div class="background-image">
-    <img src="{% static 'images/wallpaper.jpg' %}" alt="" width="100%" height="100%">
-  </div>
-  <div class="centered">
-  <form method="post">
-              {% csrf_token %}
-    <div class="container-login">
-      <label><b> {{form.username.label_tag}} </b></label>
-      {{form.username}}
-
-      <label><b> {{form.password.label_tag}} </b></label>
-      {{form.password}}
-
-      <button type="submit"><a href="{% url 'index' %}" style="color:white; text-decoration:none">Login</a></button>
-      <div style="text-align:center; margin-top:10px;">
-        <a href="#" style="color:#51ade2; text-decoration:none">Forgot password?</a>
-      </div>
-    </div>
-  </form>
 </div>
 
-
+<div class="background-image">
+    <img src="{% static 'images/wallpaper.jpg' %}" alt="" width="100%" height="100%">
+</div>
+<div class="centered">
+    <form method="post" action="">
+        <div class="container-login">
+            {% csrf_token %}
+            {% for field in form %}
+                <label><b> {{ field.label_tag}} </b></label>
+                {{field}}
+            {% endfor %}
+            <button type="submit" style="color:white; text-decoration:none"> Login
+            </button>
+            <div style="text-align:center; margin-top:10px;">
+                <a href="#" style="color:#51ade2; text-decoration:none">Forgot password?</a>
+            </div>
+        </div>
+    </form>
+</div>
 
 
 </body>

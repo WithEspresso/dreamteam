@@ -2,16 +2,16 @@ from django.contrib.auth.models import User
 from django import forms
 from .models import PaidTimeOffRequests, Expenses
 from .validators import validate_image_file
+from .validators import validate_year_entry
 
 
-class LoginForm(forms.ModelForm):
+class LoginForm(forms.Form):
     # Changes it from plain text to hashing
+    username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
 
     # Meta Information about your class.
     class Meta:
-        model = User
-        # What fields do we want to appear on the form?
         fields = ['username', 'password']
 
 
@@ -32,6 +32,31 @@ class PaidTimeOffForm(forms.ModelForm):
     class Meta:
         model = PaidTimeOffRequests
         fields = ['date', 'hours']
+
+
+MONTH_CHOICES = (
+    ('jan', 'January'),
+    ('feb', 'February'),
+    ('mar', 'March'),
+    ('apr', 'April'),
+    ('may', 'May'),
+    ('jun', 'June'),
+    ('jul', 'July'),
+    ('aug', 'August'),
+    ('sep', 'September'),
+    ('oct', 'October'),
+    ('nov', 'November'),
+    ('dec', 'December'),
+)
+
+
+class PaycheckSearchForm(forms.Form):
+    # Form to search and retrieve paychecks from a pay period.
+    month = forms.ChoiceField(widget=forms.Select, choices=MONTH_CHOICES)
+    year = forms.IntegerField(validators=[validate_year_entry])
+
+    class Meta:
+        fields = ['month', 'year']
 
 
 class ExpenseRequestForm(forms.ModelForm):
