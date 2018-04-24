@@ -90,7 +90,7 @@ class PaidTimeOffRequests(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateField()
     hours = models.IntegerField()
-    status = models.CharField(max_length=10, choices=STATUS_CHOICE)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICE, default="Pending")
 
     def __str__(self):
         return str(self.user_id) + "'s pto request for " + str(self.date)

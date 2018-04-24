@@ -125,15 +125,15 @@ def paid_time_off(request):
             "form": form,
             "pto_requests": pto_requests
         }
-        print(str(request.POST["date"]))
-        print(str(request.POST["hours"]))
+
         # Saving the form data and saving to the database if the user is sending a POST request.
         if request.method == "POST" and form.is_valid():
             pto_request = form.save(commit=False)
+            print(str(request.POST["date"]))
+            print(str(request.POST["hours"]))
             pto_request.user_id = user
-            pto_request.date = request.POST["date"]
-            pto_request.hours = request.POST["hours"]
-            pto_request.status = request.POST["status"]
+            pto_request.date = request.POST.get("date")
+            pto_request.hours = request.POST.get("hours")
             pto_request.save()
             return HttpResponseRedirect('pto/')
         return render(request, 'pto.html', context)
