@@ -8,6 +8,8 @@ from .forms import UserForm
 from .forms import PaidTimeOffForm
 from .forms import ExpenseRequestForm
 
+from datetime import datetime
+
 # TODO: only import models we are utilizing, let me be lazy right now please.
 from .models import *
 
@@ -32,7 +34,7 @@ def login_user(request):
             else:
                 return render(request, 'login.html', {'error_message': 'You have been banned.'})
         else:
-            return render(request, 'login.html', {'error_message': 'Invalid login'})
+            return render(request, 'login.html', {'form': form, 'error_message': 'Invalid login'})
     context = {
          "form": form,
     }
@@ -96,6 +98,20 @@ def view_paycheck_information(request):
     :param   request as an http request
     :return: A rendered html page for the index with detailed paycheck information.
     """
+    if request.method == "GET":
+        start_date = request.GET.get("start-date")
+        end_date = request.GET.get("end-date")
+        if start_date is not None and end_date is not None:
+            # Get all paychecks within this range and pass to context.
+            # TODO Convert strings to datetime objects for comparison.
+            start_date = datetime.strptime(start_date, '%m/%d/%Y')
+            end_date = datetime.strptime(end_date, '%m/%d/%Y')
+            print(type(start_date))
+            print("START DATE: " + str(start_date))
+            print("END DATE: " + str(end_date))
+        else:
+            # Just get five most recent paychecks if no query is being done.
+            print("DATE IS NONE. CARRY ON.")
     return render(request, 'paycheck.html')
 
 
@@ -129,8 +145,10 @@ def paid_time_off(request):
         # Saving the form data and saving to the database if the user is sending a POST request.
         if request.method == "POST" and form.is_valid():
             pto_request = form.save(commit=False)
+            # DEBUG
             print(str(request.POST["date"]))
             print(str(request.POST["hours"]))
+            # END DEBUG
             pto_request.user_id = user
             pto_request.date = request.POST.get("date")
             pto_request.hours = request.POST.get("hours")
@@ -138,7 +156,12 @@ def paid_time_off(request):
             return HttpResponseRedirect('pto/')
         return render(request, 'pto.html', context)
     else:
-        return render(request, 'login.html')
+        form = LoginForm()
+        context = {
+            'form': form,
+            'error_message': "You must be logged in to perform this task. Please log in to continue.\n"
+        }
+        return render(request, 'login.html', context)
 
 
 def approve_paid_time_off(request):

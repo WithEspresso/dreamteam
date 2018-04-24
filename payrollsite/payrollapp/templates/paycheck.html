@@ -15,48 +15,47 @@
 
 {% block page-wrapper %}
 
-            <!-- Page Content -->
-            <div id="page-wrapper">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="container">
-                              <form>
-                                <ol class="list-theme row">
-                                    <li class="col-sm-12">
-                                        <h2 class="http-equivheme">Choose dates:</h2>
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <fieldset class="mk-datepicker-container">
-                                                  <label for="start-date">Start Date</label>
-                                                  <input type="text" id="start-date" name="start-date" placeholder="Select Date" class="mk-datepicker-trigger" data-max="#end-date" />
-                                              </fieldset>
-                                          </div>
-                                          <div class="col-sm-6">
-                                            <fieldset class="mk-datepicker-container">
-                                              <label for="end-date">End Date</label>
-                                              <input type="text" id="end-date" name="end-date" placeholder="Select Date" class="mk-datepicker-trigger" data-min="#start-date" />
-                                          </fieldset>
-                                      </div>
-                                  </div>
-                              </li>
-                          </ol>
-                      </form>
-                      <form action="">
+<!-- Page Content -->
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="container">
+                    <form method="get" action="">
+                        <ol class="list-theme row">
+                            <li class="col-sm-12">
+                                <h2 class="http-equivheme">Choose dates:</h2>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <fieldset class="mk-datepicker-container">
+                                            <label for="start-date">Start Date</label>
+                                            <input type="text" id="start-date" name="start-date"
+                                                   placeholder="Select Date" class="mk-datepicker-trigger"
+                                                   data-max="#end-date"/>
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <fieldset class="mk-datepicker-container">
+                                            <label for="end-date">End Date</label>
+                                            <input type="text" id="end-date" name="end-date" placeholder="Select Date"
+                                                   class="mk-datepicker-trigger" data-min="#start-date"/>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </li>
+                            <button type="submit" style="color:white; text-decoration:none">Submit</button>
+                        </ol>
+                    </form>
+                </div>
 
-                          <button type="button" style="color:white; text-decoration:none">Submit</button>
 
-                      </form>
-                  </div>
+                <hr>
 
+                <h1>Check information:</h1>
 
-                  <hr>
+                <table class="responstable">
 
-                  <h1>Check information:</h1>
-
-                  <table class="responstable">
-
-                      <tr>
+                    <tr>
                         <th>Check #</th>
                         <th>Pay day</th>
                         <th>Amount</th>
@@ -67,25 +66,9 @@
                         <td>54347851</td>
                         <td>03-29-2018</td>
                         <td>$9,643.00</td>
-                        <td><a style ="color: rgb(0,0,0);" href="#" data-toggle="modal" data-target="#myModal"><u>View details</u>
+                        <td><a style="color: rgb(0,0,0);" href="#" data-toggle="modal" data-target="#myModal"><u>View
+                            details</u>
                         </a>
-
-                        <section class="modal modalWindow" id="popupOne">
-                            <section class="modalWrapper">
-                                <h2>Modal Popup </h2>
-                            </section>
-                            <a class="closeBtn">CLOSE X</a>
-                        </section>
-                        <section class="modal overlay"></div></td>
-
-                        </tr>
-
-                        <tr>
-                            <td>865423344</td>
-                            <td>03-12-2018</td>
-                            <td>$1,867.33</td>
-                            <td><a style ="color: rgb(0,0,0);  "" href="#" data-toggle="modal" data-target="#myModal"><u>View details</u>
-                            </a>
 
                             <section class="modal modalWindow" id="popupOne">
                                 <section class="modalWrapper">
@@ -93,131 +76,155 @@
                                 </section>
                                 <a class="closeBtn">CLOSE X</a>
                             </section>
-                            <section class="modal overlay"></div></td>
-                            </tr>
+                            <section class="modal overlay">
+            </div>
+            </td>
 
-                            <tr>
-                                <td>675314175</td>
-                                <td>04-17-2018</td>
-                                <td>$3,987.21</td>
-                                <td><a style ="color: rgb(0,0,0);  "" href="#" data-toggle="modal" data-target="#myModal"><u>View details</u>
-                                </a>
+            </tr>
 
-                                <section class="modal modalWindow" id="popupOne">
-                                    <section class="modalWrapper">
-                                        <h2>Modal Popup </h2>
-                                    </section>
-                                    <a class="closeBtn">CLOSE X</a>
-                                </section>
-                                <section class="modal overlay"></div></td>
+            <tr>
+                <td>865423344</td>
+                <td>03-12-2018</td>
+                <td>$1,867.33</td>
+                <td><a style="color: rgb(0,0,0);  "" href="#" data-toggle="modal" data-target="#myModal"><u>View
+                    details</u>
+                    </a>
 
-                                </tr>
-                            </table>
+                    <section class="modal modalWindow" id="popupOne">
+                        <section class="modalWrapper">
+                            <h2>Modal Popup </h2>
+                        </section>
+                        <a class="closeBtn">CLOSE X</a>
+                    </section>
+                    <section class="modal overlay">
+        </div>
+        </td>
+        </tr>
 
-                        </div>
+        <tr>
+            <td>675314175</td>
+            <td>04-17-2018</td>
+            <td>$3,987.21</td>
+            <td><a style="color: rgb(0,0,0);  "" href="#" data-toggle="modal" data-target="#myModal"><u>View details</u>
+                </a>
 
-                        <div id="myModal" class="modal fade">
-                            <div class="modal-dialog modal-lg">
-                                <div class="modal-content modal-lg">
-                                    <div class="modal-header modal-lg">
-                                        <h3 class="modal-title " style="float: left">Paycheck Details</h3>
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <table align="center" class="detailsTable" >
-                                            <thead>
-                                              <tr>
-                                                <th>Pay Types</th>
-                                                <th>Amount</th>
-                                                <th></th>
-                                                <th>Withholding</th>
-                                                <th>Deductions</th>
+                <section class="modal modalWindow" id="popupOne">
+                    <section class="modalWrapper">
+                        <h2>Modal Popup </h2>
+                    </section>
+                    <a class="closeBtn">CLOSE X</a>
+                </section>
+                <section class="modal overlay">
+    </div>
+    </td>
 
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                          <tr>
-                                            <td>Regular</td>
-                                            <td>2,700.00</td>
-                                            <td></td>
-                                            <td>Federal</td>
-                                            <td>546.31</td>
-                                        </tr>
-                                        <tr>
-                                          <td>Overtime</td>
-                                          <td>0.00</td>
-                                          <td></td>
-                                          <td>State</td>
-                                          <td>52.99</td>
-                                      </tr>
-                                      <tr>
-                                       <td>Vacation</td>
-                                       <td>0.00</td>
-                                       <td></td>
-                                       <td>City</td>
-                                       <td>0.00</td>
-                                   </tr>
-                                   <tr>
-                                       <td>Sick</td>
-                                       <td>0.00</td>
-                                       <td></td>
-                                       <td>Fica</td>
-                                       <td>162.34</td>
-                                   </tr>
-                                   <tr>
-                                       <td>Bonus</td>
-                                       <td>0.00</td>
-                                       <td></td>
-                                       <td></td>
-                                       <td></td>
-                                   </tr>
-                                   <tr>
-                                       <td>Nontaxable</td>
-                                       <td>0.00</td>
-                                       <td></td>
-                                       <td></td>
-                                       <td></td>
-                                   </tr>
-                                   <tr>
-                                       <td>Gross Pay</td>
-                                       <td>0.00</td>
-                                       <td></td>
-                                       <td></td>
-                                       <td></td>
-                                   </tr>
-                                    <tr >
+    </tr>
+    </table>
 
-                                       <td></td>
-                                       <td></td>
-                                       <td></td>
-                                       <td></td>
-                                       <td></td>
-                                   </tr>
-                                    <tr>
+</div>
 
-                                       <td>Gross Pay</td>
-                                       <td>5960.22</td>
-                                       <td></td>
-                                       <td>Gross W/H</td>
-                                       <td>556.41</td>
-                                   </tr>
-                                   <tr>
+<div id="myModal" class="modal fade">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content modal-lg">
+            <div class="modal-header modal-lg">
+                <h3 class="modal-title " style="float: left">Paycheck Details</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                <table align="center" class="detailsTable">
+                    <thead>
+                    <tr>
+                        <th>Pay Types</th>
+                        <th>Amount</th>
+                        <th></th>
+                        <th>Withholding</th>
+                        <th>Deductions</th>
 
-                                       <td>NET</td>
-                                       <td>3885.00</td>
-                                       <td></td>
-                                       <td></td>
-                                       <td></td>
-                                   </tr>
-                               </tbody>
-                           </table>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
-                        </div>
-                        </div>
-                        </div>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Regular</td>
+                        <td>2,700.00</td>
+                        <td></td>
+                        <td>Federal</td>
+                        <td>546.31</td>
+                    </tr>
+                    <tr>
+                        <td>Overtime</td>
+                        <td>0.00</td>
+                        <td></td>
+                        <td>State</td>
+                        <td>52.99</td>
+                    </tr>
+                    <tr>
+                        <td>Vacation</td>
+                        <td>0.00</td>
+                        <td></td>
+                        <td>City</td>
+                        <td>0.00</td>
+                    </tr>
+                    <tr>
+                        <td>Sick</td>
+                        <td>0.00</td>
+                        <td></td>
+                        <td>Fica</td>
+                        <td>162.34</td>
+                    </tr>
+                    <tr>
+                        <td>Bonus</td>
+                        <td>0.00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Nontaxable</td>
+                        <td>0.00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Gross Pay</td>
+                        <td>0.00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+
+                        <td>Gross Pay</td>
+                        <td>5960.22</td>
+                        <td></td>
+                        <td>Gross W/H</td>
+                        <td>556.41</td>
+                    </tr>
+                    <tr>
+
+                        <td>NET</td>
+                        <td>3885.00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
 

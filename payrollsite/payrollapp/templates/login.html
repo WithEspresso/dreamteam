@@ -21,10 +21,16 @@
 <div class="centered">
     <form method="post" action="">
         <div class="container-login">
+            {% if error_message %}
+            <div class="alert alert-danger">
+                <strong>{{ error_message }}</strong>
+                <br><br>
+            </div>
+            {% endif %}
             {% csrf_token %}
             {% for field in form %}
-                <label><b> {{ field.label_tag}} </b></label>
-                {{field}}
+            <label><b> {{ field.label_tag}} </b></label>
+            {{field}}
             {% endfor %}
             <button type="submit" style="color:white; text-decoration:none"> Login
             </button>

@@ -50,11 +50,12 @@ class TimeSheet(models.Model):
         return self.user_id + "'s time sheet, " + self.time_sheet_id
 
 
-class Wages(models.Model):
-    wages_id = models.AutoField(primary_key=True)
+class Paycheck(models.Model):
+    paycheck_id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    type = models.CharField(max_length=20)
-    tax_withholding = models.DecimalField(decimal_places=2, max_digits=16)
+    payday = models.DateField(auto_now_add=True)
+    amount = models.DecimalField(decimal_places=2, max_digits=16)
+    witholdings = models.DecimalField(decimal_places=2, max_digits=16)
 
     def __str__(self):
         return self.user_id + "'s " + "wages"
