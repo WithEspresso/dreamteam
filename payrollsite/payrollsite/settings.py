@@ -68,6 +68,8 @@ TEMPLATES = [
     },
 ]
 
+TEMPLATES[0]['OPTIONS']['context_processors'].append("payrollapp.context_processors.user_meta_data_processor")
+
 WSGI_APPLICATION = 'payrollsite.wsgi.application'
 
 

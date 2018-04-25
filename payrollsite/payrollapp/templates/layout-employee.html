@@ -107,15 +107,15 @@
               </div>
               <div class="modal-body">
                 <h4>Name </h4>
-                <p>Full name</p>
+                <p>{{ request.user.first_name }} {{ request.user.last_name }}</p>
                 <h4>User ID </h4>
-                <p>UserID</p>
+                <p> {{ request.user }}</p>
                 <h4>Email </h4>
-                <p>Email</p>
+                <p> {{ request.user.email }}</p>
                 <h4>Address </h4>
-                <p>Adress</p>
+                <p>{{ user_meta_data.address}}</p>
                 <h4>SSN </h4>
-                <p>SSN</p>
+                <p> {{ user_meta_data.social_security_number }}</p>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

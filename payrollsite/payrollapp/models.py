@@ -12,6 +12,12 @@ STATUS_CHOICE = (
     ('Approved', 'Approved'),
     ('Denied', 'Denied'))
 
+USER_STATUS = (
+    ('Active', 'Active'),
+    ('Terminated', 'Terminated'),
+    ('No current affiliation', 'No current affiliation')
+)
+
 
 class Manager(models.Model):
     manager_id = models.AutoField(primary_key=True)
@@ -34,7 +40,7 @@ class UserMetaData(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     address = models.CharField(max_length=255)
     social_security_number = models.IntegerField()
-    user_status = models.CharField(max_length=25)
+    user_status = models.CharField(max_length=25, choices=USER_STATUS, default='Active')
 
 
 class HumanResourcesData(models.Model):
@@ -128,3 +134,9 @@ class PaidTimeOffRequests(models.Model):
 class Approvals(models.Model):
     approval_id = models.AutoField(primary_key=True)
     status = models.CharField(max_length=20)
+
+
+class VacationHours(models.Model):
+    vacation_hours_id = models.AutoField(primary_key=True)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    number_of_vacation_hours = models.IntegerField(default=72)
