@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django import forms
-from .models import PaidTimeOffRequests, Expenses
+from .models import PaidTimeOffRequests, Expenses, TimeSheetSubmission
 from .validators import validate_image_file
 from .validators import validate_year_entry
 
@@ -32,31 +32,6 @@ class PaidTimeOffForm(forms.ModelForm):
     class Meta:
         model = PaidTimeOffRequests
         fields = ['date', 'hours', 'status']
-
-
-MONTH_CHOICES = (
-    ('jan', 'January'),
-    ('feb', 'February'),
-    ('mar', 'March'),
-    ('apr', 'April'),
-    ('may', 'May'),
-    ('jun', 'June'),
-    ('jul', 'July'),
-    ('aug', 'August'),
-    ('sep', 'September'),
-    ('oct', 'October'),
-    ('nov', 'November'),
-    ('dec', 'December'),
-)
-
-
-class PaycheckSearchForm(forms.Form):
-    # Form to search and retrieve paychecks from a pay period.
-    month = forms.ChoiceField(widget=forms.Select, choices=MONTH_CHOICES)
-    year = forms.IntegerField(validators=[validate_year_entry])
-
-    class Meta:
-        fields = ['month', 'year']
 
 
 class ExpenseRequestForm(forms.ModelForm):

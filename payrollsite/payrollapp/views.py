@@ -230,7 +230,13 @@ def display_time_sheet(request):
     :param   request as an http request
     :return: A rendered html page for inputting time sheet requests
     """
-    return render(request, 'timesheets.html')
+    total_hours = TimeSheetSubmission.calculate_pay_period_total_hours()
+    total_hours = total_hours.get('number_hours__sum')
+
+    context = {
+        'total_hours': total_hours
+    }
+    return render(request, 'timesheets.html', context)
 
 
 def approve_time_sheet(request):

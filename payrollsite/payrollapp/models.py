@@ -1,7 +1,11 @@
 from django.db import models
+from django.db.models import Sum
+
 from django.contrib.auth.models import User
 from django.utils.timezone import now
 
+import calendar
+from datetime import datetime
 
 STATUS_CHOICE = (
     ('Pending', 'Pending'),
@@ -41,14 +45,30 @@ class HumanResourcesData(models.Model):
     is_manager = models.BooleanField(default=False)
 
 
-class TimeSheet(models.Model):
+class TimeSheetSubmission(models.Model):
     time_sheet_id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateField()
     number_hours = models.IntegerField()
 
+    @staticmethod
+    def calculate_pay_period_total_hours(date=now()):
+        """
+        Calculates the total hours for the current pay period. The default
+        pay period is the current month as a datetime. Calculates the first and last
+        day of the month and uses that to search the database for time sheet submissions
+        within the pay period.
+        :param date:
+        :return:
+        """
+        start_date = datetime(date.year, date.month, 1)
+        end_date = datetime(date.year, date.month, calendar.mdays[date.month])
+        total_hours = TimeSheetSubmission.objects.filter(date__range=[start_date, end_date])\
+            .aggregate(Sum('number_hours'))
+        return total_hours
+
     def __str__(self):
-        return self.user_id + "'s time sheet, " + self.time_sheet_id
+        return str(self.user_id) + "'s time sheet, " + str(self.time_sheet_id)
 
 
 class PaycheckInformation(models.Model):

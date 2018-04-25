@@ -45,7 +45,7 @@
                           <input class="form-control" type="number" min="0" max="8" step="1" v-model="day.hours" />
                         </td>
                         <td>
-                           { dailyTotal(day) }
+                           {# Hours #}
                         </td>
                         <!--
                         <td>
@@ -79,14 +79,14 @@
                       <!--  <td>
                            <h4>{ calcWeekUnpaid(week) }</h4></td> -->
                         <td>
-                          <h4>{ calcWeekHours(week) }</h4>
+                          <h4>{# total_hours #}</h4>
                         </td>
                       </tr>
                     </tbody>
                   </table>
                   <div class="col-md-12">
               <!--       <h3 style="text-align:right">Overtime: 2 Hours</h3> -->
-                    <h3 style="text-align:right">Pay Period Total: { periodTotalHours }</h3>
+                    <h3 style="text-align:right">Pay Period Total: {{ total_hours }}</h3>
                     <button class="btn btn-success" id="submit">Submit</button>
                     <button class="btn btn-warning" id="save">Save</button>
                     <button class="btn btn-danger" id="delete">Delete</button>
