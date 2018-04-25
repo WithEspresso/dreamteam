@@ -52,18 +52,20 @@ class TimeSheetSubmission(models.Model):
     number_hours = models.IntegerField()
 
     @staticmethod
-    def calculate_pay_period_total_hours(date=now()):
+    def calculate_pay_period_total_hours(username, date=now()):
         """
         Calculates the total hours for the current pay period. The default
         pay period is the current month as a datetime. Calculates the first and last
         day of the month and uses that to search the database for time sheet submissions
         within the pay period.
+        :param username:
         :param date:
-        :return:
+        :return:The total hours for the pay period of the user.
         """
         start_date = datetime(date.year, date.month, 1)
         end_date = datetime(date.year, date.month, calendar.mdays[date.month])
         total_hours = TimeSheetSubmission.objects.filter(date__range=[start_date, end_date])\
+            .filter(user_id__username__exact=username)\
             .aggregate(Sum('number_hours'))
         return total_hours
 

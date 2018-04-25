@@ -16,6 +16,11 @@ from .models import *
 # Note, possibly convert these views from function based views to class based views in the future.
 
 
+def redirect_unauthorized_user(request):
+    # TODO: Eliminate code redundancy and show the user the way if they trying to access pages incorrectly.
+    pass
+
+
 def login_user(request):
     """
     Logs in a user if a post request is given or redirects the user
@@ -100,22 +105,35 @@ def view_paycheck_information(request):
     """
     context = {}
     error_message = None
+    # If the user is logged in, get information from the html input tags.
     if request.method == "GET" and request.user.is_authenticated:
         start_date = request.GET.get("start-date")
         end_date = request.GET.get("end-date")
         username = request.user
+        # If the input tags have values, convert them to datetime objects and use
+        # them to search the database for values within their range.
         if start_date is not None and end_date is not None:
             start_date = datetime.strptime(start_date, '%m/%d/%Y')
             end_date = datetime.strptime(end_date, '%m/%d/%Y')
             results = PaycheckInformation.search_by_time_period(start_date, end_date, username)
+            # Case where no values have been found.
             if len(results) == 0:
                 error_message = "Sorry, no paychecks could be found within the specified time period."
+        # Load the last five paychecks for the user if they are not currently filtering by time period.
         else:
             results = PaycheckInformation.objects.filter(user_id__username__exact=username)
         context = {
             'results': results,
             'error_message': error_message
         }
+    # User is not logged in. Redirecting to the login page with an error message.
+    else:
+        form = LoginForm()
+        context = {
+            'form': form,
+            'error_message': "You must be logged in to perform this task. Please log in to continue.\n"
+        }
+        return render(request, 'login.html', context)
     return render(request, 'paycheck.html', context)
 
 
@@ -149,10 +167,6 @@ def paid_time_off(request):
         # Saving the form data and saving to the database if the user is sending a POST request.
         if request.method == "POST" and form.is_valid():
             pto_request = form.save(commit=False)
-            # DEBUG
-            print(str(request.POST["date"]))
-            print(str(request.POST["hours"]))
-            # END DEBUG
             pto_request.user_id = user
             pto_request.date = request.POST.get("date")
             pto_request.hours = request.POST.get("hours")
@@ -230,12 +244,33 @@ def display_time_sheet(request):
     :param   request as an http request
     :return: A rendered html page for inputting time sheet requests
     """
-    total_hours = TimeSheetSubmission.calculate_pay_period_total_hours()
-    total_hours = total_hours.get('number_hours__sum')
-
-    context = {
-        'total_hours': total_hours
-    }
+    if request.user.is_authenticated:
+        # Write time sheet to the database.
+        if request.method == "POST":
+            date = request.POST.get("date")
+            hours = request.POST.get("hours")
+            if date is not None and hours is not None:
+                time_sheet_submission = TimeSheetSubmission()
+                time_sheet_submission.date = date
+                time_sheet_submission.number_hours = hours
+                time_sheet_submission.user_id = request.user
+                time_sheet_submission.save()
+        # Get total hours for the current pay period.
+        username = request.user
+        total_hours = TimeSheetSubmission.calculate_pay_period_total_hours(username)
+        total_hours = total_hours.get('number_hours__sum')
+        context = {
+            'total_hours': total_hours
+        }
+    else:
+        # User is not logged in. Redirecting to the login page with an error message.
+        form = LoginForm()
+        context = {
+            'form': form,
+            'error_message': "You must be logged in to perform this task. Please log in to continue.\n"
+        }
+        return render(request, 'login.html', context)
+    # Load the page normally for an authenticated user.
     return render(request, 'timesheets.html', context)
 
 

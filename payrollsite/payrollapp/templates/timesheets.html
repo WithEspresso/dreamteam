@@ -6,101 +6,108 @@
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 
 {% load static %}
-<link href="{% static 'css/testcss.css' %}" rel="stylesheet">
+<link href="{% static 'css/timesheet.css' %}" rel="stylesheet">
 
 {% endblock %}
 
 {% block page-wrapper %}
 
-        <div id="page-wrapper">
-            <div class="container-fluid">
+<div id="page-wrapper">
+    <div class="container-fluid">
 
-              <div class="container">
-                <h1>Edit Timesheet</h1>
-                <div id="app">
-                  <table class="table table-condensed" v-for="week in weeks">
-                    <thead>
-                      <tr style="border: none">
-                        <th style="border: none">
-                          <!-- <h3>Week  { $index + 1 </h3> }-->
-                        </th>
-                      </tr>
-                      <tr>
-                        <th>Date</th>
-                        <th>Hours</th>
-                        <!-- <th>Out</th> -->
-                        <!-- <th>Deductions</th> -->
-                        <!-- <th>Vacation</th> -->
-                        <!-- <th>Personal</th> -->
-                        <!-- <th>Unpaid</th> -->
-                        <th>Total</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr v-for="day in week.days">
-                        <td>
-                          <input class="form-control" type="date" v-model="day.date" />
-                        </td>
-                        <td>
-                          <input class="form-control" type="number" min="0" max="8" step="1" v-model="day.hours" />
-                        </td>
-                        <td>
-                           {# Hours #}
-                        </td>
-                        <!--
-                        <td>
-                          <input class="form-control" type="time" v-model="day.out" />
-                        </td> -->
-                        <!--
-                        <td class="deductions">
-                          <input class="form-control" type="number" min="0" max="8" step=".5" v-model="day.deductions" />
-                        </td> -->
-                        <!-- <td class="vacations">
-                          <input class="form-control" type="number" min="0" max="8" step=".5" v-model="day.vacation" />
-                        </td> -->
-                        <!-- <td class="personal">
-                          <input class="form-control" type="number" min="0" max="8" step=".5" v-model="day.personal" />
-                        </td> -->
-                        <!-- <td class="unpaid">
-                          <input class="form-control" type="number" min="0" max="8" step=".5" v-model="day.unpaid" />
-                        </td> -->
+        <div class="container">
+            <h1>Edit Timesheet</h1>
+            <div id="app">
+                <form method="post" action="">
+                    {% csrf_token %}
+                    <table class="table table-condensed" v-for="week in weeks">
+                        <thead>
+                        <tr style="border: none">
+                            <th style="border: none">
+                                <!-- <h3>Week  { $index + 1 </h3> }-->
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>Date</th>
+                            <th>Hours</th>
+                            <!-- <th>Out</th> -->
+                            <!-- <th>Deductions</th> -->
+                            <!-- <th>Vacation</th> -->
+                            <!-- <th>Personal</th> -->
+                            <!-- <th>Unpaid</th> -->
+                            <!-- <th>Total</th> -->
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-for="day in week.days">
+                            <td>
+                                <input class="form-control" type="date" v-model="day.date" name="date"/>
+                            </td>
+                            <td>
+                                <input class="form-control" type="number" min="0" max="24" step="1"
+                                       v-model="day.hours" name="hours"/>
+                            </td>
+                            <td>
+                                <!-- { dailyTotal(day) } -->
+                            </td>
+                            <!--
+                            <td>
+                              <input class="form-control" type="time" v-model="day.out" />
+                            </td> -->
+                            <!--
+                            <td class="deductions">
+                              <input class="form-control" type="number" min="0" max="8" step=".5" v-model="day.deductions" />
+                            </td> -->
+                            <!-- <td class="vacations">
+                              <input class="form-control" type="number" min="0" max="8" step=".5" v-model="day.vacation" />
+                            </td> -->
+                            <!-- <td class="personal">
+                              <input class="form-control" type="number" min="0" max="8" step=".5" v-model="day.personal" />
+                            </td> -->
+                            <!-- <td class="unpaid">
+                              <input class="form-control" type="number" min="0" max="8" step=".5" v-model="day.unpaid" />
+                            </td> -->
 
-                      </tr>
-                      <tr>
-                        <td>
-                          <h4>Total</h4>
-                        </td>
-                      <!--  <td>
-                          <h4>{ calcWeekDeductions(week) }</h4></td> -->
-                      <!--  <td>
-                           <h4>{ calcWeekVacation(week) }</h4></td> -->
-                      <!--   <td>
-                          <h4>{ calcWeekPersonal(week) }</h4></td> -->
-                      <!--  <td>
-                           <h4>{ calcWeekUnpaid(week) }</h4></td> -->
-                        <td>
-                          <h4>{# total_hours #}</h4>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <div class="col-md-12">
-              <!--       <h3 style="text-align:right">Overtime: 2 Hours</h3> -->
-                    <h3 style="text-align:right">Pay Period Total: {{ total_hours }}</h3>
-                    <button class="btn btn-success" id="submit">Submit</button>
-                    <button class="btn btn-warning" id="save">Save</button>
-                    <button class="btn btn-danger" id="delete">Delete</button>
-              <!--           <pre>{ $data | json }</pre> -->
-                  </div>
-                </div>
-              </div>
+                        </tr>
+                        <tr>
 
+                            <td>
+                                <!-- <h4>Total</h4> -->
+                            </td>
+                            <td>
+                                <h4>Total: {{ total_hours }}</h4>
+                            </td>
+                            <!--  <td>
+                                <h4>{ calcWeekDeductions(week) }</h4></td> -->
+                            <!--  <td>
+                                 <h4>{ calcWeekVacation(week) }</h4></td> -->
+                            <!--   <td>
+                                <h4>{ calcWeekPersonal(week) }</h4></td> -->
+                            <!--  <td>
+                                 <h4>{ calcWeekUnpaid(week) }</h4></td> -->
+                            <td>
+                                <!-- <h4>{ calcWeekHours(week) }</h4> -->
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="col-md-12">
+                        <!--       <h3 style="text-align:right">Overtime: 2 Hours</h3> -->
+                        <!-- <h3 style="text-align:right">Pay Period Total: { periodTotalHours }</h3> -->
+                        <button type="submit" class="btn btn-success" id="submit">Submit</button>
+                        <!-- <button class="btn btn-warning" id="save">Save</button> -->
+                        <button class="btn btn-danger" id="delete">Clear</button>
+                        <!--           <pre>{ $data | json }</pre> -->
+                    </div>
+                </form>
             </div>
         </div>
+    </div>
+</div>
 
 {% endblock %}
 
 {% block scriptsblock %}
 {% load static %}
-<script src="{% static 'scripts/testjs.js' %}"></script>
+<script src="{% static 'scripts/timesheets.js' %}"></script>
 {% endblock %}
