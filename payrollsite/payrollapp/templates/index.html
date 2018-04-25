@@ -1,22 +1,104 @@
-{% extends 'payrollapp/base.html' %}
-{% load staticfiles %}
+{% extends 'layout-employee.html' %}
 
-<div style="padding:50px;">
+{% block page-wrapper %}
 
-    {% block title %}
-    <h1> Welcome to the payroll app</h1>
-    {% endblock %}
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h3 class="page-header">Welcome username</h3>
+                    </div>
+                </div>
 
-    {% block content %}
-    <h1>Login for employees</h1>
-    <a href = "login_manager"> Log in as an employee </a>
-    <h1>Login for managers</h1>
-    <a href=  "login_employee"> Log in as a manager </a>
-    {% endblock %}
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-edit fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">Paid Time</div>
+                                        <div class="huge">Off</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="{% url 'pto' %}">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-green">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-tasks fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">Paychecks</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="{% url 'paycheck' %}">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-yellow">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-table fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">Timesheets</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="{% url 'timesheets' %}">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-red">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-money fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">Expenses</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="{% url 'expenses' %}">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-</div>
-
-{% block footer %}
-{% endblock %}
-
-</html>
+  {% endblock %}

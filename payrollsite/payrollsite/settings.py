@@ -68,6 +68,8 @@ TEMPLATES = [
     },
 ]
 
+TEMPLATES[0]['OPTIONS']['context_processors'].append("payrollapp.context_processors.user_meta_data_processor")
+
 WSGI_APPLICATION = 'payrollsite.wsgi.application'
 
 
@@ -119,7 +121,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-
-LOGIN_REDIRECT_URL = 'time_list'
-
-LOGOUT_REDIRECT_URL = 'index'

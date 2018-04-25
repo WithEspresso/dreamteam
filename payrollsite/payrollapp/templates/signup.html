@@ -1,0 +1,62 @@
+{% extends 'layout-hr.html' %}
+{% block stylesblock %}
+{% load static %}
+<link href="{% static 'css/style.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block page-wrapper %}
+
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+
+                <form action="" id="form-create-account">
+                  <div class="container-login">
+                    <div class="container-inside-form">
+                      <label for="uname"><b>Username</b></label>
+                      <input type="text" placeholder="Enter Username" name="uname" required>
+                    </div>
+                    <div class="container-inside-form">
+                      <label for="psw"><b>Password</b></label>
+                      <input type="password" placeholder="Enter Password" name="psw" required>
+                    </div>
+                    <div class="container-inside-form">
+                      <label for="name"><b>First Name</b></label>
+                      <input type="text" placeholder="Enter First Name" name="name" required>
+                    </div>
+                    <div class="container-inside-form">
+                      <label for="lastname"><b>Last Name</b></label>
+                      <input type="text" placeholder="Enter Last Name" name="lastname" required>
+                    </div>
+                    <div class="container-inside-form">
+                      <label for="email"><b>Email</b></label>
+                      <input type="text" placeholder="Enter Email" name="email" required>
+                    </div>
+                    <div class="container-inside-form">
+                      <label for="address"><b>Address</b></label>
+                      <input type="text" placeholder="Enter Address" name="address" required>
+                    </div>
+                    <div class="container-inside-form">
+                      <label for="ssn"><b>SSN</b></label>
+                      <input type="text" placeholder="Enter SSN" name="ssn" required>
+                    </div>
+                    <div class="container-inside-form">
+                      <label for="manager"><b>Manager ID</b></label>
+                      <input type="text" placeholder="Enter Manager ID" name="manager" required>
+                    </div>
+
+                    <input type="radio" name="usertype" value="employee" checked style="margin:5px; margin-top:20px;"> Employee<br>
+                    <input type="radio" name="usertype" value="manager" style="margin:5px;"> Manager<br>
+                    <input type="radio" name="usertype" value="human-resources" style="margin:5px;"> Human Resources<br><br>
+
+                    <button type="button"><a href="{% url 'signup' %}" style="color:white; text-decoration:none">Create an account</a></button>
+                  </div>
+                </form>
+
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /#page-wrapper -->
+
+{% endblock %}
