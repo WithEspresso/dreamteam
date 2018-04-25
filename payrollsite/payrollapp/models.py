@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.timezone import now
 
 
 STATUS_CHOICE = (
@@ -53,12 +54,17 @@ class TimeSheet(models.Model):
 class PaycheckInformation(models.Model):
     paycheck_id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    payday = models.DateField(auto_now_add=True)
+    payday = models.DateField(default=now)
     amount = models.DecimalField(decimal_places=2, max_digits=16)
     witholdings = models.DecimalField(decimal_places=2, max_digits=16)
 
+    @staticmethod
+    def search_by_time_period(start_date, end_date, username):
+        results = PaycheckInformation.objects.filter(user_id__username__exact=username).filter(payday__range=[start_date, end_date])
+        return results
+
     def __str__(self):
-        return self.user_id + "'s " + "wages"
+        return str(self.user_id) + "'s " + "wages"
 
 
 def expense_directory_path(instance, filename):

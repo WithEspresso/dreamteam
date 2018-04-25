@@ -23,7 +23,7 @@ def login_user(request):
     :return: The dashboard page for the user if the login is successful
     """
     form = LoginForm(request.POST or None)
-    if request.method == "POST":
+    if request.method == "POST" and form.is_valid():
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(username=username, password=password)
@@ -98,19 +98,25 @@ def view_paycheck_information(request):
     :param   request as an http request
     :return: A rendered html page for the index with detailed paycheck information.
     """
-    if request.method == "GET":
+    context = {}
+    error_message = None
+    if request.method == "GET" and request.user.is_authenticated:
         start_date = request.GET.get("start-date")
         end_date = request.GET.get("end-date")
+        username = request.user
         if start_date is not None and end_date is not None:
             start_date = datetime.strptime(start_date, '%m/%d/%Y')
             end_date = datetime.strptime(end_date, '%m/%d/%Y')
-            print(type(start_date))
-            print("START DATE: " + str(start_date))
-            print("END DATE: " + str(end_date))
+            results = PaycheckInformation.search_by_time_period(start_date, end_date, username)
+            if len(results) == 0:
+                error_message = "Sorry, no paychecks could be found within the specified time period."
         else:
-            # Just get five most recent paychecks if no query is being done.
-            print("DATE IS NONE. CARRY ON.")
-    return render(request, 'paycheck.html')
+            results = PaycheckInformation.objects.filter(user_id__username__exact=username)
+        context = {
+            'results': results,
+            'error_message': error_message
+        }
+    return render(request, 'paycheck.html', context)
 
 
 def show_dashboard(request):
