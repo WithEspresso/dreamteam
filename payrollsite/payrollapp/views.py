@@ -152,8 +152,8 @@ def paid_time_off(request):
         user = User.objects.get(username=this_username)
         pto_requests = PaidTimeOffRequests.objects.filter(user_id__username=this_username)
         # Retrieving remaining pto hours from the database
-        remaining_pto = VacationHours.objects.get(user_id__username=this_username)
-        remaining_pto = remaining_pto.number_of_vacation_hours
+        remaining_pto = PaidTimeOffHours.objects.get(user_id__username=this_username)
+        remaining_pto = remaining_pto.remaining_hours
         print(type(remaining_pto))
         context = {
             "form": form,

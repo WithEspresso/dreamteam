@@ -18,6 +18,8 @@ USER_STATUS = (
     ('No current affiliation', 'No current affiliation')
 )
 
+FOUR_WEEKS = 160
+
 
 class Manager(models.Model):
     manager_id = models.AutoField(primary_key=True)
@@ -136,7 +138,7 @@ class Approvals(models.Model):
     status = models.CharField(max_length=20)
 
 
-class VacationHours(models.Model):
+class PaidTimeOffHours(models.Model):
     vacation_hours_id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    number_of_vacation_hours = models.IntegerField(default=72)
+    remaining_hours = models.IntegerField(default=FOUR_WEEKS)
