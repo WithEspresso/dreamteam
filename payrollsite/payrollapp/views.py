@@ -102,8 +102,6 @@ def view_paycheck_information(request):
         start_date = request.GET.get("start-date")
         end_date = request.GET.get("end-date")
         if start_date is not None and end_date is not None:
-            # Get all paychecks within this range and pass to context.
-            # TODO Convert strings to datetime objects for comparison.
             start_date = datetime.strptime(start_date, '%m/%d/%Y')
             end_date = datetime.strptime(end_date, '%m/%d/%Y')
             print(type(start_date))

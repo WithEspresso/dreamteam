@@ -50,7 +50,7 @@ class TimeSheet(models.Model):
         return self.user_id + "'s time sheet, " + self.time_sheet_id
 
 
-class Paycheck(models.Model):
+class PaycheckInformation(models.Model):
     paycheck_id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     payday = models.DateField(auto_now_add=True)
