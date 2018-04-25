@@ -16,11 +16,6 @@ from .models import *
 # Note, possibly convert these views from function based views to class based views in the future.
 
 
-def redirect_unauthorized_user(request):
-    # TODO: Eliminate code redundancy and show the user the way if they trying to access pages incorrectly.
-    pass
-
-
 def login_user(request):
     """
     Logs in a user if a post request is given or redirects the user
@@ -98,12 +93,10 @@ def register(request):
 def view_paycheck_information(request):
     """
     Loads a list of paychecks for the given logged in user.
-    # TODO: HTTP GET, retrieve User paid time off requests as context.
-    # TODO: HTTP GET, retrieve paycheck information for the given time period.
+    Allows the user to search paychecks between a time range.
     :param   request as an http request
     :return: A rendered html page for the index with detailed paycheck information.
     """
-    context = {}
     error_message = None
     # If the user is logged in, get information from the html input tags.
     if request.method == "GET" and request.user.is_authenticated:
@@ -139,9 +132,8 @@ def view_paycheck_information(request):
 
 def show_dashboard(request):
     """
-    TODO: Implement retrieval of User information from the database to create context to render page.
     :param   request as an http request
-    :return: A rendered html page for the index with a list of current pending and process PTO requests.
+    :return: A rendered html page with the user's dashboard.
     """
     return render(request, 'dashboard-employee.html')
 
@@ -159,11 +151,15 @@ def paid_time_off(request):
         this_username = request.user
         user = User.objects.get(username=this_username)
         pto_requests = PaidTimeOffRequests.objects.filter(user_id__username=this_username)
+        # Retrieving remaining pto hours from the database
+        remaining_pto = VacationHours.objects.get(user_id__username=this_username)
+        remaining_pto = remaining_pto.number_of_vacation_hours
+        print(type(remaining_pto))
         context = {
             "form": form,
-            "pto_requests": pto_requests
+            "pto_requests": pto_requests,
+            "remaining_pto": remaining_pto
         }
-
         # Saving the form data and saving to the database if the user is sending a POST request.
         if request.method == "POST" and form.is_valid():
             pto_request = form.save(commit=False)
@@ -174,6 +170,7 @@ def paid_time_off(request):
             return HttpResponseRedirect('pto/')
         return render(request, 'pto.html', context)
     else:
+        # User is not logged in. Show them the way.
         form = LoginForm()
         context = {
             'form': form,
@@ -217,6 +214,7 @@ def expense_reimbursement(request):
     else:
         # User is not logged in. Show them the way.
         return redirect('index')
+    # Display the page normally.
     context = {
         "form": form,
         "expense_requests": expense_requests,
@@ -238,9 +236,8 @@ def approve_expense_reimbursement(request):
 
 def display_time_sheet(request):
     """
-    Displays a form so the user can input their time sheet information
-    TODO: HTTP NONE, display time sheet form.
-    TODO: HTTP POST, validate time and add to the database.
+    Displays a form so the user can input their time sheet information and view
+    submitted time sheets.
     :param   request as an http request
     :return: A rendered html page for inputting time sheet requests
     """
