@@ -116,6 +116,32 @@ class PaycheckInformation(models.Model):
         results = PaycheckInformation.objects.filter(user_id__username__exact=username).filter(payday__range=[start_date, end_date])
         return results
 
+    @staticmethod
+    def get_last_years_history():
+        """
+        Returns a dictionary of the last twelve months' paychecks.
+        :return:
+        """
+        right_now = datetime.now()
+        current_month = right_now.month
+        last_twelve_months = []
+        for i in range(0, 12):
+            next_month = current_month - i
+            if next_month <= 0:
+                next_month += 12
+            last_twelve_months.append(calendar.month_name[next_month])
+        last_twelve_months.reverse()
+        """
+        paychecks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+        paycheck_per_month = {
+        }
+        for i in range(0, 12):
+            month = last_twelve_months[i]
+            paycheck_per_month[month] = paychecks[i]
+        return(paycheck_per_month)
+        """
+        return last_twelve_months
+
     def __str__(self):
         return str(self.user_id) + "'s " + "wages"
 

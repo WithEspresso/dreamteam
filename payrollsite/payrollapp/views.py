@@ -3,6 +3,8 @@ from django.shortcuts import redirect
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 
+import json
+
 from .forms import LoginForm
 from .forms import UserForm
 from .forms import PaidTimeOffForm
@@ -340,8 +342,7 @@ def approve_time_sheet(request):
             timesheet = TimeSheetSubmission.objects.get(time_sheet_id=time_sheet_id)
             timesheet.status = form.cleaned_data['status']
             timesheet.save()
-
-    # Default behavior: Load all pending time sheets.
+    # HTTP None, Default behavior: Load all pending and processed time sheets.
     form = ApprovalForm()
     pending_time_sheets = TimeSheetSubmission.objects.filter(status="Pending")
     processed_time_sheets = TimeSheetSubmission.objects.exclude(status="Pending")
@@ -364,8 +365,15 @@ def generate_reports(request):
     :param   request as an http request
     :return: A rendered html page with the employee reports.
     """
+    """
+    For the #container-graph-paycheck, create a tuple of the next twelve months
+    and calculate the total dollars per month. 
+    """
+    users = User.objects.all()
+    last_twelve_months = PaycheckInformation.get_last_years_history()
+
     context = {
-        # TODO: Add context
+        'last_twelve_months': json.dumps(last_twelve_months)
     }
     return render(request, 'reports.html', context)
 

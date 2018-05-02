@@ -23,9 +23,7 @@
 <script>
 $('#container-graph-paycheck').highcharts({
     xAxis: {
-        categories: ["January", "February", "March",
-                     "April", "May", "June", "July", "August",
-                   "September","October","November", "December"]
+        categories: [ "{{ last_twelve_months|safe }}" ]
     },
     yAxis: [{
       title: {
