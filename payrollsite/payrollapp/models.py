@@ -43,6 +43,7 @@ class UserMetaData(models.Model):
     address = models.CharField(max_length=255)
     social_security_number = models.IntegerField()
     user_status = models.CharField(max_length=25, choices=USER_STATUS, default='Active')
+    company = models.CharField(max_length=255, unique=True, default="No company")
 
 
 class HumanResourcesData(models.Model):

@@ -71,7 +71,7 @@ def register(request):
     :param request:
     :return: A success page if the User was successfully added to the system.
     """
-    template_name = 'register.html'
+    template_name = 'signup.html'
     form = UserForm(request.POST or None)
     if form.is_valid():
         user = form.save(commit=False)
@@ -188,7 +188,10 @@ def approve_paid_time_off(request):
     :param   request as an http request
     :return: A rendered html page for the index with a list of current pending and process PTO requests.
     """
-    return render(request)
+    context = {
+        # TODO: Add context
+    }
+    return render(request, 'approvalspto.html', context)
 
 
 def expense_reimbursement(request):
@@ -231,7 +234,10 @@ def approve_expense_reimbursement(request):
     :param   request as an http request
     :return: A rendered html page for the index with a list of current pending and process PTO requests.
     """
-    return render(request)
+    context = {
+        # TODO: Add context
+    }
+    return render(request, 'approvalsexpenses.html', context)
 
 
 def display_time_sheet(request):
@@ -281,7 +287,10 @@ def approve_time_sheet(request):
     :param   request as an http request
     :return: A rendered html page for the index with a list of current pending and process PTO requests.
     """
-    return render(request)
+    context = {
+        # TODO: Add context
+    }
+    return render(request, 'approvalstimesheets.html', context)
 
 
 def generate_reports(request):
@@ -293,7 +302,10 @@ def generate_reports(request):
     :param   request as an http request
     :return: A rendered html page with the employee reports.
     """
-    return render(request)
+    context = {
+        # TODO: Add context
+    }
+    return render(request, 'reports.html', context)
 
 
 def view_personal_information(request):
@@ -319,7 +331,7 @@ def update_personal_information(request):
     return render(request)
 
 
-def manage_wages(request):
+def manage_accounts(request):
     """
     Allows HR to manage wages of a given employee
     TODO: Add a decorator so that it is an HR only view
@@ -329,4 +341,7 @@ def manage_wages(request):
     :param   request as an http request
     :return: A rendered html page with wage information
     """
-    return render(request)
+    context = {
+
+    }
+    return render(request, "manageaccount.html", context)
