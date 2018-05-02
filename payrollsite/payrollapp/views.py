@@ -192,7 +192,6 @@ def approve_paid_time_off(request):
     if request.method == "POST":
         form = ApprovalForm(request.POST)
         if form.is_valid():
-            print("ayy we valid now LILL NIGGA")
             pto_id = request.POST['row_pto_id']
             pto_request = PaidTimeOffRequests.objects.get(paid_time_off_request_id=pto_id)
             pto_request.status = form.cleaned_data['status']
@@ -252,8 +251,24 @@ def approve_expense_reimbursement(request):
     :param   request as an http request
     :return: A rendered html page for the index with a list of current pending and process PTO requests.
     """
+    if request.method == "POST":
+        form = ApprovalForm(request.POST)
+        if form.is_valid():
+            expense_id = request.POST['row_expense_id']
+            expense_request = Expenses.objects.get(expense_id=expense_id)
+            expense_request.status = form.cleaned_data['status']
+            expense_request.save()
+
+    # Default behavior: Load all pending time sheets.
+    form = ApprovalForm()
+    pending_expense_requests = Expenses.objects.filter(status="Pending")
+    processed_expense_requests = Expenses.objects.exclude(status="Pending")
+
+    # Load all approved time sheets.
     context = {
-        # TODO: Add context
+        'form': form,
+        'pending_expense_requests': pending_expense_requests,
+        'processed_expense_requests': processed_expense_requests
     }
     return render(request, 'approvalsexpenses.html', context)
 

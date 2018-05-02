@@ -15,18 +15,23 @@
 
         <!-- Displays all pto requests for the logged in user. -->
         {% if expense_requests %}
-        <table style-="width:100%">
+        <table class="responstable">
             <tr>
-                <th> Title</th>
-                <th> Amount</th>
-                <th> Image</th>
+                <th>User ID</th>
+                <th>Status</th>
+                <th>Amount</th>
+                <th>Receipt</th>
             </tr>
-            {% for expenditure in expense_requests %}
+            {% for expense_request in processed_expense_requests %}
             <tr>
-                <td> {{ expenditure.title }}</td>
-                <td> {{ expenditure.amount }}</td>
-                <td> {{ expenditure.file }}</td>
+                <td>{{ expense_request.user_id }}</td>
+                <td>{{ expense_request.title }}</td>
+                <td>{{ expense_request.amount }}</td>
+                <td>{{ expense_request.file }}</td>
+                <td> {{ expense_request.title }}</td>
             </tr>
+            {% empty %}
+            <h2> No processed expense reimbursement requests. </h2>
             {% endfor %}
         </table>
         {% else %}

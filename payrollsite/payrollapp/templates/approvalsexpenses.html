@@ -15,189 +15,73 @@
 
 {% block page-wrapper %}
 
-            <!-- Page Content -->
-            <div id="page-wrapper">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-lg-12">
+<!-- Page Content -->
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
 
-                  <hr>
+                <hr>
 
-                  <h1>Paid Time Off approvals:</h1>
-
-                  <table class="responstable">
-
-                      <tr>
+                <table class="responstable">
+                    <tr>
                         <th>User ID</th>
                         <th>Status</th>
-                        <th>Date</th>
-                        <th>Description</th>
                         <th>Amount</th>
-                        <th>Details</th>
+                        <th>Receipt</th>
                     </tr>
-
+                    {% for expense_request in pending_expense_requests %}
                     <tr>
-                        <td>54347851</td>
-                        <td>Pending</td>
-                        <td>02/04/18</td>
-                        <td>Gym</td>
-                        <td>8</td>
-                        <td><a style ="color: rgb(0,0,0);" href="#" data-toggle="modal" data-target="#myModal"><u>View details</u>
-                        </a>
-
-                        <section class="modal modalWindow" id="popupOne">
-                            <section class="modalWrapper">
-                                <h2>Modal Popup </h2>
-                            </section>
-                            <a class="closeBtn">CLOSE X</a>
-                        </section>
-                        <section class="modal overlay"></div></td>
-
-                        </tr>
-
-                        <tr>
-                          <td>54347851</td>
-                          <td>Pending</td>
-                          <td>03/04/18</td>
-                          <td>Meal</td>
-                          <td>8</td>
-                            <td><a style ="color: rgb(0,0,0);" href="#" data-toggle="modal" data-target="#myModal"><u>View details</u>
-                            </a>
-
-                            <section class="modal modalWindow" id="popupOne">
-                                <section class="modalWrapper">
-                                    <h2>Modal Popup </h2>
-                                </section>
-                                <a class="closeBtn">CLOSE X</a>
-                            </section>
-                            <section class="modal overlay"></div></td>
-                            </tr>
-
-                            <tr>
-                              <td>54347851</td>
-                              <td>Pending</td>
-                              <td>04/04/18</td>
-                              <td>Flight ticket</td>
-                              <td>8</td>
-                                <td><a style ="color: rgb(0,0,0);" href="#" data-toggle="modal" data-target="#myModal"><u>View details</u>
-                                </a>
-
-                                <section class="modal modalWindow" id="popupOne">
-                                    <section class="modalWrapper">
-                                        <h2>Modal Popup </h2>
-                                    </section>
-                                    <a class="closeBtn">CLOSE X</a>
-                                </section>
-                                <section class="modal overlay"></div></td>
-
-                                </tr>
-                            </table>
-
-                        </div>
-
-                        <div id="myModal" class="modal fade">
-                            <div class="modal-dialog modal-lg">
-                                <div class="modal-content modal-lg">
-                                    <div class="modal-header modal-lg">
-                                        <h3 class="modal-title " style="float: left">Paycheck Details</h3>
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <table align="center" class="detailsTable" >
-                                            <thead>
-                                              <tr>
-                                                <th>Pay Types</th>
-                                                <th>Amount</th>
-                                                <th></th>
-                                                <th>Withholding</th>
-                                                <th>Deductions</th>
-
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                          <tr>
-                                            <td>Regular</td>
-                                            <td>2,700.00</td>
-                                            <td></td>
-                                            <td>Federal</td>
-                                            <td>546.31</td>
-                                        </tr>
-                                        <tr>
-                                          <td>Overtime</td>
-                                          <td>0.00</td>
-                                          <td></td>
-                                          <td>State</td>
-                                          <td>52.99</td>
-                                      </tr>
-                                      <tr>
-                                       <td>Vacation</td>
-                                       <td>0.00</td>
-                                       <td></td>
-                                       <td>City</td>
-                                       <td>0.00</td>
-                                   </tr>
-                                   <tr>
-                                       <td>Sick</td>
-                                       <td>0.00</td>
-                                       <td></td>
-                                       <td>Fica</td>
-                                       <td>162.34</td>
-                                   </tr>
-                                   <tr>
-                                       <td>Bonus</td>
-                                       <td>0.00</td>
-                                       <td></td>
-                                       <td></td>
-                                       <td></td>
-                                   </tr>
-                                   <tr>
-                                       <td>Nontaxable</td>
-                                       <td>0.00</td>
-                                       <td></td>
-                                       <td></td>
-                                       <td></td>
-                                   </tr>
-                                   <tr>
-                                       <td>Gross Pay</td>
-                                       <td>0.00</td>
-                                       <td></td>
-                                       <td></td>
-                                       <td></td>
-                                   </tr>
-                                    <tr >
-
-                                       <td></td>
-                                       <td></td>
-                                       <td></td>
-                                       <td></td>
-                                       <td></td>
-                                   </tr>
-                                    <tr>
-
-                                       <td>Gross Pay</td>
-                                       <td>5960.22</td>
-                                       <td></td>
-                                       <td>Gross W/H</td>
-                                       <td>556.41</td>
-                                   </tr>
-                                   <tr>
-
-                                       <td>NET</td>
-                                       <td>3885.00</td>
-                                       <td></td>
-                                       <td></td>
-                                       <td></td>
-                                   </tr>
-                               </tbody>
-                           </table>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
-                        </div>
-                        </div>
-                        </div>
-
+                        <td>{{ expense_request.user_id }}</td>
+                        <td>{{ expense_request.status }}</td>
+                        <td>{{ expense_request.amount }}</td>
+                        <td>{{ expense_request.file }}</td>
+                        <td>
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                {{ form.status }}
+                                <input type="hidden" name="row_expense_id"
+                                       value="{{ expense_request.expense_id }}">
+                                <button type="submit">Update</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <h2> No paid time off requests currently awaiting approval. </h2>
+                    {% endfor %}
+                </table>
+                <h1>Processed Expense Reimbursement Requests </h1>
+                                <table class="responstable">
+                    <tr>
+                        <th>User ID</th>
+                        <th>Status</th>
+                        <th>Amount</th>
+                        <th>Receipt</th>
+                    </tr>
+                    {% for expense_request in processed_expense_requests %}
+                    <tr>
+                        <td>{{ expense_request.user_id }}</td>
+                        <td>{{ expense_request.status }}</td>
+                        <td>{{ expense_request.amount }}</td>
+                        <td>{{ expense_request.file }}</td>
+                        <td>
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                {{ form.status }}
+                                <input type="hidden" name="row_expense_id"
+                                       value="{{ expense_request.expense_id }}">
+                                <button type="submit">Update</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <h2> No paid time off requests currently awaiting approval. </h2>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 {% endblock %}
