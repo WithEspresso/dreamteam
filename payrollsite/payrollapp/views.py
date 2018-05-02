@@ -7,6 +7,7 @@ from .forms import LoginForm
 from .forms import UserForm
 from .forms import PaidTimeOffForm
 from .forms import ExpenseRequestForm
+from .forms import ApprovalForm
 
 from datetime import datetime
 
@@ -188,8 +189,25 @@ def approve_paid_time_off(request):
     :param   request as an http request
     :return: A rendered html page for the index with a list of current pending and process PTO requests.
     """
+    if request.method == "POST":
+        form = ApprovalForm(request.POST)
+        if form.is_valid():
+            print("ayy we valid now LILL NIGGA")
+            pto_id = request.POST['row_pto_id']
+            pto_request = PaidTimeOffRequests.objects.get(paid_time_off_request_id=pto_id)
+            pto_request.status = form.cleaned_data['status']
+            pto_request.save()
+
+    # Default behavior: Load all pending time sheets.
+    form = ApprovalForm()
+    pending_pto_requests = PaidTimeOffRequests.objects.filter(status="Pending")
+    processed_pto_requests = PaidTimeOffRequests.objects.exclude(status="Pending")
+
+    # Load all approved time sheets.
     context = {
-        # TODO: Add context
+        'form': form,
+        'pending_pto_requests': pending_pto_requests,
+        'processed_pto_requests': processed_pto_requests
     }
     return render(request, 'approvalspto.html', context)
 
@@ -287,8 +305,26 @@ def approve_time_sheet(request):
     :param   request as an http request
     :return: A rendered html page for the index with a list of current pending and process PTO requests.
     """
+    # Behavior for updating database entries
+    if request.method == "POST":
+        form = ApprovalForm(request.POST)
+        if form.is_valid():
+            print("ayy we valid now LILL NIGGA")
+            time_sheet_id = request.POST['row_timesheet_id']
+            timesheet = TimeSheetSubmission.objects.get(time_sheet_id=time_sheet_id)
+            timesheet.status = form.cleaned_data['status']
+            timesheet.save()
+
+    # Default behavior: Load all pending time sheets.
+    form = ApprovalForm()
+    pending_time_sheets = TimeSheetSubmission.objects.filter(status="Pending")
+    processed_time_sheets = TimeSheetSubmission.objects.exclude(status="Pending")
+
+    # Load all approved time sheets.
     context = {
-        # TODO: Add context
+        'form': form,
+        'pending_time_sheets': pending_time_sheets,
+        'processed_time_sheets': processed_time_sheets
     }
     return render(request, 'approvalstimesheets.html', context)
 

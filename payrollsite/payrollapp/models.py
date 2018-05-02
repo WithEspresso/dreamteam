@@ -59,6 +59,7 @@ class TimeSheetSubmission(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateField()
     number_hours = models.IntegerField()
+    status = models.CharField(max_length=10, choices=STATUS_CHOICE)
 
     @staticmethod
     def calculate_pay_period_total_hours(username, date=now()):
@@ -77,6 +78,19 @@ class TimeSheetSubmission(models.Model):
             .filter(user_id__username__exact=username)\
             .aggregate(Sum('number_hours'))
         return total_hours
+
+    @staticmethod
+    def get_time_sheet_by_company(username):
+        """
+        Searches the database for time sheets by user.
+        :param username:
+        :return:
+        """
+        # matching_timesheets = TimeSheetSubmission.objects.filter(user_id__username__exact=username)
+        # <queryset>.filter(<ForeignKeyTable>__<ForeignKeyColumn>__exact=<company_name>)
+        # matching_timesheets = matching_timesheets.filter(user)
+        matching_timesheets = TimeSheetSubmission.objects.filter.all()
+        return matching_timesheets
 
     def __str__(self):
         return str(self.user_id) + "'s time sheet, " + str(self.time_sheet_id)

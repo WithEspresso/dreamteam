@@ -44,3 +44,18 @@ class ExpenseRequestForm(forms.ModelForm):
     class Meta:
         model = Expenses
         fields = ['title', 'amount', 'file']
+
+
+class ApprovalForm(forms.Form):
+    """
+    Form to search the website.
+    User selects a search algorithm with the drop down menu and enters a query.
+    Query is stored as the value in this form.
+    """
+    select_choices = (
+        ('Pending', 'Pending'),
+        ('Approved', 'Approved'),
+        ('Denied', 'Denied'),
+    )
+    # time_sheet_id = forms.CharField(widget=forms.HiddenInput(), initial="Pending")
+    status = forms.ChoiceField(widget=forms.Select, choices=select_choices)
