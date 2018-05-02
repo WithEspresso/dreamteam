@@ -4,7 +4,10 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    # Unauthenticated users only
     path('', views.login_user, name='index'),
+
+    # All user groups
     url(r'dashbaord/#', views.show_dashboard, name='dashboard'),
 
     # Employee only

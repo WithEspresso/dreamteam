@@ -18,6 +18,13 @@ USER_STATUS = (
     ('No current affiliation', 'No current affiliation')
 )
 
+USER_GROUPS = (
+    ('Employee', 'Employee'),
+    ('Manager', 'Manager'),
+    ('Human Resources', 'Human Resources')
+)
+
+# Number of work hours every four weeks.
 FOUR_WEEKS = 160
 
 
@@ -42,8 +49,9 @@ class UserMetaData(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     address = models.CharField(max_length=255)
     social_security_number = models.IntegerField()
+    group = models.CharField(max_length=32, choices=USER_GROUPS, default='Employee')
     user_status = models.CharField(max_length=25, choices=USER_STATUS, default='Active')
-    company = models.CharField(max_length=255, unique=True, default="No company")
+    company = models.CharField(max_length=255, unique=False, default="No company")
 
 
 class HumanResourcesData(models.Model):

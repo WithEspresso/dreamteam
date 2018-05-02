@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django import forms
-from .models import PaidTimeOffRequests, Expenses, TimeSheetSubmission
+from .models import PaidTimeOffRequests, Expenses, UserMetaData
 from .validators import validate_image_file
 from .validators import validate_year_entry
 
@@ -24,6 +24,15 @@ class UserForm(forms.ModelForm):
         model = User
         # What fields do we want to appear on the form?
         fields = ['username', 'email', 'first_name', 'last_name', 'password']
+
+
+class UserMetaDataForm(forms.ModelForm):
+
+    # Meta Information about your class.
+    class Meta:
+        model = UserMetaData
+        # What fields do we want to appear on the form?
+        fields = ['address', 'social_security_number', 'group']
 
 
 class PaidTimeOffForm(forms.ModelForm):

@@ -8,8 +8,7 @@ from .forms import UserForm
 from .forms import PaidTimeOffForm
 from .forms import ExpenseRequestForm
 from .forms import ApprovalForm
-
-from datetime import datetime
+from .forms import UserMetaDataForm
 
 # TODO: only import models we are utilizing, let me be lazy right now please.
 from .models import *
@@ -73,20 +72,32 @@ def register(request):
     :return: A success page if the User was successfully added to the system.
     """
     template_name = 'signup.html'
-    form = UserForm(request.POST or None)
-    if form.is_valid():
-        user = form.save(commit=False)
-        username = form.cleaned_data['username']
-        password = form.cleaned_data['password']
+    user_form = UserForm(request.POST or None)
+    user_metadata_form = UserMetaDataForm(request.POST or None)
+    if user_form.is_valid() and user_metadata_form.is_valid():
+        # Check django.auth.contrib's user form, register the user.
+        user = user_form.save(commit=False)
+        username = user_form.cleaned_data['username']
+        password = user_form.cleaned_data['password']
         user.set_password(password)
         user.save()
+        # Now, get our metadata and add it to the table.
+        user_metadata = user_metadata_form.save(commit=False)
+        user_metadata.user_id = user
+        user_metadata.address = user_metadata_form.cleaned_data['address']
+        user_metadata.social_security_number = user_metadata_form.cleaned_data['social_security_number']
+        user_metadata.group = user_metadata_form.cleaned_data['group']
+        # Save the new tables if both forms are okay.
+        user_metadata.save()
+        # Login the user.
         user = authenticate(username=username, password=password)
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return render(request, 'dashboard')
+                return redirect('dashboard')
     context = {
-        "form": form,
+        "user_form": user_form,
+        "user_metadata_form": user_metadata_form
     }
     return render(request, template_name, context)
 
@@ -384,7 +395,6 @@ def update_personal_information(request):
 
 def manage_accounts(request):
     """
-    Allows HR to manage wages of a given employee
     TODO: Add a decorator so that it is an HR only view
     TODO: HTTP NONE, displays form to search for an employee
     TODO: HTTP GET, display wage information of the given user_id.
@@ -392,7 +402,8 @@ def manage_accounts(request):
     :param   request as an http request
     :return: A rendered html page with wage information
     """
+    all_users = User.objects.all()
     context = {
-
+        "users": all_users
     }
     return render(request, "manageaccount.html", context)

@@ -26,12 +26,10 @@
                         <th>Details</th>
                         <th>Actions</th>
                     </tr>
-
+                    {% for user in users %}
                     <tr>
-                        <td>54347851</td>
-                        <td>Leire Litwin</td>
-                        <!-- <td>Leire</td>
-                        <td>Litwin</td> -->
+                        <td>{{ user.user_id }}</td>
+                        <td>{{ user.first_name }} {{ user.last_name }}</td>
                         <td><a style="color: rgb(0,0,0);" href="#" data-toggle="modal" data-target="#myModal"><u>View
                             details</u></a>
                             <section class="modal modalWindow" id="popupOne">
@@ -40,7 +38,7 @@
                                 </section>
                                 <a class="closeBtn">CLOSE X</a>
                             </section>
-                            <section class="modal overlay">
+                            <section class="modal overlay"> </section>
                         </td>
                         <td><a style="color: rgb(0,0,0);" href="#" data-toggle="modal"
                                data-target="#myModal2"><u>Manage</u></a>
@@ -50,64 +48,10 @@
                                 </section>
                                 <a class="closeBtn">CLOSE X</a>
                             </section>
-                            <section class="modal overlay">
+                            <section class="modal overlay"> </section>
                         </td>
                     </tr>
-
-                    <tr>
-                        <td>865423344</td>
-                        <td>Peter Cruz</td>
-                        <!-- <td>Peter</td>
-                        <td>Cruz</td> -->
-                        <td><a style="color: rgb(0,0,0);" href="#" data-toggle="modal" data-target="#myModal"><u>View
-                            details</u></a>
-                            <section class="modal modalWindow" id="popupOne">
-                                <section class="modalWrapper">
-                                    <h2>Modal Popup </h2>
-                                </section>
-                                <a class="closeBtn">CLOSE X</a>
-                            </section>
-                            <section class="modal overlay">
-                        </td>
-                        </td>
-                        <td><a style="color: rgb(0,0,0);" href="#" data-toggle="modal"
-                               data-target="#myModal2"><u>Manage</u></a>
-                            <section class="modal modalWindow" id="popupTwo">
-                                <section class="modalWrapper">
-                                    <h2>Modal Popup </h2>
-                                </section>
-                                <a class="closeBtn">CLOSE X</a>
-                            </section>
-                            <section class="modal overlay">
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>675314175</td>
-                        <td>Ilya Nemtsov</td>
-                        <!-- <td>Ilya</td>
-                        <td>Nemtsov</td> -->
-                        <td><a style="color: rgb(0,0,0);" href="#" data-toggle="modal" data-target="#myModal"><u>View
-                            details</u></a>
-                            <section class="modal modalWindow" id="popupOne">
-                                <section class="modalWrapper">
-                                    <h2>Modal Popup </h2>
-                                </section>
-                                <a class="closeBtn">CLOSE X</a>
-                            </section>
-                            <section class="modal overlay">
-                        </td>
-                        <td><a style="color: rgb(0,0,0);" href="#" data-toggle="modal"
-                               data-target="#myModal2"><u>Manage</u></a>
-                            <section class="modal modalWindow" id="popupTwo">
-                                <section class="modalWrapper">
-                                    <h2>Modal Popup </h2>
-                                </section>
-                                <a class="closeBtn">CLOSE X</a>
-                            </section>
-                            <section class="modal overlay">
-                        </td>
-                    </tr>
+                    {% endfor %}
                 </table>
             </div>
 
