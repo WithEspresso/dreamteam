@@ -123,7 +123,7 @@
                 <h4 class="modal-title">User profile information</h4>
               </div>
               <div class="modal-body">
-                <h4>Name </h4>
+                <!--- <h4>Name </h4>
                 <p>{{ request.user.first_name }} {{ request.user.last_name }}</p>
                 <h4>User ID </h4>
                 <p> {{ request.user }}</p>
@@ -132,7 +132,69 @@
                 <h4>Address </h4>
                 <p>{{ user_meta_data.address}}</p>
                 <h4>SSN </h4>
-                <p> {{ user_meta_data.social_security_number }}</p>
+                <p> {{ user_meta_data.social_security_number }}</p> --->
+                                      <div class="container">
+                        <div class="row">
+                            <div class="col-md-7 ">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4><h4 style="color:#00b1b1;">{{ request.user.first_name }} {{ request.user.last_name }} </h4></span>
+                                        </h4>
+                                    </div>
+                                    <div class="panel-body">
+
+                                        <div class="box box-info">
+
+                                            <div class="clearfix"></div>
+                                            <hr style="margin:5px 0 5px 0;">
+
+
+                                            <div class="col-sm-5 col-xs-6 tital ">First Name:</div>
+                                            <div class="col-sm-7 col-xs-6 ">{{ request.user.first_name }}</div>
+                                            <div class="clearfix"></div>
+                                            <div class="bot-border"></div>
+
+                                            <div class="col-sm-5 col-xs-6 tital ">Last Name:</div>
+                                            <div class="col-sm-7"> {{ request.user.last_name }}</div>
+                                            <div class="clearfix"></div>
+                                            <div class="bot-border"></div>
+
+                                            <div class="col-sm-5 col-xs-6 tital ">Date Of Joining:</div>
+                                            <div class="col-sm-7">15 Jun 2016</div>
+
+                                            <div class="clearfix"></div>
+                                            <div class="bot-border"></div>
+
+                                            <div class="col-sm-5 col-xs-6 tital ">Date Of Birth:</div>
+                                            <div class="col-sm-7">11 Jun 1998</div>
+
+                                            <div class="clearfix"></div>
+                                            <div class="bot-border"></div>
+
+                                            <div class="col-sm-5 col-xs-6 tital ">email:</div>
+                                            <div class="col-sm-7">{{ request.user.email }}</div>
+
+                                            <div class="clearfix"></div>
+                                            <div class="bot-border"></div>
+
+                                            <div class="col-sm-5 col-xs-6 tital ">Address:</div>
+                                            <div class="col-sm-7">{{ user_meta_data.address}}</div>
+
+                                            <div class="clearfix"></div>
+                                            <div class="bot-border"></div>
+
+                                            <div class="col-sm-5 col-xs-6 tital ">Department:</div>
+                                            <div class="col-sm-7">Analytics</div>
+
+                                            <!-- /.box-body -->
+                                        </div>
+                                        <!-- /.box -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
