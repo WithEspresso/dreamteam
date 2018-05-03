@@ -131,15 +131,6 @@ class PaycheckInformation(models.Model):
                 next_month += 12
             last_twelve_months.append(calendar.month_name[next_month])
         last_twelve_months.reverse()
-        """
-        paychecks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-        paycheck_per_month = {
-        }
-        for i in range(0, 12):
-            month = last_twelve_months[i]
-            paycheck_per_month[month] = paychecks[i]
-        return(paycheck_per_month)
-        """
         return last_twelve_months
 
     def __str__(self):

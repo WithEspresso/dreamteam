@@ -149,7 +149,7 @@ def show_dashboard(request):
     :param   request as an http request
     :return: A rendered html page with the user's dashboard.
     """
-    return render(request, 'dashboard-employee.html')
+    return render(request, 'dashboard-manager.html')
 
 
 def paid_time_off(request):

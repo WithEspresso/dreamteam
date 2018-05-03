@@ -1,4 +1,4 @@
-{% extends 'layout-manager.html' %}
+{% extends 'layout-hr.html' %}
 
 {% block stylesblock %}
 <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,700'>
@@ -15,7 +15,7 @@
 
 {% block page-wrapper %}
 
-<!-- Page Content -->
+           <!-- Page Content -->
 <div id="page-wrapper">
     <div class="container-fluid">
         <div class="row">
@@ -23,74 +23,124 @@
 
                 <hr>
 
-                <h1>Timesheet approvals:</h1>
+                <h1>Expenses approvals:</h1>
 
                 <table class="responstable">
 
                     <tr>
-                        <th>User ID</th>
+                        <th>Employee ID</th>
+                        <th>User Name</th>
                         <th>Status</th>
-                        <th>Date</th>
-                        <th>Hours</th>
                         <th>Details</th>
                     </tr>
-                    {% for pto_request in pending_pto_requests %}
+
                     <tr>
-                        <td>{{ pto_request.user_id }}</td>
-                        <td>{{ pto_request.status }}</td>
-                        <td>{{ pto_request.date }}</td>
-                        <td>{{ pto_request.hours }}</td>
-                        <td>
-                            <form action="" method="post">
-                                {% csrf_token %}
-                                {{ form.status }}
-                                <input type="hidden" name="row_pto_id"
-                                       value="{{ pto_request.paid_time_off_request_id }}">
-                                <button type="submit">Update</button>
-                            </form>
+                        <td>54347851</td>
+                        <td>Ilya Nemtsov</td>
+                        <td>Pending</td>
+                        <td><a style="color: rgb(0,0,0);" href="#" data-toggle="modal" data-target="#myModal"><u>View
+                            details</u>
+                        </a>
+
+                            <section class="modal modalWindow" id="popupOne">
+                                <section class="modalWrapper">
+                                    <h2>Modal Popup </h2>
+                                </section>
+                                <a class="closeBtn">CLOSE X</a>
+                            </section>
+                            <section class="modal overlay">
+                            </section>
                         </td>
                     </tr>
-                    {% empty %}
-                    <h2> No paid time off requests currently awaiting approval. </h2>
-                    {% endfor %}
-                </table>
-                <h1>Processed Paid Time Off Requests </h1>
-                <table class="responstable">
-                    <tr>
-                        <th>User ID</th>
-                        <th>Status</th>
-                        <th>Date</th>
-                        <th>Hours</th>
-                        <th>Details</th>
+                    </td>
+
                     </tr>
-                    {% for pto_request in processed_pto_requests %}
+
                     <tr>
-                        <td>{{ pto_request.user_id }}</td>
-                        <td>{{ pto_request.status }}</td>
-                        <td>{{ pto_request.date }}</td>
-                        <td>{{ pto_request.hours }}</td>
-                        <td>
-                            <form action="" method="post">
-                                {% csrf_token %}
-                                {{ form.status }}
-                                <input type="hidden" name="row_pto_id"
-                                       value="{{ pto_request.paid_time_off_request_id }}">
-                                <button type="submit">Update</button>
-                            </form>
+                        <td>54347849</td>
+                        <td>Leire Litwin</td>
+
+                        <td>Pending</td>
+
+
+                        <td><a style="color: rgb(0,0,0);" href="#" data-toggle="modal" data-target="#myModal"><u>View
+                            details</u>
+                        </a>
+
+                            <section class="modal modalWindow" id="popupOne">
+                                <section class="modalWrapper">
+                                    <h2>Modal Popup </h2>
+                                </section>
+                                <a class="closeBtn">CLOSE X</a>
+                            </section>
+                            <section class="modal overlay">
+                            </section>
                         </td>
                     </tr>
-                    {% empty %}
-                    <h2> No paid time off requests currently awaiting approval. </h2>
-                    {% endfor %}
+
+                    <tr>
+                        <td>54347800</td>
+                        <td>Peter Cruz</td>
+                        <td>Pending</td>
+                        <td><a style="color: rgb(0,0,0);" href="#" data-toggle="modal" data-target="#myModal"><u>View
+                            details</u>
+                        </a>
+
+                            <section class="modal modalWindow" id="popupOne">
+                                <section class="modalWrapper">
+                                    <h2>Modal Popup </h2>
+                                </section>
+                                <a class="closeBtn">CLOSE X</a>
+                            </section>
+                            <section class="modal overlay">
+                            </section>
+                        </td>
+
+                    </tr>
                 </table>
+
             </div>
 
             <div id="myModal" class="modal fade">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content modal-lg">
                         <div class="modal-header modal-lg">
-                            <h3 class="modal-title " style="float: left">Paycheck Details</h3>
+                            <h3 class="modal-title " style="float: left">PTO request Details</h3>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+            <div class="modal-body">
+                <table align="center" class="detailsTable">
+                    <thead>
+                    <tr>
+                        <th>Employee ID</th>
+                        <th>Full Name</th>
+                        <th>Date</th>
+                        <th>Hours</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr align="center">
+                        <td>54347851</td>
+                        <td>Ilya Nemtsov</td>
+                        <td>04/20/2018</td>
+                        <td>8.00</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-info btn-md" style="" data-dismiss="modal">Cancel
+                            </button>
+                            <div>
+                                <button type="button" class="btn btn-md btn-danger " data-dismiss="modal">Reject
+                                </button>
+                                <button type="button" class="btn btn-md btn-success btn-md" data-dismiss="modal">
+                                    Approve
+                                </button>
+
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -107,3 +157,6 @@
             {% load static %}
             <script src="{% static 'scripts/paycheck.js' %}"></script>
             {% endblock %}
+        </div>
+    </div>
+</div>

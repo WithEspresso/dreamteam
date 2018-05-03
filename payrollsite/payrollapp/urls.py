@@ -8,7 +8,7 @@ urlpatterns = [
     path('', views.login_user, name='index'),
 
     # All user groups
-    url(r'dashbaord/#', views.show_dashboard, name='dashboard'),
+    url(r'dashboard/', views.show_dashboard, name='dashboard'),
 
     # Employee only
     url(r'logout/$', views.logout_user, name='logout_user'),

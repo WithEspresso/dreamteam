@@ -1,4 +1,4 @@
-{% extends 'layout-manager.html' %}
+{% extends 'layout-hr.html' %}
 
 {% block page-wrapper %}
 
@@ -21,9 +21,12 @@
 <script src="http://code.highcharts.com/highcharts.js"></script>
 
 <script>
+
 $('#container-graph-paycheck').highcharts({
     xAxis: {
-        categories: [ "{{ last_twelve_months|safe }}" ]
+        categories: ["January", "February", "March",
+                     "April", "May", "June", "July", "August",
+                   "September","October","November", "December"]
     },
     yAxis: [{
       title: {
@@ -38,6 +41,7 @@ $('#container-graph-paycheck').highcharts({
       data: [2000, 2100, 2300, 2000, 1800, 1950, 1900, 2000, 2100, 2400, 2300, 2350]
     }]
 });
+
 $('#container-graph-hours').highcharts({
     chart: {
       renderTo: 'container',
@@ -60,6 +64,7 @@ $('#container-graph-hours').highcharts({
       data: [8, 8, 8, 7, 8, 2, 0]
     }]
 });
+
 $('#container-graph-employees').highcharts({
     plotOptions: {
     pie: {
@@ -106,6 +111,8 @@ $('#container-graph-employees').highcharts({
       }]
     }]
 });
+
+
 </script>
 
 {% endblock %}
