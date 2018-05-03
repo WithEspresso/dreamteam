@@ -367,20 +367,12 @@ def generate_reports(request):
     if request.user.is_authenticated:
         users = User.objects.all()
         last_twelve_months = PaycheckInformation.get_last_years_history()
-
-<<<<<<< HEAD
         context = {
             'last_twelve_months': json.dumps(last_twelve_months)
         }
         return render(request, 'reports.html', context)
     else:
         return redirect(login_user)
-=======
-    context = {
-        'last_twelve_months': last_twelve_months  # json.dumps(last_twelve_months)
-    }
-    return render(request, 'reports.html', context)
->>>>>>> 13ac1613b80f1b88d6f849bbb5089c33f4866b99
 
 
 def view_personal_information(request):
