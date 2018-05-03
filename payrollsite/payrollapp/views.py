@@ -15,6 +15,7 @@ from .forms import UserMetaDataForm
 # TODO: only import models we are utilizing, let me be lazy right now please.
 from .models import *
 
+
 # Note, possibly convert these views from function based views to class based views in the future.
 
 
@@ -38,7 +39,7 @@ def login_user(request):
         else:
             return render(request, 'login.html', {'form': form, 'error_message': 'Invalid login'})
     context = {
-         "form": form,
+        "form": form,
     }
     return render(request, 'login.html', context)
 
@@ -50,7 +51,7 @@ def logout_user(request):
     :return The index page.
     """
     logout(request)
-    return HttpResponseRedirect('/')
+    return redirect(login_user)
 
 
 def reset_password(request):
@@ -135,12 +136,7 @@ def view_paycheck_information(request):
         }
     # User is not logged in. Redirecting to the login page with an error message.
     else:
-        form = LoginForm()
-        context = {
-            'form': form,
-            'error_message': "You must be logged in to perform this task. Please log in to continue.\n"
-        }
-        return render(request, 'login.html', context)
+        return redirect(login_user)
     return render(request, 'paycheck.html', context)
 
 
@@ -149,7 +145,9 @@ def show_dashboard(request):
     :param   request as an http request
     :return: A rendered html page with the user's dashboard.
     """
-    return render(request, 'dashboard-manager.html')
+    if request.user.is_authenticated:
+        return render(request, 'dashboard-manager.html')
+    return redirect(login_user)
 
 
 def paid_time_off(request):
@@ -184,13 +182,7 @@ def paid_time_off(request):
             return HttpResponseRedirect('pto/')
         return render(request, 'pto.html', context)
     else:
-        # User is not logged in. Show them the way.
-        form = LoginForm()
-        context = {
-            'form': form,
-            'error_message': "You must be logged in to perform this task. Please log in to continue.\n"
-        }
-        return render(request, 'login.html', context)
+        return redirect(login_user)
 
 
 def approve_paid_time_off(request):
@@ -202,26 +194,29 @@ def approve_paid_time_off(request):
     :param   request as an http request
     :return: A rendered html page for the index with a list of current pending and process PTO requests.
     """
-    if request.method == "POST":
-        form = ApprovalForm(request.POST)
-        if form.is_valid():
-            pto_id = request.POST['row_pto_id']
-            pto_request = PaidTimeOffRequests.objects.get(paid_time_off_request_id=pto_id)
-            pto_request.status = form.cleaned_data['status']
-            pto_request.save()
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            form = ApprovalForm(request.POST)
+            if form.is_valid():
+                pto_id = request.POST['row_pto_id']
+                pto_request = PaidTimeOffRequests.objects.get(paid_time_off_request_id=pto_id)
+                pto_request.status = form.cleaned_data['status']
+                pto_request.save()
 
-    # Default behavior: Load all pending time sheets.
-    form = ApprovalForm()
-    pending_pto_requests = PaidTimeOffRequests.objects.filter(status="Pending")
-    processed_pto_requests = PaidTimeOffRequests.objects.exclude(status="Pending")
+        # Default behavior: Load all pending time sheets.
+        form = ApprovalForm()
+        pending_pto_requests = PaidTimeOffRequests.objects.filter(status="Pending")
+        processed_pto_requests = PaidTimeOffRequests.objects.exclude(status="Pending")
 
-    # Load all approved time sheets.
-    context = {
-        'form': form,
-        'pending_pto_requests': pending_pto_requests,
-        'processed_pto_requests': processed_pto_requests
-    }
-    return render(request, 'approvalspto.html', context)
+        # Load all approved time sheets.
+        context = {
+            'form': form,
+            'pending_pto_requests': pending_pto_requests,
+            'processed_pto_requests': processed_pto_requests
+        }
+        return render(request, 'approvalspto.html', context)
+    else:
+        return redirect(login_user)
 
 
 def expense_reimbursement(request):
@@ -246,7 +241,7 @@ def expense_reimbursement(request):
             return HttpResponseRedirect('expense-requests/')
     else:
         # User is not logged in. Show them the way.
-        return redirect('index')
+        return redirect(login_user)
     # Display the page normally.
     context = {
         "form": form,
@@ -264,26 +259,29 @@ def approve_expense_reimbursement(request):
     :param   request as an http request
     :return: A rendered html page for the index with a list of current pending and process PTO requests.
     """
-    if request.method == "POST":
-        form = ApprovalForm(request.POST)
-        if form.is_valid():
-            expense_id = request.POST['row_expense_id']
-            expense_request = Expenses.objects.get(expense_id=expense_id)
-            expense_request.status = form.cleaned_data['status']
-            expense_request.save()
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            form = ApprovalForm(request.POST)
+            if form.is_valid():
+                expense_id = request.POST['row_expense_id']
+                expense_request = Expenses.objects.get(expense_id=expense_id)
+                expense_request.status = form.cleaned_data['status']
+                expense_request.save()
 
-    # Default behavior: Load all pending time sheets.
-    form = ApprovalForm()
-    pending_expense_requests = Expenses.objects.filter(status="Pending")
-    processed_expense_requests = Expenses.objects.exclude(status="Pending")
+        # Default behavior: Load all pending time sheets.
+        form = ApprovalForm()
+        pending_expense_requests = Expenses.objects.filter(status="Pending")
+        processed_expense_requests = Expenses.objects.exclude(status="Pending")
 
-    # Load all approved time sheets.
-    context = {
-        'form': form,
-        'pending_expense_requests': pending_expense_requests,
-        'processed_expense_requests': processed_expense_requests
-    }
-    return render(request, 'approvalsexpenses.html', context)
+        # Load all approved time sheets.
+        context = {
+            'form': form,
+            'pending_expense_requests': pending_expense_requests,
+            'processed_expense_requests': processed_expense_requests
+        }
+        return render(request, 'approvalsexpenses.html', context)
+    else:
+        return redirect(login_user)
 
 
 def display_time_sheet(request):
@@ -312,13 +310,7 @@ def display_time_sheet(request):
             'total_hours': total_hours
         }
     else:
-        # User is not logged in. Redirecting to the login page with an error message.
-        form = LoginForm()
-        context = {
-            'form': form,
-            'error_message': "You must be logged in to perform this task. Please log in to continue.\n"
-        }
-        return render(request, 'login.html', context)
+        return redirect(login_user)
     # Load the page normally for an authenticated user.
     return render(request, 'timesheets.html', context)
 
@@ -334,26 +326,29 @@ def approve_time_sheet(request):
     :return: A rendered html page for the index with a list of current pending and process PTO requests.
     """
     # Behavior for updating database entries
-    if request.method == "POST":
-        form = ApprovalForm(request.POST)
-        if form.is_valid():
-            print("ayy we valid now LILL NIGGA")
-            time_sheet_id = request.POST['row_timesheet_id']
-            timesheet = TimeSheetSubmission.objects.get(time_sheet_id=time_sheet_id)
-            timesheet.status = form.cleaned_data['status']
-            timesheet.save()
-    # HTTP None, Default behavior: Load all pending and processed time sheets.
-    form = ApprovalForm()
-    pending_time_sheets = TimeSheetSubmission.objects.filter(status="Pending")
-    processed_time_sheets = TimeSheetSubmission.objects.exclude(status="Pending")
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            form = ApprovalForm(request.POST)
+            if form.is_valid():
+                print("ayy we valid now LILL NIGGA")
+                time_sheet_id = request.POST['row_timesheet_id']
+                timesheet = TimeSheetSubmission.objects.get(time_sheet_id=time_sheet_id)
+                timesheet.status = form.cleaned_data['status']
+                timesheet.save()
+        # HTTP None, Default behavior: Load all pending and processed time sheets.
+        form = ApprovalForm()
+        pending_time_sheets = TimeSheetSubmission.objects.filter(status="Pending")
+        processed_time_sheets = TimeSheetSubmission.objects.exclude(status="Pending")
 
-    # Load all approved time sheets.
-    context = {
-        'form': form,
-        'pending_time_sheets': pending_time_sheets,
-        'processed_time_sheets': processed_time_sheets
-    }
-    return render(request, 'approvalstimesheets.html', context)
+        # Load all approved time sheets.
+        context = {
+            'form': form,
+            'pending_time_sheets': pending_time_sheets,
+            'processed_time_sheets': processed_time_sheets
+        }
+        return render(request, 'approvalstimesheets.html', context)
+    else:
+        return redirect(login_user)
 
 
 def generate_reports(request):
@@ -369,13 +364,23 @@ def generate_reports(request):
     For the #container-graph-paycheck, create a tuple of the next twelve months
     and calculate the total dollars per month. 
     """
-    users = User.objects.all()
-    last_twelve_months = PaycheckInformation.get_last_years_history()
+    if request.user.is_authenticated:
+        users = User.objects.all()
+        last_twelve_months = PaycheckInformation.get_last_years_history()
 
+<<<<<<< HEAD
+        context = {
+            'last_twelve_months': json.dumps(last_twelve_months)
+        }
+        return render(request, 'reports.html', context)
+    else:
+        return redirect(login_user)
+=======
     context = {
-        'last_twelve_months': json.dumps(last_twelve_months)
+        'last_twelve_months': last_twelve_months  # json.dumps(last_twelve_months)
     }
     return render(request, 'reports.html', context)
+>>>>>>> 13ac1613b80f1b88d6f849bbb5089c33f4866b99
 
 
 def view_personal_information(request):
@@ -410,8 +415,11 @@ def manage_accounts(request):
     :param   request as an http request
     :return: A rendered html page with wage information
     """
-    all_users = User.objects.all()
-    context = {
-        "users": all_users
-    }
-    return render(request, "manageaccount.html", context)
+    if request.user.is_authenticated:
+        all_users = User.objects.all()
+        context = {
+            "users": all_users
+        }
+        return render(request, "manageaccount.html", context)
+    else:
+        return redirect(login_user)
