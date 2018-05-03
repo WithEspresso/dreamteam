@@ -3,12 +3,14 @@ from django.shortcuts import redirect
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 
+import json
+
 from .forms import LoginForm
 from .forms import UserForm
 from .forms import PaidTimeOffForm
 from .forms import ExpenseRequestForm
-
-from datetime import datetime
+from .forms import ApprovalForm
+from .forms import UserMetaDataForm
 
 # TODO: only import models we are utilizing, let me be lazy right now please.
 from .models import *
@@ -71,21 +73,33 @@ def register(request):
     :param request:
     :return: A success page if the User was successfully added to the system.
     """
-    template_name = 'register.html'
-    form = UserForm(request.POST or None)
-    if form.is_valid():
-        user = form.save(commit=False)
-        username = form.cleaned_data['username']
-        password = form.cleaned_data['password']
+    template_name = 'signup.html'
+    user_form = UserForm(request.POST or None)
+    user_metadata_form = UserMetaDataForm(request.POST or None)
+    if user_form.is_valid() and user_metadata_form.is_valid():
+        # Check django.auth.contrib's user form, register the user.
+        user = user_form.save(commit=False)
+        username = user_form.cleaned_data['username']
+        password = user_form.cleaned_data['password']
         user.set_password(password)
         user.save()
+        # Now, get our metadata and add it to the table.
+        user_metadata = user_metadata_form.save(commit=False)
+        user_metadata.user_id = user
+        user_metadata.address = user_metadata_form.cleaned_data['address']
+        user_metadata.social_security_number = user_metadata_form.cleaned_data['social_security_number']
+        user_metadata.group = user_metadata_form.cleaned_data['group']
+        # Save the new tables if both forms are okay.
+        user_metadata.save()
+        # Login the user.
         user = authenticate(username=username, password=password)
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return render(request, 'dashboard')
+                return redirect('dashboard')
     context = {
-        "form": form,
+        "user_form": user_form,
+        "user_metadata_form": user_metadata_form
     }
     return render(request, template_name, context)
 
@@ -135,7 +149,7 @@ def show_dashboard(request):
     :param   request as an http request
     :return: A rendered html page with the user's dashboard.
     """
-    return render(request, 'dashboard-employee.html')
+    return render(request, 'dashboard-manager.html')
 
 
 def paid_time_off(request):
@@ -188,7 +202,26 @@ def approve_paid_time_off(request):
     :param   request as an http request
     :return: A rendered html page for the index with a list of current pending and process PTO requests.
     """
-    return render(request)
+    if request.method == "POST":
+        form = ApprovalForm(request.POST)
+        if form.is_valid():
+            pto_id = request.POST['row_pto_id']
+            pto_request = PaidTimeOffRequests.objects.get(paid_time_off_request_id=pto_id)
+            pto_request.status = form.cleaned_data['status']
+            pto_request.save()
+
+    # Default behavior: Load all pending time sheets.
+    form = ApprovalForm()
+    pending_pto_requests = PaidTimeOffRequests.objects.filter(status="Pending")
+    processed_pto_requests = PaidTimeOffRequests.objects.exclude(status="Pending")
+
+    # Load all approved time sheets.
+    context = {
+        'form': form,
+        'pending_pto_requests': pending_pto_requests,
+        'processed_pto_requests': processed_pto_requests
+    }
+    return render(request, 'approvalspto.html', context)
 
 
 def expense_reimbursement(request):
@@ -231,7 +264,26 @@ def approve_expense_reimbursement(request):
     :param   request as an http request
     :return: A rendered html page for the index with a list of current pending and process PTO requests.
     """
-    return render(request)
+    if request.method == "POST":
+        form = ApprovalForm(request.POST)
+        if form.is_valid():
+            expense_id = request.POST['row_expense_id']
+            expense_request = Expenses.objects.get(expense_id=expense_id)
+            expense_request.status = form.cleaned_data['status']
+            expense_request.save()
+
+    # Default behavior: Load all pending time sheets.
+    form = ApprovalForm()
+    pending_expense_requests = Expenses.objects.filter(status="Pending")
+    processed_expense_requests = Expenses.objects.exclude(status="Pending")
+
+    # Load all approved time sheets.
+    context = {
+        'form': form,
+        'pending_expense_requests': pending_expense_requests,
+        'processed_expense_requests': processed_expense_requests
+    }
+    return render(request, 'approvalsexpenses.html', context)
 
 
 def display_time_sheet(request):
@@ -281,7 +333,27 @@ def approve_time_sheet(request):
     :param   request as an http request
     :return: A rendered html page for the index with a list of current pending and process PTO requests.
     """
-    return render(request)
+    # Behavior for updating database entries
+    if request.method == "POST":
+        form = ApprovalForm(request.POST)
+        if form.is_valid():
+            print("ayy we valid now LILL NIGGA")
+            time_sheet_id = request.POST['row_timesheet_id']
+            timesheet = TimeSheetSubmission.objects.get(time_sheet_id=time_sheet_id)
+            timesheet.status = form.cleaned_data['status']
+            timesheet.save()
+    # HTTP None, Default behavior: Load all pending and processed time sheets.
+    form = ApprovalForm()
+    pending_time_sheets = TimeSheetSubmission.objects.filter(status="Pending")
+    processed_time_sheets = TimeSheetSubmission.objects.exclude(status="Pending")
+
+    # Load all approved time sheets.
+    context = {
+        'form': form,
+        'pending_time_sheets': pending_time_sheets,
+        'processed_time_sheets': processed_time_sheets
+    }
+    return render(request, 'approvalstimesheets.html', context)
 
 
 def generate_reports(request):
@@ -293,7 +365,17 @@ def generate_reports(request):
     :param   request as an http request
     :return: A rendered html page with the employee reports.
     """
-    return render(request)
+    """
+    For the #container-graph-paycheck, create a tuple of the next twelve months
+    and calculate the total dollars per month. 
+    """
+    users = User.objects.all()
+    last_twelve_months = PaycheckInformation.get_last_years_history()
+
+    context = {
+        'last_twelve_months': json.dumps(last_twelve_months)
+    }
+    return render(request, 'reports.html', context)
 
 
 def view_personal_information(request):
@@ -319,9 +401,8 @@ def update_personal_information(request):
     return render(request)
 
 
-def manage_wages(request):
+def manage_accounts(request):
     """
-    Allows HR to manage wages of a given employee
     TODO: Add a decorator so that it is an HR only view
     TODO: HTTP NONE, displays form to search for an employee
     TODO: HTTP GET, display wage information of the given user_id.
@@ -329,4 +410,8 @@ def manage_wages(request):
     :param   request as an http request
     :return: A rendered html page with wage information
     """
-    return render(request)
+    all_users = User.objects.all()
+    context = {
+        "users": all_users
+    }
+    return render(request, "manageaccount.html", context)

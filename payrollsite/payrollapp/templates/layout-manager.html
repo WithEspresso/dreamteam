@@ -73,7 +73,7 @@
                     <ul class="nav" id="side-menu">
 
                       <li>
-                          <a href="{% url 'index' %}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                          <a href="{% url 'dashboard' %}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                       </li>
                       <li>
                           <a href="{% url 'paycheck' %}"><i class="fa fa-tasks fa-fw"></i> Paycheck</a>
@@ -82,7 +82,7 @@
                           <a href="{% url 'timesheets' %}"><i class="fa fa-table fa-fw"></i> Timesheets</a>
                       </li>
                       <li>
-                          <a href="{% url 'expenses' %}"><i class="fa fa-money fa-fw"></i> Expenses</a>
+                          <a href="{% url 'expense-requests' %}"><i class="fa fa-money fa-fw"></i> Expenses</a>
                       </li>
                       <li>
                           <a href="{% url 'pto' %}"><i class="fa fa-edit fa-fw"></i> Paid Time Off</a>
@@ -94,13 +94,13 @@
                             <a href="#"><i class="fa fa-wrench fa-fw"></i> Approvals<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="#">Timesheet approvals</a>
+                                    <a href="{% url 'timesheet-approvals' %}">Timesheet approvals</a>
                                 </li>
                                 <li>
-                                    <a href="#">Expenses approvals</a>
+                                    <a href="{% url 'expense-approvals' %}">Expenses approvals</a>
                                 </li>
                                 <li>
-                                    <a href="#">PTO approvals</a>
+                                    <a href="{% url 'pto-approvals' %}">PTO approvals</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -124,15 +124,15 @@
               </div>
               <div class="modal-body">
                 <h4>Name </h4>
-                <p> Full name </p>
+                <p>{{ request.user.first_name }} {{ request.user.last_name }}</p>
                 <h4>User ID </h4>
-                <p> UserID </p>
+                <p> {{ request.user }}</p>
                 <h4>Email </h4>
-                <p> Email </p>
+                <p> {{ request.user.email }}</p>
                 <h4>Address </h4>
-                <p> Adress </p>
+                <p>{{ user_meta_data.address}}</p>
                 <h4>SSN </h4>
-                <p> SSN </p>
+                <p> {{ user_meta_data.social_security_number }}</p>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

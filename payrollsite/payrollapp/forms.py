@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django import forms
-from .models import PaidTimeOffRequests, Expenses, TimeSheetSubmission
+from .models import PaidTimeOffRequests, Expenses, UserMetaData
 from .validators import validate_image_file
 from .validators import validate_year_entry
 
@@ -26,6 +26,15 @@ class UserForm(forms.ModelForm):
         fields = ['username', 'email', 'first_name', 'last_name', 'password']
 
 
+class UserMetaDataForm(forms.ModelForm):
+
+    # Meta Information about your class.
+    class Meta:
+        model = UserMetaData
+        # What fields do we want to appear on the form?
+        fields = ['address', 'social_security_number', 'group']
+
+
 class PaidTimeOffForm(forms.ModelForm):
     # User is automatically retrieved from the request.user method in the view.
     # Status is only visible to the manager
@@ -44,3 +53,18 @@ class ExpenseRequestForm(forms.ModelForm):
     class Meta:
         model = Expenses
         fields = ['title', 'amount', 'file']
+
+
+class ApprovalForm(forms.Form):
+    """
+    Form to search the website.
+    User selects a search algorithm with the drop down menu and enters a query.
+    Query is stored as the value in this form.
+    """
+    select_choices = (
+        ('Pending', 'Pending'),
+        ('Approved', 'Approved'),
+        ('Denied', 'Denied'),
+    )
+    # time_sheet_id = forms.CharField(widget=forms.HiddenInput(), initial="Pending")
+    status = forms.ChoiceField(widget=forms.Select, choices=select_choices)

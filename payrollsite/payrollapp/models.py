@@ -18,6 +18,13 @@ USER_STATUS = (
     ('No current affiliation', 'No current affiliation')
 )
 
+USER_GROUPS = (
+    ('Employee', 'Employee'),
+    ('Manager', 'Manager'),
+    ('Human Resources', 'Human Resources')
+)
+
+# Number of work hours every four weeks.
 FOUR_WEEKS = 160
 
 
@@ -42,7 +49,9 @@ class UserMetaData(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     address = models.CharField(max_length=255)
     social_security_number = models.IntegerField()
+    group = models.CharField(max_length=32, choices=USER_GROUPS, default='Employee')
     user_status = models.CharField(max_length=25, choices=USER_STATUS, default='Active')
+    company = models.CharField(max_length=255, unique=False, default="No company")
 
 
 class HumanResourcesData(models.Model):
@@ -58,6 +67,7 @@ class TimeSheetSubmission(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateField()
     number_hours = models.IntegerField()
+    status = models.CharField(max_length=10, choices=STATUS_CHOICE)
 
     @staticmethod
     def calculate_pay_period_total_hours(username, date=now()):
@@ -77,6 +87,19 @@ class TimeSheetSubmission(models.Model):
             .aggregate(Sum('number_hours'))
         return total_hours
 
+    @staticmethod
+    def get_time_sheet_by_company(username):
+        """
+        Searches the database for time sheets by user.
+        :param username:
+        :return:
+        """
+        # matching_timesheets = TimeSheetSubmission.objects.filter(user_id__username__exact=username)
+        # <queryset>.filter(<ForeignKeyTable>__<ForeignKeyColumn>__exact=<company_name>)
+        # matching_timesheets = matching_timesheets.filter(user)
+        matching_timesheets = TimeSheetSubmission.objects.filter.all()
+        return matching_timesheets
+
     def __str__(self):
         return str(self.user_id) + "'s time sheet, " + str(self.time_sheet_id)
 
@@ -92,6 +115,23 @@ class PaycheckInformation(models.Model):
     def search_by_time_period(start_date, end_date, username):
         results = PaycheckInformation.objects.filter(user_id__username__exact=username).filter(payday__range=[start_date, end_date])
         return results
+
+    @staticmethod
+    def get_last_years_history():
+        """
+        Returns a dictionary of the last twelve months' paychecks.
+        :return:
+        """
+        right_now = datetime.now()
+        current_month = right_now.month
+        last_twelve_months = []
+        for i in range(0, 12):
+            next_month = current_month - i
+            if next_month <= 0:
+                next_month += 12
+            last_twelve_months.append(calendar.month_name[next_month])
+        last_twelve_months.reverse()
+        return last_twelve_months
 
     def __str__(self):
         return str(self.user_id) + "'s " + "wages"

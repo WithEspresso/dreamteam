@@ -1,4 +1,4 @@
-{% extends 'layout-manager.html' %}
+{% extends 'layout-hr.html' %}
 
 {% block page-wrapper %}
 
@@ -7,10 +7,112 @@
             <div class="container-fluid">
                 <div class="row">
                     <h2 style="display: inline-block; margin-right: 30px;">Reports</h2>
-                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalExpenses" style="display: inline-block; margin-bottom: 10px;"> Create New Expense</button>
-                    <!-- /.col-lg-12 -->
                 </div>
+
+                <div id="container-graph-paycheck" style="min-width: 300px; height: 300px; margin: 1em"></div>
+                <div id="container-graph-hours" style="min-width: 300px; height: 300px; margin: 1em"></div>
+                <div id="container-graph-employees" style="min-width: 300px; height: 400px; margin: 1em"></div>
+
             </div>
         </div>
+
+{% endblock %}
+{% block scriptsblock %}
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<script>
+
+$('#container-graph-paycheck').highcharts({
+    xAxis: {
+        categories: ["January", "February", "March",
+                     "April", "May", "June", "July", "August",
+                   "September","October","November", "December"]
+    },
+    yAxis: [{
+      title: {
+        text: 'Dollars ($)'
+      }
+    }],
+    title: {
+      text: 'Chart for paycheck $/month'
+    },
+    series: [{
+      name: 'Dollars ($) a month',
+      data: [2000, 2100, 2300, 2000, 1800, 1950, 1900, 2000, 2100, 2400, 2300, 2350]
+    }]
+});
+
+$('#container-graph-hours').highcharts({
+    chart: {
+      renderTo: 'container',
+      type: 'column'
+    },
+    xAxis: {
+      categories: ["Monday", "Tuesday", "Wednesday",
+                     "Thursday", "Friday", "Saturday", "Sunday"]
+    },
+    yAxis: [{
+      title: {
+        text: 'Hours (h)'
+      }
+    }],
+    title: {
+      text: 'Chart for hours worked this week h/day'
+    },
+    series: [{
+      name: 'Hours a day',
+      data: [8, 8, 8, 7, 8, 2, 0]
+    }]
+});
+
+$('#container-graph-employees').highcharts({
+    plotOptions: {
+    pie: {
+      allowPointSelect: true,
+      cursor: 'pointer',
+      dataLabels: {
+        enabled: false
+      },
+      showInLegend: true
+    }
+    },
+    chart: {
+      renderTo: 'container',
+      type: 'pie'
+    },
+    xAxis: {
+      categories: ["Peter", "Leire", "Ilya",
+                     "Danielle", "Justin", "Alex"]
+    },
+    title: {
+      text: 'Employees team working hours'
+    },
+    series: [{
+      name: 'Working hours/week',
+      colorByPoint: true,
+      data: [{
+        name: 'Peter',
+        y: 40,
+      }, {
+        name: 'Leire',
+        y: 42
+      }, {
+        name: 'Ilya',
+        y: 37
+      }, {
+        name: 'Danielle',
+        y: 50
+      }, {
+        name: 'Justin',
+        y: 21
+      }, {
+        name: 'Alex',
+        y: 13
+      }]
+    }]
+});
+
+
+</script>
 
 {% endblock %}
