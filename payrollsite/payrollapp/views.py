@@ -373,7 +373,7 @@ def generate_reports(request):
     last_twelve_months = PaycheckInformation.get_last_years_history()
 
     context = {
-        'last_twelve_months': json.dumps(last_twelve_months)
+        'last_twelve_months':  last_twelve_months#json.dumps(last_twelve_months)
     }
     return render(request, 'reports.html', context)
 
