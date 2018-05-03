@@ -1,0 +1,20 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700);
+
+*{
+  font-family: 'Roboto', sans-serif;
+}
+
+.border-none{
+  border: none;
+}
+
+.table th, .table td {
+     border-top: none !important;
+ }
+
+footer{
+  margin-top: 30px;
+  background: black;
+  color: white;
+  padding: 15px 0;
+}

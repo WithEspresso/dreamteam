@@ -15,6 +15,7 @@ from .forms import UserMetaDataForm
 # TODO: only import models we are utilizing, let me be lazy right now please.
 from .models import *
 
+
 # Note, possibly convert these views from function based views to class based views in the future.
 
 
@@ -38,7 +39,7 @@ def login_user(request):
         else:
             return render(request, 'login.html', {'form': form, 'error_message': 'Invalid login'})
     context = {
-         "form": form,
+        "form": form,
     }
     return render(request, 'login.html', context)
 
@@ -50,7 +51,7 @@ def logout_user(request):
     :return The index page.
     """
     logout(request)
-    return HttpResponseRedirect('/')
+    return redirect(login_user)
 
 
 def reset_password(request):
@@ -373,7 +374,7 @@ def generate_reports(request):
     last_twelve_months = PaycheckInformation.get_last_years_history()
 
     context = {
-        'last_twelve_months': json.dumps(last_twelve_months)
+        'last_twelve_months': last_twelve_months  # json.dumps(last_twelve_months)
     }
     return render(request, 'reports.html', context)
 
