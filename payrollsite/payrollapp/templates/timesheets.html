@@ -1,18 +1,10 @@
 {% extends 'layout-employee.html' %}
 
 {% block stylesblock %}
-<!-- <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,700'> -->
-<!-- <link rel='stylesheet prefetch' href='https://s3-us-west-2.amazonaws.com/s.cdpn.io/176621/mk-datepicker.css'> -->
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
-<!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script> -->
-
 
 {% load static %}
 <link href="{% static 'css/timesheet.css' %}" rel="stylesheet">
-<!-- <link href="{% static 'css/style.css' %}" rel="stylesheet">
-<link href="{% static 'css/paycheck.css' %}" rel="stylesheet">
-<link href="{% static 'css/mk-ui.css' %}" rel="stylesheet"> -->
 {% endblock %}
 
 {% block page-wrapper %}
@@ -25,7 +17,7 @@
             <div id="app">
                 <form method="post" action="">
                     {% csrf_token %}
-                    <table class="table table-condensed">
+                    <table class="table table-condensed" align="center" style="width: 25%">
                         <thead>
                         <tr style="border: none">
                             <th style="border: none">
@@ -42,7 +34,7 @@
                                 <input class="form-control" type="date" name="date"/>
                             </td>
                             <td>
-                                <input class="form-control" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours0"/>
+                                <input class="form-control" style="width:75px" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours0"/>
                             </td>
                         </tr>
                         <tr>
@@ -50,7 +42,7 @@
                                 <input class="form-control" type="date" name="date"/>
                             </td>
                             <td>
-                                <input class="form-control" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours1"/>
+                                <input class="form-control" style="width:75px" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours1"/>
                             </td>
                         </tr>
                         <tr>
@@ -58,7 +50,7 @@
                                 <input class="form-control" type="date" name="date"/>
                             </td>
                             <td>
-                                <input class="form-control" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours2"/>
+                                <input class="form-control" style="width:75px" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours2"/>
                             </td>
                         </tr>
                         <tr>
@@ -66,7 +58,7 @@
                                 <input class="form-control" type="date" name="date"/>
                             </td>
                             <td>
-                                <input class="form-control" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours3"/>
+                                <input class="form-control" style="width:75px" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours3"/>
                             </td>
                         </tr>
                         <tr>
@@ -74,7 +66,7 @@
                                 <input class="form-control" type="date" name="date"/>
                             </td>
                             <td>
-                                <input class="form-control" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours4"/>
+                                <input class="form-control" style="width:75px" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours4"/>
                             </td>
                         </tr>
                         <tr>
@@ -82,7 +74,7 @@
                                 <input class="form-control" type="date" name="date"/>
                             </td>
                             <td>
-                                <input class="form-control" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours5"/>
+                                <input class="form-control" style="width:75px" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours5"/>
                             </td>
                         </tr>
                         <tr>
@@ -90,19 +82,20 @@
                                 <input class="form-control" type="date" name="date"/>
                             </td>
                             <td>
-                                <input class="form-control" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours6"/>
+                                <input class="form-control" style="width:75px" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours6"/>
                             </td>
                         </tr>
                         <tr>
                             <td>
+                              <h4 align="right">Total:</h4>
                             </td>
                             <td>
-                                <h4>Total: <input type="number" name="total" id="total"/></h4>
+                                <h4><input style="width:75px" type="number" name="total" id="total"/></h4>
                             </td>
                         </tr>
                         </tbody>
                     </table>
-                    <div class="col-md-12">
+                    <div class="col-md-12" align="center">
                         <button type="submit" class="btn btn-success" id="submit">Submit</button>
                         <button type="reset" onclick="return confirm_reset()" class="btn btn-danger" id="clear">Reset</button>
                     </div>
@@ -114,7 +107,7 @@
             <br>
             <br>
 
-            <table class="table table-condensed" style="width:100%">
+            <table class="table table-condensed" style="width:75%" align="center">
               <thead>
                 <tr>
                   <th>Submission Date</th>
