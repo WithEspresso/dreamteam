@@ -120,8 +120,8 @@
                     </th>
                 </tr>
                 <tr>
-                  <th>Date</th>
-                  <th>Hours</th>
+                  <th>Submission Date</th>
+                  <th>Total Hours</th>
                   <th>Status</th>
                   <th>Details</th>
                 </tr>
@@ -131,10 +131,48 @@
                   <td>1/2/18</td>
                   <td>40</td>
                   <td>Pending</td>
-                  <td>Pending</td>
+                  <td><a style="color: rgb(0,0,0);" href="#" data-toggle="modal" data-target="#myModal"><u>View
+                      details</u></a>
+                      <section class="modal modalWindow" id="popupOne">
+                          <section class="modalWrapper">
+                              <h2>Modal Popup </h2>
+                          </section>
+                          <a class="closeBtn">CLOSE X</a>
+                      </section>
+                      <section class="modal overlay"> </section>
+                  </td>
                 </tr>
               </tbody>
             </table>
+        </div>
+        <div id="myModal" class="modal fade">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content modal-lg">
+                    <div class="modal-header modal-lg">
+                        <h3 class="modal-title " style="float: left">Timesheet Details</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <table align="center" class="detailsTable">
+                            <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Hours</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>1/1/18</td>
+                                <td align="right">8</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
