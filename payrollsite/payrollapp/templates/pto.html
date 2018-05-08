@@ -20,12 +20,8 @@
             <div id="app">
                 <form method="post" action="">
                     {% csrf_token %}
-                    <table class="table table-condensed" v-for="week in weeks">
+                    <table align="center" style="width: 25%" class="table table-condensed" v-for="week in weeks">
                         <thead>
-                        <tr style="border: none">
-                            <th style="border: none">
-                            </th>
-                        </tr>
                         <tr>
                             <th>Date</th>
                             <th>Hours</th>
@@ -37,7 +33,7 @@
                                 <input class="form-control" type="date" name="date"/>
                             </td>
                             <td>
-                                <input class="form-control" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours0"/>
+                                <input style="width:75px" class="form-control" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours0"/>
                             </td>
                         </tr>
                         <tr>
@@ -45,7 +41,7 @@
                                 <input class="form-control" type="date" name="date"/>
                             </td>
                             <td>
-                                <input class="form-control" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours1"/>
+                                <input style="width:75px" class="form-control" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours1"/>
                             </td>
                         </tr>
                         <tr>
@@ -53,7 +49,7 @@
                                 <input class="form-control" type="date" name="date"/>
                             </td>
                             <td>
-                                <input class="form-control" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours2"/>
+                                <input style="width:75px" class="form-control" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours2"/>
                             </td>
                         </tr>
                         <tr>
@@ -61,7 +57,7 @@
                                 <input class="form-control" type="date" name="date"/>
                             </td>
                             <td>
-                                <input class="form-control" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours3"/>
+                                <input style="width:75px" class="form-control" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours3"/>
                             </td>
                         </tr>
                         <tr>
@@ -69,19 +65,20 @@
                                 <input class="form-control" type="date" name="date"/>
                             </td>
                             <td>
-                                <input class="form-control" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours4"/>
+                                <input style="width:75px" class="form-control" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours4"/>
                             </td>
                         </tr>
                         <tr>
                             <td>
+                              <h4 align="right">Total:</h4>
                             </td>
                             <td>
-                                <h4>Total: <input type="number" name="total" id="total"/></h4>
+                                <h4><input style="width:75px" type="number" name="total" id="total"/></h4>
                             </td>
                         </tr>
                         </tbody>
                     </table>
-                    <div class="col-md-12">
+                    <div align="center" class="col-md-12">
                         <button type="submit" class="btn btn-success" id="submit">Submit</button>
                         <button type="reset" onclick="return confirm_reset()" class="btn btn-danger" id="clear">Reset</button>
                     </div>
@@ -92,12 +89,15 @@
             <br>
             <br>
             {% if pto_requests %}
-            <table style="width:100%">
+            <table class="table table-condensed" style="width:50%" align="center">
+              <thead>
                 <tr>
                     <th> Date</th>
                     <th> Hours</th>
                     <th> Status</th>
                 </tr>
+              </thead>
+              <tbody>
                 {% for pto in pto_requests %}
                 <tr>
                     <td> {{ pto.date }}</td>
@@ -105,6 +105,7 @@
                     <td> {{ pto.status }}</td>
                 </tr>
                 {% endfor %}
+              </tbody>
             </table>
             {% else %}
             <h4> No current paid time off requests pending. </h4>
