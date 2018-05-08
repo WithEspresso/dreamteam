@@ -5,6 +5,8 @@
 <!-- <link rel='stylesheet prefetch' href='https://s3-us-west-2.amazonaws.com/s.cdpn.io/176621/mk-datepicker.css'> -->
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script> -->
+
 
 {% load static %}
 <link href="{% static 'css/timesheet.css' %}" rel="stylesheet">
@@ -40,7 +42,7 @@
                                 <input class="form-control" type="date" name="date"/>
                             </td>
                             <td>
-                                <input class="form-control" type="number" min="0" max="24" step="1" name="hours" id="hours0"/>
+                                <input class="form-control" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours0"/>
                             </td>
                         </tr>
                         <tr>
@@ -48,7 +50,7 @@
                                 <input class="form-control" type="date" name="date"/>
                             </td>
                             <td>
-                                <input class="form-control" type="number" min="0" max="24" step="1" name="hours" id="hours1"/>
+                                <input class="form-control" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours1"/>
                             </td>
                         </tr>
                         <tr>
@@ -56,7 +58,7 @@
                                 <input class="form-control" type="date" name="date"/>
                             </td>
                             <td>
-                                <input class="form-control" type="number" min="0" max="24" step="1" name="hours" id="hours2"/>
+                                <input class="form-control" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours2"/>
                             </td>
                         </tr>
                         <tr>
@@ -64,7 +66,7 @@
                                 <input class="form-control" type="date" name="date"/>
                             </td>
                             <td>
-                                <input class="form-control" type="number" min="0" max="24" step="1" name="hours" id="hours3"/>
+                                <input class="form-control" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours3"/>
                             </td>
                         </tr>
                         <tr>
@@ -72,7 +74,7 @@
                                 <input class="form-control" type="date" name="date"/>
                             </td>
                             <td>
-                                <input class="form-control" type="number" min="0" max="24" step="1" name="hours" id="hours4"/>
+                                <input class="form-control" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours4"/>
                             </td>
                         </tr>
                         <tr>
@@ -80,7 +82,7 @@
                                 <input class="form-control" type="date" name="date"/>
                             </td>
                             <td>
-                                <input class="form-control" type="number" min="0" max="24" step="1" name="hours" id="hours5"/>
+                                <input class="form-control" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours5"/>
                             </td>
                         </tr>
                         <tr>
@@ -88,14 +90,14 @@
                                 <input class="form-control" type="date" name="date"/>
                             </td>
                             <td>
-                                <input class="form-control" type="number" min="0" max="24" step="1" name="hours" id="hours6"/>
+                                <input class="form-control" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours6"/>
                             </td>
                         </tr>
                         <tr>
                             <td>
                             </td>
                             <td>
-                                <h4>Total: <input type="text" name="total" id="total"/></h4>
+                                <h4>Total: <input type="number" name="total" id="total"/></h4>
                             </td>
                         </tr>
                         </tbody>
@@ -114,11 +116,6 @@
 
             <table class="table table-condensed" style="width:100%">
               <thead>
-                <tr style="border: none">
-                    <th style="border: none">
-                        <!-- <h3>Week  { $index + 1 </h3> }-->
-                    </th>
-                </tr>
                 <tr>
                   <th>Submission Date</th>
                   <th>Total Hours</th>
@@ -145,6 +142,8 @@
               </tbody>
             </table>
         </div>
+
+        <!-- modal to view details of a submitted timesheet -->
         <div id="myModal" class="modal fade">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content modal-lg">
@@ -189,16 +188,21 @@
   }
 </script>
 
-<script type=text/javascript>
-function calculateTotal() {
-    var hours = document.getElementsByName('hours');
-    var total = 0;
-    for(var i = 0; i < arr.length; i++) {
-        // if(parseInt(arr[i].value))
-            // tot += parseInt(arr[i].value);
-        total += hours[i].value;
-    }
-    document.getElementById('total').value = total;
-}
+<script>
+  function calculateTotal() {
+      var hours = document.getElementsByName('hours');
+      var total = 0;
+      console.log("--")
+      for(var i = 0; i < hours.length; i++) {
+
+          if(hours[i].value) {
+            console.log(hours[i].value);
+            total = total + parseInt(hours[i].value);
+          }
+
+          console.log("total: " + total);
+      }
+      document.getElementById('total').value = total;
+  };
 </script>
 {% endblock %}
