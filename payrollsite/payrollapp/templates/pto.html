@@ -2,9 +2,7 @@
 
 
 {% block stylesblock %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 
 {% load static %}
 <link href="{% static 'css/timesheet.css' %}" rel="stylesheet">
@@ -26,7 +24,6 @@
                         <thead>
                         <tr style="border: none">
                             <th style="border: none">
-                                <!-- <h3>Week  { $index + 1 </h3> }-->
                             </th>
                         </tr>
                         <tr>
@@ -35,33 +32,58 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr v-for="day in week.days">
+                        <tr>
                             <td>
-                                <input class="form-control" type="date" v-model="day.date" name="date">
+                                <input class="form-control" type="date" name="date"/>
                             </td>
                             <td>
-                                <input class="form-control" type="number" min="0" max="24" step="1" v-model="day.hours"
-                                       name="hours">
+                                <input class="form-control" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours0"/>
                             </td>
-                                <input class="form-control" type="hidden" value="Pending" name="status">
+                        </tr>
+                        <tr>
+                            <td>
+                                <input class="form-control" type="date" name="date"/>
+                            </td>
+                            <td>
+                                <input class="form-control" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours1"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input class="form-control" type="date" name="date"/>
+                            </td>
+                            <td>
+                                <input class="form-control" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours2"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input class="form-control" type="date" name="date"/>
+                            </td>
+                            <td>
+                                <input class="form-control" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours3"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input class="form-control" type="date" name="date"/>
+                            </td>
+                            <td>
+                                <input class="form-control" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours4"/>
+                            </td>
                         </tr>
                         <tr>
                             <td>
                             </td>
                             <td>
-                                <h4 style="text-align:right">Total: 40.00</h4>
-                                <!-- <h4>Total: 40.00</h4> -->
+                                <h4>Total: <input type="number" name="total" id="total"/></h4>
                             </td>
                         </tr>
                         </tbody>
                     </table>
                     <div class="col-md-12">
-                        <!-- <h3 style="text-align:right">Overtime: 2 Hours</h3> -->
-                        <!-- <h3 style="text-align:right">Pay Period Total: { periodTotalHours }</h3> -->
-                        <button type="submit" class="btn btn-success" id="submit"> Submit</button>
-                        <!-- <button class="btn btn-warning" id="save">Save</button> -->
-                        <button class="btn btn-danger" id="delete"> Clear</button>
-                        <!--           <pre>{ $data | json }</pre> -->
+                        <button type="submit" class="btn btn-success" id="submit">Submit</button>
+                        <button type="reset" onclick="return confirm_reset()" class="btn btn-danger" id="clear">Reset</button>
                     </div>
                 </form>
             </div>
@@ -70,7 +92,7 @@
             <br>
             <br>
             {% if pto_requests %}
-            <table style-="width:100%">
+            <table style="width:100%">
                 <tr>
                     <th> Date</th>
                     <th> Hours</th>
@@ -95,5 +117,29 @@
 
 {% block scriptsblock %}
 {% load static %}
-<script src="{% static 'scripts/timesheets.js' %}"></script>
+<!-- <script src="{% static 'scripts/timesheets.js' %}"></script> -->
+
+<script>
+  function confirm_reset() {
+    return confirm("Are you sure you want to reset all fields?");
+  }
+</script>
+
+<script>
+  function calculateTotal() {
+      var hours = document.getElementsByName('hours');
+      var total = 0;
+      console.log("--")
+      for(var i = 0; i < hours.length; i++) {
+
+          if(hours[i].value) {
+            console.log(hours[i].value);
+            total = total + parseInt(hours[i].value);
+          }
+
+          console.log("total: " + total);
+      }
+      document.getElementById('total').value = total;
+  };
+</script>
 {% endblock %}
