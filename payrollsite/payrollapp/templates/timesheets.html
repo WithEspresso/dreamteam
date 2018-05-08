@@ -99,7 +99,7 @@
                     </table>
                     <div class="col-md-12">
                         <button type="submit" class="btn btn-success" id="submit">Submit</button>
-                        <button type="reset" class="btn btn-danger" id="clear">Reset</button>
+                        <button type="reset" onclick="return confirm_reset()" class="btn btn-danger" id="clear">Reset</button>
                     </div>
                 </form>
             </div>
@@ -113,8 +113,14 @@
 {% load static %}
 <!-- <script src="{% static 'scripts/timesheets.js' %}"></script> -->
 
+<script>
+  function confirm_reset() {
+    return confirm("Are you sure you want to reset all fields?");
+  }
+</script>
+
 <script type=text/javascript>
-function caculateTotal() {
+function calculateTotal() {
     var hours = document.getElementsByName('hours');
     var total = 0;
     for(var i = 0; i < arr.length; i++) {
