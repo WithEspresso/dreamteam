@@ -1,9 +1,9 @@
 {% extends 'layout-employee.html' %}
 
 {% block stylesblock %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.js"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script> -->
 
 {% load static %}
 <link href="{% static 'css/timesheet.css' %}" rel="stylesheet">
@@ -24,69 +24,77 @@
                         <thead>
                         <tr style="border: none">
                             <th style="border: none">
-                                <!-- <h3>Week  { $index + 1 </h3> }-->
                             </th>
                         </tr>
                         <tr>
                             <th>Date</th>
                             <th>Hours</th>
-                            <!-- <th>Out</th> -->
-                            <!-- <th>Deductions</th> -->
-                            <!-- <th>Vacation</th> -->
-                            <!-- <th>Personal</th> -->
-                            <!-- <th>Unpaid</th> -->
-                            <!-- <th>Total</th> -->
                         </tr>
                         </thead>
                         <tbody>
-                        <tr v-for="day in week.days">
+                        <!-- <tr v-for="day in week.days"> -->
+                        <tr>
                             <td>
-                                <input class="form-control" type="date" v-model="day.date" name="date"/>
+                                <input class="form-control" type="date" name="date"/>
                             </td>
                             <td>
-                                <input class="form-control" type="number" min="0" max="24" step="1"
-                                       v-model="day.hours" name="hours"/>
+                                <input class="form-control" type="number" min="0" max="24" step="1" name="hours" id="hours0"/>
                             </td>
-                            <td>
-                                <!-- { dailyTotal(day) } -->
-                            </td>
-                            <!--
-                            <td>
-                              <input class="form-control" type="time" v-model="day.out" />
-                            </td> -->
-                            <!--
-                            <td class="deductions">
-                              <input class="form-control" type="number" min="0" max="8" step=".5" v-model="day.deductions" />
-                            </td> -->
-                            <!-- <td class="vacations">
-                              <input class="form-control" type="number" min="0" max="8" step=".5" v-model="day.vacation" />
-                            </td> -->
-                            <!-- <td class="personal">
-                              <input class="form-control" type="number" min="0" max="8" step=".5" v-model="day.personal" />
-                            </td> -->
-                            <!-- <td class="unpaid">
-                              <input class="form-control" type="number" min="0" max="8" step=".5" v-model="day.unpaid" />
-                            </td> -->
-
                         </tr>
                         <tr>
-
+                            <td>
+                                <input class="form-control" type="date" name="date"/>
+                            </td>
+                            <td>
+                                <input class="form-control" type="number" min="0" max="24" step="1" name="hours" id="hours1"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input class="form-control" type="date" name="date"/>
+                            </td>
+                            <td>
+                                <input class="form-control" type="number" min="0" max="24" step="1" name="hours" id="hours2"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input class="form-control" type="date" name="date"/>
+                            </td>
+                            <td>
+                                <input class="form-control" type="number" min="0" max="24" step="1" name="hours" id="hours3"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input class="form-control" type="date" name="date"/>
+                            </td>
+                            <td>
+                                <input class="form-control" type="number" min="0" max="24" step="1" name="hours" id="hours4"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input class="form-control" type="date" name="date"/>
+                            </td>
+                            <td>
+                                <input class="form-control" type="number" min="0" max="24" step="1" name="hours" id="hours5"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input class="form-control" type="date" name="date"/>
+                            </td>
+                            <td>
+                                <input class="form-control" type="number" min="0" max="24" step="1" name="hours" id="hours6"/>
+                            </td>
+                        </tr>
+                        <tr>
                             <td>
                                 <!-- <h4>Total</h4> -->
                             </td>
                             <td>
-                                <h4>Total: {{ total_hours }}</h4>
-                            </td>
-                            <!--  <td>
-                                <h4>{ calcWeekDeductions(week) }</h4></td> -->
-                            <!--  <td>
-                                 <h4>{ calcWeekVacation(week) }</h4></td> -->
-                            <!--   <td>
-                                <h4>{ calcWeekPersonal(week) }</h4></td> -->
-                            <!--  <td>
-                                 <h4>{ calcWeekUnpaid(week) }</h4></td> -->
-                            <td>
-                                <!-- <h4>{ calcWeekHours(week) }</h4> -->
+                                <h4>Total: <input type="text" name="total" id="total"/></h4>
                             </td>
                         </tr>
                         </tbody>
@@ -109,5 +117,18 @@
 
 {% block scriptsblock %}
 {% load static %}
-<script src="{% static 'scripts/timesheets.js' %}"></script>
+<!-- <script src="{% static 'scripts/timesheets.js' %}"></script> -->
+
+<script type=text/javascript>
+function caculateTotal() {
+    var hours = document.getElementsByName('hours');
+    var total = 0;
+    for(var i = 0; i < arr.length; i++) {
+        // if(parseInt(arr[i].value))
+            // tot += parseInt(arr[i].value);
+        total += hours[i].value;
+    }
+    document.getElementById('total').value = total;
+}
+</script>
 {% endblock %}
