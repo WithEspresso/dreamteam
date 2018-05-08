@@ -22,20 +22,18 @@
                 <th>Amount</th>
                 <th>Receipt</th>
             </tr>
-            {% for expense_request in processed_expense_requests %}
+            {% for expense_request in expense_requests %}
             <tr>
                 <td>{{ expense_request.user_id }}</td>
-                <td>{{ expense_request.title }}</td>
+                <td>{{ expense_request.status }}</td>
                 <td>{{ expense_request.amount }}</td>
                 <td>{{ expense_request.file }}</td>
-                <td> {{ expense_request.title }}</td>
+                <td>{{ expense_request.title }}</td>
             </tr>
-            {% empty %}
-            <h2> No processed expense reimbursement requests. </h2>
             {% endfor %}
         </table>
         {% else %}
-        <h4> No current expense reimbursement requests pending. </h4>
+        <h2> No pending expense reimbursement requests. </h2>
         {% endif %}
 
         <div class="modal fade" id="myModalExpenses" role="dialog">

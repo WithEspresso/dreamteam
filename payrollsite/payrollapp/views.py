@@ -231,23 +231,26 @@ def expense_reimbursement(request):
         this_username = request.user
         user = User.objects.get(username=this_username)
         expense_requests = Expenses.objects.filter(user_id__username=this_username)
-        # Saving the form data and saving to the database.
-        if form.is_valid():
-            expense_request = form.save(commit=False)
-            expense_request.user_id = user
-            expense_request.status = 'Pending'
-            expense_request.save()
+        print("FOUND EXPENSE REQUESTS: ")
+        print(expense_requests)
+        # Display the page normally.
+        context = {
+            "form": form,
+            "expense_requests": expense_requests,
+        }
+        # If the user is posting, saving the form data and saving to the database.
+        if form.is_valid() and request.POST:
+            new_expense_request = form.save(commit=False)
+            new_expense_request.user_id = user
+            new_expense_request.status = 'Pending'
+            new_expense_request.save()
             # Redirect is done instead of rendering because refreshing will cause form resubmission.
             return HttpResponseRedirect('expense-requests/')
+        else:
+            return render(request, 'expense-requests.html', context)
     else:
         # User is not logged in. Show them the way.
         return redirect(login_user)
-    # Display the page normally.
-    context = {
-        "form": form,
-        "expense_requests": expense_requests,
-    }
-    return render(request, 'expense-requests.html', context)
 
 
 def approve_expense_reimbursement(request):
@@ -328,21 +331,18 @@ def approve_time_sheet(request):
     # Behavior for updating database entries
     if request.user.is_authenticated:
         if request.method == "POST":
-            form = ApprovalForm(request.POST)
-            if form.is_valid():
-                print("ayy we valid now LILL NIGGA")
-                time_sheet_id = request.POST['row_timesheet_id']
-                timesheet = TimeSheetSubmission.objects.get(time_sheet_id=time_sheet_id)
-                timesheet.status = form.cleaned_data['status']
-                timesheet.save()
+            time_sheet_id = request.POST['row_timesheet_id']
+            time_sheet = TimeSheetSubmission.objects.get(time_sheet_id=time_sheet_id)
+            if form.is_valid:
+                print(request.POST.get("status_update"))
+
+            time_sheet.save()
         # HTTP None, Default behavior: Load all pending and processed time sheets.
-        form = ApprovalForm()
         pending_time_sheets = TimeSheetSubmission.objects.filter(status="Pending")
         processed_time_sheets = TimeSheetSubmission.objects.exclude(status="Pending")
 
         # Load all approved time sheets.
         context = {
-            'form': form,
             'pending_time_sheets': pending_time_sheets,
             'processed_time_sheets': processed_time_sheets
         }

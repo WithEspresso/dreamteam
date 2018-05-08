@@ -148,8 +148,15 @@ class Expenses(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     amount = models.DecimalField(decimal_places=2, max_digits=16)
     file = models.ImageField(upload_to=expense_directory_path, null=True)
+    description = models.CharField(max_length=255, default="No description.")
+    date = models.DateField(auto_now=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICE)
 
+    def get_users_fullname(self):
+        return str(self.user_id.first_name) + " " + str(self.user_id.last_name)
+
+    def get_user_id(self):
+        return str(self.user_id.id)
 
 class ExpenseRequest(models.Model):
     expense_request_id = models.AutoField(primary_key=True)
