@@ -13,9 +13,15 @@ body {
 }
 #page-wrapper {
   padding: 0 15px;
-  min-height: 568px;
+  min-height: 100%;
   background-color: white;
 }
+
+#user-profile-information{
+    width: 60%;
+    margin-left: 20%;
+}
+
 @media (min-width: 768px) {
   #page-wrapper {
     position: inherit;

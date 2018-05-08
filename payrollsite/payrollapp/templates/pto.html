@@ -14,7 +14,7 @@
 {% block page-wrapper %}
 
 <!-- Page Content -->
-<div id="page-wrapper">
+<div id="page-wrapper" style="min-height:100%;">
     <div class="container-fluid">
         <div class="container">
             <h1>Request Paid Time Off</h1>
@@ -43,7 +43,7 @@
                                 <input class="form-control" type="number" min="0" max="24" step="1" v-model="day.hours"
                                        name="hours">
                             </td>
-                                <input class="form-control" type="hidden" value="Pending" name="status">
+                            <input class="form-control" type="hidden" value="Pending" name="status">
                         </tr>
                         <tr>
                             <td>

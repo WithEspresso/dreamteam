@@ -11,7 +11,7 @@
 <link href="{% static 'css/mk-ui.css' %}" rel="stylesheet"> {% endblock %} {% block page-wrapper %}
 
 <!-- Page Content -->
-<div id="page-wrapper">
+<div id="page-wrapper" style="min-height:100%;">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
@@ -38,7 +38,7 @@
                                 </section>
                                 <a class="closeBtn">CLOSE X</a>
                             </section>
-                            <section class="modal overlay"> </section>
+                            <section class="modal overlay"></section>
                         </td>
                         <td><a style="color: rgb(0,0,0);" href="#" data-toggle="modal"
                                data-target="#myModal2"><u>Manage</u></a>
@@ -48,7 +48,7 @@
                                 </section>
                                 <a class="closeBtn">CLOSE X</a>
                             </section>
-                            <section class="modal overlay"> </section>
+                            <section class="modal overlay"></section>
                         </td>
                     </tr>
                     {% endfor %}
@@ -117,8 +117,10 @@
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content modal-lg">
                         <div class="modal-header modal-lg">
-                            <h3 class="modal-title " style="float: left">Edit Account Details</h3>
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h3 class="modal-title " style="float: left">Manage Accounts</h3>
+                            <button type="button" style="width:100px;" class="close" data-dismiss="modal"
+                                    aria-hidden="true">&times;
+                            </button>
                         </div>
                         <div class="modal-body">
                             <div class="container-fluid">
@@ -171,7 +173,9 @@
 
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-default" style="width:100px;" data-dismiss="modal">
+                                    Close
+                                </button>
                             </div>
                         </div>
                     </div>
