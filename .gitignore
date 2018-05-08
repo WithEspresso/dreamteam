@@ -2,3 +2,4 @@
 payrollsite/db.sqlite3
 *.pyc
 *.pyc
+*.sqlite3

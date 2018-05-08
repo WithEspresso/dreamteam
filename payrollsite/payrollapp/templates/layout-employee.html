@@ -12,7 +12,7 @@
     <link rel="icon" href="{% static 'images/favicon.png' %}">
 
     <!-- Bootstrap Core CSS -->
-    <link href= "{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
     <link href="{% static 'css/metisMenu.css' %}" rel="stylesheet">
@@ -25,156 +25,220 @@
 
     <link href="{% static 'css/morris.css' %}" rel="stylesheet">
 
-        {% block stylesblock %}
-        {% endblock %}
+    {% block stylesblock %}
+    {% endblock %}
 
 </head>
 
 <body>
 
-    <div id="wrapper">
+<div id="wrapper">
 
-        <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a href="#" class="logo"><img src="{% static 'images/logo3.png' %}" alt="" style="width:235px; padding:5px;"></a>
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="#" class="logo"><img src="{% static 'images/logo3.png' %}" alt=""
+                                          style="width:235px; padding:5px;"></a>
+        </div>
+        <!-- /.navbar-header -->
+
+        <ul class="nav navbar-top-links navbar-right">
+
+            <!-- /.dropdown -->
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li><a href="#" data-toggle="modal" data-target="#myModalUserInfo"><i class="fa fa-user fa-fw"></i>
+                        User Profile</a>
+                    </li>
+                    <li><a href="#" data-toggle="modal" data-target="#myModalSettings"><i class="fa fa-gear fa-fw"></i>
+                        Settings</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li><a href="{% url 'logout_user' %}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-user -->
+            </li>
+            <!-- /.dropdown -->
+        </ul>
+        <!-- /.navbar-top-links -->
+
+        <div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav navbar-collapse">
+                <ul class="nav" id="side-menu">
+
+                    <li>
+                        <a href="{% url 'dashboard' %}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'paycheck' %}"><i class="fa fa-tasks fa-fw"></i> Paycheck</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'timesheets' %}"><i class="fa fa-table fa-fw"></i> Timesheets</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'expense-requests' %}"><i class="fa fa-money fa-fw"></i> Expenses</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'pto' %}"><i class="fa fa-edit fa-fw"></i> Paid Time Off</a>
+                    </li>
+
+                </ul>
             </div>
-            <!-- /.navbar-header -->
+            <!-- /.sidebar-collapse -->
+        </div>
+        <!-- /.navbar-static-side -->
+    </nav>
 
-            <ul class="nav navbar-top-links navbar-right">
 
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#" data-toggle="modal" data-target="#myModalUserInfo"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li><a href="#" data-toggle="modal" data-target="#myModalSettings"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="{% url 'logout_user' %}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-user -->
-                </li>
-                <!-- /.dropdown -->
-            </ul>
-            <!-- /.navbar-top-links -->
-
-            <div class="navbar-default sidebar" role="navigation">
-                <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav" id="side-menu">
-
-                        <li>
-                            <a href="{% url 'dashboard' %}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'paycheck' %}"><i class="fa fa-tasks fa-fw"></i> Paycheck</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'timesheets' %}"><i class="fa fa-table fa-fw"></i> Timesheets</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'expense-requests' %}"><i class="fa fa-money fa-fw"></i> Expenses</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'pto' %}"><i class="fa fa-edit fa-fw"></i> Paid Time Off</a>
-                        </li>
-
-                    </ul>
+    <!-- Modal -->
+    <div class="modal fade" id="myModalUserInfo" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">User profile information</h4>
                 </div>
-                <!-- /.sidebar-collapse -->
-            </div>
-            <!-- /.navbar-static-side -->
-        </nav>
+                <div class="modal-body">
+                    <!--- <h4>Name </h4>
+                    <p>{{ request.user.first_name }} {{ request.user.last_name }}</p>
+                    <h4>User ID </h4>
+                    <p> {{ request.user }}</p>
+                    <h4>Email </h4>
+                    <p> {{ request.user.email }}</p>
+                    <h4>Address </h4>
+                    <p>{{ user_meta_data.address}}</p>
+                    <h4>SSN </h4>
+                    <p> {{ user_meta_data.social_security_number }}</p> --->
+                    <div class="container">
+                        <div class="row">
+                            <div class="panel panel-default" style="width: 60%; margin-left:20%;">
+                                <div class="panel-heading">
+                                    <h4><h4 style="color:#00b1b1;">{{ request.user.first_name }} {{
+                                        request.user.last_name }} </h4></span>
+                                    </h4>
+                                </div>
+                                <div class="panel-body">
+
+                                    <div class="box box-info">
+
+                                        <div class="clearfix"></div>
+                                        <hr style="margin:5px 0 5px 0;">
 
 
-        <!-- Modal -->
-        <div class="modal fade" id="myModalUserInfo" role="dialog">
-          <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">User profile information</h4>
-              </div>
-              <div class="modal-body">
-                <h4>Name </h4>
-                <p>{{ request.user.first_name }} {{ request.user.last_name }}</p>
-                <h4>User ID </h4>
-                <p> {{ request.user }}</p>
-                <h4>Email </h4>
-                <p> {{ request.user.email }}</p>
-                <h4>Address </h4>
-                <p>{{ user_meta_data.address}}</p>
-                <h4>SSN </h4>
-                <p> {{ user_meta_data.social_security_number }}</p>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              </div>
+                                        <div class="col-sm-5 col-xs-6 tital ">First Name:</div>
+                                        <div class="col-sm-7 col-xs-6 ">{{ request.user.first_name }}</div>
+                                        <div class="clearfix"></div>
+                                        <div class="bot-border"></div>
+
+                                        <div class="col-sm-5 col-xs-6 tital ">Last Name:</div>
+                                        <div class="col-sm-7"> {{ request.user.last_name }}</div>
+                                        <div class="clearfix"></div>
+                                        <div class="bot-border"></div>
+
+                                        <div class="col-sm-5 col-xs-6 tital ">Date Of Joining:</div>
+                                        <div class="col-sm-7">15 Jun 2016</div>
+
+                                        <div class="clearfix"></div>
+                                        <div class="bot-border"></div>
+
+                                        <div class="col-sm-5 col-xs-6 tital ">Date Of Birth:</div>
+                                        <div class="col-sm-7">11 Jun 1998</div>
+
+                                        <div class="clearfix"></div>
+                                        <div class="bot-border"></div>
+
+                                        <div class="col-sm-5 col-xs-6 tital ">Email:</div>
+                                        <div class="col-sm-7">{{ request.user.email }}</div>
+
+                                        <div class="clearfix"></div>
+                                        <div class="bot-border"></div>
+
+                                        <div class="col-sm-5 col-xs-6 tital ">Address:</div>
+                                        <div class="col-sm-7">{{ user_meta_data.address}}</div>
+
+                                        <div class="clearfix"></div>
+                                        <div class="bot-border"></div>
+
+                                        <div class="col-sm-5 col-xs-6 tital ">Department:</div>
+                                        <div class="col-sm-7">Analytics</div>
+
+                                        <!-- /.box-body -->
+                                    </div>
+                                    <!-- /.box -->
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
             </div>
-          </div>
         </div>
-
-        <div class="modal fade" id="myModalSettings" role="dialog">
-          <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">User Settings</h4>
-              </div>
-              <div class="modal-body">
-                <h4>Change Password </h4>
-                <input type="text" placeholder="User ID" name="uname" required>
-                <br>
-                <input type="password" placeholder="Old Password" name="old-password" required>
-                <br>
-                <input type="password" placeholder="New Password" name="old-password" required>
-                <br>
-                <button type="button" class="btn btn-default" onclick="">Change</button>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {% block page-wrapper %}
-        {% endblock %}
-
-        <!-- Page Content
-        <div id="page-wrapper">
-            <div class="container-fluid">
-
-            </div>
-        </div>
-        -->
-
     </div>
 
-    <!-- jQuery -->
-    <script src="{% static 'scripts/jquery.js' %}"></script>
+    <div class="modal fade" id="myModalSettings" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">User Settings</h4>
+                </div>
+                <div class="modal-body">
+                    <h4>Change Password </h4>
+                    <input type="text" placeholder="User ID" name="uname" required>
+                    <br>
+                    <input type="password" placeholder="Old Password" name="old-password" required>
+                    <br>
+                    <input type="password" placeholder="New Password" name="old-password" required>
+                    <br>
+                    <button type="button" class="btn btn-default" onclick="">Change</button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="{% static 'scripts/bootstrap.js' %}"></script>
-
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="{% static 'scripts/metisMenu.js' %}"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="{% static 'scripts/sb-admin-2.js' %}"></script>
-
-    {% block scriptsblock %}
+    {% block page-wrapper %}
     {% endblock %}
+
+    <!-- Page Content
+    <div id="page-wrapper">
+        <div class="container-fluid">
+
+        </div>
+    </div>
+    -->
+
+</div>
+
+<!-- jQuery -->
+<script src="{% static 'scripts/jquery.js' %}"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="{% static 'scripts/bootstrap.js' %}"></script>
+
+<!-- Metis Menu Plugin JavaScript -->
+<script src="{% static 'scripts/metisMenu.js' %}"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="{% static 'scripts/sb-admin-2.js' %}"></script>
+
+{% block scriptsblock %}
+{% endblock %}
 
 </body>
 
