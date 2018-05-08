@@ -20,7 +20,7 @@
             <div id="app">
                 <form method="post" action="">
                     {% csrf_token %}
-                    <table align="center" style="width: 25%" class="table table-condensed" v-for="week in weeks">
+                    <table class="table table-condensed" align="center" style="width: 25%" >
                         <thead>
                         <tr>
                             <th>Date</th>
@@ -33,7 +33,7 @@
                                 <input class="form-control" type="date" name="date"/>
                             </td>
                             <td>
-                                <input style="width:75px" class="form-control" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours0"/>
+                                <input class="form-control" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours0"  style="width:75px"/>
                             </td>
                         </tr>
                         <tr>
@@ -41,7 +41,7 @@
                                 <input class="form-control" type="date" name="date"/>
                             </td>
                             <td>
-                                <input style="width:75px" class="form-control" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours1"/>
+                                <input class="form-control" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours1"  style="width:75px"/>
                             </td>
                         </tr>
                         <tr>
@@ -49,7 +49,7 @@
                                 <input class="form-control" type="date" name="date"/>
                             </td>
                             <td>
-                                <input style="width:75px" class="form-control" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours2"/>
+                                <input class="form-control" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours2"  style="width:75px"/>
                             </td>
                         </tr>
                         <tr>
@@ -57,7 +57,7 @@
                                 <input class="form-control" type="date" name="date"/>
                             </td>
                             <td>
-                                <input style="width:75px" class="form-control" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours3"/>
+                                <input class="form-control" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours3"  style="width:75px"/>
                             </td>
                         </tr>
                         <tr>
@@ -65,7 +65,7 @@
                                 <input class="form-control" type="date" name="date"/>
                             </td>
                             <td>
-                                <input style="width:75px" class="form-control" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours4"/>
+                                <input class="form-control" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours4"  style="width:75px"/>
                             </td>
                         </tr>
                         <tr>
@@ -78,7 +78,7 @@
                         </tr>
                         </tbody>
                     </table>
-                    <div align="center" class="col-md-12">
+                    <div class="col-md-12" align="center">
                         <button type="submit" class="btn btn-success" id="submit">Submit</button>
                         <button type="reset" onclick="return confirm_reset()" class="btn btn-danger" id="clear">Reset</button>
                     </div>
