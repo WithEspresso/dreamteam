@@ -53,6 +53,9 @@ class UserMetaData(models.Model):
     user_status = models.CharField(max_length=25, choices=USER_STATUS, default='Active')
     company = models.CharField(max_length=255, unique=False, default="No company")
 
+    def __str__(self):
+        return str(self.user_id) + "'s meta data"
+
 
 class HumanResourcesData(models.Model):
     human_resources_data_id = models.AutoField(primary_key=True)

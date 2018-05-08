@@ -12,15 +12,42 @@ from .forms import ExpenseRequestForm
 from .forms import ApprovalForm
 from .forms import UserMetaDataForm
 
+from django.contrib.auth.models import Permission
 # TODO: only import models we are utilizing, let me be lazy right now please.
 from .models import *
 
 
-# Note, possibly convert these views from function based views to class based views in the future.
+def get_layout_based_on_user_group(user):
+    """
+    Helper function to determine which html base page to render.
+    Returns the appropriate layout depending on the user's permissions.
+    :param user from request.user
+    :return: a string containing the appropriate layout for th e page.
+    """
+    if user.groups.filter(name="HumanResources").exists():
+        return "layout-hr.html"
+    elif user.groups.filter(name="Manager").exists():
+        return "layout-manager.html"
+    else:
+        return "layout-employee.html"
+
+
+def check_user_group(user, group_name):
+    """
+    Helper function to determine permissions.
+    Checks to see if a user is part of a group.
+    :param user from request.user
+    :param group_name to check in the form of a string
+    :return: a string containing the appropriate layout for th e page.
+    """
+    if user.groups.filter(name=group_name).exists():
+        return True
+    return False
 
 
 def login_user(request):
     """
+    Available to anonymous and registered users.
     Logs in a user if a post request is given or redirects the user
     :param request:
     :return: The dashboard page for the user if the login is successful
@@ -67,10 +94,9 @@ def reset_password(request):
 
 def register(request):
     """
-    TODO: Add decorator so this is an HR only view
-    TODO: HTTP GET, display form
-    TODO: HTTP POST, validate form and add user to the database.
-    Registers a user to the payroll system.
+    Registers an initial HR user to the payroll system.
+    Registration should start here for a company, then
+    HR can register the rest of its users.
     :param request:
     :return: A success page if the User was successfully added to the system.
     """
@@ -90,6 +116,7 @@ def register(request):
         user_metadata.address = user_metadata_form.cleaned_data['address']
         user_metadata.social_security_number = user_metadata_form.cleaned_data['social_security_number']
         user_metadata.group = user_metadata_form.cleaned_data['group']
+        user_metadata.company = user_metadata_form.cleaned_data['company']
         # Save the new tables if both forms are okay.
         user_metadata.save()
         # Login the user.
@@ -115,6 +142,7 @@ def view_paycheck_information(request):
     error_message = None
     # If the user is logged in, get information from the html input tags.
     if request.method == "GET" and request.user.is_authenticated:
+        layout = get_layout_based_on_user_group(request.user)
         start_date = request.GET.get("start-date")
         end_date = request.GET.get("end-date")
         username = request.user
@@ -131,6 +159,7 @@ def view_paycheck_information(request):
         else:
             results = PaycheckInformation.objects.filter(user_id__username__exact=username)
         context = {
+            'layout': layout,
             'results': results,
             'error_message': error_message
         }
@@ -146,7 +175,11 @@ def show_dashboard(request):
     :return: A rendered html page with the user's dashboard.
     """
     if request.user.is_authenticated:
-        return render(request, 'dashboard-manager.html')
+        layout = get_layout_based_on_user_group(request.user)
+        context = {
+            "layout": layout
+        }
+        return render(request, 'dashboard.html', context)
     return redirect(login_user)
 
 
@@ -159,6 +192,7 @@ def paid_time_off(request):
     """
     form = PaidTimeOffForm(request.POST or None)
     if request.user.is_authenticated:
+        layout = get_layout_based_on_user_group(request.user)
         # Retrieving existing pto requests from the database
         this_username = request.user
         user = User.objects.get(username=this_username)
@@ -168,6 +202,7 @@ def paid_time_off(request):
         remaining_pto = remaining_pto.remaining_hours
         print(type(remaining_pto))
         context = {
+            "layout": layout,
             "form": form,
             "pto_requests": pto_requests,
             "remaining_pto": remaining_pto
@@ -194,7 +229,7 @@ def approve_paid_time_off(request):
     :param   request as an http request
     :return: A rendered html page for the index with a list of current pending and process PTO requests.
     """
-    if request.user.is_authenticated:
+    if request.user.is_authenticated and check_user_group(request.user, "Manager"):
         if request.method == "POST":
             form = ApprovalForm(request.POST)
             if form.is_valid():
@@ -225,8 +260,9 @@ def expense_reimbursement(request):
     :param   request as an http request
     :return: A rendered html page for the index with a list of current pending and expense reimbursement requests.
     """
-    form = ExpenseRequestForm(request.POST, request.FILES or None)
-    if request.user.is_authenticated:
+    if request.user.is_authenticated and check_user_group(request.user, "Manager"):
+        form = ExpenseRequestForm(request.POST, request.FILES or None)
+        layout = get_layout_based_on_user_group(request.user)
         # Retrieving existing  requests from the database
         this_username = request.user
         user = User.objects.get(username=this_username)
@@ -235,6 +271,7 @@ def expense_reimbursement(request):
         print(expense_requests)
         # Display the page normally.
         context = {
+            "layout": layout,
             "form": form,
             "expense_requests": expense_requests,
         }
@@ -255,14 +292,12 @@ def expense_reimbursement(request):
 
 def approve_expense_reimbursement(request):
     """
+    Manager only view.
     Loads a list of pending expense reimbursement requests.
-    TODO: Add decorator so this is a manager only view.
-    TODO: HTTP GET, retrieve pending pto request. Implement manager only access to this view. Redirect if failed.
-    TODO: HTTP POST, update status of PTO requests.
     :param   request as an http request
     :return: A rendered html page for the index with a list of current pending and process PTO requests.
     """
-    if request.user.is_authenticated:
+    if request.user.is_authenticated and check_user_group(request.user, "Manager"):
         if request.method == "POST":
             form = ApprovalForm(request.POST)
             if form.is_valid():
@@ -295,6 +330,8 @@ def display_time_sheet(request):
     :return: A rendered html page for inputting time sheet requests
     """
     if request.user.is_authenticated:
+        # Get the correct layout.
+        layout = get_layout_based_on_user_group(request.user)
         # Write time sheet to the database.
         if request.method == "POST":
             date = request.POST.get("date")
@@ -310,6 +347,7 @@ def display_time_sheet(request):
         total_hours = TimeSheetSubmission.calculate_pay_period_total_hours(username)
         total_hours = total_hours.get('number_hours__sum')
         context = {
+            'layout': layout,
             'total_hours': total_hours
         }
     else:
@@ -320,16 +358,13 @@ def display_time_sheet(request):
 
 def approve_time_sheet(request):
     """
+    Manager only view.
     Loads a list of pending time sheets from employees, managers, and HR
-    TODO: Add decorator so this is a manager only view.
-    TODO: HTTP NONE, display time sheet form.
-    TODO: HTTP GET, retrieve pending pto request. Implement manager only access to this view. Redirect if failed.
-    TODO: HTTP POST, update status of PTO requests.
     :param   request as an http request
     :return: A rendered html page for the index with a list of current pending and process PTO requests.
     """
     # Behavior for updating database entries
-    if request.user.is_authenticated:
+    if request.user.is_authenticated and check_user_group(request.user, "Manager"):
         if request.method == "POST":
             time_sheet_id = request.POST['row_timesheet_id']
             time_sheet = TimeSheetSubmission.objects.get(time_sheet_id=time_sheet_id)
@@ -353,10 +388,9 @@ def approve_time_sheet(request):
 
 def generate_reports(request):
     """
+    Manager only view.
     Displays reports about the manager's employees.
-    TODO: Add decorator so this is a manager only view.
-    TODO: HTTP NONE, display time sheet form.
-    TODO: HTTP GET, display reports about a given user by filtering results.
+    TODO: How does graph work pls x axis doesn't take python data structures
     :param   request as an http request
     :return: A rendered html page with the employee reports.
     """
@@ -364,7 +398,7 @@ def generate_reports(request):
     For the #container-graph-paycheck, create a tuple of the next twelve months
     and calculate the total dollars per month. 
     """
-    if request.user.is_authenticated:
+    if request.user.is_authenticated and check_user_group(request.user, "Manager"):
         users = User.objects.all()
         last_twelve_months = PaycheckInformation.get_last_years_history()
         context = {
@@ -373,29 +407,6 @@ def generate_reports(request):
         return render(request, 'reports.html', context)
     else:
         return redirect(login_user)
-
-
-def view_personal_information(request):
-    """
-    Displays personal information to the user.
-    TODO: HTTP NONE, display personal information.
-    :param   request as an http request
-    :return: A rendered html page with user information.
-    """
-    return render(request)
-
-
-def update_personal_information(request):
-    """
-    Allows HR to search for user information and edit it.
-    TODO: Add a decorator so that it is an HR only view
-    TODO: HTTP NONE, display personal information.
-    TODO: HTTP GET, display personal information of the given user_id.
-    TODO: HTTP POST, update personal information
-    :param   request as an http request
-    :return: A rendered html page with user information.
-    """
-    return render(request)
 
 
 def manage_accounts(request):
@@ -407,7 +418,7 @@ def manage_accounts(request):
     :param   request as an http request
     :return: A rendered html page with wage information
     """
-    if request.user.is_authenticated:
+    if request.user.is_authenticated and check_user_group(request.user, "HumanResources"):
         all_users = User.objects.all()
         context = {
             "users": all_users

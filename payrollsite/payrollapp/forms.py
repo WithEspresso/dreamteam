@@ -32,7 +32,7 @@ class UserMetaDataForm(forms.ModelForm):
     class Meta:
         model = UserMetaData
         # What fields do we want to appear on the form?
-        fields = ['address', 'social_security_number', 'group']
+        fields = ['address', 'social_security_number', 'group', 'company']
 
 
 class PaidTimeOffForm(forms.ModelForm):
