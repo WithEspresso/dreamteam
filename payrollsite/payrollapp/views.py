@@ -365,6 +365,7 @@ def approve_time_sheet(request):
     """
     # Behavior for updating database entries
     if request.user.is_authenticated and check_user_group(request.user, "Manager"):
+        form = ApprovalForm()
         if request.method == "POST":
             time_sheet_id = request.POST['row_timesheet_id']
             time_sheet = TimeSheetSubmission.objects.get(time_sheet_id=time_sheet_id)
@@ -420,6 +421,7 @@ def manage_accounts(request):
     """
     if request.user.is_authenticated and check_user_group(request.user, "HumanResources"):
         all_users = User.objects.all()
+
         context = {
             "users": all_users
         }
