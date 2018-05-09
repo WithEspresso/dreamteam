@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/payrollsite/payrollapp/models.py" line="187" />
+    <bookmark url="file://$PROJECT_DIR$/payrollsite/payrollapp/models.py" line="211" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="152c590c-61db-40eb-935a-b6da2a744baa" name="Default" comment="" />
@@ -27,45 +27,37 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="manageaccount.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/templates/manageaccount.html">
+    <leaf>
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="263">
-              <caret line="16" column="35" lean-forward="true" selection-start-line="16" selection-start-column="35" selection-end-line="16" selection-end-column="35" />
+            <state relative-caret-position="414">
+              <caret line="78" column="67" selection-start-line="78" selection-start-column="67" selection-end-line="78" selection-end-column="67" />
               <folding>
-                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#a#0;n#td#2;n#tr#1;n#table#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#a#0;n#td#3;n#tr#1;n#table#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#h3#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="e#3435#3442#1" expanded="true" />
-                <element signature="n#style#0;n#h3#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#button#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="e#6144#6151#0" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#1;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#2;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#a#0;n#button#0;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#button#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="e#0#28#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="layout-hr.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/templates/layout-hr.html">
+      <file leaf-file-name="timesheets.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/templates/timesheets.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1264">
-              <caret line="117" column="33" lean-forward="true" selection-start-line="117" selection-start-column="33" selection-end-line="117" selection-end-column="33" />
+            <state relative-caret-position="184">
+              <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+              <folding>
+                <element signature="n#style#0;n#tr#0;n#thead#0;n#table#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#td#0;n#tr#7;n#tbody#0;n#table#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="415">
-              <caret line="430" lean-forward="true" selection-start-line="430" selection-end-line="430" />
+            <state relative-caret-position="1161">
+              <caret line="362" column="32" lean-forward="true" selection-start-line="362" selection-start-column="32" selection-end-line="362" selection-end-column="32" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -86,12 +78,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>profile</find>
-      <find>login</find>
-      <find>paycheck</find>
-      <find>welcome</find>
-      <find>wel</find>
-      <find>FILES</find>
       <find>creat</find>
       <find>add</find>
       <find>posts/add</find>
@@ -112,8 +98,16 @@
       <find>meta</find>
       <find>manage</find>
       <find>reports</find>
-      <find>my</find>
       <find>manage_ac</find>
+      <find>month</find>
+      <find>timesh</find>
+      <find>my</find>
+      <find>time_sheet</find>
+      <find>paycheck</find>
+      <find>datetime</find>
+      <find>now()</find>
+      <find>timesheet</find>
+      <find>start</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -152,7 +146,6 @@
         <option value="$PROJECT_DIR$/payrollsite/payrollapp/context_processors.py" />
         <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/layout-employee.html" />
         <option value="$PROJECT_DIR$/payrollsite/payrollapp/admin.py" />
-        <option value="$PROJECT_DIR$/payrollsite/payrollapp/static/css/bootstrap.css" />
         <option value="$PROJECT_DIR$/payrollsite/payrollapp/urls.py" />
         <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/dashboard-manager.html" />
         <option value="$PROJECT_DIR$/payrollsite/payrollapp/templatetags.py" />
@@ -163,16 +156,17 @@
         <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/approvalsexpenses.html" />
         <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/paycheck.html" />
         <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/pto.html" />
-        <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/timesheets.html" />
         <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/expense-requests.html" />
         <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/dashboard.html" />
         <option value="$PROJECT_DIR$/payrollsite/payrollapp/forms.py" />
         <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/approvalspto.html" />
         <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/approvalstimesheets.html" />
         <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/reports.html" />
-        <option value="$PROJECT_DIR$/payrollsite/payrollapp/models.py" />
         <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/manageaccount.html" />
+        <option value="$PROJECT_DIR$/payrollsite/payrollapp/static/css/bootstrap.css" />
         <option value="$PROJECT_DIR$/payrollsite/payrollapp/views.py" />
+        <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/timesheets.html" />
+        <option value="$PROJECT_DIR$/payrollsite/payrollapp/models.py" />
       </list>
     </option>
   </component>
@@ -218,6 +212,14 @@
               <item name="payrollsite" type="462c0819:PsiDirectoryNode" />
               <item name="payrollapp" type="462c0819:PsiDirectoryNode" />
               <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="dreamteam" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dreamteam" type="462c0819:PsiDirectoryNode" />
+              <item name="payrollsite" type="462c0819:PsiDirectoryNode" />
+              <item name="payrollapp" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="dreamteam" type="b2602c69:ProjectViewProjectNode" />
@@ -348,67 +350,44 @@
     <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Python Console" order="7" />
+      <window_info anchor="bottom" id="TODO" order="12" />
+      <window_info anchor="bottom" id="Event Log" order="23" side_tool="true" />
+      <window_info anchor="bottom" id="Database Changes" order="15" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.17477004" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16388889" />
-      <window_info anchor="bottom" id="Statistic" order="8" weight="0.3040629" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.20893562" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18333334" />
+      <window_info anchor="bottom" id="Statistic" order="14" weight="0.3040629" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="right" id="Database" order="6" />
       <window_info anchor="right" id="SciView" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Debug" order="5" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Docker" order="16" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Inspection" order="8" weight="0.4" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16388889" />
-      <window_info anchor="right" id="SciView" order="3" />
+      <window_info anchor="right" id="SciView" order="4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Statistic" order="8" weight="0.3040629" />
-      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="TODO" order="13" />
+      <window_info anchor="bottom" id="Version Control" order="17" />
+      <window_info anchor="bottom" id="Run" order="4" />
+      <window_info anchor="bottom" id="Statistic" order="21" weight="0.3040629" />
+      <window_info anchor="bottom" id="Database Changes" order="22" show_stripe_button="false" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="right" id="Database" order="5" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Event Log" order="18" side_tool="true" />
+      <window_info anchor="bottom" id="Cvs" order="6" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32943678" />
-      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.19973719" />
-      <window_info anchor="bottom" id="Python Console" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="19" visible="true" weight="0.19973719" />
+      <window_info anchor="bottom" id="Python Console" order="20" />
     </layout>
-    <layout-to-restore>
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20694445" />
-      <window_info id="Structure" order="1" weight="0.25" />
-      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Statistic" order="12" weight="0.3040629" />
-      <window_info anchor="bottom" id="Python Console" order="9" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32979852" />
-      <window_info anchor="right" id="Database" order="3" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.32896462" />
-      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="right" id="SciView" order="4" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -597,13 +576,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/static/css/bootstrap.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="1601" column="14" lean-forward="true" selection-start-line="1601" selection-start-column="14" selection-end-line="1601" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/static/css/mk-ui.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="322">
@@ -695,13 +667,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/templates/timesheets.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="6" column="23" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/templates/expense-requests.html">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -744,13 +709,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/forms.py">
+    <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/static/css/bootstrap.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="828">
-          <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="270">
+          <caret line="1069" column="33" lean-forward="true" selection-start-line="1069" selection-start-column="33" selection-end-line="1069" selection-end-column="33" />
         </state>
       </provider>
     </entry>
@@ -758,13 +720,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1264">
           <caret line="117" column="33" lean-forward="true" selection-start-line="117" selection-start-column="33" selection-end-line="117" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="57" lean-forward="true" selection-start-line="57" selection-end-line="57" />
         </state>
       </provider>
     </entry>
@@ -790,12 +745,43 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="19" column="25" selection-start-line="19" selection-start-column="25" selection-end-line="19" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="415">
-          <caret line="430" lean-forward="true" selection-start-line="430" selection-end-line="430" />
+        <state relative-caret-position="1161">
+          <caret line="362" column="32" lean-forward="true" selection-start-line="362" selection-start-column="32" selection-end-line="362" selection-end-column="32" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/templates/timesheets.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+          <folding>
+            <element signature="n#style#0;n#tr#0;n#thead#0;n#table#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#td#0;n#tr#7;n#tbody#0;n#table#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="78" column="67" selection-start-line="78" selection-start-column="67" selection-end-line="78" selection-end-column="67" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -4,8 +4,10 @@ from django.db.models import Sum
 from django.contrib.auth.models import User
 from django.utils.timezone import now
 
+from django.conf.urls import *
+
 import calendar
-from datetime import datetime
+import datetime
 
 STATUS_CHOICE = (
     ('Pending', 'Pending'),
@@ -65,6 +67,10 @@ class HumanResourcesData(models.Model):
     is_manager = models.BooleanField(default=False)
 
 
+class TimeSheetApprovals(models.Model):
+    time_sheet_approvals_id = models.AutoField(primary_key=True)
+
+
 class TimeSheetSubmission(models.Model):
     time_sheet_id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -73,7 +79,25 @@ class TimeSheetSubmission(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICE)
 
     @staticmethod
-    def calculate_pay_period_total_hours(username, date=now()):
+    def get_all_submissions_by_month(username, date=datetime.datetime.now()):
+        """
+        Default is getting the current datetime and getting all submissions
+        within the month.
+        :param username to search for
+        :param date: optional pay period to search for
+        :return: A queryset of all submissions
+        """
+        month = date.month
+        year = date.year
+        start_day = calendar.monthrange(year, month)[0]
+        end_day = calendar.monthrange(year, month)[1]
+        start_date = datetime.date(year, month, start_day)
+        end_date = datetime.date(year, month, end_day)
+        results = TimeSheetSubmission.objects.filter(user_id__username__exact=username).filter(date__range=[start_date, end_date])
+        return results
+
+    @staticmethod
+    def calculate_pay_period_total_hours(username, date=datetime.datetime.now()):
         """
         Calculates the total hours for the current pay period. The default
         pay period is the current month as a datetime. Calculates the first and last
@@ -83,8 +107,8 @@ class TimeSheetSubmission(models.Model):
         :param date:
         :return:The total hours for the pay period of the user.
         """
-        start_date = datetime(date.year, date.month, 1)
-        end_date = datetime(date.year, date.month, calendar.mdays[date.month])
+        start_date = datetime.date(date.year, date.month, 1)
+        end_date = datetime.date(date.year, date.month, calendar.mdays[date.month])
         total_hours = TimeSheetSubmission.objects.filter(date__range=[start_date, end_date])\
             .filter(user_id__username__exact=username)\
             .aggregate(Sum('number_hours'))
@@ -125,7 +149,7 @@ class PaycheckInformation(models.Model):
         Returns a dictionary of the last twelve months' paychecks.
         :return:
         """
-        right_now = datetime.now()
+        right_now = datetime.datetime.now()
         current_month = right_now.month
         last_twelve_months = []
         for i in range(0, 12):

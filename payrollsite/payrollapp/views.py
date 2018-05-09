@@ -332,6 +332,10 @@ def display_time_sheet(request):
     if request.user.is_authenticated:
         # Get the correct layout.
         layout = get_layout_based_on_user_group(request.user)
+        # Retrieve all time sheet submissions for the current pay period
+        # now = Datetime.now()
+        # start_date =
+        # submissions_per_period = TimeSheetSubmission.search_by_time_period()
         # Write time sheet to the database.
         if request.method == "POST":
             date = request.POST.get("date")
