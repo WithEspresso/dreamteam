@@ -61,20 +61,20 @@
             <br>
             <br>
             <br>
-            {% if pto_requests %}
+            {% if pto_approvals %}
             <table class="table table-condensed" style="width:50%" align="center">
                 <thead>
                 <tr>
-                    <th> Date</th>
-                    <th> Hours</th>
+                    <th> Date Submitted </th>
+                    <th> Total Hours Requested </th>
                     <th> Status</th>
                 </tr>
                 </thead>
                 <tbody>
-                {% for pto in pto_requests %}
+                {% for pto in pto_approvals %}
                 <tr>
-                    <td> {{ pto.date }}</td>
-                    <td> {{ pto.hours }}</td>
+                    <td> {{ pto.date_submitted }}</td>
+                    <td> {{ pto.get_total_hours }}</td>
                     <td> {{ pto.status }}</td>
                 </tr>
                 {% endfor %}

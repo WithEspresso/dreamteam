@@ -242,6 +242,11 @@ class PaidTimeOffApproval(models.Model):
         results = PaidTimeOffEntry.objects.filter(paid_time_off_approval_id=id)
         return results
 
+    def get_total_hours(self):
+        entries = self.get_all_entries_by_submission()
+        total_hours = entries.aggregate(Sum('hours')).get('hours__sum')
+        return total_hours
+
 
 class PaidTimeOffEntry(models.Model):
     paid_time_off_request_id = models.AutoField(primary_key=True)

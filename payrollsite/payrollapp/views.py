@@ -197,7 +197,7 @@ def paid_time_off(request):
         # Retrieving existing pto requests from the database
         this_username = request.user
         user = User.objects.get(username=this_username)
-        pto_requests = PaidTimeOffEntry.objects.filter(user_id__username=this_username)
+        pto_requests = PaidTimeOffApproval.objects.filter(user_id__username=this_username)
 
         # Retrieving remaining pto hours from the database
         remaining_pto = PaidTimeOffHours.objects.get(user_id__username=this_username)
@@ -226,11 +226,12 @@ def paid_time_off(request):
                     entry.paid_time_off_approval_id = approval
                     entry.save()
             return HttpResponseRedirect('pto/')
+        # Load the page with the context dictionary.
         context = {
             "loop_times": range(0, 5),
             "layout": layout,
             "form": form,
-            "pto_requests": pto_requests,
+            "pto_approvals": pto_requests,
             "remaining_pto": remaining_pto
         }
         return render(request, 'pto.html', context)
