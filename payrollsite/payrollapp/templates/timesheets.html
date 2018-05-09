@@ -118,10 +118,11 @@
                 </tr>
               </thead>
               <tbody>
+              {% for approval in time_sheet_approvals %}
                 <tr>
-                  <td>1/2/18</td>
-                  <td>40</td>
-                  <td>Pending</td>
+                  <td> {% approval.date_submitted %} </td>
+                  <td> {% approval.get_total_hours %} </td>
+                  <td> {% approval.status %} </td>
                   <td><a style="color: rgb(0,0,0);" href="#" data-toggle="modal" data-target="#myModal"><u>View
                       details</u></a>
                       <section class="modal modalWindow" id="popupOne">
@@ -133,6 +134,7 @@
                       <section class="modal overlay"> </section>
                   </td>
                 </tr>
+              {% endfor %}
               </tbody>
             </table>
         </div>

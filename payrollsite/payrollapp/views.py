@@ -341,18 +341,22 @@ def display_time_sheet(request):
             date = request.POST.get("date")
             hours = request.POST.get("hours")
             if date is not None and hours is not None:
-                time_sheet_submission = TimeSheetSubmission()
+                time_sheet_submission = TimeSheetEntry()
                 time_sheet_submission.date = date
                 time_sheet_submission.number_hours = hours
                 time_sheet_submission.user_id = request.user
                 time_sheet_submission.save()
         # Get total hours for the current pay period.
         username = request.user
-        total_hours = TimeSheetSubmission.calculate_pay_period_total_hours(username)
+        total_hours = TimeSheetEntry.calculate_pay_period_total_hours(username)
         total_hours = total_hours.get('number_hours__sum')
+        # Get all time sheet approvals by user
+        time_sheet_approvals = TimeSheetApprovals.filter(user_id=username)
+
         context = {
             'layout': layout,
-            'total_hours': total_hours
+            'total_hours': total_hours,
+            'time_sheet_approvals' : time_sheet_approvals
         }
     else:
         return redirect(login_user)
@@ -372,14 +376,14 @@ def approve_time_sheet(request):
         form = ApprovalForm()
         if request.method == "POST":
             time_sheet_id = request.POST['row_timesheet_id']
-            time_sheet = TimeSheetSubmission.objects.get(time_sheet_id=time_sheet_id)
+            time_sheet = TimeSheetEntry.objects.get(time_sheet_id=time_sheet_id)
             if form.is_valid:
                 print(request.POST.get("status_update"))
 
             time_sheet.save()
         # HTTP None, Default behavior: Load all pending and processed time sheets.
-        pending_time_sheets = TimeSheetSubmission.objects.filter(status="Pending")
-        processed_time_sheets = TimeSheetSubmission.objects.exclude(status="Pending")
+        pending_time_sheets = TimeSheetEntry.objects.filter(status="Pending")
+        processed_time_sheets = TimeSheetEntry.objects.exclude(status="Pending")
 
         # Load all approved time sheets.
         context = {

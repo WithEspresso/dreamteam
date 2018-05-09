@@ -69,14 +69,37 @@ class HumanResourcesData(models.Model):
 
 class TimeSheetApprovals(models.Model):
     time_sheet_approvals_id = models.AutoField(primary_key=True)
+    date_submitted = models.DateField(auto_now=True)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICE)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+
+    def get_all_entries_by_submission(self):
+        """
+        Returns all time sheet entries for the approval ID
+        :param username to search for
+        :param date: optional pay period to search for
+        :return: A queryset of all submissions
+        """
+        id = self.time_sheet_approvals_id
+        results = TimeSheetEntry.objects.filter(time_sheet_approvals_id=id)
+        return results
+
+    def get_total_hours(self):
+        """
+        Calculates the total hours in each submission.
+        :return:
+        """
+        all_entries = self.get_all_entries_by_submission()
+        total_hours = all_entries.aggregate(Sum('number_hours'))
+        return total_hours
 
 
-class TimeSheetSubmission(models.Model):
+class TimeSheetEntry(models.Model):
     time_sheet_id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateField()
     number_hours = models.IntegerField()
-    status = models.CharField(max_length=10, choices=STATUS_CHOICE)
+    time_sheet_approvals_id = models.ForeignKey(TimeSheetApprovals, on_delete=models.CASCADE)
 
     @staticmethod
     def get_all_submissions_by_month(username, date=datetime.datetime.now()):
@@ -93,7 +116,7 @@ class TimeSheetSubmission(models.Model):
         end_day = calendar.monthrange(year, month)[1]
         start_date = datetime.date(year, month, start_day)
         end_date = datetime.date(year, month, end_day)
-        results = TimeSheetSubmission.objects.filter(user_id__username__exact=username).filter(date__range=[start_date, end_date])
+        results = TimeSheetEntry.objects.filter(user_id__username__exact=username).filter(date__range=[start_date, end_date])
         return results
 
     @staticmethod
@@ -109,7 +132,7 @@ class TimeSheetSubmission(models.Model):
         """
         start_date = datetime.date(date.year, date.month, 1)
         end_date = datetime.date(date.year, date.month, calendar.mdays[date.month])
-        total_hours = TimeSheetSubmission.objects.filter(date__range=[start_date, end_date])\
+        total_hours = TimeSheetEntry.objects.filter(date__range=[start_date, end_date])\
             .filter(user_id__username__exact=username)\
             .aggregate(Sum('number_hours'))
         return total_hours
@@ -124,7 +147,7 @@ class TimeSheetSubmission(models.Model):
         # matching_timesheets = TimeSheetSubmission.objects.filter(user_id__username__exact=username)
         # <queryset>.filter(<ForeignKeyTable>__<ForeignKeyColumn>__exact=<company_name>)
         # matching_timesheets = matching_timesheets.filter(user)
-        matching_timesheets = TimeSheetSubmission.objects.filter.all()
+        matching_timesheets = TimeSheetEntry.objects.filter.all()
         return matching_timesheets
 
     def __str__(self):
