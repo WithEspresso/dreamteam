@@ -29,6 +29,7 @@
                     <tr>
                         <th>Employee ID</th>
                         <th>User Name</th>
+                        <th>Full Name</th>
                         <th>Status</th>
                         <th>Details</th>
                     </tr>
@@ -36,9 +37,45 @@
                     <tr>
                         <td>{{ time_sheet.user_id.id }}</td>
                         <td>{{ time_sheet.user_id.username}}</td>
+                        <td>{{ time_sheet.user_id.first_name }} {{ time_sheet.user_id.last_name }}</td>
                         <td>{{ time_sheet.status }}</td>
                         <td><a style="color: rgb(0,0,0);" href="#" data-toggle="modal"
                                data-target="#{{time_sheet.time_sheet_approvals_id}}"><u>View
+                            details</u>
+                        </a>
+                            <section class="modal modalWindow" id="popupOne">
+                                <section class="modalWrapper">
+                                    <h2>Modal Popup </h2>
+                                </section>
+                                <a class="closeBtn">CLOSE X</a>
+                            </section>
+                            <section class="modal overlay">
+                            </section>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <h2> No pending time sheets to display for approval. </h2>
+                    {% endfor %}
+                </table>
+
+                <h1>Processed Timesheet approvals:</h1>
+
+                <table class="responstable">
+                    <tr>
+                        <th>Employee ID</th>
+                        <th>User Name</th>
+                        <th>Full Name</th>
+                        <th>Status</th>
+                        <th>Details</th>
+                    </tr>
+                    {% for time_sheet in processed_time_sheets %}
+                    <tr>
+                        <td>{{ time_sheet.user_id.id }}</td>
+                        <td>{{ time_sheet.user_id.username}}</td>
+                        <td>{{ time_sheet.user_id.first_name }} {{ time_sheet.user_id.last_name }}</td>
+                        <td>{{ time_sheet.status }}</td>
+                        <td><a style="color: rgb(0,0,0);" href="#" data-toggle="modal"
+                               data-target="#{{time_sheet.time_sheet_approvals_id}}processed"><u>View
                             details</u>
                         </a>
                             <section class="modal modalWindow" id="popupOne">
@@ -56,6 +93,8 @@
                     {% endfor %}
                 </table>
             </div>
+
+            <!--- Modal behavior for pending time sheets -->
             {% for time_sheet in pending_time_sheets %}
             <div id="{{time_sheet.time_sheet_approvals_id}}" class="modal fade">
                 <div class="modal-dialog modal-lg">
@@ -91,9 +130,10 @@
                             <button type="button" class="btn btn-info btn-md" style="" data-dismiss="modal">Cancel
                             </button>
                             <div>
-                                <form method="post" action="" >
+                                <form method="post" action="">
                                     {% csrf_token %}
-                                    <input type="hidden" name="time_sheet_id" value="{{ time_sheet.time_sheet_approvals_id }}">
+                                    <input type="hidden" name="time_sheet_id"
+                                           value="{{ time_sheet.time_sheet_approvals_id }}">
                                     <button type="submit" name="reject" class="btn btn-md btn-danger ">
                                         Reject
                                     </button>
@@ -108,6 +148,59 @@
             </div>
             {% endfor %}
 
+            <!-- Modal behavior for rocessed time sheets -->
+            {% for time_sheet in processed_time_sheets %}
+            <div id="{{time_sheet.time_sheet_approvals_id}}processed" class="modal fade">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content modal-lg">
+                        <div class="modal-header modal-lg">
+                            <h3 class="modal-title " style="float: left">Timesheet Details</h3>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <table align="center" class="detailsTable">
+                                <thead>
+                                <tr>
+                                    <th>Employee ID</th>
+                                    <th>Full Name</th>
+                                    <th>Date</th>
+                                    <th>Hours</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for entry in time_sheet.get_all_entries_by_submission %}
+                                <tr align="center">
+                                    <td>{{ time_sheet.user_id.id }}</td>
+                                    <td>{{ time_sheet.user_id }}</td>
+                                    <td>{{ entry.date }}</td>
+                                    <td>{{ entry.number_hours }}</td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                            <h4>Total hours: {{ time_sheet.get_total_hours }}</h4>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-info btn-md" style="" data-dismiss="modal">Cancel
+                            </button>
+                            <div>
+                                <form method="post" action="">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="time_sheet_id"
+                                           value="{{ time_sheet.time_sheet_approvals_id }}">
+                                    <button type="submit" name="reject" class="btn btn-md btn-danger ">
+                                        Reject
+                                    </button>
+                                    <button type="submit" name="approve" class="btn btn-md btn-success btn-md">
+                                        Approve
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
 
             {% endblock %}
 
