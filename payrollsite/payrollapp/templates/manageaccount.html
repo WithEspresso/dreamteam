@@ -26,11 +26,11 @@
                         <th>Details</th>
                         <th>Actions</th>
                     </tr>
-                    {% for user in users %}
+                    {% for user_data in user_metadata %}
                     <tr>
-                        <td>{{ user.username }}</td>
-                        <td>{{ user.first_name }} {{ user.last_name }}</td>
-                        <td><a style="color: rgb(0,0,0);" href="#" data-toggle="modal" data-target="#{{ user.username }}"><u>View
+                        <td>{{ user_data.user_id.username }}</td>
+                        <td>{{ user_data.user_id.first_name }} {{ user_data.user_id.last_name }}</td>
+                        <td><a style="color: rgb(0,0,0);" href="#" data-toggle="modal" data-target="#{{ user_data.user_id.username }}details"><u>View
                             details</u></a>
                             <section class="modal modalWindow" id="popupOne">
                                 <section class="modalWrapper">
@@ -41,7 +41,7 @@
                             <section class="modal overlay"></section>
                         </td>
                         <td><a style="color: rgb(0,0,0);" href="#" data-toggle="modal"
-                               data-target="#{{user.username}}2"><u>Manage</u></a>
+                               data-target="#{{user_data.user_id.username}}manage"><u>Update Information</u></a>
                             <section class="modal modalWindow" id="popupTwo">
                                 <section class="modalWrapper">
                                     <h2>Modal Popup </h2>
@@ -54,8 +54,10 @@
                     {% endfor %}
                 </table>
             </div>
-            {% for user in users %}
-            <div id="{{ user.username }}" class="modal fade">
+
+            <!-- Modal popup for user account details. View only, not edit. --->
+            {% for user_data in user_metadata %}
+            <div id="{{ user_data.user_id.username }}details" class="modal fade">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content modal-lg">
                         <div class="modal-header modal-lg">
@@ -73,31 +75,31 @@
                                 <tbody>
                                 <tr>
                                     <td>Username</td>
-                                    <td>{{ user.username }}</td>
+                                    <td>{{ user_data.user_id.username }}</td>
                                 </tr>
                                 <tr>
                                     <td>First Name</td>
-                                    <td>{{ user.first_name }}</td>
+                                    <td>{{ user_data.user_id.first_name }}</td>
                                 </tr>
                                 <tr>
                                     <td>Last Name</td>
-                                    <td>{{ user.last_name }}</td>
+                                    <td>{{ user_data.user_id.last_name }}</td>
                                 </tr>
                                 <tr>
                                     <td>Email</td>
-                                    <td>{{ user.email }}</td>
+                                    <td>{{ user_data.user_id.email }}</td>
                                 </tr>
                                 <tr>
                                     <td>Address</td>
-                                    <td>{{ user.metadata.address }}</td>
+                                    <td>{{ user_data.address }}</td>
                                 </tr>
                                 <tr>
                                     <td>SSN</td>
-                                    <td>{{ user.metadata.social_security_number }}</td>
+                                    <td>{{ user_data.social_security_number }}</td>
                                 </tr>
                                 <tr>
                                     <td>Role</td>
-                                    <td>{{ user.metadata.group }}</td>
+                                    <td>{{ user_data.group }}</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -108,7 +110,11 @@
                     </div>
                 </div>
             </div>
-            <div id="{{ user.username }}2" class="modal fade">
+            {% endfor %}
+
+            <!-- Modal for managing account information. -->
+            {% for user_data in user_metadata %}
+            <div id="{{user_data.user_id.username}}manage" class="modal fade">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content modal-lg">
                         <div class="modal-header modal-lg">
@@ -119,7 +125,7 @@
                         </div>
                         <div class="modal-body">
                             <div class="container-fluid">
-                                <form action="" id="form-create-account">
+                                <form action="" method="post">
                                     <div class="container-login">
                                         <div class="container-inside-form">
                                             <label for="uname"><b>Username</b></label>
@@ -154,15 +160,11 @@
                                             <input type="text" placeholder="Enter Manager ID" name="manager" required>
                                         </div>
 
-                                        <input type="radio" name="usertype" value="employee" checked
-                                               style="margin:5px; margin-top:20px;"> Employee<br>
-                                        <input type="radio" name="usertype" value="manager" style="margin:5px;"> Manager<br>
-                                        <input type="radio" name="usertype" value="human-resources" style="margin:5px;">
-                                        Human Resources<br><br>
+                                        <input type="radio" name="usertype" value="employee" checked style="margin:5px; margin-top:20px;"> Employee<br>
+                                        <input type="radio" name="usertype" value="manager" style="margin:5px;"> Manager <br>
+                                        <input type="radio" name="usertype" value="human-resources" style="margin:5px;"> Human Resources<br><br>
 
-                                        <button type="button"><a href="{% url 'signup' %}"
-                                                                 style="color:white; text-decoration:none">Create an
-                                            account</a></button>
+                                        <button type="submit"><a href="{% url 'signup' %}"  style="color:white; text-decoration:none">Create an account</a></button>
                                     </div>
                                 </form>
 

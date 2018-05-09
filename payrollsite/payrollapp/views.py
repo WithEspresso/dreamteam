@@ -448,10 +448,10 @@ def manage_accounts(request):
     :return: A rendered html page with wage information
     """
     if request.user.is_authenticated and check_user_group(request.user, "HumanResources"):
-        all_users = UserMetaData.objects.all()
+        user_metadata = UserMetaData.objects.all()
 
         context = {
-            "users": all_users
+            "user_metadata": user_metadata
         }
         return render(request, "manageaccount.html", context)
     else:
