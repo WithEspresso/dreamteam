@@ -65,9 +65,10 @@
             <table class="table table-condensed" style="width:50%" align="center">
                 <thead>
                 <tr>
-                    <th> Date Submitted </th>
-                    <th> Total Hours Requested </th>
+                    <th> Date Submitted</th>
+                    <th> Total Hours Requested</th>
                     <th> Status</th>
+                    <th> Details</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -76,6 +77,17 @@
                     <td> {{ pto.date_submitted }}</td>
                     <td> {{ pto.get_total_hours }}</td>
                     <td> {{ pto.status }}</td>
+                    <td><a style="color: rgb(0,0,0);" href="#" data-toggle="modal"
+                           data-target="#{{pto.paid_time_off_approval_id}}"><u>View
+                        details</u></a>
+                        <section class="modal modalWindow" id="popupOne">
+                            <section class="modalWrapper">
+                                <h2>Modal Popup </h2>
+                            </section>
+                            <a class="closeBtn">CLOSE X</a>
+                        </section>
+                        <section class="modal overlay"></section>
+                    </td>
                 </tr>
                 {% endfor %}
                 </tbody>
@@ -84,6 +96,40 @@
             <h4> No current paid time off requests pending. </h4>
             {% endif %}
         </div>
+        <!-- modal to view details of a submitted timesheet -->
+        {% for pto in pto_approvals %}
+        <div id="{{pto.paid_time_off_approval_id}}" class="modal fade">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content modal-lg">
+                    <div class="modal-header modal-lg">
+                        <h3 class="modal-title " style="float: left">Paid Time off Request Details</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <table align="center" class="detailsTable">
+                            <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Hours</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for entry in pto.get_all_entries_by_submission %}
+                            <tr>
+                                <th>{{ entry.date }}</th>
+                                <th>{{ entry.hours }}</th>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
     </div>
 </div>
 

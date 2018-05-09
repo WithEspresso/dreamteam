@@ -448,7 +448,7 @@ def manage_accounts(request):
     :return: A rendered html page with wage information
     """
     if request.user.is_authenticated and check_user_group(request.user, "HumanResources"):
-        all_users = User.objects.all()
+        all_users = UserMetaData.objects.all()
 
         context = {
             "users": all_users
