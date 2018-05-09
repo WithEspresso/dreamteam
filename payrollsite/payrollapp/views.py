@@ -448,10 +448,33 @@ def manage_accounts(request):
     :return: A rendered html page with wage information
     """
     if request.user.is_authenticated and check_user_group(request.user, "HumanResources"):
-        user_metadata = UserMetaData.objects.all()
+        # Check for post request and process data accordingly.
 
+        # Gets all user metadata relevant to the company HR works for from the database.
+        # TODO: Filter by company of user in instance.
+        all_user_metadata = UserMetaData.objects.all().order_by('user_id__username')
+
+        # Creates a custom form with prepopulated data for each entry for user meta data
+        metadata_forms = list()
+        for data in all_user_metadata:
+            form = UserMetaDataForm(instance=data)
+            metadata_forms.append(form)
+
+        # Creates a custom form with prepopulated data for each entry for django.auth.contrib.models.User
+        user_forms = list()
+        all_users = User.objects.all().exclude(django_user_id=None).order_by('username')
+        for user in all_users:
+            form = UserForm(instance=user)
+            user_forms.append(form)
+
+        # Zip all data into a tuple for iterating through in template.
+        zipped_data = zip(all_user_metadata, metadata_forms, user_forms)
+
+        # Pass context to template and render page.
         context = {
-            "user_metadata": user_metadata
+            "zipped_data": zipped_data,
+            "user_metadata": all_user_metadata,
+            "metadata_forms": metadata_forms
         }
         return render(request, "manageaccount.html", context)
     else:

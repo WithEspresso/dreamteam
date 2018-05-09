@@ -48,7 +48,7 @@ class Employee(models.Model):
 
 class UserMetaData(models.Model):
     user_meta_data_id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name="django_user_id")
     address = models.CharField(max_length=255)
     social_security_number = models.IntegerField()
     group = models.CharField(max_length=32, choices=USER_GROUPS, default='Employee')
