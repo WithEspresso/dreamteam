@@ -250,21 +250,20 @@ def approve_paid_time_off(request):
     """
     if request.user.is_authenticated and check_user_group(request.user, "Manager"):
         if request.method == "POST":
-            form = ApprovalForm(request.POST)
-            if form.is_valid():
-                pto_id = request.POST['row_pto_id']
-                pto_request = PaidTimeOffEntry.objects.get(paid_time_off_request_id=pto_id)
-                pto_request.status = form.cleaned_data['status']
-                pto_request.save()
+            pto_id = request.POST['pto_id']
+            pto_request = PaidTimeOffApproval.objects.get(paid_time_off_approval_id=pto_id)
+            if "approve" in request.POST:
+                pto_request.status = "Approved"
+            if "reject" in request.POST:
+                pto_request.status = "Denied"
+            pto_request.save()
 
         # Default behavior: Load all pending time sheets.
-        form = ApprovalForm()
-        pending_pto_requests = PaidTimeOffEntry.objects.filter(status="Pending")
-        processed_pto_requests = PaidTimeOffEntry.objects.exclude(status="Pending")
+        pending_pto_requests = PaidTimeOffApproval.objects.filter(status="Pending")
+        processed_pto_requests = PaidTimeOffApproval.objects.exclude(status="Pending")
 
         # Load all approved time sheets.
         context = {
-            'form': form,
             'pending_pto_requests': pending_pto_requests,
             'processed_pto_requests': processed_pto_requests
         }
@@ -317,22 +316,22 @@ def approve_expense_reimbursement(request):
     :return: A rendered html page for the index with a list of current pending and process PTO requests.
     """
     if request.user.is_authenticated and check_user_group(request.user, "Manager"):
+        # If the user is making a post request, updates the database.
         if request.method == "POST":
-            form = ApprovalForm(request.POST)
-            if form.is_valid():
-                expense_id = request.POST['row_expense_id']
-                expense_request = Expenses.objects.get(expense_id=expense_id)
-                expense_request.status = form.cleaned_data['status']
-                expense_request.save()
+            expense_id = request.POST['expense_id']
+            expense_request = Expenses.objects.get(expense_id=expense_id)
+            if "approve" in request.POST:
+                expense_request.status = "Approved"
+            if "reject" in request.POST:
+                expense_request.status = "Denied"
+            expense_request.save()
 
         # Default behavior: Load all pending time sheets.
-        form = ApprovalForm()
         pending_expense_requests = Expenses.objects.filter(status="Pending")
         processed_expense_requests = Expenses.objects.exclude(status="Pending")
 
         # Load all approved time sheets.
         context = {
-            'form': form,
             'pending_expense_requests': pending_expense_requests,
             'processed_expense_requests': processed_expense_requests
         }

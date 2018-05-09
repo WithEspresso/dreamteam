@@ -87,26 +87,101 @@
                                             <div>
                                                 <form method="post" action="">
                                                     {% csrf_token %}
-                                                    <input type="hidden" name="row_expense_id"
-                                                           value="{{ expense_request.expense_id }}">
+                                                    <input type="hidden" name="expense_id" value="{{ expense_request.expense_id }}">
 
                                                     <input type="hidden" name="status_update" value="reject">
 
-                                                    <button type="submit" name="reject" value="reject"
-                                                            class="btn btn-md btn-danger "
-                                                            data-dismiss="modal">Reject
+                                                    <button type="submit" name="reject" value="reject" class="btn btn-md btn-danger ">
+                                                        Reject
+                                                    </button>
+                                                    <button type="submit" name="approve" value="approve" class="btn btn-md btn-success btn-md">
+                                                        Approve
                                                     </button>
                                                 </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </td>
+                    </tr>
+                </table>
+
+                <h1> Processed expense reimbursement approvals</h1>
+                <table class="responstable">
+                    <tr>
+                        <th>Employee ID</th>
+                        <th>User Name</th>
+                        <th>Status</th>
+                        <th>Details</th>
+                    </tr>
+                    {% for expense_request in processed_expense_requests %}
+                    <tr>
+                        <td>{{ expense_request.get_user_id }}</td>
+                        <td>{{ expense_request.user_id }}</td>
+                        <td>{{ expense_request.status }}</td>
+                        <td>
+                            <a style="color: rgb(0,0,0);" href="#" data-toggle="modal"
+                               data-target="#{{ expense_request.expense_id }}processed">
+                                <u>View details</u>
+                            </a>
+                            <section class="modal modalWindow" id="popupOne">
+                                <section class="modalWrapper">
+                                    <h2>Modal Popup </h2>
+                                </section>
+                                <a class="closeBtn">CLOSE X</a>
+                            </section>
+                            <section class="modal overlay">
+                            </section>
+                            <div id="{{ expense_request.expense_id }}processed" class="modal fade">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content modal-lg">
+                                        <div class="modal-header modal-lg">
+                                            <h3 class="modal-title " style="float: left">Expense Details</h3>
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                &times;
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <table align="center" class="detailsTable">
+                                                <thead>
+                                                <tr>
+                                                    <th>Employee ID</th>
+                                                    <th>Full Name</th>
+                                                    <th>Description</th>
+                                                    <th>Date</th>
+                                                    <th>Cost</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr align="center">
+                                                    <td>{{ expense_request.get_user_id }}</td>
+                                                    <td>{{ expense_request.get_users_fullname }}</td>
+                                                    <td>{{ expense_request.description }}</td>
+                                                    <td>{{ expense_request.date }}</td>
+                                                    <td>{{ expense_request.amount }}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-info btn-md" style=""
+                                                    data-dismiss="modal">Cancel
+                                            </button>
+                                            <div>
                                                 <form method="post" action="">
                                                     {% csrf_token %}
-                                                    <input type="hidden" name="row_expense_id"
-                                                           value="{{ expense_request.expense_id }}">
+                                                    <input type="hidden" name="expense_id" value="{{ expense_request.expense_id }}">
 
-                                                    <input type="hidden" name="status_update" value="approve">
+                                                    <input type="hidden" name="status_update" value="reject">
 
-                                                    <button type="submit" name="approve" value="approve"
-                                                            class="btn btn-md btn-success btn-md"
-                                                            data-dismiss="modal">
+                                                    <button type="submit" name="reject" value="reject" class="btn btn-md btn-danger ">
+                                                        Reject
+                                                    </button>
+                                                    <button type="submit" name="approve" value="approve" class="btn btn-md btn-success btn-md">
                                                         Approve
                                                     </button>
                                                 </form>
