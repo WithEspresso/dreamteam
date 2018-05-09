@@ -73,6 +73,11 @@ class TimeSheetApprovals(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICE)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
+    @staticmethod
+    def get_all_by_username(username):
+        results = TimeSheetApprovals.objects.filter(user_id__username=username)
+        return results
+
     def get_all_entries_by_submission(self):
         """
         Returns all time sheet entries for the approval ID
@@ -87,10 +92,10 @@ class TimeSheetApprovals(models.Model):
     def get_total_hours(self):
         """
         Calculates the total hours in each submission.
-        :return:
+        :return: The total hours worked as an integer.
         """
         all_entries = self.get_all_entries_by_submission()
-        total_hours = all_entries.aggregate(Sum('number_hours'))
+        total_hours = all_entries.aggregate(Sum('number_hours')).get('number_hours__sum')
         return total_hours
 
 
@@ -134,7 +139,7 @@ class TimeSheetEntry(models.Model):
         end_date = datetime.date(date.year, date.month, calendar.mdays[date.month])
         total_hours = TimeSheetEntry.objects.filter(date__range=[start_date, end_date])\
             .filter(user_id__username__exact=username)\
-            .aggregate(Sum('number_hours'))
+            .aggregate(Sum('number_hours')).get('number_hours__sum')
         return total_hours
 
     @staticmethod
@@ -208,26 +213,46 @@ class Expenses(models.Model):
     def get_user_id(self):
         return str(self.user_id.id)
 
+
 class ExpenseRequest(models.Model):
     expense_request_id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     approved = models.BooleanField(default=False)
 
 
-class PaidTimeOff(models.Model):
-    paid_time_off_id = models.AutoField(primary_key=True)
+class PaidTimeOffApproval(models.Model):
+    paid_time_off_approval_id = models.AutoField(primary_key=True)
+    date_submitted = models.DateField(auto_now=True)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICE, default="Pending")
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    @staticmethod
+    def get_all_by_username(username):
+        results = PaidTimeOffApproval.objects.filter(user_id__username=username)
+        return results
 
-class PaidTimeOffRequests(models.Model):
+    def get_all_entries_by_submission(self):
+        """
+        Returns all time sheet entries for the approval ID
+        :param username to search for
+        :param date: optional pay period to search for
+        :return: A queryset of all submissions
+        """
+        id = self.paid_time_off_approval_id
+        results = PaidTimeOffEntry.objects.filter(paid_time_off_approval_id=id)
+        return results
+
+
+class PaidTimeOffEntry(models.Model):
     paid_time_off_request_id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateField()
     hours = models.IntegerField()
     status = models.CharField(max_length=10, choices=STATUS_CHOICE, default="Pending")
+    paid_time_off_approval_id = models.ForeignKey(PaidTimeOffApproval, on_delete=models.CASCADE)
 
     def __str__(self):
-        return str(self.user_id) + "'s pto request for " + str(self.date)
+        return str(self.user_id) + "'s pto request for " + str(self.date) + " in approval: "
 
 
 class Approvals(models.Model):

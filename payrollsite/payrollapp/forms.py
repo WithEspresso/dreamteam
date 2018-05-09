@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django import forms
-from .models import PaidTimeOffRequests, Expenses, UserMetaData
+from .models import PaidTimeOffEntry, Expenses, UserMetaData
 from .validators import validate_image_file
 from .validators import validate_year_entry
 
@@ -35,11 +35,18 @@ class UserMetaDataForm(forms.ModelForm):
         fields = ['address', 'social_security_number', 'group', 'company']
 
 
-class PaidTimeOffForm(forms.ModelForm):
+class PaidTimeOffSubmissionForm(forms.ModelForm):
+
+
+    class Meta:
+        pass
+
+
+class PaidTimeOffRequestForm(forms.ModelForm):
     # User is automatically retrieved from the request.user method in the view.
     # Status is only visible to the manager
     class Meta:
-        model = PaidTimeOffRequests
+        model = PaidTimeOffEntry
         fields = ['date', 'hours', 'status']
 
 

@@ -7,7 +7,7 @@ import json
 
 from .forms import LoginForm
 from .forms import UserForm
-from .forms import PaidTimeOffForm
+from .forms import PaidTimeOffRequestForm
 from .forms import ExpenseRequestForm
 from .forms import ApprovalForm
 from .forms import UserMetaDataForm
@@ -149,8 +149,8 @@ def view_paycheck_information(request):
         # If the input tags have values, convert them to datetime objects and use
         # them to search the database for values within their range.
         if start_date is not None and end_date is not None:
-            start_date = datetime.strptime(start_date, '%m/%d/%Y')
-            end_date = datetime.strptime(end_date, '%m/%d/%Y')
+            start_date = datetime.datetime.strptime(start_date, '%m/%d/%Y')
+            end_date = datetime.datetime.strptime(end_date, '%m/%d/%Y')
             results = PaycheckInformation.search_by_time_period(start_date, end_date, username)
             # Case where no values have been found.
             if len(results) == 0:
@@ -190,31 +190,49 @@ def paid_time_off(request):
     :param   request as an http request
     :return: A rendered html page for the index with a list of current pending and process PTO requests.
     """
-    form = PaidTimeOffForm(request.POST or None)
+    form = PaidTimeOffRequestForm(request.POST or None)
     if request.user.is_authenticated:
         layout = get_layout_based_on_user_group(request.user)
+
         # Retrieving existing pto requests from the database
         this_username = request.user
         user = User.objects.get(username=this_username)
-        pto_requests = PaidTimeOffRequests.objects.filter(user_id__username=this_username)
+        pto_requests = PaidTimeOffEntry.objects.filter(user_id__username=this_username)
+
         # Retrieving remaining pto hours from the database
         remaining_pto = PaidTimeOffHours.objects.get(user_id__username=this_username)
         remaining_pto = remaining_pto.remaining_hours
-        print(type(remaining_pto))
+
+        # Saving the form data and saving to the database if the user is sending a POST request.
+        if request.method == "POST":
+            # Iterate through all entries and append valid ones to a list.
+            pto_entries = list()
+            for i in range(0, 5):
+                pto_entry = PaidTimeOffEntry()
+                pto_entry.user_id = user
+                date = request.POST.get("date" + str(i))
+                hours = request.POST.get("hours" + str(i))
+                # Check for empty entries
+                if hours is not None and hours != '' and date is not None and date != '':
+                    pto_entry.date = date
+                    pto_entry.hours = hours
+                    pto_entries.append(pto_entry)
+            # If there are valid entries, create a new approval and link them all by foreign key.
+            if pto_entries is not None:
+                approval = PaidTimeOffApproval()
+                approval.user_id = user
+                approval.save()
+                for entry in pto_entries:
+                    entry.paid_time_off_approval_id = approval
+                    entry.save()
+            return HttpResponseRedirect('pto/')
         context = {
+            "loop_times": range(0, 5),
             "layout": layout,
             "form": form,
             "pto_requests": pto_requests,
             "remaining_pto": remaining_pto
         }
-        # Saving the form data and saving to the database if the user is sending a POST request.
-        if request.method == "POST" and form.is_valid():
-            pto_request = form.save(commit=False)
-            pto_request.user_id = user
-            pto_request.date = request.POST.get("date")
-            pto_request.hours = request.POST.get("hours")
-            pto_request.save()
-            return HttpResponseRedirect('pto/')
         return render(request, 'pto.html', context)
     else:
         return redirect(login_user)
@@ -234,14 +252,14 @@ def approve_paid_time_off(request):
             form = ApprovalForm(request.POST)
             if form.is_valid():
                 pto_id = request.POST['row_pto_id']
-                pto_request = PaidTimeOffRequests.objects.get(paid_time_off_request_id=pto_id)
+                pto_request = PaidTimeOffEntry.objects.get(paid_time_off_request_id=pto_id)
                 pto_request.status = form.cleaned_data['status']
                 pto_request.save()
 
         # Default behavior: Load all pending time sheets.
         form = ApprovalForm()
-        pending_pto_requests = PaidTimeOffRequests.objects.filter(status="Pending")
-        processed_pto_requests = PaidTimeOffRequests.objects.exclude(status="Pending")
+        pending_pto_requests = PaidTimeOffEntry.objects.filter(status="Pending")
+        processed_pto_requests = PaidTimeOffEntry.objects.exclude(status="Pending")
 
         # Load all approved time sheets.
         context = {
@@ -332,11 +350,8 @@ def display_time_sheet(request):
     if request.user.is_authenticated:
         # Get the correct layout.
         layout = get_layout_based_on_user_group(request.user)
-        # Retrieve all time sheet submissions for the current pay period
-        # now = Datetime.now()
-        # start_date =
-        # submissions_per_period = TimeSheetSubmission.search_by_time_period()
         # Write time sheet to the database.
+
         if request.method == "POST":
             date = request.POST.get("date")
             hours = request.POST.get("hours")
@@ -346,17 +361,18 @@ def display_time_sheet(request):
                 time_sheet_submission.number_hours = hours
                 time_sheet_submission.user_id = request.user
                 time_sheet_submission.save()
+
         # Get total hours for the current pay period.
         username = request.user
         total_hours = TimeSheetEntry.calculate_pay_period_total_hours(username)
-        total_hours = total_hours.get('number_hours__sum')
+
         # Get all time sheet approvals by user
-        time_sheet_approvals = TimeSheetApprovals.filter(user_id=username)
+        time_sheet_approvals = TimeSheetApprovals.get_all_by_username(username)
 
         context = {
             'layout': layout,
             'total_hours': total_hours,
-            'time_sheet_approvals' : time_sheet_approvals
+            'time_sheet_approvals': time_sheet_approvals
         }
     else:
         return redirect(login_user)

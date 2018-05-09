@@ -33,8 +33,10 @@
                                 <input class="form-control" type="date" name="date"/>
                             </td>
                             <td>
-                                <form method="post" action= "">
-                                    <input class="form-control" style="width:75px" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours0"/>
+                                <form method="post" action="">
+                                    <input class="form-control" style="width:75px" type="number" value="0"
+                                           onchange="calculateTotal()" min="0" max="24" step="1" name="hours"
+                                           id="hours0"/>
                                 </form>
                             </td>
                         </tr>
@@ -43,7 +45,8 @@
                                 <input class="form-control" type="date" name="date"/>
                             </td>
                             <td>
-                                <input class="form-control" style="width:75px" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours1"/>
+                                <input class="form-control" style="width:75px" type="number" value="0"
+                                       onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours1"/>
                             </td>
                         </tr>
                         <tr>
@@ -51,7 +54,8 @@
                                 <input class="form-control" type="date" name="date"/>
                             </td>
                             <td>
-                                <input class="form-control" style="width:75px" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours2"/>
+                                <input class="form-control" style="width:75px" type="number" value="0"
+                                       onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours2"/>
                             </td>
                         </tr>
                         <tr>
@@ -59,7 +63,8 @@
                                 <input class="form-control" type="date" name="date"/>
                             </td>
                             <td>
-                                <input class="form-control" style="width:75px" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours3"/>
+                                <input class="form-control" style="width:75px" type="number" value="0"
+                                       onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours3"/>
                             </td>
                         </tr>
                         <tr>
@@ -67,7 +72,8 @@
                                 <input class="form-control" type="date" name="date"/>
                             </td>
                             <td>
-                                <input class="form-control" style="width:75px" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours4"/>
+                                <input class="form-control" style="width:75px" type="number" value="0"
+                                       onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours4"/>
                             </td>
                         </tr>
                         <tr>
@@ -75,7 +81,8 @@
                                 <input class="form-control" type="date" name="date"/>
                             </td>
                             <td>
-                                <input class="form-control" style="width:75px" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours5"/>
+                                <input class="form-control" style="width:75px" type="number" value="0"
+                                       onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours5"/>
                             </td>
                         </tr>
                         <tr>
@@ -83,12 +90,13 @@
                                 <input class="form-control" type="date" name="date"/>
                             </td>
                             <td>
-                                <input class="form-control" style="width:75px" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours6"/>
+                                <input class="form-control" style="width:75px" type="number" value="0"
+                                       onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours6"/>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                              <h4 align="right">Total:</h4>
+                                <h4 align="right">Total:</h4>
                             </td>
                             <td>
                                 <h4><input style="width:75px" type="number" name="total" id="total"/></h4>
@@ -98,7 +106,8 @@
                     </table>
                     <div class="col-md-12" align="center">
                         <button type="submit" class="btn btn-success" id="submit">Submit</button>
-                        <button type="reset" onclick="return confirm_reset()" class="btn btn-danger" id="clear">Reset</button>
+                        <button type="reset" onclick="return confirm_reset()" class="btn btn-danger" id="clear">Reset
+                        </button>
                     </div>
                 </form>
             </div>
@@ -109,38 +118,40 @@
             <br>
 
             <table class="table table-condensed" style="width:75%" align="center">
-              <thead>
+                <thead>
                 <tr>
-                  <th>Submission Date</th>
-                  <th>Total Hours</th>
-                  <th>Status</th>
-                  <th>Details</th>
+                    <th>Submission Date</th>
+                    <th>Total Hours</th>
+                    <th>Status</th>
+                    <th>Details</th>
                 </tr>
-              </thead>
-              <tbody>
-              {% for approval in time_sheet_approvals %}
+                </thead>
+                <tbody>
+                {% for approval in time_sheet_approvals %}
                 <tr>
-                  <td> {% approval.date_submitted %} </td>
-                  <td> {% approval.get_total_hours %} </td>
-                  <td> {% approval.status %} </td>
-                  <td><a style="color: rgb(0,0,0);" href="#" data-toggle="modal" data-target="#myModal"><u>View
-                      details</u></a>
-                      <section class="modal modalWindow" id="popupOne">
-                          <section class="modalWrapper">
-                              <h2>Modal Popup </h2>
-                          </section>
-                          <a class="closeBtn">CLOSE X</a>
-                      </section>
-                      <section class="modal overlay"> </section>
-                  </td>
+                    <td> {{ approval.date_submitted }}</td>
+                    <td> {{ approval.get_total_hours }}</td>
+                    <td> {{ approval.status }}</td>
+                    <td><a style="color: rgb(0,0,0);" href="#" data-toggle="modal"
+                           data-target="#{{approval.time_sheet_approvals_id}}"><u>View
+                        details</u></a>
+                        <section class="modal modalWindow" id="popupOne">
+                            <section class="modalWrapper">
+                                <h2>Modal Popup </h2>
+                            </section>
+                            <a class="closeBtn">CLOSE X</a>
+                        </section>
+                        <section class="modal overlay"></section>
+                    </td>
                 </tr>
-              {% endfor %}
-              </tbody>
+                {% endfor %}
+                </tbody>
             </table>
         </div>
 
         <!-- modal to view details of a submitted timesheet -->
-        <div id="myModal" class="modal fade">
+        {% for approval in time_sheet_approvals %}
+        <div id="{{ approval.time_sheet_approvals_id }}" class="modal fade">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content modal-lg">
                     <div class="modal-header modal-lg">
@@ -156,10 +167,12 @@
                             </tr>
                             </thead>
                             <tbody>
+                            {% for entry in approval.get_all_entries_by_submission %}
                             <tr>
-                                <td>1/1/18</td>
-                                <td align="right">8</td>
+                                <th>{{ entry.date }}</th>
+                                <th>{{ entry.number_hours }}</th>
                             </tr>
+                            {% endfor %}
                             </tbody>
                         </table>
                     </div>
@@ -169,6 +182,7 @@
                 </div>
             </div>
         </div>
+        {% endfor %}
     </div>
 </div>
 
@@ -179,26 +193,26 @@
 <!-- <script src="{% static 'scripts/timesheets.js' %}"></script> -->
 
 <script>
-  function confirm_reset() {
-    return confirm("Are you sure you want to reset all fields?");
-  }
+    function confirm_reset() {
+        return confirm("Are you sure you want to reset all fields?");
+    }
 </script>
 
 <script>
-  function calculateTotal() {
-      var hours = document.getElementsByName('hours');
-      var total = 0;
-      console.log("--")
-      for(var i = 0; i < hours.length; i++) {
+    function calculateTotal() {
+        var hours = document.getElementsByName('hours');
+        var total = 0;
+        console.log("--")
+        for (var i = 0; i < hours.length; i++) {
 
-          if(hours[i].value) {
-            console.log(hours[i].value);
-            total = total + parseInt(hours[i].value);
-          }
+            if (hours[i].value) {
+                console.log(hours[i].value);
+                total = total + parseInt(hours[i].value);
+            }
 
-          console.log("total: " + total);
-      }
-      document.getElementById('total').value = total;
-  };
+            console.log("total: " + total);
+        }
+        document.getElementById('total').value = total;
+    };
 </script>
 {% endblock %}

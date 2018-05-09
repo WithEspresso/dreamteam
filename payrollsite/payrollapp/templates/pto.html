@@ -20,7 +20,7 @@
             <div id="app">
                 <form method="post" action="">
                     {% csrf_token %}
-                    <table class="table table-condensed" align="center" style="width: 25%" >
+                    <table class="table table-condensed" align="center" style="width: 25%">
                         <thead>
                         <tr>
                             <th>Date</th>
@@ -28,50 +28,21 @@
                         </tr>
                         </thead>
                         <tbody>
+                        <!--- Repeats the same table row with an index for POST accessor-->
+                        {% for i in loop_times %}
                         <tr>
                             <td>
-                                <input class="form-control" type="date" name="date"/>
+                                <input class="form-control" type="date" name="date{{i}}"/>
                             </td>
                             <td>
-                                <input class="form-control" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours0"  style="width:75px"/>
+                                <input class="form-control" type="number" value="0" onchange="calculateTotal()" min="0"
+                                       max="24" step="1" name="hours{{i}}" id="hours0" style="width:75px"/>
                             </td>
                         </tr>
+                        {% endfor %}
                         <tr>
                             <td>
-                                <input class="form-control" type="date" name="date"/>
-                            </td>
-                            <td>
-                                <input class="form-control" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours1"  style="width:75px"/>
-                            </td>
-                            <input class="form-control" type="hidden" value="Pending" name="status">
-                        </tr>
-                        <tr>
-                            <td>
-                                <input class="form-control" type="date" name="date"/>
-                            </td>
-                            <td>
-                                <input class="form-control" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours2"  style="width:75px"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input class="form-control" type="date" name="date"/>
-                            </td>
-                            <td>
-                                <input class="form-control" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours3"  style="width:75px"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input class="form-control" type="date" name="date"/>
-                            </td>
-                            <td>
-                                <input class="form-control" type="number" value="0" onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours4"  style="width:75px"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                              <h4 align="right">Total:</h4>
+                                <h4 align="right">Total:</h4>
                             </td>
                             <td>
                                 <h4><input style="width:75px" type="number" name="total" id="total"/></h4>
@@ -81,7 +52,8 @@
                     </table>
                     <div class="col-md-12" align="center">
                         <button type="submit" class="btn btn-success" id="submit">Submit</button>
-                        <button type="reset" onclick="return confirm_reset()" class="btn btn-danger" id="clear">Reset</button>
+                        <button type="reset" onclick="return confirm_reset()" class="btn btn-danger" id="clear">Reset
+                        </button>
                     </div>
                 </form>
             </div>
@@ -91,14 +63,14 @@
             <br>
             {% if pto_requests %}
             <table class="table table-condensed" style="width:50%" align="center">
-              <thead>
+                <thead>
                 <tr>
                     <th> Date</th>
                     <th> Hours</th>
                     <th> Status</th>
                 </tr>
-              </thead>
-              <tbody>
+                </thead>
+                <tbody>
                 {% for pto in pto_requests %}
                 <tr>
                     <td> {{ pto.date }}</td>
@@ -106,7 +78,7 @@
                     <td> {{ pto.status }}</td>
                 </tr>
                 {% endfor %}
-              </tbody>
+                </tbody>
             </table>
             {% else %}
             <h4> No current paid time off requests pending. </h4>
@@ -122,26 +94,26 @@
 <!-- <script src="{% static 'scripts/timesheets.js' %}"></script> -->
 
 <script>
-  function confirm_reset() {
-    return confirm("Are you sure you want to reset all fields?");
-  }
+    function confirm_reset() {
+        return confirm("Are you sure you want to reset all fields?");
+    }
 </script>
 
 <script>
-  function calculateTotal() {
-      var hours = document.getElementsByName('hours');
-      var total = 0;
-      console.log("--")
-      for(var i = 0; i < hours.length; i++) {
+    function calculateTotal() {
+        var hours = document.getElementsByName('hours');
+        var total = 0;
+        console.log("--")
+        for (var i = 0; i < hours.length; i++) {
 
-          if(hours[i].value) {
-            console.log(hours[i].value);
-            total = total + parseInt(hours[i].value);
-          }
+            if (hours[i].value) {
+                console.log(hours[i].value);
+                total = total + parseInt(hours[i].value);
+            }
 
-          console.log("total: " + total);
-      }
-      document.getElementById('total').value = total;
-  };
+            console.log("total: " + total);
+        }
+        document.getElementById('total').value = total;
+    };
 </script>
 {% endblock %}
