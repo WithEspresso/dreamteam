@@ -125,7 +125,7 @@
                         </div>
                         <div class="modal-body">
                             <div class="container-fluid">
-                                <form action="" method="post">
+                                <form action="" id="form-create-account">
                                     <div class="container-login">
                                         <div class="container-inside-form">
                                             <label for="uname"><b>Username</b></label>
@@ -160,11 +160,15 @@
                                             <input type="text" placeholder="Enter Manager ID" name="manager" required>
                                         </div>
 
-                                        <input type="radio" name="usertype" value="employee" checked style="margin:5px; margin-top:20px;"> Employee<br>
-                                        <input type="radio" name="usertype" value="manager" style="margin:5px;"> Manager <br>
-                                        <input type="radio" name="usertype" value="human-resources" style="margin:5px;"> Human Resources<br><br>
+                                        <input type="radio" name="usertype" value="employee" checked
+                                               style="margin:5px; margin-top:20px;"> Employee<br>
+                                        <input type="radio" name="usertype" value="manager" style="margin:5px;"> Manager<br>
+                                        <input type="radio" name="usertype" value="human-resources" style="margin:5px;">
+                                        Human Resources<br><br>
 
-                                        <button type="submit"><a href="{% url 'signup' %}"  style="color:white; text-decoration:none">Create an account</a></button>
+                                        <button type="button"><a href="{% url 'signup' %}"
+                                                                 style="color:white; text-decoration:none">Create an
+                                            account</a></button>
                                     </div>
                                 </form>
 
