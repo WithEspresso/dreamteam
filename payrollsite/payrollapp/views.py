@@ -390,20 +390,24 @@ def approve_time_sheet(request):
     """
     # Behavior for updating database entries
     if request.user.is_authenticated and check_user_group(request.user, "Manager"):
-        form = ApprovalForm()
+        # If the user is sending a post request, make changes to the database.
         if request.method == "POST":
-            time_sheet_id = request.POST['row_timesheet_id']
-            time_sheet = TimeSheetEntry.objects.get(time_sheet_id=time_sheet_id)
-            if form.is_valid:
-                print(request.POST.get("status_update"))
-
+            time_sheet_id = request.POST['time_sheet_id']
+            time_sheet = TimeSheetApprovals.objects.get(time_sheet_approvals_id=time_sheet_id)
+            if "approve" in request.POST:
+                time_sheet.status = "Approved"
+            if "reject" in request.POST:
+                time_sheet.status = "Denied"
             time_sheet.save()
+
         # HTTP None, Default behavior: Load all pending and processed time sheets.
-        pending_time_sheets = TimeSheetEntry.objects.filter(status="Pending")
-        processed_time_sheets = TimeSheetEntry.objects.exclude(status="Pending")
+        pending_time_sheets = TimeSheetApprovals.objects.filter(status="Pending")
+        processed_time_sheets = TimeSheetApprovals.objects.exclude(status="Pending")
+        time_sheet_approvals = TimeSheetApprovals.objects.all()
 
         # Load all approved time sheets.
         context = {
+            'time_sheet_approvals': time_sheet_approvals,
             'pending_time_sheets': pending_time_sheets,
             'processed_time_sheets': processed_time_sheets
         }
