@@ -440,15 +440,24 @@ def generate_reports(request):
 
 def manage_accounts(request):
     """
-    TODO: Add a decorator so that it is an HR only view
-    TODO: HTTP NONE, displays form to search for an employee
-    TODO: HTTP GET, display wage information of the given user_id.
-    TODO: HTTP POST, update wage information
     :param   request as an http request
     :return: A rendered html page with wage information
     """
     if request.user.is_authenticated and check_user_group(request.user, "HumanResources"):
         # Check for post request and process data accordingly.
+        if request.method == "POST":
+            # Currently not working. Will debug later.
+            """
+            user_id = request.POST.get("user_id")
+            metadata_id = request.POST.get("metadata_id")
+            user_instance = User.objects.get(username=user_id)
+            metadata_instance = UserMetaData.objects.get(user_meta_data_id=metadata_id)
+            metadata_form = UserMetaDataForm(request.POST, instance=metadata_instance)
+            user_form = UserForm(request.POST, instance=user_instance)
+            if metadata_form.is_valid() and user_form.is_valid():
+                metadata_form.save()
+                user_form.save()
+            """
 
         # Gets all user metadata relevant to the company HR works for from the database.
         # TODO: Filter by company of user in instance.

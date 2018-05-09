@@ -17,12 +17,6 @@ class LoginForm(forms.Form):
 
 class UserForm(forms.ModelForm):
     # Changes it from plain text to hashing
-    username = forms.CharField(widget=forms.TextInput(
-        attrs={'class': 'containder-inside-form',
-              }))
-    password = forms.CharField(widget=forms.PasswordInput(
-        attrs={'class': 'containder-inside-form',
-              }))
     email = forms.CharField(widget=forms.TextInput(
         attrs={'class': 'containder-inside-form',
               }))
@@ -37,7 +31,7 @@ class UserForm(forms.ModelForm):
     class Meta:
         model = User
         # What fields do we want to appear on the form?
-        fields = ['username', 'email', 'first_name', 'last_name', 'password']
+        fields = ['email', 'first_name', 'last_name']
 
 
 class UserMetaDataForm(forms.ModelForm):
