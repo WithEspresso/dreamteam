@@ -70,7 +70,7 @@ class HumanResourcesData(models.Model):
 class TimeSheetApprovals(models.Model):
     time_sheet_approvals_id = models.AutoField(primary_key=True)
     date_submitted = models.DateField(auto_now=True)
-    status = models.CharField(max_length=10, choices=STATUS_CHOICE)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICE, default="Pending")
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
     @staticmethod

@@ -168,6 +168,7 @@ def view_paycheck_information(request):
         net_pay = list()
         federal_taxes = list()
         total_taxes = list()
+        # TODO: Move this to a database table to save time on calculations.
         for result in results:
             amount = float(result.amount)
             state_tax = round(amount * state_tax_rate, 2)
@@ -239,7 +240,7 @@ def paid_time_off(request):
                 date = request.POST.get("date" + str(i))
                 hours = request.POST.get("hours" + str(i))
                 # Check for empty entries
-                if hours is not None and hours != '' and date is not None and date != '' and total_hours > 0:
+                if hours is not None and hours != '' and date is not None and total_hours > 0:
                     pto_entry.date = date
                     pto_entry.hours = hours
                     total_hours += int(hours)
@@ -379,29 +380,39 @@ def display_time_sheet(request):
     """
     if request.user.is_authenticated:
         # Get the correct layout.
-        layout = get_layout_based_on_user_group(request.user)
+        user = request.user
+        layout = get_layout_based_on_user_group(user)
         # Write time sheet to the database.
-        time_sheet_entries = list()
-        total_hours = 0
         if request.method == "POST":
-            pto_entry = PaidTimeOffEntry()
-            pto_entry.user_id = request.user
+            time_sheet_entries = list()
+            total_hours = 0
             for i in range(0, 5):
+                time_sheet_entry = TimeSheetEntry()
+                time_sheet_entry.user_id = user
                 date = request.POST.get("date" + str(i))
                 hours = request.POST.get("hours" + str(i))
-                if date is not None and hours is not None:
-                    time_sheet_submission = TimeSheetEntry()
-                    time_sheet_submission.date = date
-                    time_sheet_submission.number_hours = hours
-                    time_sheet_submission.user_id = request.user
-                    time_sheet_submission.save()
-
+                print("DATE IS : " + str(date))
+                print("HOURS IS : " + str(hours))
+                if date is not None and date is not "" and hours is not None:
+                    time_sheet_entry.date = date
+                    time_sheet_entry.number_hours = hours
+                    total_hours += int(hours)
+                    time_sheet_entries.append(time_sheet_entry)
+                    print("CREATING ENTRY: " + str(time_sheet_entry.time_sheet_id))
+            if time_sheet_entries is not None and total_hours != 0:
+                approval = TimeSheetApprovals()
+                approval.user_id = user
+                print("SAVING APPROVAL: " + str(approval.time_sheet_approvals_id))
+                approval.save()
+                for entry in time_sheet_entries:
+                    entry.time_sheet_approvals_id = approval
+                    entry.save()
+                return HttpResponseRedirect('timesheet/')
         # Get total hours for the current pay period.
-        username = request.user
-        total_hours = TimeSheetEntry.calculate_pay_period_total_hours(username)
+        total_hours = TimeSheetEntry.calculate_pay_period_total_hours(user)
 
         # Get all time sheet approvals by user
-        time_sheet_approvals = TimeSheetApprovals.get_all_by_username(username)
+        time_sheet_approvals = TimeSheetApprovals.get_all_by_username(user)
 
         context = {
             "loop_times": range(0, 5),
