@@ -143,6 +143,7 @@ def view_paycheck_information(request):
     # If the user is logged in, get information from the html input tags.
     if request.method == "GET" and request.user.is_authenticated:
         layout = get_layout_based_on_user_group(request.user)
+        # Get start and end dates for search parameters.
         start_date = request.GET.get("start-date")
         end_date = request.GET.get("end-date")
         username = request.user
@@ -158,10 +159,33 @@ def view_paycheck_information(request):
         # Load the last five paychecks for the user if they are not currently filtering by time period.
         else:
             results = PaycheckInformation.objects.filter(user_id__username__exact=username)
+        # Calculate taxes for paychecks.
+        state_tax_rate = 0.15
+        city_tax_rate = 0.05
+        federal_tax_rate = 0.10
+        state_taxes = list()
+        city_taxes = list()
+        net_pay = list()
+        federal_taxes = list()
+        total_taxes = list()
+        for result in results:
+            amount = float(result.amount)
+            state_tax = round(amount * state_tax_rate, 2)
+            state_taxes.append("%.2f" % state_tax)
+            city_tax = round(amount * city_tax_rate, 2)
+            city_taxes.append("%.2f" % city_tax)
+            federal_tax = round(amount * federal_tax_rate, 2)
+            federal_taxes.append("%.2f" % federal_tax)
+            total_tax = round((state_tax_rate + city_tax_rate + federal_tax_rate) * amount, 2)
+            total_taxes.append("%.2f" % total_tax)
+            net_pay.append("%.2f" % (round(amount - total_tax, 2)))
+        zipped_data = zip(results, state_taxes, city_taxes, federal_taxes, total_taxes, net_pay)
+
         context = {
             'layout': layout,
             'results': results,
-            'error_message': error_message
+            'error_message': error_message,
+            'tax_information': zipped_data
         }
     # User is not logged in. Redirecting to the login page with an error message.
     else:
@@ -215,7 +239,7 @@ def paid_time_off(request):
                 date = request.POST.get("date" + str(i))
                 hours = request.POST.get("hours" + str(i))
                 # Check for empty entries
-                if hours is not None and hours != '' and date is not None and date != '':
+                if hours is not None and hours != '' and date is not None and date != '' and total_hours > 0:
                     pto_entry.date = date
                     pto_entry.hours = hours
                     total_hours += int(hours)
@@ -357,19 +381,20 @@ def display_time_sheet(request):
         # Get the correct layout.
         layout = get_layout_based_on_user_group(request.user)
         # Write time sheet to the database.
-        i = 0
         time_sheet_entries = list()
+        total_hours = 0
         if request.method == "POST":
             pto_entry = PaidTimeOffEntry()
             pto_entry.user_id = request.user
-            date = request.POST.get("date" + str(i))
-            hours = request.POST.get("hours" + str(i))
-            if date is not None and hours is not None:
-                time_sheet_submission = TimeSheetEntry()
-                time_sheet_submission.date = date
-                time_sheet_submission.number_hours = hours
-                time_sheet_submission.user_id = request.user
-                time_sheet_submission.save()
+            for i in range(0, 5):
+                date = request.POST.get("date" + str(i))
+                hours = request.POST.get("hours" + str(i))
+                if date is not None and hours is not None:
+                    time_sheet_submission = TimeSheetEntry()
+                    time_sheet_submission.date = date
+                    time_sheet_submission.number_hours = hours
+                    time_sheet_submission.user_id = request.user
+                    time_sheet_submission.save()
 
         # Get total hours for the current pay period.
         username = request.user
@@ -379,6 +404,7 @@ def display_time_sheet(request):
         time_sheet_approvals = TimeSheetApprovals.get_all_by_username(username)
 
         context = {
+            "loop_times": range(0, 5),
             'layout': layout,
             'total_hours': total_hours,
             'time_sheet_approvals': time_sheet_approvals
