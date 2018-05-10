@@ -190,6 +190,7 @@ def paid_time_off(request):
     :param   request as an http request
     :return: A rendered html page for the index with a list of current pending and process PTO requests.
     """
+    error_message = ""
     form = PaidTimeOffRequestForm(request.POST or None)
     if request.user.is_authenticated:
         layout = get_layout_based_on_user_group(request.user)
@@ -207,6 +208,7 @@ def paid_time_off(request):
         if request.method == "POST":
             # Iterate through all entries and append valid ones to a list.
             pto_entries = list()
+            total_hours = 0
             for i in range(0, 5):
                 pto_entry = PaidTimeOffEntry()
                 pto_entry.user_id = user
@@ -216,23 +218,27 @@ def paid_time_off(request):
                 if hours is not None and hours != '' and date is not None and date != '':
                     pto_entry.date = date
                     pto_entry.hours = hours
+                    total_hours += int(hours)
                     pto_entries.append(pto_entry)
             # If there are valid entries, create a new approval and link them all by foreign key.
-            if pto_entries is not None:
+            if pto_entries is not None and total_hours > 0:
                 approval = PaidTimeOffApproval()
                 approval.user_id = user
                 approval.save()
                 for entry in pto_entries:
                     entry.paid_time_off_approval_id = approval
                     entry.save()
-            return HttpResponseRedirect('pto/')
+                return HttpResponseRedirect('pto/')
+            else:
+                error_message = "Total hours cannot be zero."
         # Load the page with the context dictionary.
         context = {
             "loop_times": range(0, 5),
             "layout": layout,
             "form": form,
             "pto_approvals": pto_requests,
-            "remaining_pto": remaining_pto
+            "remaining_pto": remaining_pto,
+            "error_message": error_message
         }
         return render(request, 'pto.html', context)
     else:
@@ -351,10 +357,13 @@ def display_time_sheet(request):
         # Get the correct layout.
         layout = get_layout_based_on_user_group(request.user)
         # Write time sheet to the database.
-
+        i = 0
+        time_sheet_entries = list()
         if request.method == "POST":
-            date = request.POST.get("date")
-            hours = request.POST.get("hours")
+            pto_entry = PaidTimeOffEntry()
+            pto_entry.user_id = request.user
+            date = request.POST.get("date" + str(i))
+            hours = request.POST.get("hours" + str(i))
             if date is not None and hours is not None:
                 time_sheet_submission = TimeSheetEntry()
                 time_sheet_submission.date = date

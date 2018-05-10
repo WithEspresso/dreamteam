@@ -27,7 +27,10 @@
                 <td>{{ expense_request.user_id }}</td>
                 <td>{{ expense_request.status }}</td>
                 <td>{{ expense_request.amount }}</td>
-                <td>{{ expense_request.file }}</td>
+                <td>
+                    {{ expense_request.file.url }}
+                    <img src="{{ expense_request.file.url }}" style="width:42px;height:42px;border:0;">
+                </td>
                 <td>{{ expense_request.title }}</td>
             </tr>
             {% endfor %}
