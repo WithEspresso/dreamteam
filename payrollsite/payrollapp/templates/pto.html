@@ -36,7 +36,7 @@
                             </td>
                             <td>
                                 <input class="form-control" type="number" value="0" onchange="calculateTotal()" min="0"
-                                       max="24" step="1" name="hours{{i}}" id="hours0" style="width:75px"/>
+                                       max="24" step="1" name="hours" id="hours0" style="width:75px"/>
                             </td>
                         </tr>
                         {% endfor %}
@@ -149,15 +149,10 @@
     function calculateTotal() {
         var hours = document.getElementsByName('hours');
         var total = 0;
-        console.log("--")
         for (var i = 0; i < hours.length; i++) {
-
             if (hours[i].value) {
-                console.log(hours[i].value);
                 total = total + parseInt(hours[i].value);
             }
-
-            console.log("total: " + total);
         }
         document.getElementById('total').value = total;
     };
