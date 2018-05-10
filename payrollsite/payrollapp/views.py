@@ -329,6 +329,7 @@ def expense_reimbursement(request):
             new_expense_request = form.save(commit=False)
             new_expense_request.user_id = user
             new_expense_request.status = 'Pending'
+            print(new_expense_request.file.url)
             new_expense_request.save()
             # Redirect is done instead of rendering because refreshing will cause form resubmission.
             return HttpResponseRedirect('expense-requests/')

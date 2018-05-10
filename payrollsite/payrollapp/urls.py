@@ -1,8 +1,10 @@
 from django.conf.urls import url
 from django.urls import path
 from django.contrib.auth.views import login, logout
-
 from . import views
+
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     # Unauthenticated users only
@@ -31,3 +33,6 @@ urlpatterns = [
     url(r'signup/$', views.register, name='signup'),
     url(r'manageaccounts/$', views.manage_accounts, name='manage-accounts'),
 ]
+
+if settings.DEBUG is True:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

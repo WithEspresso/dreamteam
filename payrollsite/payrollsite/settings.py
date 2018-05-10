@@ -55,7 +55,7 @@ ROOT_URLCONF = 'payrollsite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['payrollsite/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -123,6 +123,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'payrollapp/media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'payrollapp/media/')
 
 PROJECT_ROOT = 'payrollsite'
