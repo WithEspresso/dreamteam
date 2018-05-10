@@ -22,14 +22,21 @@
                 <th>Amount</th>
                 <th>Receipt</th>
             </tr>
-            {% for expense_request in expense_requests %}
             <tr>
+                {% for expense_request in expense_requests %}
                 <td>{{ expense_request.user_id }}</td>
                 <td>{{ expense_request.status }}</td>
                 <td>{{ expense_request.amount }}</td>
-                <td>
-                    {{ expense_request.file.url }}
-                    <img src="{{ expense_request.file.url }}" style="width:42px;height:42px;border:0;">
+                <td><a style="color: rgb(0,0,0);" href="#" data-toggle="modal"
+                       data-target="#{{expense_request.expense_id}}"><u>View
+                    details</u></a>
+                    <section class="modal modalWindow" id="popupOne">
+                        <section class="modalWrapper">
+                            <h2>Modal Popup </h2>
+                        </section>
+                        <a class="closeBtn">CLOSE X</a>
+                    </section>
+                    <section class="modal overlay"></section>
                 </td>
                 <td>{{ expense_request.title }}</td>
             </tr>
@@ -38,6 +45,29 @@
         {% else %}
         <h2> No pending expense reimbursement requests. </h2>
         {% endif %}
+
+        <!-- modal to view details of a submitted timesheet -->
+        {% for expense_request in expense_requests %}
+        <div id="{{expense_request.expense_id}}" class="modal fade">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content modal-lg">
+                    <div class="modal-header modal-lg">
+                        <h3 class="modal-title " style="float: left">Timesheet Details</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <table align="center" class="detailsTable">
+                            <h2> Expense Reimbursement File Upload </h2>
+                            <img src="{{ expense_request.file.url }}" style="width:500px;height:600px;">
+                        </table>
+                    </div>
+                    <div class=" modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
 
         <div class="modal fade" id="myModalExpenses" role="dialog">
             <div class="modal-dialog modal-lg" style="width:500px">
