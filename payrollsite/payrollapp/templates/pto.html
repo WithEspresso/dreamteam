@@ -17,6 +17,9 @@
         <div class="container">
             <h1>Request Paid Time Off</h1>
             <h4>Remaining PTO hours: {{ remaining_pto }}</h4>
+            {% if error_message %}
+                {{ error_message }}
+            {% endif %}
             <div id="app">
                 <form method="post" action="">
                     {% csrf_token %}

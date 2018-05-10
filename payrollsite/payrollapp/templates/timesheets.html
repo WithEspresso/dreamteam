@@ -28,80 +28,18 @@
                         </tr>
                         </thead>
                         <tbody>
+                        <!--- Repeats the same table row with an index for POST accessor-->
+                        {% for i in loop_times %}
                         <tr>
                             <td>
-                                <input class="form-control" type="date" name="date"/>
+                                <input class="form-control" type="date" name="date{{i}}"/>
                             </td>
                             <td>
-                                <form method="post" action="">
-                                    <input class="form-control" style="width:75px" type="number" value="0"
-                                           onchange="calculateTotal()" min="0" max="24" step="1" name="hours"
-                                           id="hours0"/>
-                                </form>
+                                <input class="form-control" type="number" value="0" onchange="calculateTotal()" min="0"
+                                       max="24" step="1" name="hours{{i}}" id="hours0" style="width:75px"/>
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                <input class="form-control" type="date" name="date"/>
-                            </td>
-                            <td>
-                                <input class="form-control" style="width:75px" type="number" value="0"
-                                       onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours1"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input class="form-control" type="date" name="date"/>
-                            </td>
-                            <td>
-                                <input class="form-control" style="width:75px" type="number" value="0"
-                                       onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours2"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input class="form-control" type="date" name="date"/>
-                            </td>
-                            <td>
-                                <input class="form-control" style="width:75px" type="number" value="0"
-                                       onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours3"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input class="form-control" type="date" name="date"/>
-                            </td>
-                            <td>
-                                <input class="form-control" style="width:75px" type="number" value="0"
-                                       onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours4"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input class="form-control" type="date" name="date"/>
-                            </td>
-                            <td>
-                                <input class="form-control" style="width:75px" type="number" value="0"
-                                       onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours5"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input class="form-control" type="date" name="date"/>
-                            </td>
-                            <td>
-                                <input class="form-control" style="width:75px" type="number" value="0"
-                                       onchange="calculateTotal()" min="0" max="24" step="1" name="hours" id="hours6"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h4 align="right">Total:</h4>
-                            </td>
-                            <td>
-                                <h4><input style="width:75px" type="number" name="total" id="total"/></h4>
-                            </td>
-                        </tr>
+                        {% endfor %}
                         </tbody>
                     </table>
                     <div class="col-md-12" align="center">
