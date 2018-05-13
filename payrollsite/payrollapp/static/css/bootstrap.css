@@ -2616,13 +2616,7 @@ input[type=text], input[type=password] {
 }
 
 
-#myModalExpenses input[type=text]{
-    width: 70%;
-}
 
-#myModalExpenses .modal-body{
-  left: 15%;
-}
 
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
   input[type="date"].form-control,

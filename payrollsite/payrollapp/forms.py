@@ -4,7 +4,6 @@ from .models import PaidTimeOffEntry, Expenses, UserMetaData
 from .validators import validate_image_file
 from .validators import validate_year_entry
 
-
 class LoginForm(forms.Form):
     # Changes it from plain text to hashing
     username = forms.CharField()

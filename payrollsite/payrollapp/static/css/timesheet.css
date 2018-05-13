@@ -1,9 +1,11 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700);
+@import url(https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css); 
 
+/*div.wrapper *{padding: 0px 1px 0px 1px}*/
 *{
   font-family: 'Roboto', sans-serif;
 }
-
+/*
 .border-none{
   border: none;
 }
@@ -17,4 +19,4 @@ footer{
   background: black;
   color: white;
   padding: 15px 0;
-}
+}*/
