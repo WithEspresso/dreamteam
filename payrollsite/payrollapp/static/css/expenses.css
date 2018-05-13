@@ -25,7 +25,7 @@ body {
   background: #A0D468;
 }
 
-table {
+/*table {
   text-align: left;
   width: 640px;
   margin: 30px auto;
@@ -41,7 +41,7 @@ table tr:nth-child(odd) {
 table td {
   padding: 10px 15px;
   color: #434A54;
-}
+}*/
 
 .amount {
   color: #DA4453;

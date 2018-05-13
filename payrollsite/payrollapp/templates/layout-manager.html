@@ -35,7 +35,8 @@
 
     <!-- Navigation -->
     <!-- <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0"> -->
-      <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0; width: 100%; position: fixed;">
+    <nav class="navbar navbar-default navbar-static-top" role="navigation"
+         style="margin-bottom: 0; width: 100%; position: fixed;">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="sr-only">Toggle navigation</span>
@@ -44,7 +45,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a href="{%url 'dashboard'%}" class="logo"><img src="{% static 'images/logo3.png' %}" alt=""
-                                          style="width:235px; padding:5px;"></a>
+                                                            style="width:235px; padding:5px;"></a>
         </div>
         <!-- /.navbar-header -->
 
@@ -72,7 +73,7 @@
         <!-- /.navbar-top-links -->
 
         <!-- <div class="navbar-default sidebar" role="navigation" > -->
-        <div class="navbar-default sidebar" role="navigation" style="position: fixed; height:100%" >
+        <div class="navbar-default sidebar" role="navigation" style="position: fixed; height:100%">
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
 
@@ -157,30 +158,30 @@
                                         <div class="clearfix"></div>
                                         <div class="bot-border"></div>
 
-                                        <div ><b>Last Name: </b >{{ request.user.last_name }}</div>
+                                        <div><b>Last Name: </b>{{ request.user.last_name }}</div>
                                         <div class="clearfix"></div>
                                         <div class="bot-border"></div>
 
-                                        <div ><b>Date Of Joining: </b >{{ request.user.date_joined }}</div>
-
-                                        <div class="clearfix"></div>
-                                        <div class="bot-border"></div>
-
-                                        <div ><b>Date Of Birth: </b>11 Jun 1998</div>
+                                        <div><b>Date Of Joining: </b>{{ request.user.date_joined }}</div>
 
                                         <div class="clearfix"></div>
                                         <div class="bot-border"></div>
 
-                                        <div ><b>Email: </b> {{ request.user.email }}</div>
-                                        <div class="clearfix"></div>
-                                        <div class="bot-border"></div>
-
-                                        <div ><b>Address: </b>{{ user_meta_data.address}}</div>
+                                        <div><b>Date Of Birth: </b>11 Jun 1998</div>
 
                                         <div class="clearfix"></div>
                                         <div class="bot-border"></div>
 
-                                        <div ><b>Department: </b>Analytics</div>
+                                        <div><b>Email: </b> {{ request.user.email }}</div>
+                                        <div class="clearfix"></div>
+                                        <div class="bot-border"></div>
+
+                                        <div><b>Address: </b>{{ user_meta_data.address}}</div>
+
+                                        <div class="clearfix"></div>
+                                        <div class="bot-border"></div>
+
+                                        <div><b>Department: </b>Analytics</div>
 
                                         <!-- /.box-body -->
                                     </div>

@@ -1,22 +1,396 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700);
-@import url(https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css); 
-
-/*div.wrapper *{padding: 0px 1px 0px 1px}*/
-*{
-  font-family: 'Roboto', sans-serif;
-}
-/*
-.border-none{
-  border: none;
+.pikaday  {
+    position: relative;
+    display: inline-block;
 }
 
-.table th, .table td {
-     border-top: none !important;
- }
+.pikaday .fa-calendar {
+    color: #666;
+    position: absolute;
+    left: .6em;
+    top: .4em;
+    display: inline-block;
+}
+.pikaday__display {
+  padding-left: 1.9em !important;
+}
 
-footer{
-  margin-top: 30px;
-  background: black;
+.pika-button {
+  .is-today &  {
+    color: #444; //AAFP-gray
+    background-color: #A7BAC5; //AAFP-blue-tint-50;
+  }
+  .is-selected & {
+    background-color: #4f758B; //AAFP-blue;
+    color: white;
+  }
+  &:hover {
+    background-color: #cf7f00; //AAFP-orange
+  }
+}
+
+.pika-table th {
+    color: #777;
+    background-color: white;
+    abbr[title] {
+      border: none;
+      text-decoration: none;
+      cursor: default;
+    }
+}
+
+/** OVERRIDES for AAFP ISSUES **/
+.pika-next, .pika-prev, .pika-button {
+  box-shadow: none;
+}
+.pika-button {
+  background-color: #dce3e8;
+  color: #444;
+}
+.pika-label {
+  font-size: 18px;
+  color: #4f758b;
+}
+.pika-single table tr th:first-child {
+  padding-left: 0;
+}
+.pika-button, .pika-prev, .pika-next {
+  border-radius: 0 !important;
+}
+
+.pika-table  {
+	display:table;
+	vertical-align: middle;
+	float:none;
+	clear:none;
+
+	thead, tbody, th, td, tr {
+	float:none;
+	clear:none;
+	}
+
+	thead {display: table-header-group;}
+	tr { display: table-row; border: 0;}
+	td, th { display: table-cell; }
+	thead { display: table-header-group; }
+	tbody { display: table-row-group; }
+	tfoot { display: table-footer-group; }
+	th { font-weight: bolder; text-align: center; }
+	td, th, tr { vertical-align: inherit; }
+	table { border-spacing: 2px; }
+	thead, tbody, tfoot {  vertical-align: middle;}
+	td {
+		border:0px;
+		padding: 0;
+
+		&[valign=top]{vertical-align:top}
+		&[valign=middle]{vertical-align:middle}
+		&[valign=bottom]{vertical-align:bottom}
+		&[valign=baseline]{vertical-align:baseline}
+
+		p {
+			margin:0;
+		}
+
+		ul, ol {
+			padding-bottom: 0;
+			margin:0;
+		}
+
+		.table-head-mobile {
+			display:none;
+		}
+		ol, ul, li, span, div {font-weight:normal;}
+		b, strong {color: inherit;}
+	}
+}
+
+button {
+    background-color: #51ade2;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+
+    font-size: 14px;
+    float: right;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+.responstable {
+  margin: 1em 0;
+  width: 100%;
+  overflow: hidden;
+  background: #FFF;
+  color: #024457;
+  border-radius: 10px;
+  border: 1px solid #167F92;
+}
+.responstable tr {
+  border: 1px solid #D9E4E6;
+}
+.responstable tr:nth-child(odd) {
+  background-color: #EAF3F3;
+}
+.responstable th {
+  display: none;
+  border: 1px solid #FFF;
+  background-color: #167F92;
+  color: #FFF;
+  padding: 1em;
+}
+.responstable th:first-child {
+  display: table-cell;
+  text-align: center;
+}
+.responstable th:nth-child(2) {
+  display: table-cell;
+}
+.responstable th:nth-child(2) span {
+  display: none;
+}
+.responstable th:nth-child(2):after {
+  content: attr(data-th);
+}
+@media (min-width: 480px) {
+  .responstable th:nth-child(2) span {
+    display: block;
+  }
+  .responstable th:nth-child(2):after {
+    display: none;
+  }
+}
+.responstable td {
+  display: block;
+  word-wrap: break-word;
+  max-width: 7em;
+}
+.responstable td:first-child {
+  display: table-cell;
+  text-align: center;
+  border-right: 1px solid #D9E4E6;
+}
+@media (min-width: 480px) {
+  .responstable td {
+    border: 1px solid #D9E4E6;
+  }
+}
+.responstable th, .responstable td {
+  text-align: center;
+  margin: .5em 1em;
+}
+@media (min-width: 480px) {
+  .responstable th, .responstable td {
+    display: table-cell;
+    padding: 1em;
+  }
+}
+
+@import url(https://fonts.googleapis.com/css?family=Muli);
+@import url(https://fonts.googleapis.com/css?family=Gentium+Basic);
+
+/* --- The Table Structure --- */
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  }
+table tr th,
+table tr td {
+  border-right: 1px solid #bbb;
+  border-bottom: 1px solid #bbb;
+  box-shadow: 2px 2px 1px #e5dfcc;
+}
+table tr th:first-child,
+table tr td:first-child {
+  border-left: 1px solid #bbb;
+}
+table tr th {
+  border-top: 1px solid #bbb;
+}
+
+/* top-left border-radius */
+table tr:first-child th:first-child {
+  border-top-left-radius: 6px;
+}
+
+/* top-right border-radius */
+table tr:first-child th:last-child {
+  border-top-right-radius: 6px;
+}
+
+/* bottom-left border-radius */
+table tr:last-child td:first-child {
+  border-bottom-left-radius: 6px;
+}
+
+/* bottom-right border-radius */
+table tr:last-child td:last-child {
+  border-bottom-right-radius: 6px;
+}
+
+/* -- The Stlyes -- */
+
+table th, td{
+  padding: 8px 20px;
+}
+table th{
+  background: #E5E6EB;
+  color: #111;
+}
+table td{
+  background: #EFF1F6;
+}
+
+.pikaday {
+  position: relative;
+  display: inline-block;
+}
+.pikaday .fa-calendar {
+  color: #666;
+  position: absolute;
+  left: .6em;
+  top: .4em;
+  display: inline-block;
+}
+.pikaday__display {
+  padding-left: 1.9em !important;
+}
+.is-today .pika-button {
+  color: #444;
+  background-color: #A7BAC5;
+}
+.is-selected .pika-button {
+  background-color: #4f758B;
   color: white;
-  padding: 15px 0;
-}*/
+}
+.pika-button:hover {
+  background-color: #cf7f00;
+}
+.pika-table th {
+  color: #777;
+  background-color: white;
+}
+.pika-table th abbr[title] {
+  border: none;
+  text-decoration: none;
+  cursor: default;
+}
+/** OVERRIDES for AAFP ISSUES **/
+.pika-next,
+.pika-prev,
+.pika-button {
+  box-shadow: none;
+}
+.pika-button {
+  background-color: #dce3e8;
+  color: #444;
+}
+.pika-label {
+  font-size: 18px;
+  color: #4f758b;
+}
+.pika-single table tr th:first-child {
+  padding-left: 0;
+}
+.pika-button,
+.pika-prev,
+.pika-next {
+  border-radius: 0 !important;
+}
+.pika-table {
+  display: table;
+  vertical-align: middle;
+  float: none;
+  clear: none;
+}
+.pika-table thead,
+.pika-table tbody,
+.pika-table th,
+.pika-table td,
+.pika-table tr {
+  float: none;
+  clear: none;
+}
+.pika-table thead {
+  display: table-header-group;
+}
+.pika-table tr {
+  display: table-row;
+  border: 0;
+}
+.pika-table td,
+.pika-table th {
+  display: table-cell;
+}
+.pika-table thead {
+  display: table-header-group;
+}
+.pika-table tbody {
+  display: table-row-group;
+}
+.pika-table tfoot {
+  display: table-footer-group;
+}
+.pika-table th {
+  font-weight: bolder;
+  text-align: center;
+}
+.pika-table td,
+.pika-table th,
+.pika-table tr {
+  vertical-align: inherit;
+}
+.pika-table table {
+  border-spacing: 2px;
+}
+.pika-table thead,
+.pika-table tbody,
+.pika-table tfoot {
+  vertical-align: middle;
+}
+.pika-table td {
+  border: 0px;
+  padding: 0;
+}
+.pika-table td[valign=top] {
+  vertical-align: top;
+}
+.pika-table td[valign=middle] {
+  vertical-align: middle;
+}
+.pika-table td[valign=bottom] {
+  vertical-align: bottom;
+}
+.pika-table td[valign=baseline] {
+  vertical-align: baseline;
+}
+.pika-table td p {
+  margin: 0;
+}
+.pika-table td ul,
+.pika-table td ol {
+  padding-bottom: 0;
+  margin: 0;
+}
+.pika-table td .table-head-mobile {
+  display: none;
+}
+.pika-table td ol,
+.pika-table td ul,
+.pika-table td li,
+.pika-table td span,
+.pika-table td div {
+  font-weight: normal;
+}
+.pika-table td b,
+.pika-table td strong {
+  color: inherit;
+}
+
+
+
+
+
