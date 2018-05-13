@@ -1,12 +1,28 @@
 {% load static %}
 
-<html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}">
     <title>Payroll System | by Dreamteam</title>
     <link rel="icon" href="{% static 'images/favicon.png' %}">
+
+    <!-- Bootstrap Core CSS -->
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="{% static 'css/metisMenu.css' %}" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{% static 'css/sb-admin-2.css' %}" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="{% static 'css/font-awesome.css' %}" rel="stylesheet" type="text/css">
+
+    <link href="{% static 'css/morris.css' %}" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    {% block stylesblock %}
+    {% endblock %}
 
 </head>
 <body>
@@ -19,8 +35,8 @@
     <img src="{% static 'images/wallpaper.jpg' %}" alt="" width="100%" height="100%">
 </div>
 <div class="centered">
-    <form method="post" action="">
-        <div class="container-login">
+    <form style="width: 25%" method="post" action="">
+        <div class="container-login" style="width: 100%">
             {% if error_message %}
             <div class="alert alert-danger">
                 <strong>{{ error_message }}</strong>
@@ -34,13 +50,294 @@
             {% endfor %}
             <button type="submit" style="color:white; text-decoration:none"> Login
             </button>
-            <div style="text-align:center; margin-top:10px;">
-                <a href="#" style="color:#51ade2; text-decoration:none">Forgot password?</a>
+            <div style="margin-top:10px;">
+
+                <a href="#" style="float:left; color:#51ade2; ">Forgot password?</a>
+                <a href="#" style="float:right; color:#51ade2;" data-toggle="modal" data-target="#createAccount">Register</a>
+
             </div>
         </div>
+        <div class="row">
+            <div style="text-align:center; margin-top:10px;">
+                <a style="color:#2F4F4F" href="#" data-toggle="modal" data-target="#privacy">Privacy Policy</a> |
+                <a style="color:#2F4F4F" href="#" data-toggle="modal" data-target="#help">Help</a>
+            </div>
+        </div>
+
     </form>
+
+</div>
+<script src="{% static 'scripts/jquery.js' %}"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="{% static 'scripts/bootstrap.js' %}"></script>
+
+<!-- Metis Menu Plugin JavaScript -->
+<script src="{% static 'scripts/metisMenu.js' %}"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="{% static 'scripts/sb-admin-2.js' %}"></script>
+
+{% block scriptsblock %}
+</body>
+
+
+<div id="privacy" class="modal fade">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content modal-lg">
+            <div class="modal-header modal-md">
+                <h3 class="modal-title " style="float: left">Privacy Policy</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="margin-top type-bold">Disclaimer</p>
+                <p>All statements, information, and data given herein are believed to be accurate and reliable, but are
+                    presented without guarantee, expressed or implied. Statements or suggestions concerning possible use
+                    of our products, including but not limited to the design of DreamPayroll products and systems, are
+                    made
+                    without representation or warranty that any such use is free of patent infringement, and are not
+                    recommendations to infringe any patent. The user should not assume that all safety measures are
+                    indicated, or that other measures may not be required.</p>
+                <br/>
+                <p>DreamPayroll is committed to protecting online user privacy. In order to ensure your privacy,
+                    information DreamPayroll collects through our website at www.DreamPayroll.com (“Site”) is used only
+                    in the
+                    manner and for the purposes described in this DreamPayroll Privacy Policy (“Privacy Policy.”)</p>
+                <p class="margin-top type-bold">Newsletter Disclaimer</p>
+                <p>DreamPayroll provides information in e-newsletters for general guidance only, and does not constitute
+                    the provision of legal advice, tax advice, accounting services, investment advice, or professional
+                    consulting of any kind. The information provided herein should not be used as a substitute for
+                    consultation with professional tax, accounting, legal, or other competent advisers. Before making
+                    any decision or taking any action, you should consult a professional adviser who has been provided
+                    with all pertinent facts relevant to your particular situation.</p>
+                <br/>
+                <p>Tax articles in e-newsletters are not intended to be used, and cannot be used by any taxpayer, for
+                    the purpose of avoiding accuracy-related penalties that may be imposed on the taxpayer. The
+                    information is provided “as is,” with no assurance or guarantee of completeness, accuracy, or
+                    timeliness of the information, and without warranty of any kind, express or implied, including but
+                    not limited to warranties of performance, merchantability, and fitness for a particular purpose.</p>
+                <p class="margin-top type-bold">User Consent to Privacy Policy</p>
+                <p>Any person accessing, browsing, or otherwise using the Site, either manually or via an automated
+                    device or program, shall be considered a “User.” All Users are bound by the terms of this Privacy
+                    Policy. Users consent to the collection, use, and disclosure of personally identifiable User
+                    information (“Information”) pursuant to the terms of this Privacy Policy.</p>
+                <p class="margin-top type-bold">Information Collected from Users</p>
+                <p>DreamPayroll collects the email address of Users that email a question or comment to DreamPayroll or
+                    submit
+                    a customer review.</p>
+                <br/>
+                <p>DreamPayroll collects the billing and shipping addresses, including relevant e-mail, phone and credit
+                    card numbers and expiration dates of Users who purchase a product from DreamPayroll through the
+                    Site.
+                    This includes users who register to become DreamPayroll members or enter any DreamPayroll contests
+                    or
+                    other promotional features available on the Site.</p>
+                <br/>
+                <p>Through the use of “cookies” (for more information regarding cookies, see below), DreamPayroll may
+                    collect and store anonymous information relating to Users’ browsing patterns, including, for
+                    instance, the User’s browser version, site referral information, IP address, operating system, and
+                    other technical Site use information.</p>
+                <p class="margin-top type-bold">Cookies</p>
+                <p>The Site uses a feature of Internet web browsers called a cookie, which is a file that a User’s web
+                    browser places on a User’s computer’s hard drive, to assign an identification code to the computer
+                    and to collect anonymous browsing information. On this Site, cookies are used in conjunction with
+                    session variables to track a User’s shopping cart and expire as soon as an order is completed or if
+                    a shopping cart sits idle for a lengthy period without being checked out.</p>
+                <br/>
+                <p>DreamPayroll does not use cookies to retrieve Information about Users from a User’s computer unless
+                    the
+                    User knowingly and willingly provided such Information. For instance, DreamPayroll’s cookies do not
+                    collection any Information and the cookies do not collect, store or contain any credit card
+                    information.</p>
+                <br/>
+                <p>You may set your Internet web browser to notify you when you receive a cookie or to prevent cookies
+                    from being sent. If you prevent a cookie from being sent, you may limit the functionality
+                    DreamPayroll
+                    can provide you when you visit the Site, especially when purchasing an item on the Site.</p>
+                <p class="margin-top type-bold">Use of Information</p>
+                <p>DreamPayroll uses the Information collected from its Users to:</p>
+                <ul>
+                    <li>Respond to Users’ questions or comments;</li>
+                    <li>Administer a User’s contest entry or entry in other promotional feature;</li>
+                    <li>Fulfill a User’s purchase request and notify Users of their order status; and</li>
+                    <li>Provide Users with important functionality changes to the Site, new DreamPayroll services, and
+                        special offers we think you will find valuable.
+                    </li>
+                </ul>
+                <p class="margin-top type-bold">Disclosure of Information to Third Parties</p>
+                <p>Unless we have your consent or except as required or permitted by law, DreamPayroll will not sell,
+                    share, trade, or give away any Information that it collects or receives regarding its Users.</p>
+                <br/>
+                <p>DreamPayroll may disclose information about our Users to others if we have a good faith belief that
+                    we
+                    are required to do so by law or legal process, to respond to claims, or to protect the rights,
+                    property, or safety of DreamPayroll or others. DreamPayroll may disclose Information to a third
+                    party in
+                    the event that a third party acquires DreamPayroll or its assets. (See Sale or Acquisition section
+                    below.)</p>
+                <p class="margin-top type-bold">Linked Internet Websites</p>
+                <p>The Site may provide hyperlinks, which are highlighted words or pictures within a hypertext document
+                    that, when clicked, take you to another place within the document, to another document altogether,
+                    or may take you to a third-party website not controlled by DreamPayroll. These hyperlinked
+                    third-party
+                    websites may collect and disclose Information different than this Site. DreamPayroll is not
+                    responsible
+                    for the collection, use, or disclosure of information collected through these websites, and
+                    DreamPayroll expressly disclaims any and all liability related to such collection, use, or
+                    disclosure.</p>
+                <p class="margin-top type-bold">Children</p>
+                <p>The DreamPayroll Site is not directed toward children under 18 years of age, and DreamPayroll does
+                    not
+                    knowingly collect any information from children under 18 years of age through the Site.</p>
+                <p class="margin-top type-bold">Security</p>
+                <p>DreamPayroll has security measures to protect against the loss, misuse, and alteration of the
+                    Information under our control, including credit card information that is submitted to DreamPayroll
+                    When
+                    Users place orders or access their account information, the Site uses secure server software (SSL),
+                    which encrypts all information Users’ input before it is sent to us. Thus, we have taken steps to
+                    protect the Information we collect from you from unauthorized access. Unfortunately, no system is
+                    perfect; therefore, DreamPayroll makes no representations or warranties with regard to the
+                    sufficiency
+                    of these security measures. DreamPayroll shall not be responsible for any actual or consequential
+                    damages that result from a lapse in compliance with this Privacy Policy because of a security breach
+                    or technical malfunction.</p>
+                <p class="margin-top type-bold">Sale or Acquisition</p>
+                <p>In the event that another company acquires DreamPayroll or all or part of its assets, we reserve the
+                    right to include Information among the assets transferred to the acquiring company.</p>
+                <p class="margin-top type-bold">Applicable Law/International Issues</p>
+                <p>Information that is submitted to this Site will be collected, processed, stored, disclosed, and
+                    disposed of in accordance with applicable U.S. law. If you are a non-U.S. User, you acknowledge and
+                    agree that we may collect and use your Information, as discussed above, outside your resident
+                    jurisdiction. In addition, such Information may be stored on servers located outside your resident
+                    jurisdiction. U.S. law may not provide the degree of protection for Information that is available in
+                    other countries. By providing us with your Information, you acknowledge that your have read this
+                    Privacy Policy, understand it, agree to its terms and consent to the transfer of such Information
+                    outside your resident jurisdiction. If you do not consent to the terms of this Policy, please do not
+                    use this Site, but if you have already provided us with Information, please contact us and let us
+                    know how you would like us to handle such information.</p>
+                <p class="margin-top type-bold">Amendments to Privacy Policy</p>
+                <p>DreamPayroll reserves the right to amend this Privacy Policy periodically.</p>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
+<div id="help" class="modal fade">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content modal-lg">
+            <div class="modal-header modal-md">
+                <h3 class="modal-title " style="float: left">Help</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h3 class="type-bold margin-vertical">Login</h3>
+                <p class="type-bold">Description:</p>
+                <p>Log in to the application.</p>
+                <p class="type-bold margin-top">Actions:</p>
+                <ul>
+                    <li>
+                        Enter the <strong>Username.</strong> Usernames are not case sensitive.
+                        Usernames must be 3 to 20 characters in length.
+                        Usernames may not contain special characters other than . and _.
+                    </li>
+                    <li>
+                        Enter the <strong>Password.</strong>
+                        Passwords are case sensitive.
+                        Passwords must be 7 to 20 characters in length, must not be duplicates of any of the previously
+                        four used passwords and must include 2 of the following 3 items:
+                        <ul>
+                            <li>1 or more numbers</li>
+                            <li>1 or more uppercase letters and 1 or more lowercase letters</li>
+                            <li>1 or more non-alphanumeric characters</li>
+                        </ul>
+                    </li>
+                    <li>Verify all information is correct and click <strong>Login</strong> to enter the main screen.
+                    </li>
+                    <li>Click <strong>Forgot?</strong> to reset the password.</li>
+                    <li>Click <strong>Register</strong> to register for the first time(only for HR).</li>
+                </ul>
+                <p class="type-bold">Important Notes:</p>
+                <ul>
+                    <li>
+                        In order to maintain confidentiality, employees must contact their Company Administrator with
+                        questions.
+                        DreamPayroll is not authorized to speak directly with employees.
+                    </li>
+                </ul>
 
-</body>
-</html>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="createAccount" class="modal fade">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content modal-lg">
+            <div class="modal-header modal-md">
+                <h3 class="modal-title " style="float: left">Create Account</h3>
+                <button type="button" style="width:100px;" class="close" data-dismiss="modal"
+                        aria-hidden="true">&times;
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <form action="" id="form-create-account">
+                        <div class="container-login">
+                            <div class="container-inside-form">
+                                <label for="uname"><b>Username</b></label>
+                                <input type="text" placeholder="Enter Username" name="uname" required>
+                            </div>
+                            <div class="container-inside-form">
+                                <label for="psw"><b>Password</b></label>
+                                <input type="password" placeholder="Enter Password" name="psw" required>
+                            </div>
+                            <div class="container-inside-form">
+                                <label for="name"><b>First Name</b></label>
+                                <input type="text" placeholder="Enter First Name" name="name" required>
+                            </div>
+                            <div class="container-inside-form">
+                                <label for="lastname"><b>Last Name</b></label>
+                                <input type="text" placeholder="Enter Last Name" name="lastname" required>
+                            </div>
+                            <div class="container-inside-form">
+                                <label for="email"><b>Email</b></label>
+                                <input type="text" placeholder="Enter Email" name="email" required>
+                            </div>
+                            <div class="container-inside-form">
+                                <label for="address"><b>Address</b></label>
+                                <input type="text" placeholder="Enter Address" name="address" required>
+                            </div>
+                            <div class="container-inside-form">
+                                <label for="ssn"><b>SSN</b></label>
+                                <input type="text" placeholder="Enter SSN" name="ssn" required>
+                            </div>
+                            <div class="container-inside-form">
+                                <label for="manager"><b>Manager ID</b></label>
+                                <input type="text" placeholder="Enter Manager ID" name="manager" required>
+                            </div>
+
+                            <button type="button"><a href="{% url 'signup' %}"
+                                                     style="color:white; text-decoration:none">Create an account</a></button>
+                        </div>
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" style="width:100px;" data-dismiss="modal">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

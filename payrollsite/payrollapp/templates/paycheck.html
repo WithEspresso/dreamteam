@@ -1,4 +1,4 @@
-{% extends 'layout-employee.html' %}
+{% extends layout %}
 
 {% block stylesblock %}
 <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,700'>
@@ -16,7 +16,7 @@
 {% block page-wrapper %}
 
 <!-- Page Content -->
-<div id="page-wrapper">
+<div id="page-wrapper" style="min-height:100%; padding-top:100px">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
@@ -67,11 +67,11 @@
                         <td>{{ paycheck.paycheck_id }}</td>
                         <td>{{ paycheck.payday }}</td>
                         <td>{{ paycheck.amount }}</td>
-                        <td><a style="color: rgb(0,0,0);" href="#" data-toggle="modal" data-target="#myModal"><u>View
+                        <td><a style="color: rgb(0,0,0);" href="#" data-toggle="modal"
+                               data-target="#{{ paycheck.paycheck_id }}"><u>View
                             details</u>
                         </a>
-
-                            <section class="modal modalWindow" id="popupOne">
+                            <section class="modal modalWindow">
                                 <section class="modalWrapper">
                                     <h2>Modal Popup </h2>
                                 </section>
@@ -84,7 +84,8 @@
                 </table>
             </div>
 
-            <div id="myModal" class="modal fade">
+            {% for paycheck, state_tax, city_tax, federal_tax, net_tax, net_pay in tax_information %}
+            <div id="{{paycheck.paycheck_id}}" class="modal fade">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content modal-lg">
                         <div class="modal-header modal-lg">
@@ -97,85 +98,32 @@
                                 <tr>
                                     <th>Pay Types</th>
                                     <th>Amount</th>
-                                    <th></th>
-                                    <th>Withholding</th>
-                                    <th>Deductions</th>
-
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td>Regular</td>
-                                    <td>2,700.00</td>
-                                    <td></td>
-                                    <td>Federal</td>
-                                    <td>546.31</td>
-                                </tr>
-                                <tr>
-                                    <td>Overtime</td>
-                                    <td>0.00</td>
-                                    <td></td>
-                                    <td>State</td>
-                                    <td>52.99</td>
-                                </tr>
-                                <tr>
-                                    <td>Vacation</td>
-                                    <td>0.00</td>
-                                    <td></td>
-                                    <td>City</td>
-                                    <td>0.00</td>
-                                </tr>
-                                <tr>
-                                    <td>Sick</td>
-                                    <td>0.00</td>
-                                    <td></td>
-                                    <td>Fica</td>
-                                    <td>162.34</td>
-                                </tr>
-                                <tr>
-                                    <td>Bonus</td>
-                                    <td>0.00</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>Nontaxable</td>
-                                    <td>0.00</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
                                     <td>Gross Pay</td>
-                                    <td>0.00</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>{{ paycheck.amount }}</td>
                                 </tr>
                                 <tr>
-
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>State Taxes</td>
+                                    <td>{{ state_tax }}</td>
                                 </tr>
                                 <tr>
-
-                                    <td>Gross Pay</td>
-                                    <td>5960.22</td>
-                                    <td></td>
-                                    <td>Gross W/H</td>
-                                    <td>556.41</td>
+                                    <td>City Taxes</td>
+                                    <td>{{ city_tax }}</td>
                                 </tr>
                                 <tr>
-
-                                    <td>NET</td>
-                                    <td>3885.00</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>Federal Taxes</td>
+                                    <td>{{ federal_tax }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Net Tax</td>
+                                    <td>{{ net_tax }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Net pay</td>
+                                    <td>{{ net_pay }}</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -186,14 +134,18 @@
                     </div>
                 </div>
             </div>
+            {% endfor %}
 
             {% endblock %}
 
             {% block scriptsblock %}
-            <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+            <!-- <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script> -->
             <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/176621/mk-component.js'></script>
             <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/176621/mk-datepicker.js'></script>
 
             {% load static %}
             <script src="{% static 'scripts/paycheck.js' %}"></script>
             {% endblock %}
+        </div>
+    </div>
+</div>

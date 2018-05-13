@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/payrollsite/payrollapp/models.py" line="92" />
+    <bookmark url="file://$PROJECT_DIR$/payrollsite/payrollapp/models.py" line="234" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="152c590c-61db-40eb-935a-b6da2a744baa" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../csc648-team05/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../csc648-team05/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="152c590c-61db-40eb-935a-b6da2a744baa" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29,35 +27,17 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5047506">
+    <splitter split-orientation="horizontal" split-proportion="0.63117546">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/views.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="460">
-                  <caret line="155" column="53" selection-start-line="155" selection-start-column="53" selection-end-line="155" selection-end-column="53" />
+                <state relative-caret-position="297">
+                  <caret line="196" lean-forward="true" selection-start-line="196" selection-end-line="196" />
                   <folding>
                     <element signature="e#0#35#0" expanded="true" />
                   </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="context_processors.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/context_processors.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="69">
-                  <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="18" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/payrollsite/payrollsite/settings.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="477">
-                  <caret line="71" lean-forward="true" selection-start-line="71" selection-end-line="71" />
                 </state>
               </provider>
             </entry>
@@ -65,33 +45,12 @@
         </leaf>
       </split-first>
       <split-second>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/models.py">
+        <leaf>
+          <file leaf-file-name="pto.html" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/templates/pto.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="490">
-                  <caret line="143" column="49" selection-start-line="143" selection-start-column="49" selection-end-line="144" />
-                  <folding>
-                    <element signature="e#0#28#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="admin.py" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/admin.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="161">
-                  <caret line="9" column="36" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="36" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/urls.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="207">
-                  <caret line="12" column="10" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="10" />
+                <state relative-caret-position="253">
+                  <caret line="20" column="35" lean-forward="true" selection-start-line="20" selection-start-column="35" selection-end-line="20" selection-end-column="35" />
                 </state>
               </provider>
             </entry>
@@ -99,22 +58,10 @@
           <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/views.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-6709">
-                  <caret line="15" column="98" selection-start-line="15" selection-start-column="98" selection-end-line="15" selection-end-column="98" />
+                <state relative-caret-position="343">
+                  <caret line="212" column="17" lean-forward="true" selection-start-line="212" selection-start-column="17" selection-end-line="212" selection-end-column="17" />
                   <folding>
                     <element signature="e#0#35#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/forms.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="483">
-                  <caret line="25" column="29" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
-                  <folding>
-                    <element signature="e#0#43#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -129,26 +76,42 @@
       <list>
         <option value="HTML File" />
         <option value="Python Script" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>profile</find>
-      <find>login</find>
-      <find>paycheck</find>
-      <find>welcome</find>
-      <find>wel</find>
-      <find>FILES</find>
-      <find>expenses</find>
-      <find>creat</find>
-      <find>add</find>
-      <find>posts/add</find>
-      <find>dashboard</find>
-      <find>expense</find>
-      <find>p</find>
-      <find>timeshe</find>
       <find>times</find>
+      <find>boo</find>
+      <find>expens</find>
+      <find>dashboard</find>
+      <find>dash</find>
+      <find>expenses</find>
+      <find>geneer</find>
+      <find>head</find>
+      <find>user</find>
+      <find>dashbo</find>
+      <find>TODO</find>
+      <find>meta</find>
+      <find>manage</find>
+      <find>reports</find>
+      <find>manage_ac</find>
+      <find>month</find>
+      <find>timesh</find>
+      <find>my</find>
+      <find>time_sheet</find>
+      <find>datetime</find>
+      <find>now()</find>
+      <find>start</find>
+      <find>paycheck</find>
+      <find>approve</find>
+      <find>approval</find>
+      <find>pto</find>
+      <find>patterns</find>
+      <find>h4</find>
+      <find>pto_requ</find>
+      <find>timesheet</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -157,19 +120,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/payroll/payroll/urls.py" />
-        <option value="$PROJECT_DIR$/payroll/payroll/settings.py" />
-        <option value="$PROJECT_DIR$/payrollsite/payrollsite/urls.py" />
-        <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/myapp/base.html" />
-        <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/myapp/login_employee.html" />
-        <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/index.html" />
-        <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/register.html" />
-        <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/payrollapp/dashboard.html" />
-        <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/login_employee.html" />
-        <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/login_manager.html" />
-        <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/dashboard.html" />
-        <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/payrollapp/base.html" />
-        <option value="$PROJECT_DIR$/../csc648-team05/mysite/mysite/settings.py" />
         <option value="$PROJECT_DIR$/../csc648-team05/mysite/myapp/templates/myapp/profile_detail.html" />
         <option value="$PROJECT_DIR$/../csc648-team05/mysite/myapp/templates/myapp/post_list.html" />
         <option value="$PROJECT_DIR$/../csc648-team05/mysite/myapp/templates/myapp/userdata_form.html" />
@@ -180,11 +130,9 @@
         <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/form_template.html" />
         <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/expenses.html" />
         <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/dashboard-employee.html" />
-        <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/expense-requests.html" />
         <option value="$PROJECT_DIR$/../csc648-team05/mysite/myapp/validators.py" />
         <option value="$PROJECT_DIR$/../csc648-team05/mysite/myapp/templates/views/post/create_post.html" />
         <option value="$PROJECT_DIR$/../csc648-team05/mysite/myapp/admin.py" />
-        <option value="$PROJECT_DIR$/../csc648-team05/mysite/myapp/templates/views/post/post_detail.html" />
         <option value="$PROJECT_DIR$/../csc648-team05/mysite/myapp/templates/views/post/post_view.html" />
         <option value="$PROJECT_DIR$/../csc648-team05/mysite/myapp/templates/views/home/index.html" />
         <option value="$PROJECT_DIR$/../csc648-team05/mysite/myapp/templates/views/home/searchbar.html" />
@@ -195,18 +143,34 @@
         <option value="$PROJECT_DIR$/../csc648-team05/mysite/myapp/views.py" />
         <option value="$PROJECT_DIR$/../csc648-team05/mysite/myapp/templates/search.html" />
         <option value="$PROJECT_DIR$/payrollsite/payrollapp/validators.py" />
-        <option value="$PROJECT_DIR$/payrollsite/payrollapp/urls.py" />
         <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/login.html" />
-        <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/paycheck.html" />
-        <option value="$PROJECT_DIR$/payrollsite/payrollapp/forms.py" />
-        <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/timesheets.html" />
         <option value="$PROJECT_DIR$/payrollsite/payrollapp/context_processors.py" />
-        <option value="$PROJECT_DIR$/payrollsite/payrollsite/settings.py" />
-        <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/layout-employee.html" />
-        <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/pto.html" />
+        <option value="$PROJECT_DIR$/payrollsite/payrollapp/urls.py" />
+        <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/dashboard-manager.html" />
+        <option value="$PROJECT_DIR$/payrollsite/payrollapp/templatetags.py" />
+        <option value="$PROJECT_DIR$/payrollsite/payrollapp/static/css/timesheet.css" />
+        <option value="$PROJECT_DIR$/payrollsite/payrollapp/static/scripts/timesheet.js" />
+        <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/approvalsexpenses.html" />
+        <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/paycheck.html" />
+        <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/dashboard.html" />
+        <option value="$PROJECT_DIR$/payrollsite/payrollapp/forms.py" />
+        <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/approvalspto.html" />
+        <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/approvalstimesheets.html" />
+        <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/reports.html" />
+        <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/manageaccount.html" />
+        <option value="$PROJECT_DIR$/payrollsite/payrollapp/static/css/bootstrap.css" />
         <option value="$PROJECT_DIR$/payrollsite/payrollapp/admin.py" />
-        <option value="$PROJECT_DIR$/payrollsite/payrollapp/views.py" />
         <option value="$PROJECT_DIR$/payrollsite/payrollapp/models.py" />
+        <option value="$PROJECT_DIR$/../csc648-team05/mysite/myapp/templates/views/post/post_detail.html" />
+        <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/expense-requests.html" />
+        <option value="$PROJECT_DIR$/../csc648-team05/mysite/mysite/settings.py" />
+        <option value="$PROJECT_DIR$/payrollsite/payrollsite/settings.py" />
+        <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/layout-manager.html" />
+        <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/layout-hr.html" />
+        <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/layout-employee.html" />
+        <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/timesheets.html" />
+        <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/pto.html" />
+        <option value="$PROJECT_DIR$/payrollsite/payrollapp/views.py" />
       </list>
     </option>
   </component>
@@ -216,11 +180,10 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1460" />
-    <option name="height" value="920" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="713" />
+    <option name="width" value="734" />
+    <option name="height" value="867" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -269,18 +232,22 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../csc648-team05" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Danielle Nunez\Documents\GitHub\dreamteam\payrollsite\payrollapp\templates" />
+      <recent name="C:\Users\Danielle Nunez\Documents\GitHub\dreamteam\payrollsite\payrollapp" />
+      <recent name="C:\Users\Danielle Nunez\Documents\GitHub\dreamteam\payrollsite\payrollapp\static" />
       <recent name="C:\Users\dnune\OneDrive\Documents\GitHub\dreamteam\payrollsite\payrollapp\templates" />
       <recent name="C:\Users\dnune\OneDrive\Documents\GitHub\dreamteam\payrollsite\payrollapp\templates\payrollapp" />
-      <recent name="C:\Users\dnune\OneDrive\Documents\GitHub\dreamteam\payrollsite\payrollapp" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Danielle Nunez\Documents\GitHub\dreamteam\payrollsite\payrollapp" />
+      <recent name="C:\Users\Danielle Nunez\Documents\GitHub\dreamteam\payrollsite\media" />
       <recent name="C:\Users\dnune\OneDrive\Documents\GitHub\dreamteam\payrollsite\payrollapp" />
       <recent name="C:\Users\dnune\OneDrive\Documents\GitHub\dreamteam\payrollsite\payrollapp\templates" />
     </key>
@@ -298,6 +265,25 @@
     </option>
   </component>
   <component name="RunManager">
+    <configuration name="settings" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="csc648-team05" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../csc648-team05/mysite/mysite" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../csc648-team05/mysite/mysite/settings.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
     <configuration default="true" type="tests" factoryName="Nosetests">
       <module name="csc648-team05" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -356,6 +342,11 @@
       <option name="_new_target" value="&quot;&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.settings" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -371,70 +362,32 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.24229543" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14427084" />
-      <window_info anchor="bottom" id="Statistic" order="8" weight="0.30393198" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="right" id="Database" order="3" />
-      <window_info anchor="right" id="SciView" order="3" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16343491" />
-      <window_info anchor="right" id="SciView" order="3" />
-      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Statistic" order="8" weight="0.3040629" />
-      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="right" id="Database" order="3" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32943678" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.2658385" />
-      <window_info anchor="bottom" id="Python Console" order="7" />
-    </layout>
-    <layout-to-restore>
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20694445" />
-      <window_info id="Structure" order="1" weight="0.25" />
-      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Statistic" order="12" weight="0.3040629" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32979852" />
-      <window_info anchor="right" id="Database" order="3" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.32896462" />
-      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="TODO" order="13" />
+      <window_info anchor="bottom" id="Event Log" order="18" side_tool="true" />
+      <window_info anchor="bottom" id="Database Changes" order="22" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="17" />
+      <window_info anchor="bottom" id="Python Console" order="20" />
+      <window_info anchor="bottom" id="Run" order="4" />
+      <window_info anchor="bottom" id="Terminal" order="19" weight="0.08804205" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18472221" />
+      <window_info anchor="bottom" id="Statistic" order="21" weight="0.3040629" />
+      <window_info anchor="bottom" id="Docker" order="16" show_stripe_button="false" />
+      <window_info anchor="right" id="Database" order="5" />
       <window_info anchor="right" id="SciView" order="4" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="5" weight="0.4" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="8" weight="0.4" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Python Console" order="9" />
-    </layout-to-restore>
+      <window_info anchor="bottom" id="Cvs" order="6" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3285151" />
+    </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -444,176 +397,10 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="5" />
+      <option name="time" value="6" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../csc648-team05/mysite/myapp/templates/layouts/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="11" column="29" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../csc648-team05/mysite/mysite/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="75" column="13" lean-forward="true" selection-start-line="75" selection-start-column="13" selection-end-line="75" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../csc648-team05/mysite/myapp/migrations/0003_auto_20180314_1930.py" />
-    <entry file="file://$PROJECT_DIR$/../csc648-team05/mysite/myapp/migrations/0005_auto_20180325_1818.py" />
-    <entry file="file://$PROJECT_DIR$/../csc648-team05/mysite/myapp/templates/myapp/user_logged_in.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="4" column="12" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../csc648-team05/mysite/myapp/migrations/0004_auto_20180314_1951.py" />
-    <entry file="file://$PROJECT_DIR$/../csc648-team05/mysite/myapp/templates/register.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="20" column="18" lean-forward="true" selection-end-line="21" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../csc648-team05/mysite/myapp/templates/myapp/userdata_form.html" />
-    <entry file="file://$PROJECT_DIR$/../csc648-team05/mysite/myapp/templates/myapp/comments_form.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../csc648-team05/mysite/myapp/migrations/0005_userdata_avatar.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="16" column="10" lean-forward="true" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="uml://Python/#C:/Users/dnune/OneDrive/Documents/GitHub/dreamteam/payrollsite/payrollapp">
-      <provider selected="true" editor-type-id="UmlEditorProvider">
-        <state>
-          <ID>Python</ID>
-          <OriginalElement>#C:/Users/dnune/OneDrive/Documents/GitHub/dreamteam/payrollsite/payrollapp</OriginalElement>
-          <nodes>
-            <node x="312.8010627698439" y="22.111424775821988">payrollsite.payrollapp.models.UserMetaData</node>
-            <node x="601.189637994022" y="421.6936233809366">payrollsite.payrollapp.models.PaidTimeOffRequests</node>
-            <node x="120.99584855529724" y="644.287778146795">payrollsite.payrollapp.models.PaidTimeOff</node>
-            <node x="602.698937230156" y="805.0609432082365">payrollsite.payrollapp.models.Wages</node>
-            <node x="344.0" y="199.5">django.db.models.base.Model</node>
-            <node x="119.81375432936363" y="541.0833257016631">payrollsite.payrollapp.models.Approvals</node>
-            <node x="122.086017934241" y="757.4256061109265">payrollsite.payrollapp.models.TimeSheet</node>
-            <node x="45.81036200597802" y="257.70557954168055">payrollsite.payrollapp.models.Employee</node>
-            <node x="122.44401779567741" y="409.4791710223199">payrollsite.payrollapp.models.Manager</node>
-            <node x="339.84207904350706" y="913.8726336765194">payrollsite.payrollapp.models.Expenses</node>
-            <node x="612.0" y="166.5">django.db.models.base.ModelBase</node>
-            <node x="601.3952175357025" y="688.0768847558951">payrollsite.payrollapp.models.ExpenseRequest</node>
-            <node x="602.087512454334" y="583.4867153769512">payrollsite.payrollapp.models.HumanResources</node>
-          </nodes>
-          <notes />
-          <edges>
-            <edge source="payrollsite.payrollapp.models.Employee" target="django.db.models.base.Model">
-              <point x="121.0" y="-0.0" />
-              <point x="-96.0" y="-0.0" />
-            </edge>
-            <edge source="payrollsite.payrollapp.models.Wages" target="django.db.models.base.Model">
-              <point x="-112.5" y="-0.0" />
-              <point x="490.0" y="865.9614745931583" />
-              <point x="50.0" y="80.5" />
-            </edge>
-            <edge source="payrollsite.payrollapp.models.PaidTimeOff" target="django.db.models.base.Model">
-              <point x="-128.5" y="-0.0" />
-              <point x="461.200265692461" y="685.5569578213217" />
-              <point x="20.0" y="80.5" />
-            </edge>
-            <edge source="payrollsite.payrollapp.models.HumanResources" target="django.db.models.base.Model">
-              <point x="-141.5" y="-0.0" />
-              <point x="508.799734307539" y="622.3872467618733" />
-              <point x="70.0" y="80.5" />
-            </edge>
-            <edge source="django.db.models.base.Model" target="django.db.models.base.ModelBase">
-              <point x="96.0" y="-0.0" />
-              <point x="-108.0" y="-0.0" />
-            </edge>
-            <edge source="payrollsite.payrollapp.models.Approvals" target="django.db.models.base.Model">
-              <point x="-121.5" y="-0.0" />
-              <point x="450.0000000000001" y="578.7864496844902" />
-              <point x="10.0" y="80.5" />
-            </edge>
-            <edge source="payrollsite.payrollapp.models.PaidTimeOffRequests" target="django.db.models.base.Model">
-              <point x="-152.0" y="-0.0" />
-              <point x="518.7997343075391" y="488.79309199601454" />
-              <point x="80.0" y="80.5" />
-            </edge>
-            <edge source="payrollsite.payrollapp.models.Manager" target="django.db.models.base.Model">
-              <point x="0.0" y="-36.5" />
-              <point x="0.0" y="80.5" />
-            </edge>
-            <edge source="payrollsite.payrollapp.models.TimeSheet" target="django.db.models.base.Model">
-              <point x="-123.0" y="-0.0" />
-              <point x="468.799734307539" y="814.7731650614414" />
-              <point x="30.0" y="80.5" />
-            </edge>
-            <edge source="payrollsite.payrollapp.models.UserMetaData" target="django.db.models.base.Model">
-              <point x="0.0" y="69.5" />
-              <point x="0.0" y="-80.5" />
-            </edge>
-            <edge source="payrollsite.payrollapp.models.ExpenseRequest" target="django.db.models.base.Model">
-              <point x="-137.0" y="-0.0" />
-              <point x="500.0" y="734.3766190634342" />
-              <point x="60.0" y="80.5" />
-            </edge>
-            <edge source="payrollsite.payrollapp.models.Expenses" target="django.db.models.base.Model">
-              <point x="-118.5" y="-0.0" />
-              <point x="478.799734307539" y="927.9309199601462" />
-              <point x="40.0" y="80.5" />
-            </edge>
-          </edges>
-          <settings layout="Hierarchic Group" zoom="0.8331488655229662" x="201.0" y="231.0" />
-          <SelectedNodes>
-            <node>payrollsite.payrollapp.models.UserMetaData</node>
-          </SelectedNodes>
-          <Categories>
-            <Category>Fields</Category>
-          </Categories>
-          <SCOPE>All</SCOPE>
-        </state>
-      </provider>
-    </entry>
-    <entry file="uml://Python/#C:/Users/dnune/OneDrive/Documents/GitHub/dreamteam/payrollsite/payrollapp/views.py">
-      <provider selected="true" editor-type-id="UmlEditorProvider">
-        <state>
-          <ID>Python</ID>
-          <OriginalElement>#C:/Users/dnune/OneDrive/Documents/GitHub/dreamteam/payrollsite/payrollapp/views.py</OriginalElement>
-          <nodes />
-          <notes />
-          <edges />
-          <settings layout="Hierarchic Group" zoom="1.0" x="240.0" y="240.0" />
-          <SelectedNodes />
-          <Categories />
-          <SCOPE>All</SCOPE>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../csc648-team05/mysite/myapp/templates/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="11" selection-start-line="11" selection-end-line="11" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/templates/form_template.html" />
-    <entry file="file://$PROJECT_DIR$/../csc648-team05/mysite/myapp/templates/myapp/posts_form.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="12" column="10" lean-forward="true" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../csc648-team05/mysite/myapp/templates/views/post/create_post.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="307">
@@ -625,9 +412,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="230">
           <caret line="10" column="20" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
-          <folding>
-            <element signature="e#202#235#0#HTML" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -638,24 +422,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../csc648-team05/mysite/myapp/templates/myapp/post_detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="5" column="45" lean-forward="true" selection-start-line="5" selection-start-column="45" selection-end-line="5" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../csc648-team05/mysite/mysite/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="368">
           <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../csc648-team05/mysite/myapp/templates/views/post/post_detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1317">
-          <caret line="62" column="53" selection-start-line="62" selection-start-column="53" selection-end-line="62" selection-end-column="53" />
         </state>
       </provider>
     </entry>
@@ -691,9 +461,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1150">
           <caret line="50" selection-start-line="50" selection-end-line="50" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -704,23 +471,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../csc648-team05/mysite/myapp/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1219">
-          <caret line="56" column="48" selection-start-line="56" selection-start-column="48" selection-end-line="56" selection-end-column="48" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../csc648-team05/mysite/myapp/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4025">
           <caret line="197" column="25" selection-start-line="197" selection-start-column="25" selection-end-line="197" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -759,19 +513,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/templates/dashboard-employee.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="9" column="51" selection-start-line="9" selection-start-column="51" selection-end-line="9" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/validators.py" />
-    <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/templates/expense-requests.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-470" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/templates/login.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="598">
@@ -790,33 +531,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-483">
           <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="25" column="29" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/templates/paycheck.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="891">
-          <caret line="57" column="44" lean-forward="true" selection-start-line="57" selection-start-column="44" selection-end-line="57" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/templates/timesheets.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="22" column="79" selection-start-line="22" selection-start-column="79" selection-end-line="22" selection-end-column="79" />
         </state>
       </provider>
     </entry>
@@ -827,58 +541,229 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/payrollsite/payrollsite/settings.py">
+    <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/static/css/mk-ui.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="477">
-          <caret line="71" lean-forward="true" selection-start-line="71" selection-end-line="71" />
+        <state relative-caret-position="322">
+          <caret line="26" column="15" lean-forward="true" selection-start-line="26" selection-start-column="15" selection-end-line="26" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/templatetags.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="13" column="48" lean-forward="true" selection-start-line="13" selection-start-column="48" selection-end-line="13" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/static/css/timesheet.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/static/scripts/timesheet.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="17" column="23" lean-forward="true" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="12" column="10" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="10" />
+        <state relative-caret-position="115">
+          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/templates/pto.html">
+    <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/validators.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="27" column="70" lean-forward="true" selection-start-line="27" selection-start-column="70" selection-end-line="27" selection-end-column="70" />
+        <state relative-caret-position="391">
+          <caret line="17" column="44" selection-start-line="17" selection-start-column="44" selection-end-line="17" selection-end-column="44" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/templates/layout-employee.html">
+    <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/templates/paycheck.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="118" column="20" lean-forward="true" selection-start-line="118" selection-start-column="20" selection-end-line="118" selection-end-column="20" />
+        <state relative-caret-position="161">
+          <caret line="7" column="2" lean-forward="true" selection-start-line="7" selection-start-column="2" selection-end-line="7" selection-end-column="2" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/views.py">
+    <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/templates/dashboard-HR.html" />
+    <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/templates/dashboard-manager.html" />
+    <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/templates/approvalspto.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6709">
-          <caret line="15" column="98" selection-start-line="15" selection-start-column="98" selection-end-line="15" selection-end-column="98" />
+        <state>
+          <caret selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/templates/approvalsexpenses.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="23">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/templates/reports.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/templates/dashboard.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="46">
+          <caret line="2" column="24" lean-forward="true" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/templates/approvalstimesheets.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="7" column="31" lean-forward="true" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/static/css/bootstrap.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="1069" column="33" lean-forward="true" selection-start-line="1069" selection-start-column="33" selection-end-line="1069" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/templates/manageaccount.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="263">
+          <caret line="16" column="35" lean-forward="true" selection-start-line="16" selection-start-column="35" selection-end-line="16" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="19" column="25" selection-start-line="19" selection-start-column="25" selection-end-line="19" selection-end-column="25" />
           <folding>
-            <element signature="e#0#35#0" expanded="true" />
+            <element signature="e#0#43#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../csc648-team05/mysite/myapp/templates/myapp/post_detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="11" column="21" lean-forward="true" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
+          <folding>
+            <element signature="n#style#0;n#img#0;n#ul#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../csc648-team05/mysite/myapp/templates/views/post/post_detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="14" column="25" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="490">
-          <caret line="143" column="49" selection-start-line="143" selection-start-column="49" selection-end-line="144" />
+        <state relative-caret-position="2186">
+          <caret line="213" column="35" lean-forward="true" selection-start-line="213" selection-start-column="35" selection-end-line="213" selection-end-column="35" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../csc648-team05/mysite/myapp/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="920">
+          <caret line="43" column="24" selection-start-line="43" selection-start-column="24" selection-end-line="43" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/admin.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="9" column="36" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="36" />
+        <state relative-caret-position="207">
+          <caret line="9" column="39" selection-start-line="9" selection-start-column="39" selection-end-line="9" selection-end-column="39" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/templates/expense-requests.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="35" column="24" selection-start-line="35" selection-start-column="24" selection-end-line="35" selection-end-column="24" />
+          <folding>
+            <element signature="n#style#0;n#img#0;n#td#3;n#tr#1;n#table#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/payrollsite/payrollsite/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="331">
+          <caret line="81" column="28" lean-forward="true" selection-start-line="81" selection-start-column="28" selection-end-line="81" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/templates/layout-employee.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="205">
+          <caret line="140" column="70" lean-forward="true" selection-start-line="140" selection-start-column="70" selection-end-line="140" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/templates/layout-hr.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="149" column="43" lean-forward="true" selection-start-line="149" selection-start-column="43" selection-end-line="149" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/templates/layout-manager.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="389">
+          <caret line="44" column="57" selection-start-line="44" selection-start-column="57" selection-end-line="44" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../csc648-team05/mysite/mysite/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="126" lean-forward="true" selection-start-line="126" selection-end-line="126" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/templates/timesheets.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="642">
+          <caret line="29" column="31" lean-forward="true" selection-start-line="29" selection-start-column="31" selection-end-line="29" selection-end-column="31" />
+          <folding>
+            <element signature="n#style#0;n#tr#0;n#thead#0;n#table#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/templates/pto.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="20" column="35" lean-forward="true" selection-start-line="20" selection-start-column="35" selection-end-line="20" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="196" lean-forward="true" selection-start-line="196" selection-end-line="196" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

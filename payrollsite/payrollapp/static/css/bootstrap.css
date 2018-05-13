@@ -1065,6 +1065,7 @@ th {
 .glyphicon-menu-up:before {
   content: "\e260";
 }
+/*
 * {
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
@@ -1076,6 +1077,7 @@ th {
      -moz-box-sizing: border-box;
           box-sizing: border-box;
 }
+*/
 html {
   font-size: 10px;
 
@@ -1589,17 +1591,20 @@ pre code {
 }
 @media (min-width: 768px) {
   .container {
-    width: 750px;
+    /*width: 750px;*/
+    width: 100%;
   }
 }
 @media (min-width: 992px) {
   .container {
-    width: 970px;
+    /*width: 970px;*/
+    width: 100%;
   }
 }
 @media (min-width: 1200px) {
   .container {
-    width: 1170px;
+    /*width: 1170px;*/
+    width: 100%;
   }
 }
 .container-fluid {
@@ -3022,6 +3027,7 @@ select[multiple].input-lg {
 .btn {
   display: inline-block;
   padding: 6px 12px;
+  margin: 0 5px;
   margin-bottom: 0;
   font-size: 14px;
   font-weight: normal;
