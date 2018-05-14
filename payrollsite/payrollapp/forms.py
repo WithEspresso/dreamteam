@@ -4,6 +4,7 @@ from .models import PaidTimeOffEntry, Expenses, UserMetaData
 from .validators import validate_image_file
 from .validators import validate_year_entry
 
+
 class LoginForm(forms.Form):
     # Changes it from plain text to hashing
     username = forms.CharField()
@@ -12,6 +13,45 @@ class LoginForm(forms.Form):
     # Meta Information about your class.
     class Meta:
         fields = ['username', 'password']
+
+
+class TimeSheetForm(forms.Form):
+    number_hours = forms.IntegerField(widget=forms.NumberInput(
+        attrs={'class': 'form-control',
+               'min': '0',
+               'max': '24',
+               'value': '8.00',
+               'name': "hours",
+               'aria-label': "...",
+               'type': "number"
+               }
+    ))
+    number_hours.widget.attrs["onchange"] = "calculateTotal()"
+
+
+class UserSignUpForm(forms.ModelForm):
+    # Changes it from plain text to hashing
+    username = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'containder-inside-form',
+              }))
+    password = forms.CharField(widget=forms.PasswordInput(
+        attrs={'class': 'containder-inside-form',
+              }))
+    email = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'containder-inside-form',
+              }))
+    first_name = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'containder-inside-form',
+              }))
+    last_name = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'containder-inside-form',
+              }))
+
+    # Meta Information about your class.
+    class Meta:
+        model = User
+        # What fields do we want to appear on the form?
+        fields = ['username', 'password', 'email', 'first_name', 'last_name']
 
 
 class UserForm(forms.ModelForm):
@@ -37,7 +77,7 @@ class UserMetaDataForm(forms.ModelForm):
     GROUP_CHOICES = [
         ('Employee', 'Employee'),
         ('Manager', 'Manager'),
-        ('Human Resources', 'Human Resources')
+        ('Human Resources', 'HumanResources')
     ]
 
     address = forms.CharField(widget=forms.TextInput(
@@ -48,13 +88,16 @@ class UserMetaDataForm(forms.ModelForm):
         attrs={'placeholder': 'Enter social security number.',
                'class': 'containder-inside-form',
                }))
+    company = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'containder-inside-form',
+              }))
     group = forms.ChoiceField(choices=GROUP_CHOICES, widget=forms.RadioSelect())
 
     # Meta Information about your class.
     class Meta:
         model = UserMetaData
         # What fields do we want to appear on the form?
-        fields = ['address', 'social_security_number', 'group']
+        fields = ['address', 'social_security_number', 'company', 'group']
 
 
 class PaidTimeOffSubmissionForm(forms.ModelForm):
@@ -73,7 +116,16 @@ class PaidTimeOffRequestForm(forms.ModelForm):
 
 
 class ExpenseRequestForm(forms.ModelForm):
-    file = forms.FileField(label="Select an image to upload.",
+    title = forms.CharField(widget=forms.TextInput(
+    {
+        'placeholder':"Enter title"
+    }))
+    amount = forms.DecimalField(widget=forms.NumberInput(
+        {
+            'min': "0"
+        }
+    ))
+    file = forms.FileField(label="Upload receipt",
                            help_text="Maximum file size is 2 megabytes",
                            validators=[validate_image_file])
 

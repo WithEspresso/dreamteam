@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.shortcuts import redirect
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
+from django.contrib.auth.models import Group
+
 
 import json
 
@@ -9,10 +11,10 @@ from .forms import LoginForm
 from .forms import UserForm
 from .forms import PaidTimeOffRequestForm
 from .forms import ExpenseRequestForm
-from .forms import ApprovalForm
 from .forms import UserMetaDataForm
+from .forms import UserSignUpForm
+from .forms import TimeSheetForm
 
-from django.contrib.auth.models import Permission
 # TODO: only import models we are utilizing, let me be lazy right now please.
 from .models import *
 
@@ -52,6 +54,41 @@ def login_user(request):
     :param request:
     :return: The dashboard page for the user if the login is successful
     """
+    user_meta_data_form = UserMetaDataForm(request.POST or None)
+    user_form = UserSignUpForm(request.POST or None)
+
+    # Behavior for registering a new user.
+    if request.method == "POST" and user_form.is_valid() and user_meta_data_form.is_valid():
+        # Check django.auth.contrib's user form, register the user.
+        user = user_form.save(commit=False)
+        username = user_form.cleaned_data['username']
+        password = user_form.cleaned_data['password']
+        user.set_password(password)
+        user.save()
+        # Now, get our metadata and add it to the table.
+        user_metadata = user_meta_data_form.save(commit=False)
+        user_metadata.user_id = user
+        user_metadata.address = user_meta_data_form.cleaned_data['address']
+        user_metadata.social_security_number = user_meta_data_form.cleaned_data['social_security_number']
+        user_metadata.group = user_meta_data_form.cleaned_data['group']
+        user_metadata.company = user_meta_data_form.cleaned_data['company']
+        # Save the new tables if both forms are okay.
+        user_metadata.save()
+        # Add the user to their appropriate group.
+        my_group = Group.objects.get(name=user_metadata.group)
+        my_group.user_set.add(user)
+        # Create PTO hours for the user.
+        pto_hours = PaidTimeOffHours()
+        pto_hours.user_id = user
+        pto_hours.save()
+        # Now login the user.
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                return redirect('dashboard')
+
+    # Behavior for logging in.
     form = LoginForm(request.POST or None)
     if request.method == "POST" and form.is_valid():
         username = request.POST['username']
@@ -65,8 +102,11 @@ def login_user(request):
                 return render(request, 'login.html', {'error_message': 'You have been banned.'})
         else:
             return render(request, 'login.html', {'form': form, 'error_message': 'Invalid login'})
+
     context = {
         "form": form,
+        "user_meta_data_form": user_meta_data_form,
+        "user_form": user_form
     }
     return render(request, 'login.html', context)
 
@@ -101,7 +141,8 @@ def register(request):
     :return: A success page if the User was successfully added to the system.
     """
     template_name = 'signup.html'
-    user_form = UserForm(request.POST or None)
+    message = None
+    user_form = UserSignUpForm(request.POST or None)
     user_metadata_form = UserMetaDataForm(request.POST or None)
     if user_form.is_valid() and user_metadata_form.is_valid():
         # Check django.auth.contrib's user form, register the user.
@@ -119,15 +160,23 @@ def register(request):
         user_metadata.company = user_metadata_form.cleaned_data['company']
         # Save the new tables if both forms are okay.
         user_metadata.save()
-        # Login the user.
-        user = authenticate(username=username, password=password)
-        if user is not None:
-            if user.is_active:
-                login(request, user)
-                return redirect('dashboard')
+        # Add the user to their appropriate group.
+        my_group = Group.objects.get(name=user_metadata.group)
+        my_group.user_set.add(user)
+        # Create PTO hours for the user.
+        pto_hours = PaidTimeOffHours()
+        pto_hours.user_id = user
+        pto_hours.save()
+        # Success message
+        message = "Successfully created new user: " + str(username)
+        # Clear forms.
+        user_form = UserSignUpForm()
+        user_metadata_form = UserMetaDataForm()
+
     context = {
         "user_form": user_form,
-        "user_metadata_form": user_metadata_form
+        "user_metadata_form": user_metadata_form,
+        "message": message
     }
     return render(request, template_name, context)
 
@@ -149,15 +198,16 @@ def view_paycheck_information(request):
         username = request.user
         # If the input tags have values, convert them to datetime objects and use
         # them to search the database for values within their range.
-        if start_date is not None and end_date is not None:
-            start_date = datetime.datetime.strptime(start_date, '%m/%d/%Y')
-            end_date = datetime.datetime.strptime(end_date, '%m/%d/%Y')
+        if start_date is not None and start_date is not "" and end_date is not None and end_date is not "":
+            start_date = datetime.datetime.strptime(start_date, '%m/%d/%Y').date()
+            end_date = datetime.datetime.strptime(end_date, '%m/%d/%Y').date()
             results = PaycheckInformation.search_by_time_period(start_date, end_date, username)
             # Case where no values have been found.
             if len(results) == 0:
                 error_message = "Sorry, no paychecks could be found within the specified time period."
         # Load the last five paychecks for the user if they are not currently filtering by time period.
         else:
+            error_message = "Please input a date range in order to search for paychecks."
             results = PaycheckInformation.objects.filter(user_id__username__exact=username)
         # Calculate taxes for paychecks.
         state_tax_rate = 0.15
@@ -186,7 +236,9 @@ def view_paycheck_information(request):
             'layout': layout,
             'results': results,
             'error_message': error_message,
-            'tax_information': zipped_data
+            'tax_information': zipped_data,
+            'start_date': start_date,
+            'end_date': end_date
         }
     # User is not logged in. Redirecting to the login page with an error message.
     else:
@@ -238,9 +290,9 @@ def paid_time_off(request):
                 pto_entry = PaidTimeOffEntry()
                 pto_entry.user_id = user
                 date = request.POST.get("date" + str(i))
-                hours = request.POST.get("hours" + str(i))
-                # Check for empty entries
-                if hours is not None and hours != '' and date is not None and total_hours > 0:
+                all_hours = request.POST.getlist('hours')
+                hours = float(all_hours[i])
+                if hours is not None and hours > 0 and date is not None:
                     pto_entry.date = date
                     pto_entry.hours = hours
                     total_hours += int(hours)
@@ -283,10 +335,15 @@ def approve_paid_time_off(request):
         if request.method == "POST":
             pto_id = request.POST['pto_id']
             pto_request = PaidTimeOffApproval.objects.get(paid_time_off_approval_id=pto_id)
+            user = pto_request.user_id
+            remaining_pto = PaidTimeOffHours.objects.get(user_id=user)
             if "approve" in request.POST:
                 pto_request.status = "Approved"
             if "reject" in request.POST:
                 pto_request.status = "Denied"
+            # Calculate remaining PTO and update the database.
+            remaining_pto.remaining_hours = 160 - PaidTimeOffApproval.get_total_approved_pto(user)
+            remaining_pto.save()
             pto_request.save()
 
         # Default behavior: Load all pending time sheets.
@@ -309,8 +366,11 @@ def expense_reimbursement(request):
     :param   request as an http request
     :return: A rendered html page for the index with a list of current pending and expense reimbursement requests.
     """
-    if request.user.is_authenticated and check_user_group(request.user, "Manager"):
-        form = ExpenseRequestForm(request.POST, request.FILES or None)
+    if request.user.is_authenticated:
+        if request.POST:
+            form = ExpenseRequestForm(request.POST, request.FILES)
+        else:
+            form = ExpenseRequestForm()
         layout = get_layout_based_on_user_group(request.user)
         # Retrieving existing  requests from the database
         this_username = request.user
@@ -325,7 +385,9 @@ def expense_reimbursement(request):
             "expense_requests": expense_requests,
         }
         # If the user is posting, saving the form data and saving to the database.
-        if form.is_valid() and request.POST:
+        if form.is_valid():
+            print("CREATING EXPENSE REIMBURSEMENT")
+            form = ExpenseRequestForm(request.POST, request.FILES)
             new_expense_request = form.save(commit=False)
             new_expense_request.user_id = user
             new_expense_request.status = 'Pending'
@@ -385,38 +447,42 @@ def display_time_sheet(request):
         layout = get_layout_based_on_user_group(user)
         # Write time sheet to the database.
         if request.method == "POST":
-            time_sheet_entries = list()
-            total_hours = 0
-            for i in range(0, 5):
-                time_sheet_entry = TimeSheetEntry()
-                time_sheet_entry.user_id = user
-                date = request.POST.get("date" + str(i))
-                hours = request.POST.get("hours" + str(i))
-                print("DATE IS : " + str(date))
-                print("HOURS IS : " + str(hours))
-                if date is not None and date is not "" and hours is not None:
-                    time_sheet_entry.date = date
-                    time_sheet_entry.number_hours = hours
-                    total_hours += int(hours)
-                    time_sheet_entries.append(time_sheet_entry)
-                    print("CREATING ENTRY: " + str(time_sheet_entry.time_sheet_id))
-            if time_sheet_entries is not None and total_hours != 0:
-                approval = TimeSheetApprovals()
-                approval.user_id = user
-                print("SAVING APPROVAL: " + str(approval.time_sheet_approvals_id))
-                approval.save()
-                for entry in time_sheet_entries:
-                    entry.time_sheet_approvals_id = approval
-                    entry.save()
-                return HttpResponseRedirect('timesheet/')
+            week1 = request.POST.get("week1")
+            if week1 is not None and week1 is not "":
+                time_sheet_entries = list()
+                total_hours = 0
+                all_hours = request.POST.getlist('hours')
+                week = request.POST.get("week1")
+                day = datetime.datetime.strptime(week + '-1', "%Y-W%W-%w")
+                # Get all of the time sheet entries for that week.
+                # If the hours submitted is greater than zero, append it to the
+                # approvals we are building.
+                for i in range(0, 7):
+                    hours = float(all_hours[i])
+                    entry = TimeSheetEntry()
+                    entry.date = day
+                    entry.number_hours = hours
+                    entry.user_id = user
+                    total_hours += hours
+                    if hours > 0:
+                        time_sheet_entries.append(entry)
+                    day += datetime.timedelta(days=1)
+                # If the total hours is greater than zero and there are valid entries,
+                # Create an approval object and add the approval id to all of the entries.
+                if total_hours > 0 and time_sheet_entries is not None:
+                    approval = TimeSheetApprovals()
+                    approval.user_id = user
+                    approval.save()
+                    for entry in time_sheet_entries:
+                        entry.time_sheet_approvals_id = approval
+                        entry.save()
+                    return HttpResponseRedirect('timesheet/')
         # Get total hours for the current pay period.
         total_hours = TimeSheetEntry.calculate_pay_period_total_hours(user)
-
         # Get all time sheet approvals by user
         time_sheet_approvals = TimeSheetApprovals.get_all_by_username(user)
-
         context = {
-            "loop_times": range(0, 5),
+            "loop_times": range(0, 7),
             'layout': layout,
             'total_hours': total_hours,
             'time_sheet_approvals': time_sheet_approvals

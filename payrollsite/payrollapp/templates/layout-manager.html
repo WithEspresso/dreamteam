@@ -162,12 +162,6 @@
                                         <div class="bot-border"></div>
 
                                         <div ><b>Date Of Joining: </b >{{ request.user.date_joined }}</div>
-
-                                        <div class="clearfix"></div>
-                                        <div class="bot-border"></div>
-
-                                        <div ><b>Date Of Birth: </b>11 Jun 1998</div>
-
                                         <div class="clearfix"></div>
                                         <div class="bot-border"></div>
 
@@ -175,13 +169,17 @@
                                         <div class="clearfix"></div>
                                         <div class="bot-border"></div>
 
-                                        <div ><b>Address: </b>{{ user_meta_data.address}}</div>
-
+                                        <div><b>Address: </b>{{ user_meta_data.address}}</div>
                                         <div class="clearfix"></div>
                                         <div class="bot-border"></div>
 
-                                        <div ><b>Department: </b>Analytics</div>
+                                        <div><b>Company: </b>{{ user_meta_data.company}}</div>
+                                        <div class="clearfix"></div>
+                                        <div class="bot-border"></div>
 
+                                        <div><b>Role: </b>{{ user_meta_data.group }}</div>
+                                        <div class="clearfix"></div>
+                                        <div class="bot-border"></div>
                                         <!-- /.box-body -->
                                     </div>
                                     <!-- /.box -->

@@ -10,20 +10,22 @@
 <div id="page-wrapper" style="min-height:100%;">
     <div class="container-fluid">
         <h2> Add a user to the payroll system</h2>
+        {% if message %}
+        <h4> {{ message }}</h4>
+        {% endif %}
         <form method="post" action="" id="form-create-account">
             {% csrf_token %}
             <div class="container-login">
                 {% for field in user_form %}
                 <div class="container-inside-form">
-                    {{ field.errors }}
-                    <label><b>{{ field.label_tag }}</b></label>
+                    <label><b>{{ field.label_tag }} {{ field.errors }}</b></label>
                     {{ field }}
                 </div>
                 {% endfor %}
+
                 {% for field in user_metadata_form %}
                 <div class="container-inside-form">
-                    {{ field.errors }}
-                    <label><b>{{ field.label_tag }}</b></label>
+                    <label><b>{{ field.label_tag }} {{ field.errors }}</b></label>
                     {{ field }}
                 </div>
                 {% endfor %}

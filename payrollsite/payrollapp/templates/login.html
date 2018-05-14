@@ -290,47 +290,27 @@
             </div>
             <div class="modal-body">
                 <div class="container-fluid">
-                    <form action="" id="form-create-account">
+                    <form action="" method="post" id="form-create-account">
+                        {% csrf_token %}
                         <div class="container-login">
+                            {% for field in user_form %}
                             <div class="container-inside-form">
-                                <label for="uname"><b>Username</b></label>
-                                <input type="text" placeholder="Enter Username" name="uname" required>
+                                {{ field.errors }}
+                                <label><b> {{ field.label_tag }}</b></label>
+                                {{ field }}
                             </div>
+                            {% endfor %}
+                            {% for field in user_meta_data_form %}
                             <div class="container-inside-form">
-                                <label for="psw"><b>Password</b></label>
-                                <input type="password" placeholder="Enter Password" name="psw" required>
+                                {{ field.errors }}
+                                <label><b> {{ field.label_tag }}</b></label>
+                                {{ field }}
                             </div>
-                            <div class="container-inside-form">
-                                <label for="name"><b>First Name</b></label>
-                                <input type="text" placeholder="Enter First Name" name="name" required>
-                            </div>
-                            <div class="container-inside-form">
-                                <label for="lastname"><b>Last Name</b></label>
-                                <input type="text" placeholder="Enter Last Name" name="lastname" required>
-                            </div>
-                            <div class="container-inside-form">
-                                <label for="email"><b>Email</b></label>
-                                <input type="text" placeholder="Enter Email" name="email" required>
-                            </div>
-                            <div class="container-inside-form">
-                                <label for="address"><b>Address</b></label>
-                                <input type="text" placeholder="Enter Address" name="address" required>
-                            </div>
-                            <div class="container-inside-form">
-                                <label for="ssn"><b>SSN</b></label>
-                                <input type="text" placeholder="Enter SSN" name="ssn" required>
-                            </div>
-                            <div class="container-inside-form">
-                                <label for="manager"><b>Manager ID</b></label>
-                                <input type="text" placeholder="Enter Manager ID" name="manager" required>
-                            </div>
-
-                            <button type="button"><a href="{% url 'signup' %}"
-                                                     style="color:white; text-decoration:none">Create an account</a>
+                            {% endfor %}
+                            <button type="submit" style="color:white; text-decoration:none"> Create an account
                             </button>
                         </div>
                     </form>
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" style="width:100px;" data-dismiss="modal">
