@@ -360,7 +360,10 @@ def expense_reimbursement(request):
     :return: A rendered html page for the index with a list of current pending and expense reimbursement requests.
     """
     if request.user.is_authenticated:
-        form = ExpenseRequestForm(None)
+        if request.POST:
+            form = ExpenseRequestForm(request.POST, request.FILES)
+        else:
+            form = ExpenseRequestForm()
         layout = get_layout_based_on_user_group(request.user)
         # Retrieving existing  requests from the database
         this_username = request.user
@@ -375,7 +378,8 @@ def expense_reimbursement(request):
             "expense_requests": expense_requests,
         }
         # If the user is posting, saving the form data and saving to the database.
-        if form.is_valid() and request.POST:
+        if form.is_valid():
+            print("CREATING EXPENSE REIMBURSEMENT")
             form = ExpenseRequestForm(request.POST, request.FILES)
             new_expense_request = form.save(commit=False)
             new_expense_request.user_id = user
