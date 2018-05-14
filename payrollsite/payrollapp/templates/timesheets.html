@@ -97,24 +97,11 @@
                                 {% endfor %}
                             </div>
                             <!--- End first row. -->
-                            <div class="row" style="margin: 5px">
-                                <div class="col-sm-2 col-sm-3">
-                                    <input id="week2" name="week2" type="week">
-                                </div>
-                                {% for i in loop_times %}
-                                <div class="col-sm-1 col-sm-1 ">
-                                    <input type="number" class="form-control" min="0" max="24" value="8.00"
-                                           onchange="calculateTotal()"
-                                           aria-label="..." name="hours" required>
-                                </div>
-                                {% endfor %}
-                            </div>
-                            <!-- End second row.-->
                             <div class="panel-footer">
                                 <div class="row">
                                     <div class="col-md-11">
                                         <h3 style="float:right;">Total Hours <input class="form-control" type="number"
-                                                                                    value="80.00" name="total"
+                                                                                    value="56.00" name="total"
                                                                                     id="total"
                                                                                     value="0"
                                                                                     style="width:100px; float: right"
@@ -133,7 +120,6 @@
                         </div>
                     </form>
                 </div> <!--panel-->
-                </form>
             </div> <!--container-->
             <!-- Displays all timesheet requests for the logged in user. -->
             <br>

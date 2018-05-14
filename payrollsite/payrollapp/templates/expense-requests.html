@@ -109,23 +109,13 @@
 
                         <div id="form-box">
                             <form action="" method="post" enctype="multipart/form-data">
-
+                                {% csrf_token %}
+                                {% for field in form %}
                                 <div>
-                                    <span>Name:</span> <input type="text" name="item-name"
-                                                              placeholder="Name?">
+                                    <span> {{ field.label_tag }}: {{ field.errors }}</span>
+                                    {{ field }}
                                 </div>
-
-                                <div>
-                                    <span>Date:</span> <input type="date" name="date">
-                                </div>
-
-                                <div>
-                                    <span>Amount:</span> <input type="number" name="amount" placeholder="$">
-                                </div>
-                                <div>
-                                    <span>Upload file:</span> <input>
-                                </div>
-
+                                {% endfor %}
                                 <button type="submit" class="btn btn-success" onclick="" style="float:right">Add new
                                     Expense
                                 </button>

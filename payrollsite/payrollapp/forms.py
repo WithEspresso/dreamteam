@@ -116,6 +116,11 @@ class PaidTimeOffRequestForm(forms.ModelForm):
 
 
 class ExpenseRequestForm(forms.ModelForm):
+    title = forms.CharField(widget=forms.TextInput(
+    {
+        'placeholder':"Enter title"
+    }))
+    amount = forms.DecimalField(widget=forms.NumberInput)
     file = forms.FileField(label="Select an image to upload.",
                            help_text="Maximum file size is 2 megabytes",
                            validators=[validate_image_file])

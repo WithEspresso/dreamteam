@@ -288,9 +288,9 @@ def paid_time_off(request):
                 pto_entry = PaidTimeOffEntry()
                 pto_entry.user_id = user
                 date = request.POST.get("date" + str(i))
-                hours = request.POST.get("hours" + str(i))
-                # Check for empty entries
-                if hours is not None and hours != '' and date is not None and total_hours > 0:
+                all_hours = request.POST.getlist('hours')
+                hours = float(all_hours[i])
+                if hours is not None and hours > 0 and date is not None:
                     pto_entry.date = date
                     pto_entry.hours = hours
                     total_hours += int(hours)
@@ -360,7 +360,7 @@ def expense_reimbursement(request):
     :return: A rendered html page for the index with a list of current pending and expense reimbursement requests.
     """
     if request.user.is_authenticated:
-        form = ExpenseRequestForm(request.POST, request.FILES or None)
+        form = ExpenseRequestForm(None)
         layout = get_layout_based_on_user_group(request.user)
         # Retrieving existing  requests from the database
         this_username = request.user
@@ -376,6 +376,7 @@ def expense_reimbursement(request):
         }
         # If the user is posting, saving the form data and saving to the database.
         if form.is_valid() and request.POST:
+            form = ExpenseRequestForm(request.POST, request.FILES)
             new_expense_request = form.save(commit=False)
             new_expense_request.user_id = user
             new_expense_request.status = 'Pending'
@@ -433,7 +434,6 @@ def display_time_sheet(request):
         # Get the correct layout.
         user = request.user
         layout = get_layout_based_on_user_group(user)
-        form = TimeSheetForm()
         # Write time sheet to the database.
         if request.method == "POST":
             week1 = request.POST.get("week1")
@@ -442,9 +442,7 @@ def display_time_sheet(request):
                 total_hours = 0
                 all_hours = request.POST.getlist('hours')
                 week = request.POST.get("week1")
-                print("Week is: " + str(week))
                 day = datetime.datetime.strptime(week + '-1', "%Y-W%W-%w")
-                print("Starting date is: " + str(day))
                 # Get all of the time sheet entries for that week.
                 # If the hours submitted is greater than zero, append it to the
                 # approvals we are building.
@@ -463,51 +461,16 @@ def display_time_sheet(request):
                 if total_hours > 0 and time_sheet_entries is not None:
                     approval = TimeSheetApprovals()
                     approval.user_id = user
-                    print("SAVING APPROVAL: " + str(approval.time_sheet_approvals_id))
                     approval.save()
                     for entry in time_sheet_entries:
                         entry.time_sheet_approvals_id = approval
                         entry.save()
                     return HttpResponseRedirect('timesheet/')
-            else:
-                print("WEEK NOT FOUND.")
-
-
-            """
-            # Ye olde way
-            time_sheet_entries = list()
-            total_hours = 0
-            for i in range(0, 5):
-                time_sheet_entry = TimeSheetEntry()
-                time_sheet_entry.user_id = user
-                date = request.POST.get("date" + str(i))
-                hours = request.POST.get("hours" + str(i))
-                print("DATE IS : " + str(date))
-                print("HOURS IS : " + str(hours))
-                if date is not None and date is not "" and hours is not None:
-                    time_sheet_entry.date = date
-                    time_sheet_entry.number_hours = hours
-                    total_hours += int(hours)
-                    time_sheet_entries.append(time_sheet_entry)
-                    print("CREATING ENTRY: " + str(time_sheet_entry.time_sheet_id))
-            if time_sheet_entries is not None and total_hours != 0:
-                approval = TimeSheetApprovals()
-                approval.user_id = user
-                print("SAVING APPROVAL: " + str(approval.time_sheet_approvals_id))
-                approval.save()
-                for entry in time_sheet_entries:
-                    entry.time_sheet_approvals_id = approval
-                    entry.save()
-                return HttpResponseRedirect('timesheet/')
-            """
         # Get total hours for the current pay period.
         total_hours = TimeSheetEntry.calculate_pay_period_total_hours(user)
-
         # Get all time sheet approvals by user
         time_sheet_approvals = TimeSheetApprovals.get_all_by_username(user)
-
         context = {
-            "form": form,
             "loop_times": range(0, 7),
             'layout': layout,
             'total_hours': total_hours,
