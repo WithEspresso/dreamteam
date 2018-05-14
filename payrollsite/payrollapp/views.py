@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.shortcuts import redirect
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
+from django.contrib.auth.models import Group
+
 
 import json
 
@@ -11,6 +13,7 @@ from .forms import PaidTimeOffRequestForm
 from .forms import ExpenseRequestForm
 from .forms import ApprovalForm
 from .forms import UserMetaDataForm
+from .forms import UserSignUpForm
 
 from django.contrib.auth.models import Permission
 # TODO: only import models we are utilizing, let me be lazy right now please.
@@ -52,7 +55,42 @@ def login_user(request):
     :param request:
     :return: The dashboard page for the user if the login is successful
     """
+    user_meta_data_form = UserMetaDataForm(request.POST or None)
+    user_form = UserSignUpForm(request.POST or None)
+
+    # Behavior for registering a new user.
+    if request.method == "POST" and user_form.is_valid() and user_meta_data_form.is_valid():
+        # Check django.auth.contrib's user form, register the user.
+        user = user_form.save(commit=False)
+        username = user_form.cleaned_data['username']
+        password = user_form.cleaned_data['password']
+        user.set_password(password)
+        user.save()
+        # Now, get our metadata and add it to the table.
+        user_metadata = user_meta_data_form.save(commit=False)
+        user_metadata.user_id = user
+        user_metadata.address = user_meta_data_form.cleaned_data['address']
+        user_metadata.social_security_number = user_meta_data_form.cleaned_data['social_security_number']
+        user_metadata.group = user_meta_data_form.cleaned_data['group']
+        user_metadata.company = user_meta_data_form.cleaned_data['company']
+        # Save the new tables if both forms are okay.
+        user_metadata.save()
+        # Add the user to their appropriate group.
+        my_group = Group.objects.get(name=user_metadata.group)
+        my_group.user_set.add(user)
+        # Create PTO hours for the user.
+        pto_hours = PaidTimeOffHours()
+        pto_hours.user_id = user
+        pto_hours.save()
+        # Now login the user.
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                return redirect('dashboard')
+
     form = LoginForm(request.POST or None)
+    # Behavior for logging in.
     if request.method == "POST" and form.is_valid():
         username = request.POST['username']
         password = request.POST['password']
@@ -65,8 +103,11 @@ def login_user(request):
                 return render(request, 'login.html', {'error_message': 'You have been banned.'})
         else:
             return render(request, 'login.html', {'form': form, 'error_message': 'Invalid login'})
+
     context = {
         "form": form,
+        "user_meta_data_form": user_meta_data_form,
+        "user_form": user_form
     }
     return render(request, 'login.html', context)
 
@@ -149,7 +190,7 @@ def view_paycheck_information(request):
         username = request.user
         # If the input tags have values, convert them to datetime objects and use
         # them to search the database for values within their range.
-        if start_date is not None and end_date is not None:
+        if start_date is not None and start_date is not "" and end_date is not None and end_date is not "":
             start_date = datetime.datetime.strptime(start_date, '%m/%d/%Y')
             end_date = datetime.datetime.strptime(end_date, '%m/%d/%Y')
             results = PaycheckInformation.search_by_time_period(start_date, end_date, username)
@@ -158,6 +199,7 @@ def view_paycheck_information(request):
                 error_message = "Sorry, no paychecks could be found within the specified time period."
         # Load the last five paychecks for the user if they are not currently filtering by time period.
         else:
+            error_message = "Please input a date range in order to search for paychecks."
             results = PaycheckInformation.objects.filter(user_id__username__exact=username)
         # Calculate taxes for paychecks.
         state_tax_rate = 0.15

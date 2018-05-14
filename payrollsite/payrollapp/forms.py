@@ -14,6 +14,31 @@ class LoginForm(forms.Form):
         fields = ['username', 'password']
 
 
+class UserSignUpForm(forms.ModelForm):
+    # Changes it from plain text to hashing
+    username = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'containder-inside-form',
+              }))
+    password = forms.CharField(widget=forms.PasswordInput(
+        attrs={'class': 'containder-inside-form',
+              }))
+    email = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'containder-inside-form',
+              }))
+    first_name = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'containder-inside-form',
+              }))
+    last_name = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'containder-inside-form',
+              }))
+
+    # Meta Information about your class.
+    class Meta:
+        model = User
+        # What fields do we want to appear on the form?
+        fields = ['username', 'password', 'email', 'first_name', 'last_name']
+
+
 class UserForm(forms.ModelForm):
     # Changes it from plain text to hashing
     email = forms.CharField(widget=forms.TextInput(
@@ -48,13 +73,16 @@ class UserMetaDataForm(forms.ModelForm):
         attrs={'placeholder': 'Enter social security number.',
                'class': 'containder-inside-form',
                }))
+    company = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'containder-inside-form',
+              }))
     group = forms.ChoiceField(choices=GROUP_CHOICES, widget=forms.RadioSelect())
 
     # Meta Information about your class.
     class Meta:
         model = UserMetaData
         # What fields do we want to appear on the form?
-        fields = ['address', 'social_security_number', 'group']
+        fields = ['address', 'social_security_number', 'company', 'group']
 
 
 class PaidTimeOffSubmissionForm(forms.ModelForm):
