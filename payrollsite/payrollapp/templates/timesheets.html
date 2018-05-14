@@ -48,8 +48,13 @@
                 <!--</form>-->
                 <!--</div>-->
 
+
+
+
                 <div class="page-header"></div>
                 <div class="container-fluid ">
+                  <form method="post">
+                    {% csrf_token %}
                     <div class="panel panel-primary ">
                         <div class="panel-heading text-center">
                             <div class="row " style="margin: 5px">
@@ -86,32 +91,32 @@
                                 </div>
 
                                 <div class="col-sm-1 col-sm-1 ">
-                                    <input type="number" class="form-control" min="0" max="8" placeholder="8.00"onchange="calculateTotal()"
+                                    <input type="number" class="form-control" min="0" max="24" value="8.00" onchange="calculateTotal()"
                                            aria-label="..." name="hours" required>
                                 </div>
                                 <div class="col-sm-1 col-sm-1 ">
-                                    <input type="number" class="form-control" min="0" max="8" placeholder="8.00"onchange="calculateTotal()"
+                                    <input type="number" class="form-control" min="0" max="24" value="8.00" onchange="calculateTotal()"
                                            aria-label="..." name="hours" required>
                                 </div>
                                 <div class="col-sm-1 col-sm-1 ">
-                                    <input type="number" class="form-control" min="0" max="8" placeholder="8.00"onchange="calculateTotal()"
+                                    <input type="number" class="form-control" min="0" max="24" value="8.00"onchange="calculateTotal()"
                                            aria-label="..." name="hours" required>
                                 </div>
                                 <div class="col-sm-1 col-sm-1 ">
-                                    <input type="number" class="form-control" min="0" max="8" placeholder="8.00"onchange="calculateTotal()"
+                                    <input type="number" class="form-control" min="0" max="24" value="8.00"onchange="calculateTotal()"
                                            aria-label="..." name="hours" required>
                                 </div>
                                 <div class="col-sm-1 col-sm-1 ">
-                                    <input type="number" class="form-control" min="0" max="8" placeholder="8.00"onchange="calculateTotal()"
+                                    <input type="number" class="form-control" min="0" max="24" value="8.00"onchange="calculateTotal()"
                                            aria-label="..." name="hours" required>
                                 </div>
                                 <div class="col-sm-1 col-sm-1 ">
-                                    <input type="number" class="form-control" min="0" max="8" placeholder="8.00"onchange="calculateTotal()"
-                                           aria-label="..." name="hours" required>
+                                    <input type="number" class="form-control" min="0" max="24" placeholder="0.00"onchange="calculateTotal()"
+                                           aria-label="..." name="hours">
                                 </div>
                                 <div class="col-sm-1 col-sm-1 ">
-                                    <input type="number" class="form-control" min="0" max="8" placeholder="8.00"onchange="calculateTotal()"
-                                           aria-label="..." name="hours" required>
+                                    <input type="number" class="form-control" min="0" max="24" placeholder="0.00"onchange="calculateTotal()"
+                                           aria-label="..." name="hours">
                                 </div>
 
 
@@ -123,32 +128,32 @@
                                 </div>
 
                            <div class="col-sm-1 col-sm-1 ">
-                                    <input type="number" class="form-control" min="0" max="8" placeholder="8.00"onchange="calculateTotal()"
+                                    <input type="number" class="form-control" min="0" max="24" value="8.00"onchange="calculateTotal()"
                                            aria-label="..." name="hours" required>
                                 </div>
                                 <div class="col-sm-1 col-sm-1 ">
-                                    <input type="number" class="form-control" min="0" max="8" placeholder="8.00"onchange="calculateTotal()"
+                                    <input type="number" class="form-control" min="0" max="24" value="8.00"onchange="calculateTotal()"
                                            aria-label="..." name="hours" required>
                                 </div>
                                 <div class="col-sm-1 col-sm-1 ">
-                                    <input type="number" class="form-control" min="0" max="8" placeholder="8.00"onchange="calculateTotal()"
+                                    <input type="number" class="form-control" min="0" max="24" value="8.00"onchange="calculateTotal()"
                                            aria-label="..." name="hours" required>
                                 </div>
                                 <div class="col-sm-1 col-sm-1 ">
-                                    <input type="number" class="form-control" min="0" max="8" placeholder="8.00"onchange="calculateTotal()"
+                                    <input type="number" class="form-control" min="0" max="24" value="8.00"onchange="calculateTotal()"
                                            aria-label="..." name="hours" required>
                                 </div>
                                 <div class="col-sm-1 col-sm-1 ">
-                                    <input type="number" class="form-control" min="0" max="8" placeholder="8.00"onchange="calculateTotal()"
+                                    <input type="number" class="form-control" min="0" max="24" value="8.00"onchange="calculateTotal()"
                                            aria-label="..." name="hours" required>
                                 </div>
                                 <div class="col-sm-1 col-sm-1 ">
-                                    <input type="number" class="form-control" min="0" max="8" placeholder="8.00"onchange="calculateTotal()"
-                                           aria-label="..." name="hours" required>
+                                    <input type="number" class="form-control" min="0" max="24" placeholder="0.00"onchange="calculateTotal()"
+                                           aria-label="..." name="hours">
                                 </div>
                                 <div class="col-sm-1 col-sm-1 ">
-                                    <input type="number" class="form-control" min="0" max="8" placeholder="8.00"onchange="calculateTotal()"
-                                           aria-label="..." name="hours" required>
+                                    <input type="number" class="form-control" min="0" max="24" placeholder="0.00"onchange="calculateTotal()"
+                                           aria-label="..." name="hours">
                                 </div>
 
 
@@ -163,14 +168,14 @@
                                 <div class="col-md-11">
 
 
-                                    <h3 style="float:right;">Total Hours  <input class="form-control" type="number" name="total"  id="total" value="0"
+                                    <h3 style="float:right;">Total Hours  <input class="form-control" type="number" value="80.00" name="total"  id="total" value="0"
 
                                             style="width:100px; float: right" readonly></h3>
 
                                 </div>
 
                                 <div class="col-md-11" style="margin:10px 0">
-                                    <button type="submit" class="btn btn-success" id="submit">Submit</button>
+                                    <button type="submit" class="btn btn-success" id="submit" onclick="calculateWeek()">Submit</button>
                                     <button type="reset" onclick="return confirm_reset()" class="btn btn-danger"
                                             id="clear">
                                         Reset
@@ -181,6 +186,7 @@
                         </div>
 
                     </div> <!--panel-->
+                    </form>
                 </div> <!--container-->
                 <!-- Displays all timesheet requests for the logged in user. -->
                 <br>
@@ -264,13 +270,10 @@
 
     <script>
     function confirm_reset() {
+      // console.log('hi');
+      console.log(document.getElementById('week').value)
         return confirm("Are you sure you want to reset all fields?");
     }
-
-
-
-
-
     </script>
 
     <script>
@@ -289,10 +292,13 @@
         }
         document.getElementById('total').value = total;
     };
-
-
-
-
-
     </script>
+
+    <script>
+    function calculateWeek() {
+      console.log('hi');
+      console.log(document.getElementById('week').value)
+    }
+    </script>
+
     {% endblock %}
