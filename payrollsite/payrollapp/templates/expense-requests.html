@@ -31,7 +31,7 @@
                     <th>Day</th>
                     <th>Status</th>
                     <th>Amount</th>
-                    <th>Details</th>
+                    <th>Receipt</th>
                 </tr>
                 <tr>
                     {% for expense_request in expense_requests %}
@@ -42,7 +42,7 @@
 
                     <td><a style="color: rgb(0,0,0);" href="#" data-toggle="modal"
                            data-target="#{{expense_request.expense_id}}"><u>View
-                        details</u></a>
+                        Receipt</u></a>
                         <section class="modal modalWindow" id="popupOne">
                             <section class="modalWrapper">
                                 <h2>Modal Popup </h2>
@@ -70,10 +70,11 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
                     <div class="modal-body">
-                        <table align="center" class="detailsTable">
-                            <h2> Expense Reimbursement File Upload </h2>
-                            <img src="{{ expense_request.file.url }}" style="width:500px;height:600px;">
-                        </table>
+
+                        <h2> Expense Reimbursement Details </h2>
+                        <div style="padding-left:25%">
+                            <img src="{{ expense_request.file.url }}" align="center" style="width:400px;height:400px;">
+                        </div>
                     </div>
                     <div class=" modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
