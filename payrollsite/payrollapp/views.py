@@ -13,6 +13,7 @@ from .forms import PaidTimeOffRequestForm
 from .forms import ExpenseRequestForm
 from .forms import UserMetaDataForm
 from .forms import UserSignUpForm
+from .forms import TimeSheetForm
 
 # TODO: only import models we are utilizing, let me be lazy right now please.
 from .models import *
@@ -358,7 +359,7 @@ def expense_reimbursement(request):
     :param   request as an http request
     :return: A rendered html page for the index with a list of current pending and expense reimbursement requests.
     """
-    if request.user.is_authenticated and check_user_group(request.user, "Manager"):
+    if request.user.is_authenticated:
         form = ExpenseRequestForm(request.POST, request.FILES or None)
         layout = get_layout_based_on_user_group(request.user)
         # Retrieving existing  requests from the database
@@ -432,8 +433,48 @@ def display_time_sheet(request):
         # Get the correct layout.
         user = request.user
         layout = get_layout_based_on_user_group(user)
+        form = TimeSheetForm()
         # Write time sheet to the database.
         if request.method == "POST":
+            week1 = request.POST.get("week1")
+            if week1 is not None and week1 is not "":
+                time_sheet_entries = list()
+                total_hours = 0
+                all_hours = request.POST.getlist('hours')
+                week = request.POST.get("week1")
+                print("Week is: " + str(week))
+                day = datetime.datetime.strptime(week + '-1', "%Y-W%W-%w")
+                print("Starting date is: " + str(day))
+                # Get all of the time sheet entries for that week.
+                # If the hours submitted is greater than zero, append it to the
+                # approvals we are building.
+                for i in range(0, 7):
+                    hours = float(all_hours[i])
+                    entry = TimeSheetEntry()
+                    entry.date = day
+                    entry.number_hours = hours
+                    entry.user_id = user
+                    total_hours += hours
+                    if hours > 0:
+                        time_sheet_entries.append(entry)
+                    day += datetime.timedelta(days=1)
+                # If the total hours is greater than zero and there are valid entries,
+                # Create an approval object and add the approval id to all of the entries.
+                if total_hours > 0 and time_sheet_entries is not None:
+                    approval = TimeSheetApprovals()
+                    approval.user_id = user
+                    print("SAVING APPROVAL: " + str(approval.time_sheet_approvals_id))
+                    approval.save()
+                    for entry in time_sheet_entries:
+                        entry.time_sheet_approvals_id = approval
+                        entry.save()
+                    return HttpResponseRedirect('timesheet/')
+            else:
+                print("WEEK NOT FOUND.")
+
+
+            """
+            # Ye olde way
             time_sheet_entries = list()
             total_hours = 0
             for i in range(0, 5):
@@ -458,6 +499,7 @@ def display_time_sheet(request):
                     entry.time_sheet_approvals_id = approval
                     entry.save()
                 return HttpResponseRedirect('timesheet/')
+            """
         # Get total hours for the current pay period.
         total_hours = TimeSheetEntry.calculate_pay_period_total_hours(user)
 
@@ -465,7 +507,8 @@ def display_time_sheet(request):
         time_sheet_approvals = TimeSheetApprovals.get_all_by_username(user)
 
         context = {
-            "loop_times": range(0, 5),
+            "form": form,
+            "loop_times": range(0, 7),
             'layout': layout,
             'total_hours': total_hours,
             'time_sheet_approvals': time_sheet_approvals

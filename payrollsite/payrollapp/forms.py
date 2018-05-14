@@ -4,6 +4,7 @@ from .models import PaidTimeOffEntry, Expenses, UserMetaData
 from .validators import validate_image_file
 from .validators import validate_year_entry
 
+
 class LoginForm(forms.Form):
     # Changes it from plain text to hashing
     username = forms.CharField()
@@ -12,6 +13,20 @@ class LoginForm(forms.Form):
     # Meta Information about your class.
     class Meta:
         fields = ['username', 'password']
+
+
+class TimeSheetForm(forms.Form):
+    number_hours = forms.IntegerField(widget=forms.NumberInput(
+        attrs={'class': 'form-control',
+               'min': '0',
+               'max': '24',
+               'value': '8.00',
+               'name': "hours",
+               'aria-label': "...",
+               'type': "number"
+               }
+    ))
+    number_hours.widget.attrs["onchange"] = "calculateTotal()"
 
 
 class UserSignUpForm(forms.ModelForm):
