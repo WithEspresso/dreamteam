@@ -62,7 +62,7 @@ class UserMetaDataForm(forms.ModelForm):
     GROUP_CHOICES = [
         ('Employee', 'Employee'),
         ('Manager', 'Manager'),
-        ('Human Resources', 'Human Resources')
+        ('Human Resources', 'HumanResources')
     ]
 
     address = forms.CharField(widget=forms.TextInput(

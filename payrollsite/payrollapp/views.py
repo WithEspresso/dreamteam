@@ -11,11 +11,9 @@ from .forms import LoginForm
 from .forms import UserForm
 from .forms import PaidTimeOffRequestForm
 from .forms import ExpenseRequestForm
-from .forms import ApprovalForm
 from .forms import UserMetaDataForm
 from .forms import UserSignUpForm
 
-from django.contrib.auth.models import Permission
 # TODO: only import models we are utilizing, let me be lazy right now please.
 from .models import *
 
@@ -89,8 +87,8 @@ def login_user(request):
                 login(request, user)
                 return redirect('dashboard')
 
-    form = LoginForm(request.POST or None)
     # Behavior for logging in.
+    form = LoginForm(request.POST or None)
     if request.method == "POST" and form.is_valid():
         username = request.POST['username']
         password = request.POST['password']
@@ -142,7 +140,8 @@ def register(request):
     :return: A success page if the User was successfully added to the system.
     """
     template_name = 'signup.html'
-    user_form = UserForm(request.POST or None)
+    message = None
+    user_form = UserSignUpForm(request.POST or None)
     user_metadata_form = UserMetaDataForm(request.POST or None)
     if user_form.is_valid() and user_metadata_form.is_valid():
         # Check django.auth.contrib's user form, register the user.
@@ -160,15 +159,23 @@ def register(request):
         user_metadata.company = user_metadata_form.cleaned_data['company']
         # Save the new tables if both forms are okay.
         user_metadata.save()
-        # Login the user.
-        user = authenticate(username=username, password=password)
-        if user is not None:
-            if user.is_active:
-                login(request, user)
-                return redirect('dashboard')
+        # Add the user to their appropriate group.
+        my_group = Group.objects.get(name=user_metadata.group)
+        my_group.user_set.add(user)
+        # Create PTO hours for the user.
+        pto_hours = PaidTimeOffHours()
+        pto_hours.user_id = user
+        pto_hours.save()
+        # Success message
+        message = "Successfully created new user: " + str(username)
+        # Clear forms.
+        user_form = UserSignUpForm()
+        user_metadata_form = UserMetaDataForm()
+
     context = {
         "user_form": user_form,
-        "user_metadata_form": user_metadata_form
+        "user_metadata_form": user_metadata_form,
+        "message": message
     }
     return render(request, template_name, context)
 
