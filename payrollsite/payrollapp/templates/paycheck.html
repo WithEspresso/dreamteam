@@ -50,8 +50,11 @@
 
             <hr>
             <div class="col-lg-12">
-
-                <h1>Check information: (date) </h1>
+                {% if start_date %}
+                <h1> Check information: {{ start_date }} - {{ end_date }} </h1>
+                {% else %}
+                <h1>Check information: </h1>
+                {% endif %}
                 {% if error_message %}
                 <h2> {{ error_message }} </h2>
                 {% endif %}

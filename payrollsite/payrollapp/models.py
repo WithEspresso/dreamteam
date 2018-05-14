@@ -231,6 +231,14 @@ class PaidTimeOffApproval(models.Model):
         results = PaidTimeOffApproval.objects.filter(user_id__username=username)
         return results
 
+    @staticmethod
+    def get_total_approved_pto(username):
+        results = PaidTimeOffApproval.objects.filter(user_id__username=username).filter(status="Approved")
+        total_approved_hours = 0
+        for entry in results:
+            total_approved_hours += int(entry.get_total_hours())
+        return total_approved_hours
+
     def get_all_entries_by_submission(self):
         """
         Returns all time sheet entries for the approval ID

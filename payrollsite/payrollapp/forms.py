@@ -120,8 +120,12 @@ class ExpenseRequestForm(forms.ModelForm):
     {
         'placeholder':"Enter title"
     }))
-    amount = forms.DecimalField(widget=forms.NumberInput)
-    file = forms.FileField(label="Select an image to upload.",
+    amount = forms.DecimalField(widget=forms.NumberInput(
+        {
+            'min': "0"
+        }
+    ))
+    file = forms.FileField(label="Upload receipt",
                            help_text="Maximum file size is 2 megabytes",
                            validators=[validate_image_file])
 

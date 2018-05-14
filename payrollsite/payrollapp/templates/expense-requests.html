@@ -28,6 +28,7 @@
             <table class="responstable">
                 <tr>
                     <th>Title</th>
+                    <th>Description</th>
                     <th>Day</th>
                     <th>Status</th>
                     <th>Amount</th>
@@ -36,13 +37,14 @@
                 <tr>
                     {% for expense_request in expense_requests %}
                     <td>{{ expense_request.title }}</td>
+                    <td>{{ expense_request.description }}</td>
                     <td>{{ expense_request.date}}</td>
                     <td>{{ expense_request.status }}</td>
                     <td>${{ expense_request.amount }}</td>
 
                     <td><a style="color: rgb(0,0,0);" href="#" data-toggle="modal"
                            data-target="#{{expense_request.expense_id}}"><u>View
-                        details</u></a>
+                        receipt</u></a>
                         <section class="modal modalWindow" id="popupOne">
                             <section class="modalWrapper">
                                 <h2>Modal Popup </h2>
@@ -107,14 +109,15 @@
 
                         <h2 style="color:white;">Add a new item:</h2>
 
-                        <div id="form-box">
+                        <div id="form-box" class="container-login">
                             <form action="" method="post" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 {% for field in form %}
-                                <div>
-                                    <span> {{ field.label_tag }}: {{ field.errors }}</span>
+                                <div class="container-inside-form">
+                                    <label><b> {{ field.label_tag }}: {{ field.errors }} </b></label>
                                     {{ field }}
                                 </div>
+                                <br>
                                 {% endfor %}
                                 <button type="submit" class="btn btn-success" onclick="" style="float:right">Add new
                                     Expense

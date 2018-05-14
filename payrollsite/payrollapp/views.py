@@ -199,8 +199,8 @@ def view_paycheck_information(request):
         # If the input tags have values, convert them to datetime objects and use
         # them to search the database for values within their range.
         if start_date is not None and start_date is not "" and end_date is not None and end_date is not "":
-            start_date = datetime.datetime.strptime(start_date, '%m/%d/%Y')
-            end_date = datetime.datetime.strptime(end_date, '%m/%d/%Y')
+            start_date = datetime.datetime.strptime(start_date, '%m/%d/%Y').date()
+            end_date = datetime.datetime.strptime(end_date, '%m/%d/%Y').date()
             results = PaycheckInformation.search_by_time_period(start_date, end_date, username)
             # Case where no values have been found.
             if len(results) == 0:
@@ -236,7 +236,9 @@ def view_paycheck_information(request):
             'layout': layout,
             'results': results,
             'error_message': error_message,
-            'tax_information': zipped_data
+            'tax_information': zipped_data,
+            'start_date': start_date,
+            'end_date': end_date
         }
     # User is not logged in. Redirecting to the login page with an error message.
     else:
@@ -333,10 +335,15 @@ def approve_paid_time_off(request):
         if request.method == "POST":
             pto_id = request.POST['pto_id']
             pto_request = PaidTimeOffApproval.objects.get(paid_time_off_approval_id=pto_id)
+            user = pto_request.user_id
+            remaining_pto = PaidTimeOffHours.objects.get(user_id=user)
             if "approve" in request.POST:
                 pto_request.status = "Approved"
             if "reject" in request.POST:
                 pto_request.status = "Denied"
+            # Calculate remaining PTO and update the database.
+            remaining_pto.remaining_hours = 160 - PaidTimeOffApproval.get_total_approved_pto(user)
+            remaining_pto.save()
             pto_request.save()
 
         # Default behavior: Load all pending time sheets.
