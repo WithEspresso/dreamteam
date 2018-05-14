@@ -67,11 +67,20 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="layout-manager.html" pinned="false" current-in-tab="true">
+          <file leaf-file-name="layout-manager.html" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/templates/layout-manager.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="345">
-                  <caret line="249" lean-forward="true" selection-start-line="249" selection-end-line="249" />
+                <state relative-caret-position="276">
+                  <caret line="246" column="24" lean-forward="true" selection-start-line="246" selection-start-column="24" selection-end-line="246" selection-end-column="24" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="layout-hr.html" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/templates/layout-hr.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="92">
+                  <caret line="91" lean-forward="true" selection-start-line="91" selection-end-line="91" />
                 </state>
               </provider>
             </entry>
@@ -186,12 +195,12 @@
         <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/timesheets.html" />
         <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/layout-employee.html" />
         <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/paycheck.html" />
-        <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/layout-hr.html" />
         <option value="$PROJECT_DIR$/payrollsite/payrollapp/forms.py" />
         <option value="$PROJECT_DIR$/payrollsite/payrollapp/models.py" />
         <option value="$PROJECT_DIR$/payrollsite/payrollapp/views.py" />
         <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/expense-requests.html" />
         <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/layout-manager.html" />
+        <option value="$PROJECT_DIR$/payrollsite/payrollapp/templates/layout-hr.html" />
       </list>
     </option>
   </component>
@@ -736,13 +745,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/templates/layout-hr.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="90" column="25" selection-start-line="90" selection-start-column="25" selection-end-line="90" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/forms.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="453">
@@ -810,8 +812,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/templates/layout-manager.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="249" lean-forward="true" selection-start-line="249" selection-end-line="249" />
+        <state relative-caret-position="276">
+          <caret line="246" column="24" lean-forward="true" selection-start-line="246" selection-start-column="24" selection-end-line="246" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/payrollsite/payrollapp/templates/layout-hr.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="91" lean-forward="true" selection-start-line="91" selection-end-line="91" />
         </state>
       </provider>
     </entry>
