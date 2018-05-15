@@ -23,8 +23,8 @@
 
 
             <div class="page-header"></div>
-                <div class="container-fluid ">
-                  <form method="post">
+            <div class="container-fluid ">
+                <form method="post">
                     {% csrf_token %}
                     <div class="panel panel-primary ">
                         <div class="panel-heading text-center">
@@ -62,71 +62,40 @@
                                 </div>
 
                                 <div class="col-sm-1 col-sm-1 ">
-                                    <input type="number" class="form-control" min="0" max="24" value="8.00" onchange="calculateTotal()"
-                                           aria-label="..." name="hours" required>
-                                </div>
-                                <div class="col-sm-1 col-sm-1 ">
-                                    <input type="number" class="form-control" min="0" max="24" value="8.00" onchange="calculateTotal()"
-                                           aria-label="..." name="hours" required>
-                                </div>
-                                <div class="col-sm-1 col-sm-1 ">
-                                    <input type="number" class="form-control" min="0" max="24" value="8.00"onchange="calculateTotal()"
-                                           aria-label="..." name="hours" required>
-                                </div>
-                                <div class="col-sm-1 col-sm-1 ">
-                                    <input type="number" class="form-control" min="0" max="24" value="8.00"onchange="calculateTotal()"
-                                           aria-label="..." name="hours" required>
-                                </div>
-                                <div class="col-sm-1 col-sm-1 ">
-                                    <input type="number" class="form-control" min="0" max="24" value="8.00"onchange="calculateTotal()"
-                                           aria-label="..." name="hours" required>
-                                </div>
-                                <div class="col-sm-1 col-sm-1 ">
-                                    <input type="number" class="form-control" min="0" max="24" placeholder="0.00"onchange="calculateTotal()"
+                                    <input type="number" class="form-control" min="0" max="8" value="0.00"
+                                           onchange="calculateTotal()"
                                            aria-label="..." name="hours">
                                 </div>
                                 <div class="col-sm-1 col-sm-1 ">
-                                    <input type="number" class="form-control" min="0" max="24" placeholder="0.00"onchange="calculateTotal()"
-                                           aria-label="..." name="hours">
-                                </div>
-
-
-                            </div> <!--row-->
-                            <div class="row" style="margin: 5px">
-                                <div class="col-sm-3 col-sm-2">
-                                    <input id="week1" type="week">
-
-                                </div>
-
-                           <div class="col-sm-1 col-sm-1 ">
-                                    <input type="number" class="form-control" min="0" max="24" value="8.00"onchange="calculateTotal()"
-                                           aria-label="..." name="hours" required>
-                                </div>
-                                <div class="col-sm-1 col-sm-1 ">
-                                    <input type="number" class="form-control" min="0" max="24" value="8.00"onchange="calculateTotal()"
-                                           aria-label="..." name="hours" required>
-                                </div>
-                                <div class="col-sm-1 col-sm-1 ">
-                                    <input type="number" class="form-control" min="0" max="24" value="8.00"onchange="calculateTotal()"
-                                           aria-label="..." name="hours" required>
-                                </div>
-                                <div class="col-sm-1 col-sm-1 ">
-                                    <input type="number" class="form-control" min="0" max="24" value="8.00"onchange="calculateTotal()"
-                                           aria-label="..." name="hours" required>
-                                </div>
-                                <div class="col-sm-1 col-sm-1 ">
-                                    <input type="number" class="form-control" min="0" max="24" value="8.00"onchange="calculateTotal()"
-                                           aria-label="..." name="hours" required>
-                                </div>
-                                <div class="col-sm-1 col-sm-1 ">
-                                    <input type="number" class="form-control" min="0" max="24" placeholder="0.00"onchange="calculateTotal()"
+                                    <input type="number" class="form-control" min="0" max="8" value="0.00"
+                                           onchange="calculateTotal()"
                                            aria-label="..." name="hours">
                                 </div>
                                 <div class="col-sm-1 col-sm-1 ">
-                                    <input type="number" class="form-control" min="0" max="24" placeholder="0.00"onchange="calculateTotal()"
+                                    <input type="number" class="form-control" min="0" max="8" value="0.00"
+                                           onchange="calculateTotal()"
                                            aria-label="..." name="hours">
                                 </div>
-
+                                <div class="col-sm-1 col-sm-1 ">
+                                    <input type="number" class="form-control" min="0" max="8" value="0.00"
+                                           onchange="calculateTotal()"
+                                           aria-label="..." name="hours">
+                                </div>
+                                <div class="col-sm-1 col-sm-1 ">
+                                    <input type="number" class="form-control" min="0" max="8" value="0.00"
+                                           onchange="calculateTotal()"
+                                           aria-label="..." name="hours">
+                                </div>
+                                <div class="col-sm-1 col-sm-1 ">
+                                    <input type="number" class="form-control" min="0" max="8" placeholder="0.00"
+                                           onchange="calculateTotal()"
+                                           aria-label="..." name="hours">
+                                </div>
+                                <div class="col-sm-1 col-sm-1 ">
+                                    <input type="number" class="form-control" min="0" max="8" placeholder="0.00"
+                                           onchange="calculateTotal()"
+                                           aria-label="..." name="hours">
+                                </div>
 
 
                             </div> <!--row-->
@@ -139,14 +108,19 @@
                                 <div class="col-md-11">
 
 
-                                    <h3 style="float:right;">Total Hours  <input class="form-control" type="number" value="80.00" name="total"  id="total" value="0"
+                                    <h3 style="float:right;">Total Hours <input class="form-control" type="number"
+                                                                                value="0.00" name="total" id="total"
+                                                                                value="0"
 
-                                            style="width:100px; float: right" readonly></h3>
+                                                                                style="width:100px; float: right"
+                                                                                readonly></h3>
 
                                 </div>
 
                                 <div class="col-md-11" style="margin:10px 0">
-                                    <button type="submit" class="btn btn-success" id="submit" onclick="calculateWeek()">Submit</button>
+                                    <button type="submit" class="btn btn-success" id="submit" onclick="calculateWeek()">
+                                        Submit
+                                    </button>
                                     <button type="reset" onclick="return confirm_reset()" class="btn btn-danger"
                                             id="clear">
                                         Reset
@@ -157,12 +131,12 @@
                         </div>
 
                     </div> <!--panel-->
-                    </form>
-                </div> <!--container-->
-                <!-- Displays all timesheet requests for the logged in user. -->
-                <br>
-                <br>
-                <br>
+                </form>
+            </div> <!--container-->
+            <!-- Displays all timesheet requests for the logged in user. -->
+            <br>
+            <br>
+            <br>
 
 
             {% if pto_approvals %}
@@ -201,13 +175,66 @@
             {% endif %}
 
 
+        </div>
+        <!--
+                    <div id="app">
+                        <form method="post" action="">
+                            {% csrf_token %}
+                            <table class="table table-condensed" align="center" style="width: 25%">
+                                <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Hours</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <!--- Repeats the same table row with an index for POST accessor
+                                {% for i in loop_times %}
+                                <tr>
+                                    <td>
+                                        <input class="form-control" type="date" name="date{{i}}"/>
+                                    </td>
+                                    <td>
+                                        <input class="form-control" type="number" value="0" onchange="calculateTotal()" min="0"
+                                               max="24" step="1" name="hours" id="hours0" style="width:75px"/>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                <tr>
+                                    <td>
+                                        <h4 align="right">Total:</h4>
+                                    </td>
+                                    <td>
+                                        <h4><input style="width:75px" type="number" name="total" id="total"/></h4>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="col-md-7">
+                                <button type="submit" class="btn btn-success" id="submit">Submit</button>
+                                <button type="reset" onclick="return confirm_reset()" class="btn btn-danger" id="clear">Reset
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                -->
+        <!-- Displays all pto requests for the logged in user. -->
+        <br>
+        <br>
+        <br>
 
-            </div>
-<!--
-            <div id="app">
-                <form method="post" action="">
-                    {% csrf_token %}
-                    <table class="table table-condensed" align="center" style="width: 25%">
+    </div>
+    <!-- modal to view details of a submitted timesheet -->
+    {% for pto in pto_approvals %}
+    <div id="{{pto.paid_time_off_approval_id}}" class="modal fade">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content modal-lg">
+                <div class="modal-header modal-lg">
+                    <h3 class="modal-title " style="float: left">Paid Time off Request Details</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <table align="center" class="detailsTable">
                         <thead>
                         <tr>
                             <th>Date</th>
@@ -215,77 +242,23 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <!--- Repeats the same table row with an index for POST accessor
-                        {% for i in loop_times %}
+                        {% for entry in pto.get_all_entries_by_submission %}
                         <tr>
-                            <td>
-                                <input class="form-control" type="date" name="date{{i}}"/>
-                            </td>
-                            <td>
-                                <input class="form-control" type="number" value="0" onchange="calculateTotal()" min="0"
-                                       max="24" step="1" name="hours" id="hours0" style="width:75px"/>
-                            </td>
+                            <th>{{ entry.date }}</th>
+                            <th>{{ entry.hours }}</th>
                         </tr>
                         {% endfor %}
-                        <tr>
-                            <td>
-                                <h4 align="right">Total:</h4>
-                            </td>
-                            <td>
-                                <h4><input style="width:75px" type="number" name="total" id="total"/></h4>
-                            </td>
-                        </tr>
                         </tbody>
                     </table>
-                    <div class="col-md-7">
-                        <button type="submit" class="btn btn-success" id="submit">Submit</button>
-                        <button type="reset" onclick="return confirm_reset()" class="btn btn-danger" id="clear">Reset
-                        </button>
-                    </div>
-                </form>
-            </div>
-        -->
-            <!-- Displays all pto requests for the logged in user. -->
-            <br>
-            <br>
-            <br>
-
-        </div>
-        <!-- modal to view details of a submitted timesheet -->
-        {% for pto in pto_approvals %}
-        <div id="{{pto.paid_time_off_approval_id}}" class="modal fade">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content modal-lg">
-                    <div class="modal-header modal-lg">
-                        <h3 class="modal-title " style="float: left">Paid Time off Request Details</h3>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <table align="center" class="detailsTable">
-                            <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Hours</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for entry in pto.get_all_entries_by_submission %}
-                            <tr>
-                                <th>{{ entry.date }}</th>
-                                <th>{{ entry.hours }}</th>
-                            </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
-        {% endfor %}
     </div>
+    {% endfor %}
+</div>
 </div>
 
 {% endblock %}
@@ -298,6 +271,7 @@
     function confirm_reset() {
         return confirm("Are you sure you want to reset all fields?");
     }
+
 </script>
 
 <script>
@@ -311,6 +285,7 @@
         }
         document.getElementById('total').value = total;
     };
+
 
 </script>
 {% endblock %}
