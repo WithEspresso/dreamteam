@@ -113,25 +113,25 @@
                         <div id="form-box" class="container-login">
                             <form action="" method="post" enctype="multipart/form-data">
 
+                                <!--
+                                                                <div>
+                                                                    <span>Title:</span>
+                                                                    <input type="title" name="item-name" placeholder="Enter description">
+                                                                </div>
 
-                                <div>
-                                    <span>Title:</span>
-                                    <input type="title" name="item-name" placeholder="Enter description">
-                                </div>
+                                                                <div>
+                                                                    <span>Date:</span> <input type="date" name="date">
+                                                                </div>
 
-                                <div>
-                                    <span>Date:</span> <input type="date" name="date">
-                                </div>
+                                                                <div>
+                                                                    <span>Amount:</span> <input type="number" name="amount" min="0" placeholder="$">
+                                                                </div>
+                                                                <div>
+                                                                    <span>Upload file:</span> <input type="file">
+                                                                </div>
+                                                                <br>
+                                --->
 
-                                <div>
-                                    <span>Amount:</span> <input type="number" name="amount" min="0" placeholder="$">
-                                </div>
-                                <div>
-                                    <span>Upload file:</span> <input type="file">
-                                </div>
-                                <br>
-
-<!--
                                 {% csrf_token %}
                                 {% for field in form %}
                                 <div class="container-inside-form">
@@ -140,7 +140,6 @@
                                 </div>
                                 <br>
                                 {% endfor %}
--->
                                 <button type="submit" class="btn btn-success" onclick="" style="float:right">Add new
                                     Expense
                                 </button>

@@ -101,8 +101,7 @@ class UserMetaDataForm(forms.ModelForm):
 
 
 class PaidTimeOffSubmissionForm(forms.ModelForm):
-
-
+    pass
     class Meta:
         pass
 
@@ -118,16 +117,18 @@ class PaidTimeOffRequestForm(forms.ModelForm):
 class ExpenseRequestForm(forms.ModelForm):
     title = forms.CharField(widget=forms.TextInput(
     {
-        'placeholder':"Enter title"
+        'placeholder': "Enter title"
     }))
     amount = forms.DecimalField(widget=forms.NumberInput(
         {
             'min': "0"
         }
     ))
+    date = forms.DateField(widget=forms.DateInput())
     file = forms.FileField(label="Upload receipt",
                            help_text="Maximum file size is 2 megabytes",
                            validators=[validate_image_file])
+
 
     # User is automatically retrieved from the request.user method in the view.
     # Status is only visible to the manager

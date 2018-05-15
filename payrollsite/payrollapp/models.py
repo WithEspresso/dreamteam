@@ -121,7 +121,8 @@ class TimeSheetEntry(models.Model):
         end_day = calendar.monthrange(year, month)[1]
         start_date = datetime.date(year, month, start_day)
         end_date = datetime.date(year, month, end_day)
-        results = TimeSheetEntry.objects.filter(user_id__username__exact=username).filter(date__range=[start_date, end_date])
+        results = TimeSheetEntry.objects.filter(user_id__username__exact=username).filter(
+            date__range=[start_date, end_date])
         return results
 
     @staticmethod
@@ -137,8 +138,8 @@ class TimeSheetEntry(models.Model):
         """
         start_date = datetime.date(date.year, date.month, 1)
         end_date = datetime.date(date.year, date.month, calendar.mdays[date.month])
-        total_hours = TimeSheetEntry.objects.filter(date__range=[start_date, end_date])\
-            .filter(user_id__username__exact=username)\
+        total_hours = TimeSheetEntry.objects.filter(date__range=[start_date, end_date]) \
+            .filter(user_id__username__exact=username) \
             .aggregate(Sum('number_hours')).get('number_hours__sum')
         return total_hours
 
@@ -168,7 +169,8 @@ class PaycheckInformation(models.Model):
 
     @staticmethod
     def search_by_time_period(start_date, end_date, username):
-        results = PaycheckInformation.objects.filter(user_id__username__exact=username).filter(payday__range=[start_date, end_date])
+        results = PaycheckInformation.objects.filter(user_id__username__exact=username).filter(
+            payday__range=[start_date, end_date])
         return results
 
     @staticmethod
@@ -193,8 +195,8 @@ class PaycheckInformation(models.Model):
 
 
 def expense_directory_path(instance, filename):
-        # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
-        return 'expenses/user_{0}/{1}'.format(instance.user_id.id, filename)
+    # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
+    return 'expenses/user_{0}/{1}'.format(instance.user_id.id, filename)
 
 
 class Expenses(models.Model):
@@ -277,3 +279,6 @@ class PaidTimeOffHours(models.Model):
     vacation_hours_id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     remaining_hours = models.IntegerField(default=FOUR_WEEKS)
+
+    def __str__(self):
+        return "PTO Hours for: " + str(self.user_id) + str(self.remaining_hours)
