@@ -107,11 +107,35 @@
                                     <h3 style="float:right;">Total Hours <input class="form-control" type="number"
                                                                                 value="0.00" name="total" id="total"
                                                                                 value="0"
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <div class="panel-body" align="center">
+                                <div class="row" style="margin: 5px">
+                                    <div class="col-sm-2 col-sm-3">
+                                        <input id="week1" name="week1" type="week">
+                                    </div>
+                                    {% for i in loop_times %}
+                                    <div class="col-sm-1 col-sm-1 ">
+                                        <input type="number" class="form-control" min="0" max="8" value="0.00"
+                                               onchange="calculateTotal()"
+                                               aria-label="..." name="hours" required>
+                                    </div>
+                                    {% endfor %}
+                                </div> <!--row-->
+                            </div> <!--panel body-->
 
                                                                                 style="width:100px; float: right"
                                                                                 readonly></h3>
+                            <div class="panel-footer">
+                                <div class="row">
+                                    <div class="col-md-11">
+                                        <h3 style="float:right;">Total Hours <input class="form-control" type="number"
+                                                                                    value="0.00" name="total" id="total"
+                                                                                    value="0"
 
                                 </div>
+                                                                                    style="width:100px; float: right"
+                                                                                    readonly></h3>
 
                                 <div class="col-md-11" style="margin:10px 0">
                                     <button type="submit" class="btn btn-success" id="submit" onclick="calculateWeek()">
@@ -121,9 +145,20 @@
                                             id="clear">
                                         Reset
                                     </button>
+                                    </div>
+                                    <div class="col-md-11" style="margin:10px 0">
+                                        <button type="submit" class="btn btn-success" id="submit" onclick="calculateWeek()">
+                                            Submit
+                                        </button>
+                                        <button type="reset" onclick="return confirm_reset()" class="btn btn-danger"
+                                                id="clear">
+                                            Reset
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        </form>
                     </div> <!--panel-->
                 </form>
             </div> <!--container-->

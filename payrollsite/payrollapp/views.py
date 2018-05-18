@@ -299,6 +299,8 @@ def paid_time_off(request):
 
         # Saving the form data and saving to the database if the user is sending a POST request.
         if request.method == "POST":
+            for key, values in request.POST.lists():
+                print(key, values)
             # Iterate through all entries and append valid ones to a list.
             pto_entries = list()
             total_hours = 0
@@ -306,6 +308,11 @@ def paid_time_off(request):
                 pto_entry = PaidTimeOffEntry()
                 pto_entry.user_id = user
                 date = request.POST.get("date" + str(i))
+            week = request.POST.get("week1")
+            print("Getting PTO request of for week: " + str(week))
+            if week is not None and week is not "":
+                pto_entries = list()
+                total_hours = 0
                 all_hours = request.POST.getlist('hours')
                 hours = float(all_hours[i])
                 if hours is not None and hours > 0 and date is not None:
@@ -322,11 +329,40 @@ def paid_time_off(request):
                     entry.paid_time_off_approval_id = approval
                     entry.save()
                 return HttpResponseRedirect('pto/')
+                day = datetime.datetime.strptime(week + '-1', "%Y-W%W-%w")
+                # Get all of the time sheet entries for that week.
+                # If the hours submitted is greater than zero, append it to the
+                # approvals we are building.
+                for i in range(0, 7):
+                    hours = float(all_hours[i])
+                    entry = PaidTimeOffEntry()
+                    entry.date = day
+                    entry.hours = hours
+                    entry.user_id = user
+                    total_hours += hours
+                    # DEBUG
+                    print("Hours request: " + str(hours))
+                    print("for date: " + str(day))
+
+                    if hours > 0:
+                        pto_entries.append(entry)
+                    day += datetime.timedelta(days=1)
+                # If the total hours is greater than zero and there are valid entries,
+                # Create an approval object and add the approval id to all of the entries.
+                if total_hours > 0 and pto_entries is not None:
+                    approval = PaidTimeOffApproval()
+                    approval.user_id = user
+                    approval.save()
+                    for entry in pto_entries:
+                        entry.paid_time_off_approval_id = approval
+                        entry.save()
+                    return HttpResponseRedirect('pto/')
             else:
                 error_message = "Total hours cannot be zero."
         # Load the page with the context dictionary.
         context = {
             "loop_times": range(0, 5),
+            "loop_times": range(0, 7),
             "layout": layout,
             "form": form,
             "pto_approvals": pto_requests,
