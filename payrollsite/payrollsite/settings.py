@@ -76,6 +76,10 @@ WSGI_APPLICATION = 'payrollsite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
+"""
+Database is currently hooked up to Amazon RDS instance. 
+The database will be taken down after 5/25/2018. 
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',

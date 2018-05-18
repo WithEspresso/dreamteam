@@ -6,7 +6,10 @@ from .validators import validate_year_entry
 
 
 class LoginForm(forms.Form):
-    # Changes it from plain text to hashing
+    """
+    Form used to login to the payroll site.
+    Passwords are represented as stars.
+    """
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
 
@@ -16,6 +19,9 @@ class LoginForm(forms.Form):
 
 
 class TimeSheetForm(forms.Form):
+    """
+    Form used to entry time sheets.
+    """
     number_hours = forms.IntegerField(widget=forms.NumberInput(
         attrs={'class': 'form-control',
                'min': '0',
@@ -30,6 +36,9 @@ class TimeSheetForm(forms.Form):
 
 
 class UserSignUpForm(forms.ModelForm):
+    """
+    Form used to register users.
+    """
     # Changes it from plain text to hashing
     username = forms.CharField(widget=forms.TextInput(
         attrs={'class': 'containder-inside-form',
@@ -55,6 +64,9 @@ class UserSignUpForm(forms.ModelForm):
 
 
 class UserForm(forms.ModelForm):
+    """
+    Form used for updating user information.
+    """
     # Changes it from plain text to hashing
     email = forms.CharField(widget=forms.TextInput(
         attrs={'class': 'containder-inside-form',
@@ -74,6 +86,9 @@ class UserForm(forms.ModelForm):
 
 
 class UserMetaDataForm(forms.ModelForm):
+    """
+    Form used for updating user meta data.
+    """
     GROUP_CHOICES = [
         ('Employee', 'Employee'),
         ('Manager', 'Manager'),
@@ -100,13 +115,10 @@ class UserMetaDataForm(forms.ModelForm):
         fields = ['address', 'social_security_number', 'company', 'group']
 
 
-class PaidTimeOffSubmissionForm(forms.ModelForm):
-    pass
-    class Meta:
-        pass
-
-
 class PaidTimeOffRequestForm(forms.ModelForm):
+    """
+    Form used for submitting PTO requests
+    """
     # User is automatically retrieved from the request.user method in the view.
     # Status is only visible to the manager
     class Meta:
@@ -115,13 +127,18 @@ class PaidTimeOffRequestForm(forms.ModelForm):
 
 
 class ExpenseRequestForm(forms.ModelForm):
+    """
+    Form used for submitting expense requests.
+    """
     title = forms.CharField(widget=forms.TextInput(
     {
-        'placeholder': "Enter title"
+        'placeholder': "Enter title",
+        'width':"48",
     }))
     amount = forms.DecimalField(widget=forms.NumberInput(
         {
-            'min': "0"
+            'min': "0",
+            'width': "48",
         }
     ))
     date = forms.DateField(widget=forms.DateInput())
@@ -129,24 +146,8 @@ class ExpenseRequestForm(forms.ModelForm):
                            help_text="Maximum file size is 2 megabytes",
                            validators=[validate_image_file])
 
-
     # User is automatically retrieved from the request.user method in the view.
     # Status is only visible to the manager
     class Meta:
         model = Expenses
         fields = ['title', 'amount', 'file']
-
-
-class ApprovalForm(forms.Form):
-    """
-    Form to search the website.
-    User selects a search algorithm with the drop down menu and enters a query.
-    Query is stored as the value in this form.
-    """
-    select_choices = (
-        ('Pending', 'Pending'),
-        ('Approved', 'Approved'),
-        ('Denied', 'Denied'),
-    )
-    # time_sheet_id = forms.CharField(widget=forms.HiddenInput(), initial="Pending")
-    status = forms.ChoiceField(widget=forms.Select, choices=select_choices)

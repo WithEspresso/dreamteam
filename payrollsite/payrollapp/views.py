@@ -13,7 +13,6 @@ from .forms import PaidTimeOffRequestForm
 from .forms import ExpenseRequestForm
 from .forms import UserMetaDataForm
 from .forms import UserSignUpForm
-from .forms import TimeSheetForm
 
 # TODO: only import models we are utilizing, let me be lazy right now please.
 from .models import *
@@ -23,8 +22,10 @@ def get_layout_based_on_user_group(user):
     """
     Helper function to determine which html base page to render.
     Returns the appropriate layout depending on the user's permissions.
-    :param user from request.user
-    :return: a string containing the appropriate layout for th e page.
+    @type  user:    User object
+    @param user:    The user currently logged in
+    @rtype: String
+    @return: The template in the form of a String
     """
     if user.groups.filter(name="HumanResources").exists():
         return "layout-hr.html"
@@ -37,10 +38,13 @@ def get_layout_based_on_user_group(user):
 def check_user_group(user, group_name):
     """
     Helper function to determine permissions.
-    Checks to see if a user is part of a group.
-    :param user from request.user
-    :param group_name to check in the form of a string
-    :return: a string containing the appropriate layout for th e page.
+    Checks to see if a user is part of a group
+    @type  user: User object
+    @param user: The user currently logged in
+    @type  group_name: String
+    @param group_name: The group to check membership of
+    @rtype: bool
+    @return: True if they are in the group, false otherwise
     """
     if user.groups.filter(name=group_name).exists():
         return True
@@ -51,8 +55,10 @@ def login_user(request):
     """
     Available to anonymous and registered users.
     Logs in a user if a post request is given or redirects the user
-    :param request:
-    :return: The dashboard page for the user if the login is successful
+    @type  request: HTTP request
+    @param request: an HTTP request
+    @rtype: HttpResponse
+    @return: an http response.
     """
     user_meta_data_form = UserMetaDataForm(request.POST or None)
     user_form = UserSignUpForm(request.POST or None)
@@ -114,8 +120,10 @@ def login_user(request):
 def logout_user(request):
     """
     Logs a user out and redirects them to the index page.
-    :param request:
-    :return The index page.
+    @type  request: Http Request
+    @param request: An http request
+    @rtype: HttpResponse
+    @return: an http response.
     """
     logout(request)
     return redirect(login_user)
@@ -125,8 +133,10 @@ def reset_password(request):
     """
     Sends an email to the user to reset their password
     TODO: Use Django built in password resetting functionality versus inventing the wheel
-    :param request:
-    :return The password reset page.
+    @type  request: Http Request
+    @param request:
+    @rtype: HttpResponse
+    @return: an http response.
     """
     logout(request)
     return redirect(login)
@@ -137,8 +147,10 @@ def register(request):
     Registers an initial HR user to the payroll system.
     Registration should start here for a company, then
     HR can register the rest of its users.
-    :param request:
-    :return: A success page if the User was successfully added to the system.
+    @type  request: Http Request
+    @param request: An http request, POST or None
+    @rtype: HttpResponse
+    @return: an http response.
     """
     template_name = 'signup.html'
     message = None
@@ -151,14 +163,13 @@ def register(request):
         password = user_form.cleaned_data['password']
         user.set_password(password)
         user.save()
-        # Now, get our metadata and add it to the table.
+        # Save the new tables if both forms are okay.
         user_metadata = user_metadata_form.save(commit=False)
         user_metadata.user_id = user
         user_metadata.address = user_metadata_form.cleaned_data['address']
         user_metadata.social_security_number = user_metadata_form.cleaned_data['social_security_number']
         user_metadata.group = user_metadata_form.cleaned_data['group']
         user_metadata.company = user_metadata_form.cleaned_data['company']
-        # Save the new tables if both forms are okay.
         user_metadata.save()
         # Add the user to their appropriate group.
         my_group = Group.objects.get(name=user_metadata.group)
@@ -172,7 +183,6 @@ def register(request):
         # Clear forms.
         user_form = UserSignUpForm()
         user_metadata_form = UserMetaDataForm()
-
     context = {
         "user_form": user_form,
         "user_metadata_form": user_metadata_form,
@@ -248,8 +258,12 @@ def view_paycheck_information(request):
 
 def show_dashboard(request):
     """
-    :param   request as an http request
-    :return: A rendered html page with the user's dashboard.
+    Displays the appropriate dashboard for the logged in user
+    based on their user group.
+    @type  request: HttpRequest
+    @param request: An HTTP Request
+    @rtype: HttpResponse
+    @return: an http response.
     """
     if request.user.is_authenticated:
         layout = get_layout_based_on_user_group(request.user)
@@ -264,8 +278,10 @@ def paid_time_off(request):
     """
     Loads a list of paid time off requests for the user.
     Provides a form for the user to add additional PTO.
-    :param   request as an http request
-    :return: A rendered html page for the index with a list of current pending and process PTO requests.
+    @type  request: HttpRequest
+    @param request: An HTTP Request
+    @rtype: HttpResponse
+    @return: an http response.
     """
     error_message = ""
     form = PaidTimeOffRequestForm(request.POST or None)
@@ -324,12 +340,13 @@ def paid_time_off(request):
 
 def approve_paid_time_off(request):
     """
-    Loads a list of pending paid time off requests.
-    TODO: Add decorator so this is a manager only view.
-    TODO: HTTP GET, retrieve pending pto request. Implement manager only access to this view. Redirect if failed.
-    TODO: HTTP POST, update status of PTO requests.
-    :param   request as an http request
-    :return: A rendered html page for the index with a list of current pending and process PTO requests.
+    This is a manager only view.
+    Loads a list of pending paid time off requests
+    and approved/denied paid time off requests.
+    @type  request: HttpRequest
+    @param request: An HTTP Request
+    @rtype: HttpResponse
+    @return: an http response.
     """
     if request.user.is_authenticated and check_user_group(request.user, "Manager"):
         if request.method == "POST":
@@ -363,8 +380,11 @@ def approve_paid_time_off(request):
 def expense_reimbursement(request):
     """
     Loads a list of expense reimbursement requests for the user.
-    :param   request as an http request
-    :return: A rendered html page for the index with a list of current pending and expense reimbursement requests.
+    The user may post new expense reimbursement requests.
+    @type  request: HttpRequest
+    @param request: An HTTP Request
+    @rtype: HttpResponse
+    @return: an http response.
     """
     if request.user.is_authenticated:
         if request.POST:
@@ -406,8 +426,11 @@ def approve_expense_reimbursement(request):
     """
     Manager only view.
     Loads a list of pending expense reimbursement requests.
-    :param   request as an http request
-    :return: A rendered html page for the index with a list of current pending and process PTO requests.
+    The manager can approve or deny them.
+    @type  request: HttpRequest
+    @param request: An HTTP Request
+    @rtype: HttpResponse
+    @return: an http response.
     """
     if request.user.is_authenticated and check_user_group(request.user, "Manager"):
         # If the user is making a post request, updates the database.
@@ -438,8 +461,10 @@ def display_time_sheet(request):
     """
     Displays a form so the user can input their time sheet information and view
     submitted time sheets.
-    :param   request as an http request
-    :return: A rendered html page for inputting time sheet requests
+    @type  request: HttpRequest
+    @param request: An HTTP Request
+    @rtype: HttpResponse
+    @return: an http response.
     """
     if request.user.is_authenticated:
         # Get the correct layout.
@@ -496,9 +521,12 @@ def display_time_sheet(request):
 def approve_time_sheet(request):
     """
     Manager only view.
-    Loads a list of pending time sheets from employees, managers, and HR
-    :param   request as an http request
-    :return: A rendered html page for the index with a list of current pending and process PTO requests.
+    Loads a list of pending time sheets from employees, managers, and HR.
+    The manager can approve or deny the time sheets.
+    @type  request: HttpRequest
+    @param request: An HTTP Request
+    @rtype: HttpResponse
+    @return: an http response.
     """
     # Behavior for updating database entries
     if request.user.is_authenticated and check_user_group(request.user, "Manager"):
@@ -532,9 +560,10 @@ def generate_reports(request):
     """
     Manager only view.
     Displays reports about the manager's employees.
-    TODO: How does graph work pls x axis doesn't take python data structures
-    :param   request as an http request
-    :return: A rendered html page with the employee reports.
+    @type  request: HttpRequest
+    @param request: An HTTP Request
+    @rtype: HttpResponse
+    @return: an http response.
     """
     """
     For the #container-graph-paycheck, create a tuple of the next twelve months
@@ -553,8 +582,12 @@ def generate_reports(request):
 
 def manage_accounts(request):
     """
-    :param   request as an http request
-    :return: A rendered html page with wage information
+    Human resources only view.
+    Allows the hr user to update account information.
+    @type  request: HttpRequest
+    @param request: An HTTP Request
+    @rtype: HttpResponse
+    @return: an http response.
     """
     if request.user.is_authenticated and check_user_group(request.user, "HumanResources"):
         # Check for post request and process data accordingly.
