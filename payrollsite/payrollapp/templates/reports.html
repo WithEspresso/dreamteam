@@ -24,7 +24,10 @@
 
 $('#container-graph-paycheck').highcharts({
     xAxis: {
-        categories: ['{{ last_twelve_months }}']
+        //categories: ['{{ last_twelve_months }}']
+        categories: ["January", "February", "March",
+                     "April", "May", "June", "July",
+                     "August", "September", "October", "November", "December"]
     },
     yAxis: [{
       title: {
@@ -109,6 +112,7 @@ $('#container-graph-employees').highcharts({
       }]
     }]
 });
+
 
 
 

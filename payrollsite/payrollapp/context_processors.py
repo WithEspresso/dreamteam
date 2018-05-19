@@ -4,8 +4,10 @@ from .models import UserMetaData
 def user_meta_data_processor(request):
     """
     Allows user meta data for the logged in user to be available for all pages' contexts
-    :param request:
-    :return:
+    @type  request: HttpRequest
+    @param request:
+    @rtype: dict
+    @return: A context dictionary for the template to utilize
     """
     user_meta_data = None
     if request.user.is_authenticated:

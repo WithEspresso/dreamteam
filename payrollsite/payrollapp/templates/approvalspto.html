@@ -19,7 +19,7 @@
 <div id="page-wrapper" style="min-height:100%; padding-top:100px">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-12">
+            <div>
 
                 <hr>
 
@@ -39,7 +39,8 @@
                         <td>{{ approval.user_id }}</td>
                         <td>{{ approval.user_id.first_name }} {{ approval.user_id.last_name }}</td>
                         <td>{{ approval.status }}</td>
-                        <td><a style="color: rgb(0,0,0);" href="#" data-toggle="modal" data-target="#pending{{approval.id}}"><u>View
+                        <td><a style="color: rgb(0,0,0);" href="#" data-toggle="modal"
+                               data-target="#pending{{approval.id}}"><u>View
                             details</u>
                         </a>
                             <section class="modal modalWindow" id="popupOne">
@@ -91,127 +92,127 @@
                         </div>
 
                         <div class="modal-footer">
-                            <div>
-                                <form action="" method="post">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="pto_id" value="{{ approval.paid_time_off_approval_id }}">
-                                    <button type="submit" name="reject" value="reject" class="btn btn-md btn-danger ">
-                                        Reject
-                                    </button>
-                                    <button type="submit" name="approve" value="approve"
-                                            class="btn btn-md btn-success btn-md">
-                                        Approve
-                                    </button>
-                                    <button type="button" class="btn btn-info btn-md" style="" data-dismiss="modal">
-                                        Cancel
-                                    </button>
-                                </form>
-                            </div>
+                            <button type="button" class="btn btn-info btn-md" style="" data-dismiss="modal">
+                                Cancel
+                            </button>
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="pto_id" value="{{ approval.paid_time_off_approval_id }}">
+                                <button type="submit" name="reject" value="reject" class="btn btn-md btn-danger ">
+                                    Reject
+                                </button>
+                                <button type="submit" name="approve" value="approve"
+                                        class="btn btn-md btn-success btn-md">
+                                    Approve
+                                </button>
+
+                            </form>
+
                         </div>
                     </div>
                 </div>
             </div>
             {% endfor %}
 
-                <h1>Processed Paid Time Off Approvals:</h1>
+            <h1>Processed Paid Time Off Approvals:</h1>
 
-                <table class="responstable">
-                    <tr>
-                        <th>Employee ID</th>
-                        <th>Username</th>
-                        <th>Full Name</th>
-                        <th>Status</th>
-                        <th>Details</th>
-                    </tr>
-                    {% for approval in processed_pto_requests %}
-                    <tr>
-                        <td>{{ approval.user_id.id }}</td>
-                        <td>{{ approval.user_id }}</td>
-                        <td>{{ approval.user_id.first_name }} {{ approval.user_id.last_name }}</td>
-                        <td>{{ approval.status }}</td>
-                        <td><a style="color: rgb(0,0,0);" href="#" data-toggle="modal" data-target="#{{approval.id}}processed"><u>View
-                            details</u>
-                        </a>
-                            <section class="modal modalWindow" id="popupOne">
-                                <section class="modalWrapper">
-                                    <h2>Modal Popup </h2>
-                                </section>
-                                <a class="closeBtn">CLOSE X</a>
+            <table class="responstable">
+                <tr>
+                    <th>Employee ID</th>
+                    <th>Username</th>
+                    <th>Full Name</th>
+                    <th>Status</th>
+                    <th>Details</th>
+                </tr>
+                {% for approval in processed_pto_requests %}
+                <tr>
+                    <td>{{ approval.user_id.id }}</td>
+                    <td>{{ approval.user_id }}</td>
+                    <td>{{ approval.user_id.first_name }} {{ approval.user_id.last_name }}</td>
+                    <td>{{ approval.status }}</td>
+                    <td><a style="color: rgb(0,0,0);" href="#" data-toggle="modal"
+                           data-target="#{{approval.id}}processed"><u>View
+                        details</u>
+                    </a>
+                        <section class="modal modalWindow" id="popupOne">
+                            <section class="modalWrapper">
+                                <h2>Modal Popup </h2>
                             </section>
-                            <section class="modal overlay">
-                            </section>
-                        </td>
-                    </tr>
-                    {% empty %}
-                    <h2> No pending paid time off approvals. </h2>
-                    {% endfor %}
-                </table>
+                            <a class="closeBtn">CLOSE X</a>
+                        </section>
+                        <section class="modal overlay">
+                        </section>
+                    </td>
+                </tr>
+                {% empty %}
+                <h2> No pending paid time off approvals. </h2>
+                {% endfor %}
+            </table>
 
-            </div>
-
-            {% for approval in processed_pto_requests %}
-            <div id="{{approval.id}}processed" class="modal fade">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content modal-lg">
-                        <div class="modal-header modal-lg">
-                            <h3 class="modal-title " style="float: left">PTO request Details</h3>
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        </div>
-                        <div class="modal-body">
-                            <table align="center" class="detailsTable">
-                                <thead>
-                                <tr>
-                                    <th>Employee ID</th>
-                                    <th>Full Name</th>
-                                    <th>Date</th>
-                                    <th>Hours</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {% for entry in approval.get_all_entries_by_submission %}
-                                <tr align="center">
-                                    <td>{{ approval.user_id.id }}</td>
-                                    <td>{{ approval.user_id.first_name }} {{ approval.user_id.last_name }}</td>
-                                    <td>{{ entry.date }}</td>
-                                    <td>{{ entry.hours }}</td>
-                                </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="modal-footer">
-                            <div>
-                                <form action="" method="post">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="pto_id" value="{{ approval.paid_time_off_approval_id }}">
-                                    <button type="submit" name="reject" value="reject" class="btn btn-md btn-danger ">
-                                        Reject
-                                    </button>
-                                    <button type="submit" name="approve" value="approve"
-                                            class="btn btn-md btn-success btn-md">
-                                        Approve
-                                    </button>
-                                    <button type="button" class="btn btn-info btn-md" style="" data-dismiss="modal">
-                                        Cancel
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-
-            {% endblock %}
-
-            {% block scriptsblock %}
-            <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/176621/mk-component.js'></script>
-            <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/176621/mk-datepicker.js'></script>
-
-            {% load static %}
-            <script src="{% static 'scripts/paycheck.js' %}"></script>
-            {% endblock %}
         </div>
+
+        {% for approval in processed_pto_requests %}
+        <div id="{{approval.id}}processed" class="modal fade">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content modal-lg">
+                    <div class="modal-header modal-lg">
+                        <h3 class="modal-title " style="float: left">PTO request Details</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <table align="center" class="detailsTable">
+                            <thead>
+                            <tr>
+                                <th>Employee ID</th>
+                                <th>Full Name</th>
+                                <th>Date</th>
+                                <th>Hours</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for entry in approval.get_all_entries_by_submission %}
+                            <tr align="center">
+                                <td>{{ approval.user_id.id }}</td>
+                                <td>{{ approval.user_id.first_name }} {{ approval.user_id.last_name }}</td>
+                                <td>{{ entry.date }}</td>
+                                <td>{{ entry.hours }}</td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info btn-md" style="" data-dismiss="modal">
+                            Cancel
+                        </button>
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="pto_id" value="{{ approval.paid_time_off_approval_id }}">
+                            <button type="submit" name="reject" value="reject" class="btn btn-md btn-danger ">
+                                Reject
+                            </button>
+                            <button type="submit" name="approve" value="approve"
+                                    class="btn btn-md btn-success btn-md">
+                                Approve
+                            </button>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        {% endblock %}
+
+        {% block scriptsblock %}
+        <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/176621/mk-component.js'></script>
+        <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/176621/mk-datepicker.js'></script>
+
+        {% load static %}
+        <script src="{% static 'scripts/paycheck.js' %}"></script>
+        {% endblock %}
     </div>
 </div>

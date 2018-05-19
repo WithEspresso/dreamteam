@@ -5,6 +5,14 @@ from django import forms
 
 
 def validate_year_entry(value):
+    """
+    Validates that a year provided is greater than 1990 or
+    equal to or less than the current year.
+    @type  value: String
+    @param value:
+    @return: None
+    @raise: ValidationError
+    """
     import datetime
     now = datetime.datetime.now()
     current_year = int(now.year)
@@ -13,6 +21,15 @@ def validate_year_entry(value):
 
 
 def validate_image_file(value):
+    """
+    Validates that the image file provided is actually an image
+    file. (.jpeg, .jpg, or .png). Throws a validation
+    error if another extension is provided.
+    @type  value: String
+    @param value: The name of the image file to be uploaded
+    @return: None
+    @raise: ValidationError
+    """
     import os
     extension = os.path.splitext(value.name)[1]
     valid_extensions = ['.jpg', '.png', '.jpeg']

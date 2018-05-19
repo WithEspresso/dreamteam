@@ -25,6 +25,7 @@ SECRET_KEY = 'zbo9t@1ue1%@9xygehh39*8rsebjed+b601m4bs=)@2=ui%q0p'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+ALLOWED_HOSTS = ['127.0.0.1']
 ALLOWED_HOSTS = ['127.0.0.1', '52.53.184.187']
 
 
@@ -76,10 +77,18 @@ WSGI_APPLICATION = 'payrollsite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
+"""
+Database is currently hooked up to Amazon RDS instance. 
+The database will be taken down after 5/25/2018. 
+"""
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'csc668',
+        'USER': 'dnunez',
+        'PASSWORD': 'Rev2220!',
+        'HOST': 'csc668dreamteam.ci5qahreax9d.us-west-1.rds.amazonaws.com',     # Or an IP Address that your DB is hosted on
+        'PORT': '3306',
     }
 }
 

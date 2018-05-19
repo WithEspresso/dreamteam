@@ -11,3 +11,4 @@ admin.site.register(TimeSheetApprovals)
 
 admin.site.register(PaidTimeOffEntry)
 admin.site.register(PaidTimeOffApproval)
+admin.site.register(PaidTimeOffHours)

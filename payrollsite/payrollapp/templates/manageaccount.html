@@ -130,7 +130,8 @@
                                     {% csrf_token %}
                                     <div class="container-login">
                                         <input type="hidden" name="user_id" value="{{ user_data.user_id.username }}">
-                                        <input type="hidden" name="metadata_id" value="{{ user_data.user_meta_data_id }}">
+                                        <input type="hidden" name="metadata_id"
+                                               value="{{ user_data.user_meta_data_id }}">
                                         <!--- Form that corresponds to django's authentication system -->
                                         <div class="container-inside-form">
                                             <h2> {{ user_data.user_id.username }}'s Personal Information </h2>

@@ -1,50 +1,66 @@
 {% extends layout %}
 
+{% block stylesblock %}
+<!--<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">-->
+{% load static %}
+<link href="{% static 'css/paycheck.css' %}" rel="stylesheet">
+<link href="{% static 'css/expenses.css' %}" rel="stylesheet">
+{% endblock %}
+
 {% block page-wrapper %}
 
 <!-- Page Content -->
 <div id="page-wrapper" style="min-height:100%; padding-top:100px">
     <div class="container-fluid">
         <div class="row">
-            <h2 style="display: inline-block; margin-right: 30px;">Expenses</h2>
-            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalExpenses"
-                    style="display: inline-block; margin-bottom: 10px;"> Create New Expense
+            <h1 style="display: inline-block; margin-right: 30px;">Expenses</h1>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myExpenses"
+                    style="display: inline-block; margin-top: 25px; "> Create New Expense
             </button>
             <!-- /.col-lg-12 -->
+            <br>
+            <br>
         </div>
+        <div class="col-lg-12">
 
-        <!-- Displays all pto requests for the logged in user. -->
-        {% if expense_requests %}
-        <table class="responstable">
-            <tr>
-                <th>User ID</th>
-                <th>Status</th>
-                <th>Amount</th>
-                <th>Receipt</th>
-            </tr>
-            <tr>
-                {% for expense_request in expense_requests %}
-                <td>{{ expense_request.user_id }}</td>
-                <td>{{ expense_request.status }}</td>
-                <td>{{ expense_request.amount }}</td>
-                <td><a style="color: rgb(0,0,0);" href="#" data-toggle="modal"
-                       data-target="#{{expense_request.expense_id}}"><u>View
-                    details</u></a>
-                    <section class="modal modalWindow" id="popupOne">
-                        <section class="modalWrapper">
-                            <h2>Modal Popup </h2>
+            <!-- Displays all pto requests for the logged in user. -->
+            {% if expense_requests %}
+            <table class="responstable">
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Day</th>
+                    <th>Status</th>
+                    <th>Amount</th>
+                    <th>Receipt</th>
+                </tr>
+                <tr>
+                    {% for expense_request in expense_requests %}
+                    <td>{{ expense_request.title }}</td>
+                    <td>{{ expense_request.description }}</td>
+                    <td>{{ expense_request.date}}</td>
+                    <td>{{ expense_request.status }}</td>
+                    <td>${{ expense_request.amount }}</td>
+
+                    <td><a style="color: rgb(0,0,0);" href="#" data-toggle="modal"
+                           data-target="#{{expense_request.expense_id}}"><u>View
+                        Receipt</u></a>
+                        <section class="modal modalWindow" id="popupOne">
+                            <section class="modalWrapper">
+                                <h2>Modal Popup </h2>
+                            </section>
+                            <a class="closeBtn">CLOSE X</a>
                         </section>
-                        <a class="closeBtn">CLOSE X</a>
-                    </section>
-                    <section class="modal overlay"></section>
-                </td>
-                <td>{{ expense_request.title }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-        {% else %}
-        <h2> No pending expense reimbursement requests. </h2>
-        {% endif %}
+                        <section class="modal overlay"></section>
+                    </td>
+
+                </tr>
+                {% endfor %}
+            </table>
+            {% else %}
+            <h2> No pending expense reimbursement requests. </h2>
+            {% endif %}
+        </div>
 
         <!-- modal to view details of a submitted timesheet -->
         {% for expense_request in expense_requests %}
@@ -52,43 +68,83 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content modal-lg">
                     <div class="modal-header modal-lg">
-                        <h3 class="modal-title " style="float: left">Timesheet Details</h3>
+                        <h3 class="modal-title " style="float: left">Expenses Details</h3>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
                     <div class="modal-body">
-                        <table align="center" class="detailsTable">
-                            <h2> Expense Reimbursement File Upload </h2>
-                            <img src="{{ expense_request.file.url }}" style="width:500px;height:600px;">
-                        </table>
+
+                        <h2> Expense Reimbursement Details </h2>
+                        <div style="padding-left:25%">
+                            <img src="{{ expense_request.file.url }}" align="center" style="width:400px;height:400px;">
+                        </div>
                     </div>
                     <div class=" modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
         </div>
         {% endfor %}
 
-        <div class="modal fade" id="myModalExpenses" role="dialog">
-            <div class="modal-dialog modal-lg" style="width:500px">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <div id="myExpenses" class="modal fade">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content modal-lg">
+                    <div class="modal-header modal-lg">
                         <h4 class="modal-title">Create a new expense reimbursement</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
                     </div>
-                    <div class="modal-body">
-                        <form action="" method="post" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            <h4> {{ form.title.label_tag }} </h4>
-                            {{ form.title }}
-                            <h4> {{ form.amount.label_tag }} </h4>
-                            {{ form.amount }}
-                            <h4> {{form.file.label_tag}} </h4>
-                            {{ form.file }}
-                            <br><br>
-                            <button type="submit" class="btn btn-primary" onclick="" style="margin-left:28%">Submit
-                            </button>
-                        </form>
+                    <div class="modal-body" style="background-color:#167F92;">
+                        <!--<form action="" method="post" enctype="multipart/form-data">-->
+                        <!--{% csrf_token %}-->
+                        <!--<h4> {{ form.title.label_tag }} </h4>-->
+                        <!--{{ form.title }}-->
+                        <!--<h4> {{ form.amount.label_tag }} </h4>-->
+                        <!--{{ form.amount }}-->
+                        <!--<h4> {{form.file.label_tag}} </h4>-->
+                        <!--{{ form.file }}-->
+                        <!--<br><br>-->
+                        <!--<button type="submit" class="btn btn-primary" onclick="" style="margin-left:28%">Submit-->
+                        <!--</button>-->
+                        <!--</form>-->
+
+                        <h2 style="color:white;">Add a new item:</h2>
+
+                        <div id="form-box" class="container-login">
+                            <form action="" method="post" enctype="multipart/form-data">
+
+                                <!--
+                                                                <div>
+                                                                    <span>Title:</span>
+                                                                    <input type="title" name="item-name" placeholder="Enter description">
+                                                                </div>
+
+                                                                <div>
+                                                                    <span>Date:</span> <input type="date" name="date">
+                                                                </div>
+
+                                                                <div>
+                                                                    <span>Amount:</span> <input type="number" name="amount" min="0" placeholder="$">
+                                                                </div>
+                                                                <div>
+                                                                    <span>Upload file:</span> <input type="file">
+                                                                </div>
+                                                                <br>
+                                --->
+
+                                {% csrf_token %}
+                                {% for field in form %}
+                                <div class="container-inside-form">
+                                    <label><b> {{ field.label_tag }}: {{ field.errors }} </b></label>
+                                    {{ field }}
+                                </div>
+                                <br>
+                                {% endfor %}
+                                <button type="submit" class="btn btn-success" onclick="" style="float:right">Add new
+                                    Expense
+                                </button>
+                            </form>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -96,7 +152,11 @@
                 </div>
             </div>
         </div>
+
+
     </div>
 </div>
-
 {% endblock %}
+
+
+
