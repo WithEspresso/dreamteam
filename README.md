@@ -1,8 +1,6 @@
 # dreamteam
 Payroll application
 
-Current version: Allows users to register, login, and logout. Time table to be added next. 
-
 To host website from local machine: </br>
 Install Python 3
 pip install django </br>
